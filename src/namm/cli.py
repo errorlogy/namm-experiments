@@ -61,8 +61,6 @@ def run_experiment_impl(config: ExperimentConfig, output_dir: Path) -> Experimen
 
     from namm.domains.graph.generator import enumerate_small_graphs
 
-    output_dir.mkdir(parents=True, exist_ok=True)
-
     result = run_search(config)
     candidates = result.candidates
     rejections = result.rejections
@@ -76,35 +74,7 @@ def run_experiment_impl(config: ExperimentConfig, output_dir: Path) -> Experimen
     generative_holdout = result.best_generative
 
     if best:
-        if config.is_rewriting_domain and best.formula.canonical_ast:
-            from namm.domains.rewriting.evaluator import _all_strings, confluence_score
-            from namm.domains.rewriting.rules import parse_rules_dict
-            from namm.domains.rewriting.serializer import build_rewriting_certificate
-
-            system = parse_rules_dict(best.formula.canonical_ast)
-            test_strings = _all_strings(tuple(system.alphabet), system.max_length)[:30]
-            conf = confluence_score(system, system.max_length)
-            certificate = build_rewriting_certificate(
-                candidate_id=best.candidate_id,
-                system=system,
-                seed=config.seed,
-                test_strings=test_strings,
-                confluence={
-                    "confluent": conf.confluent,
-                    "score": conf.score,
-                    "strings_tested": conf.strings_tested,
-                },
-                extra={
-                    "domain": config.domain,
-                    "protocol_version": "v2-ai-native",
-                },
-            )
-            verification = {
-                "domain": "rewriting",
-                "system_hash": best.formula.ast_hash,
-                "eval_hash": certificate["eval_hash"],
-            }
-        elif config.is_program_domain and best.formula.canonical_ast:
+        if config.is_program_domain and best.formula.canonical_ast:
             from namm.domains.program.evaluator import evaluate_ast
 
             ast_node = canonicalize(parse_ast_dict(best.formula.canonical_ast))
@@ -171,22 +141,9 @@ def run_experiment_impl(config: ExperimentConfig, output_dir: Path) -> Experimen
         human_lines.append(
             "\n> Trust certificate; full object in certificate.json."
         )
-    if config.is_rewriting_domain:
-        human_lines.append(f"- Max string length: {config.rewriting_max_length}")
-        human_lines.append(f"- Confluence threshold: {config.confluence_threshold}")
-        human_lines.append(
-            "\n> Trust certificate; full object in certificate.json."
-        )
 
     if best:
-        if config.is_rewriting_domain and best.formula.canonical_ast:
-            from namm.domains.rewriting.rules import parse_rules_dict
-            from namm.domains.rewriting.serializer import human_projection_from_system
-
-            system = parse_rules_dict(best.formula.canonical_ast)
-            proj = human_projection_from_system(system, candidate_id=best.candidate_id)
-            human_lines.extend(["", proj])
-        elif config.is_program_domain and best.formula.canonical_ast:
+        if config.is_program_domain and best.formula.canonical_ast:
             ast_node = parse_ast_dict(best.formula.canonical_ast)
             proj = human_projection_from_ast(
                 ast_node, candidate_id=best.candidate_id, trust_certificate=True
@@ -241,16 +198,16 @@ def run_experiment_impl(config: ExperimentConfig, output_dir: Path) -> Experimen
 
     import orjson
 
-    if certificate:
-        (output_dir / "certificate.json").write_bytes(
-            orjson.dumps(certificate, option=orjson.OPT_INDENT_2)
-        )
-
     (output_dir / "result.json").write_bytes(
         orjson.dumps(experiment_result.model_dump(), option=orjson.OPT_INDENT_2)
     )
     (output_dir / "human_projection.md").write_text(human_projection, encoding="utf-8")
     (output_dir / "HUMAN_PROJECTION.md").write_text(human_projection, encoding="utf-8")
+
+    if certificate:
+        (output_dir / "certificate.json").write_bytes(
+            orjson.dumps(certificate, option=orjson.OPT_INDENT_2)
+        )
 
     log.info(
         "experiment_complete",
