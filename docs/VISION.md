@@ -46,6 +46,8 @@ Neither projection is the substrate. Certificates (Lean, z3, eval witnesses in `
 
 `PHILOSOPHICAL_INFERENCE`: AGI/ASI may correspond to a richer π_A — higher descriptive bandwidth for the same objects, not a separate ontology.
 
+**Beyond homo cognition (program belief, not verification path):** The research program treats mathematical objects as potentially **real independent of human representational access**. Human cognition (π_H) may project only a thin slice; machine-native search (π_A) together with human audit may **jointly** access structure at other descriptive levels. This is labeled `PHILOSOPHICAL_INFERENCE` throughout docs — it motivates widening search and tolerating non-human artifacts, but **does not** replace SNH operational gates (certificates, independence, generative holdout, novelty ladder).
+
 **North star:** structures whose natural compactification is **machine-native first**. See [`RESEARCH_DIRECTION.md`](RESEARCH_DIRECTION.md) for the authoritative priority stack.
 
 ---
@@ -119,6 +121,7 @@ CI (pytest + smoke search) is the merge gate. No production deployment — quali
 - [`RESEARCH_DIRECTION.md`](RESEARCH_DIRECTION.md) — AI-led roadmap, \(\pi_H\)/\(\pi_A\) notes
 - [`MANIFESTO.md`](MANIFESTO.md) — brief scientific manifesto
 - [`AI_NATIVE_NAMM.md`](AI_NATIVE_NAMM.md) — certificate-first Phase 2
+- [`OPEN_PROBLEMS_TIERLIST.md`](OPEN_PROBLEMS_TIERLIST.md) — open problems mapped to finite shadows
 
 ---
 

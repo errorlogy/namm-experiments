@@ -100,6 +100,23 @@ class ExperimentConfig(BaseModel):
     rewriting_max_length: int = 6
     rewriting_num_rules: int = 3
     confluence_threshold: float = 1.0
+    meta_max_depth: int = 3
+    meta_fixed_point_threshold: float = 1.0
+    meta_transforms: list[str] = Field(
+        default_factory=lambda: [
+            "canonicalize",
+            "add_zero",
+            "double_halve",
+            "self_unfold",
+            "swap_commutative",
+            "compose_identity",
+        ]
+    )
+    meta_include_self: bool = True
+    meta_nontrivial_only: bool = True
+    open_problem_id: str = "kotzig_pk"
+    pk_k_min: int = 3
+    pk_k_max: int = 8
 
     @property
     def effective_correlation_threshold(self) -> float:
@@ -120,6 +137,18 @@ class ExperimentConfig(BaseModel):
     @property
     def is_graph_string_domain(self) -> bool:
         return self.domain in ("finite_graphs", "graph_string", "graph")
+
+    @property
+    def is_meta_domain(self) -> bool:
+        return self.domain in ("meta_evaluation", "meta", "meta_evaluator")
+
+    @property
+    def is_open_problem_domain(self) -> bool:
+        return self.domain in (
+            "open_problem_shadow",
+            "open_problem",
+            "kotzig_pk",
+        )
 
     @property
     def effective_representation_ratio_threshold(self) -> float | None:

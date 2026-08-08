@@ -55,6 +55,25 @@ Agents and CI consume **certificates**, not prose. Human projection is optional 
 
 ---
 
+## AI thinking topology (Phase 3 foundation)
+
+Full reference: [`AI_THINKING_TOPOLOGY.md`](AI_THINKING_TOPOLOGY.md).
+
+NAMM Phase 3 (NAMM-2026-004) implements search under **AI cognition topology**, not human geometric intuition:
+
+| AI topology property | NAMM operationalization |
+|---------------------|-------------------------|
+| Combinatorial (not smooth manifold) | Discrete meta-evaluator AST search |
+| Layered meta-levels | Evaluators with `self`/`target` references |
+| Context-boundary compactification | Graphs order ≤ 6; outside = certificates/tools |
+| Fixed points E ≅ F(E) | `fixed_point_fraction` gate in 004 |
+| Sheaf-like local patches | AST nodes glued by eval hash / relations |
+| Discovery loop | propose → F(E) → observe → revise (CLI + rejections.jsonl) |
+
+> **PHILOSOPHICAL_INFERENCE:** Structures stable under AI topology but resistant to compact human projection motivate the program's search widening. Operational gates (`certificate.json`, eval hash) do not depend on this inference.
+
+---
+
 ## Experiment roadmap
 
 | ID | Domain | Goal | Status |
@@ -62,13 +81,17 @@ Agents and CI consume **certificates**, not prose. Human projection is optional 
 | NAMM-2026-001 | Graph string formulas | Calibration; null / Wiener-dominated result | Complete |
 | NAMM-2026-002 | String rewriting (confluence) | Certificate-first TRS search vs random baseline | Run |
 | NAMM-2026-003 | Program AST + evolution | Graph→Int invariant with holdout families | Run |
-| NAMM-2026-004 | Trans-level meta-evaluators | Scaffold: evaluators that score other evaluators | Docs only |
+| NAMM-2026-004 | Meta-evaluator fixed points | E ≈ F(E) on graphs order ≤ 6; AI topology | Run |
+| NAMM-2026-005 | Open problem shadow (Kotzig P_k) | Finite counterexample search vs Kotzig | Run |
 
 Phase 3+ (future): proof-assistant certificates, multi-agent attack loops, larger graph orders.
 
 ---
 
-## What would falsify the program
+## Related docs
+
+- [`AI_THINKING_TOPOLOGY.md`](AI_THINKING_TOPOLOGY.md) — AI vs human cognition topology
+- [`VISION.md`](VISION.md) — program vision and success criteria
 
 - Search consistently finds only human-known invariants with \(K_H \approx K_A\).
 - Independence and generative gates never discriminate beyond noise.
@@ -80,6 +103,7 @@ Negative results are **first-class** (`rejections.jsonl`).
 
 ## Related docs
 
+- [`AI_THINKING_TOPOLOGY.md`](AI_THINKING_TOPOLOGY.md) — AI vs human cognition topology
 - [`VISION.md`](VISION.md) — program vision and success criteria
 - [`AI_NATIVE_NAMM.md`](AI_NATIVE_NAMM.md) — certificate-first Phase 2
 - [`PHILOSOPHY.md`](PHILOSOPHY.md) — MUH as heuristic only

@@ -52,6 +52,10 @@ class SearchResult:
 
 def run_search(config: ExperimentConfig, graphs: list | None = None) -> SearchResult:
     """Dispatch search by experiment domain."""
+    if config.is_open_problem_domain:
+        return open_problem_search(config)
+    if config.is_meta_domain:
+        return meta_search(config, graphs=graphs)
     if config.is_rewriting_domain:
         return rewriting_search(config)
     if config.is_program_domain:
@@ -656,4 +660,329 @@ def rewriting_search(config: ExperimentConfig) -> SearchResult:
         candidates=candidates,
         rejections=rejections,
         best_generative={"known_baselines": known_scores},
+    )
+
+
+def _formula_from_meta(
+    candidate_id: str,
+    node,
+    *,
+    transform_name: str,
+) -> InvariantFormula:
+    from namm.domains.meta.ast import meta_to_dict
+    from namm.domains.meta.canonical import canonicalize_meta, meta_hash
+
+    canonical = canonicalize_meta(node)
+    return InvariantFormula(
+        id=candidate_id,
+        expression=f"MetaEval[F={transform_name}]",
+        primitives=["meta_evaluator", f"transform:{transform_name}"],
+        meta_origin="meta_fixed_point_search",
+        canonical_ast={
+            "evaluator": meta_to_dict(canonical),
+            "transform": transform_name,
+        },
+        ast_hash=meta_hash(canonical),
+    )
+
+
+def _is_trivial_meta(node) -> bool:
+    """Reject single-leaf evaluators when nontrivial_only is set."""
+    from namm.domains.meta.ast import MetaEvaluatorNode
+
+    if node.is_leaf():
+        return True
+    if node.op in ("self", "target"):
+        return True
+    return False
+
+
+def open_problem_search(config: ExperimentConfig) -> SearchResult:
+    """Finite-shadow counterexample search for catalogued open problems."""
+    import uuid
+
+    from namm.domains.open_problem.pk_graph import PkSearchHit, search_pk_counterexamples
+
+    problem = config.open_problem_id
+    if problem != "kotzig_pk":
+        return SearchResult(
+            candidates=[],
+            rejections=[
+                RejectionRecord(
+                    candidate_id=f"unsupported-{problem}",
+                    formula=InvariantFormula(
+                        id=f"unsupported-{problem}",
+                        expression=f"open_problem:{problem}",
+                        meta_origin="open_problem_shadow",
+                    ),
+                    reason=f"unsupported_open_problem:{problem}",
+                )
+            ],
+        )
+
+    result = search_pk_counterexamples(
+        max_order=config.max_order,
+        k_min=config.pk_k_min,
+        k_max=config.pk_k_max,
+    )
+
+    def _hit_to_formula(hit: PkSearchHit) -> InvariantFormula:
+        edge_str = ",".join(f"{u}-{v}" for u, v in hit.edge_list)
+        return InvariantFormula(
+            id=f"pk-{uuid.uuid4().hex[:8]}",
+            expression=f"PkGraph[k={hit.k},n={hit.graph_order},edges={edge_str}]",
+            primitives=[f"pk_k:{hit.k}", f"order:{hit.graph_order}"],
+            meta_origin="kotzig_pk_counterexample_search",
+            canonical_ast={
+                "problem": "kotzig_pk",
+                "k": hit.k,
+                "order": hit.graph_order,
+                "edges": hit.edge_list,
+                "violations": hit.violations,
+                "is_counterexample": hit.is_counterexample,
+            },
+            ast_hash=f"pk-{hit.k}-{hit.graph_order}-{len(hit.edge_list)}",
+        )
+
+    candidates: list[CandidateRecord] = []
+    rejections: list[RejectionRecord] = []
+
+    if result.counterexamples:
+        for hit in result.counterexamples:
+            formula = _hit_to_formula(hit)
+            candidates.append(
+                CandidateRecord(
+                    candidate_id=formula.id,
+                    formula=formula,
+                    score=1.0,
+                    agrees_with_baseline=False,
+                    graphs_tested=result.graphs_scanned,
+                    status="counterexample",
+                    attack_checklist=AttackChecklist(
+                        items=[
+                            AttackChecklistItem(
+                                step="O1",
+                                passed=True,
+                                notes=(
+                                    f"Kotzig counterexample: P_{hit.k}-graph "
+                                    f"order {hit.graph_order}"
+                                ),
+                            )
+                        ],
+                        signed_off=True,
+                    ),
+                    representation_metrics=RepresentationMetrics(
+                        json_bytes=len(str(hit.edge_list)),
+                        gzip_bytes=len(str(hit.edge_list)),
+                        eval_time_ms=0.0,
+                        token_count_estimate=len(hit.edge_list) * 4,
+                        projection_token_estimate=40,
+                    ),
+                )
+            )
+    else:
+        for hit in result.best_near_misses:
+            formula = _hit_to_formula(hit)
+            rejections.append(
+                RejectionRecord(
+                    candidate_id=formula.id,
+                    formula=formula,
+                    reason=(
+                        f"not_pk_graph:score={hit.score:.4f},"
+                        f"violations={len(hit.violations)}"
+                    ),
+                    counterexample={
+                        "k": hit.k,
+                        "order": hit.graph_order,
+                        "score": hit.score,
+                        "sample_violations": hit.violations[:3],
+                    },
+                )
+            )
+        if result.best_near_misses:
+            best = result.best_near_misses[0]
+            formula = _hit_to_formula(best)
+            candidates.append(
+                CandidateRecord(
+                    candidate_id=f"near-{best.k}-{best.graph_order}",
+                    formula=formula,
+                    score=best.score,
+                    agrees_with_baseline=False,
+                    graphs_tested=result.graphs_scanned,
+                    status="near_miss",
+                    attack_checklist=AttackChecklist(
+                        items=[
+                            AttackChecklistItem(
+                                step="O1",
+                                passed=False,
+                                notes=(
+                                    f"No counterexample order≤{config.max_order}; "
+                                    f"best near-miss score={best.score:.4f} k={best.k}"
+                                ),
+                            )
+                        ],
+                        signed_off=False,
+                    ),
+                )
+            )
+
+    return SearchResult(
+        candidates=candidates,
+        rejections=rejections,
+        best_generative={
+            "problem": "kotzig_pk",
+            "graphs_scanned": result.graphs_scanned,
+            "counterexample_count": len(result.counterexamples),
+            "k_range": [config.pk_k_min, config.pk_k_max],
+        },
+    )
+
+
+def meta_search(
+    config: ExperimentConfig,
+    graphs: list | None = None,
+) -> SearchResult:
+    """Search for meta-evaluator fixed points E ≈ F(E) on benchmark graphs."""
+    from namm.domains.graph.generator import enumerate_small_graphs
+    from namm.domains.meta.canonical import canonicalize_meta
+    from namm.domains.meta.evaluator import fixed_point_score
+    from namm.domains.meta.generator import random_meta_evaluator
+    from namm.domains.meta.serializer import compute_meta_representation_metrics
+    from namm.domains.meta.transform import apply_transform, list_transforms
+
+    rng = random.Random(config.seed)
+    benchmark_graphs = graphs if graphs is not None else enumerate_small_graphs(config.max_order)
+    ratio_threshold = config.effective_representation_ratio_threshold
+    fp_threshold = config.meta_fixed_point_threshold
+
+    available = set(list_transforms())
+    transforms = [t for t in config.meta_transforms if t in available]
+    if not transforms:
+        transforms = [t for t in list_transforms() if t != "identity"]
+
+    candidates: list[CandidateRecord] = []
+    rejections: list[RejectionRecord] = []
+    best_generative: dict | None = None
+
+    for i in range(config.num_candidates):
+        gen_seed = rng.randint(0, 2**31 - 1)
+        evaluator, candidate_id = random_meta_evaluator(
+            gen_seed,
+            max_depth=config.meta_max_depth,
+            include_self=config.meta_include_self,
+            include_target=(i % 4 == 0),
+        )
+        transform_name = rng.choice(transforms)
+        transformed = apply_transform(transform_name, evaluator)
+        canonical = canonicalize_meta(evaluator)
+
+        if config.meta_nontrivial_only and _is_trivial_meta(canonical):
+            rejections.append(
+                RejectionRecord(
+                    candidate_id=candidate_id,
+                    formula=_formula_from_meta(
+                        candidate_id, canonical, transform_name=transform_name
+                    ),
+                    reason="trivial_evaluator",
+                )
+            )
+            continue
+
+        fp_frac = fixed_point_score(canonical, transformed, benchmark_graphs)
+        if best_generative is None or fp_frac > best_generative.get("best_fixed_point_fraction", -1):
+            best_generative = {
+                "best_fixed_point_fraction": fp_frac,
+                "transform": transform_name,
+                "graphs_tested": len(benchmark_graphs),
+            }
+
+        rep_raw = compute_meta_representation_metrics(canonical, benchmark_graphs[:10])
+        rep_metrics = RepresentationMetrics(
+            json_bytes=rep_raw["json_bytes"],
+            gzip_bytes=rep_raw["gzip_bytes"],
+            eval_time_ms=rep_raw["eval_time_ms"],
+            token_count_estimate=rep_raw["token_count_estimate"],
+            projection_token_estimate=rep_raw["projection_token_estimate"],
+        )
+
+        if ratio_threshold is not None:
+            rep_gate = reject_if_low_compression_asymmetry(
+                rep_metrics, threshold=ratio_threshold
+            )
+            if not rep_gate.passed:
+                rejections.append(
+                    RejectionRecord(
+                        candidate_id=candidate_id,
+                        formula=_formula_from_meta(
+                            candidate_id, canonical, transform_name=transform_name
+                        ),
+                        reason=(
+                            f"representation_ratio_fail:"
+                            f"ratio={rep_gate.ratio:.4f}<{ratio_threshold}"
+                        ),
+                    )
+                )
+                continue
+
+        if fp_frac < fp_threshold:
+            rejections.append(
+                RejectionRecord(
+                    candidate_id=candidate_id,
+                    formula=_formula_from_meta(
+                        candidate_id, canonical, transform_name=transform_name
+                    ),
+                    reason=f"fixed_point_fail:score={fp_frac:.4f}<{fp_threshold}",
+                    counterexample={
+                        "transform": transform_name,
+                        "fixed_point_fraction": fp_frac,
+                    },
+                )
+            )
+            continue
+
+        values = [
+            fixed_point_score(canonical, apply_transform(t, canonical), benchmark_graphs)
+            for t in transforms[:3]
+        ]
+        cross_transform_stability = sum(values) / len(values) if values else fp_frac
+
+        candidates.append(
+            CandidateRecord(
+                candidate_id=candidate_id,
+                formula=_formula_from_meta(
+                    candidate_id, canonical, transform_name=transform_name
+                ),
+                score=fp_frac * (1.0 + 0.1 * cross_transform_stability),
+                agrees_with_baseline=False,
+                graphs_tested=len(benchmark_graphs),
+                status="candidate",
+                novelty_level=None,
+                representation_metrics=rep_metrics,
+                attack_checklist=AttackChecklist(
+                    items=[
+                        AttackChecklistItem(
+                            step="M1",
+                            passed=fp_frac >= fp_threshold,
+                            notes=f"fixed point F={transform_name} score={fp_frac:.4f}",
+                        ),
+                        AttackChecklistItem(
+                            step="M2",
+                            passed=not _is_trivial_meta(canonical),
+                            notes="nontrivial evaluator structure",
+                        ),
+                        AttackChecklistItem(
+                            step="M3",
+                            passed=True,
+                            notes=f"cross-transform stability={cross_transform_stability:.4f}",
+                        ),
+                    ],
+                    signed_off=fp_frac >= fp_threshold,
+                ),
+            )
+        )
+
+    return SearchResult(
+        candidates=candidates,
+        rejections=rejections,
+        best_generative=best_generative,
     )

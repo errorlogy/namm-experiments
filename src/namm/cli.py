@@ -104,6 +104,46 @@ def run_experiment_impl(config: ExperimentConfig, output_dir: Path) -> Experimen
                 "system_hash": best.formula.ast_hash,
                 "eval_hash": certificate["eval_hash"],
             }
+        elif config.is_meta_domain and best.formula.canonical_ast:
+            from namm.domains.meta.ast import parse_meta_dict
+            from namm.domains.meta.canonical import canonicalize_meta
+            from namm.domains.meta.evaluator import fixed_point_score
+            from namm.domains.meta.serializer import build_meta_certificate
+            from namm.domains.meta.transform import apply_transform
+
+            eval_payload = best.formula.canonical_ast
+            transform_name = eval_payload.get("transform", "canonicalize")
+            ast_node = canonicalize_meta(
+                parse_meta_dict(eval_payload["evaluator"])
+            )
+            transformed = apply_transform(transform_name, ast_node)
+            ref_graphs = enumerate_small_graphs(config.max_order)[:20]
+            fp_frac = fixed_point_score(ast_node, transformed, ref_graphs)
+            certificate = build_meta_certificate(
+                candidate_id=best.candidate_id,
+                evaluator=ast_node,
+                transformed=transformed,
+                transform_name=transform_name,
+                seed=config.seed,
+                reference_graphs=ref_graphs,
+                witness_bounds={
+                    "max_order": config.max_order,
+                    "graph_count": len(ref_graphs),
+                    "fixed_point_threshold": config.meta_fixed_point_threshold,
+                    "transforms": config.meta_transforms,
+                },
+                fixed_point_fraction=fp_frac,
+                extra={
+                    "domain": config.domain,
+                    "protocol_version": "v2-ai-native-topology",
+                },
+            )
+            verification = {
+                "domain": "meta_evaluation",
+                "meta_hash": best.formula.ast_hash,
+                "eval_hash": certificate["eval_hash"],
+                "fixed_point_fraction": fp_frac,
+            }
         elif config.is_program_domain and best.formula.canonical_ast:
             from namm.domains.program.evaluator import evaluate_ast
 
@@ -131,6 +171,41 @@ def run_experiment_impl(config: ExperimentConfig, output_dir: Path) -> Experimen
                 "domain": "program_ast",
                 "ast_hash": best.formula.ast_hash,
                 "eval_hash": certificate["eval_hash"],
+            }
+        elif config.is_open_problem_domain and best.formula.canonical_ast:
+            import hashlib
+
+            payload = best.formula.canonical_ast
+            witness = {
+                "problem": config.open_problem_id,
+                "k_min": config.pk_k_min,
+                "k_max": config.pk_k_max,
+                "max_order": config.max_order,
+                "graphs_scanned": generative_holdout.get("graphs_scanned")
+                if generative_holdout
+                else None,
+                "counterexample_count": generative_holdout.get("counterexample_count")
+                if generative_holdout
+                else 0,
+                "candidate": payload,
+            }
+            eval_hash = hashlib.sha256(
+                repr(sorted(witness.items())).encode()
+            ).hexdigest()[:16]
+            certificate = {
+                "candidate_id": best.candidate_id,
+                "domain": config.domain,
+                "protocol_version": "v2-open-problem-shadow",
+                "eval_hash": eval_hash,
+                "witness": witness,
+                "status": best.status,
+                "score": best.score,
+            }
+            verification = {
+                "domain": "open_problem_shadow",
+                "problem": config.open_problem_id,
+                "eval_hash": eval_hash,
+                "counterexample": payload.get("is_counterexample", False),
             }
         else:
             verification = verify_candidate(
@@ -177,6 +252,19 @@ def run_experiment_impl(config: ExperimentConfig, output_dir: Path) -> Experimen
         human_lines.append(
             "\n> Trust certificate; full object in certificate.json."
         )
+    if config.is_meta_domain:
+        human_lines.append(f"- Meta max depth: {config.meta_max_depth}")
+        human_lines.append(f"- Fixed-point threshold: {config.meta_fixed_point_threshold}")
+        human_lines.append(f"- Transforms: {', '.join(config.meta_transforms)}")
+        human_lines.append(
+            "\n> Trust certificate; meta-evaluator fixed points are AI-topology artifacts."
+        )
+    if config.is_open_problem_domain:
+        human_lines.append(f"- Open problem: {config.open_problem_id}")
+        human_lines.append(f"- P_k range: {config.pk_k_min}..{config.pk_k_max}")
+        human_lines.append(
+            "\n> Finite shadow search; counterexample would refute Kotzig for listed k."
+        )
 
     if best:
         if config.is_rewriting_domain and best.formula.canonical_ast:
@@ -186,12 +274,46 @@ def run_experiment_impl(config: ExperimentConfig, output_dir: Path) -> Experimen
             system = parse_rules_dict(best.formula.canonical_ast)
             proj = human_projection_from_system(system, candidate_id=best.candidate_id)
             human_lines.extend(["", proj])
+        elif config.is_meta_domain and best.formula.canonical_ast:
+            from namm.domains.meta.ast import parse_meta_dict
+            from namm.domains.meta.canonical import canonicalize_meta
+            from namm.domains.meta.evaluator import fixed_point_score
+            from namm.domains.meta.serializer import human_projection_from_meta
+            from namm.domains.meta.transform import apply_transform
+
+            eval_payload = best.formula.canonical_ast
+            transform_name = eval_payload.get("transform", "canonicalize")
+            ast_node = canonicalize_meta(
+                parse_meta_dict(eval_payload["evaluator"])
+            )
+            transformed = apply_transform(transform_name, ast_node)
+            ref_graphs = enumerate_small_graphs(config.max_order)[:20]
+            fp_frac = fixed_point_score(ast_node, transformed, ref_graphs)
+            proj = human_projection_from_meta(
+                ast_node,
+                candidate_id=best.candidate_id,
+                transform_name=transform_name,
+                fixed_point_fraction=fp_frac,
+            )
+            human_lines.extend(["", proj])
         elif config.is_program_domain and best.formula.canonical_ast:
             ast_node = parse_ast_dict(best.formula.canonical_ast)
             proj = human_projection_from_ast(
                 ast_node, candidate_id=best.candidate_id, trust_certificate=True
             )
             human_lines.extend(["", proj])
+        elif config.is_open_problem_domain and best.formula.canonical_ast:
+            payload = best.formula.canonical_ast
+            human_lines.extend(
+                [
+                    "",
+                    f"**Open-problem shadow:** `{config.open_problem_id}`",
+                    f"- k={payload.get('k')} order={payload.get('order')}",
+                    f"- Counterexample: {payload.get('is_counterexample')}",
+                    f"- Score (pair fraction): {best.score:.4f}",
+                    f"- Edges: {payload.get('edges')}",
+                ]
+            )
         else:
             human_lines.extend(
                 [

@@ -1,0 +1,11 @@
+experiment_id: NAMM-2026-005
+domain: open_problem_shadow
+open_problem_id: kotzig_pk
+max_order: 7
+pk_k_min: 3
+pk_k_max: 10
+num_candidates: 1
+seed: 2026005
+research_question: >
+  Does exhaustive atlas search up to order 7 find a finite P_k-graph (k≥3)
+  counterexample to Kotzig's conjecture, or certify absence in this finite shadow?
