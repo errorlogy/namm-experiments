@@ -63,6 +63,7 @@ Human projection is **optional** for machine-to-machine handoff and **trust-only
 
 ## Independence and generative power
 
+- **Representation gate:** reject candidates with \(K_A/K_H < \tau\) (default \(\tau = 2\); gzip bytes / projection tokens). Configurable via `representation_ratio_threshold` in experiment config. See `namm.metrics.representation.reject_if_low_compression_asymmetry`.
 - **Independence:** reject candidates with Pearson \(r > \tau\) vs any baseline on the atlas (default \(\tau = 0.95\)). See `namm.metrics.independence`.
 - **Generative power:** search on connected graphs order \(\leq 6\); require non-trivial score on held-out families (trees, bipartite, cubic). See `namm.metrics.generative`.
 
@@ -73,7 +74,8 @@ Human projection is **optional** for machine-to-machine handoff and **trust-only
 | Config value | Description |
 |--------------|-------------|
 | `graph_string` / `finite_graphs` | Phase 1 string formulas (NAMM-2026-001) |
-| `program_ast` | Phase 2 AST programs (NAMM-2026-002) |
+| `rewriting` | Phase 2a string rewriting systems (NAMM-2026-002) |
+| `program_ast` | Phase 2b AST programs with evolutionary search (NAMM-2026-003) |
 
 ---
 

@@ -1,10 +1,56 @@
 # NAMM Experiments
 
-Minimal runnable prototype for **NAMM Phase 1** — finite graph invariant search.
+> **Non-Anthropic Mathematics:** discovering structures whose canonical form is a verified program, not a human formula.
 
-**Protocol v2:** operational methodology, acceptance gates, and novelty ladder are in [`docs/PROTOCOL_V2.md`](docs/PROTOCOL_V2.md). Philosophy (MUH/Tegmark) is isolated in [`docs/PHILOSOPHY.md`](docs/PHILOSOPHY.md).
+**Research governance:** AI-led direction — the human author sets falsifiability and gates; the AI researcher allocates search budget across domains. See [`docs/RESEARCH_DIRECTION.md`](docs/RESEARCH_DIRECTION.md).
 
-**AI-native Phase 2:** program AST domain, certificates, and independence/generative gates — see [`docs/AI_NATIVE_NAMM.md`](docs/AI_NATIVE_NAMM.md).
+---
+
+## Hypothesis
+
+Mathematical structures may exist that are natural for **machine cognition before human projection** — easier to search, verify, and compose as certificates or AST programs than to name in classical notation. Max Tegmark's Mathematical Universe Hypothesis (MUH) is used **only as philosophy** to widen the search space; it is not a proof premise. See [`docs/PHILOSOPHY.md`](docs/PHILOSOPHY.md).
+
+---
+
+## What this repo does
+
+| Phase | Focus | Priority | Status |
+|-------|-------|----------|--------|
+| **Phase 1** | Finite graph invariant search (string formulas, baselines) | Closed | [`NAMM-2026-001`](experiments/NAMM-2026-001/) — calibration null result |
+| **Phase 2b** | Program AST synthesis (Graph → Int), evolutionary search | **P1** | [`NAMM-2026-003`](experiments/NAMM-2026-003/) |
+| **Phase 2a** | String rewriting systems, confluence search, certificate-first | **P2** | [`NAMM-2026-002`](experiments/NAMM-2026-002/) |
+| **Phase 3** | Trans-level meta-evaluators (reflective agents) | **P3** | [`NAMM-2026-004`](experiments/NAMM-2026-004/) — scaffold only |
+| **Protocol v2** | Hard acceptance gates, rejection logging, attack checklist | — | [`docs/PROTOCOL_V2.md`](docs/PROTOCOL_V2.md) |
+| **CI** | pytest + smoke search on every push to `main` | — | [`.github/workflows/ci.yml`](.github/workflows/ci.yml) |
+
+Full vision, falsifiability, and pipeline diagram: [`docs/VISION.md`](docs/VISION.md).  
+Research direction and roadmap: [`docs/RESEARCH_DIRECTION.md`](docs/RESEARCH_DIRECTION.md).  
+Brief manifesto: [`docs/MANIFESTO.md`](docs/MANIFESTO.md).
+
+---
+
+## North star
+
+> Discover structures whose canonical representation is a verified program, not a formula; whose human explanation is longer and lossier than the machine artifact; and which predict behavior on families no named invariant spans.
+
+From [`docs/AI_NATIVE_NAMM.md`](docs/AI_NATIVE_NAMM.md).
+
+---
+
+## What counts as success
+
+A result is interesting only when **all** of the following hold (not when it merely sounds novel):
+
+1. **Verified** — ground truth is the certificate (AST hash, eval witness), not the human projection.
+2. **Compression asymmetry** — \(K_A \ll K_H\): machine artifact smaller and more precise than its human explanation.
+3. **Independence** — passes correlation, simplify, and non-equivalence gates vs known baselines.
+4. **Generative power** — non-trivial on held-out graph families not used during search.
+
+Negative results are logged to `rejections.jsonl`. We claim methodology and falsifiable experiments — not breakthroughs.
+
+**Author:** Roman Kuznetsov · NAMM research program
+
+---
 
 ## Clone and run
 
@@ -17,32 +63,29 @@ python -m pytest tests/ -v
 
 On Windows you can use `py -3.12` instead of `python` if multiple versions are installed.
 
-## Run first experiment (NAMM-2026-001)
+## Run program synthesis experiment (NAMM-2026-003) — Priority 1
 
 ```bash
-python -m namm.cli run-experiment --id NAMM-2026-001
+python -m namm.cli run-experiment --id NAMM-2026-003
 ```
 
-Or after install, using the console script:
+Evolutionary AST search with sympy equivalence checks only. Held-out families: trees, bipartite, cubic.
 
-```bash
-namm run-experiment --id NAMM-2026-001
-```
-
-Artifacts are written to `experiments/NAMM-2026-001/artifacts/`:
-
-- `candidates.jsonl` — promising invariant candidates
-- `rejections.jsonl` — rejected candidates with reasons
-- `result.json` — machine-native summary
-- `HUMAN_PROJECTION.md` — human-readable summary
-
-## Run AI-native experiment (NAMM-2026-002)
+## Run rewriting experiment (NAMM-2026-002) — Priority 2
 
 ```bash
 python -m namm.cli run-experiment --id NAMM-2026-002
 ```
 
-Produces `certificate.json` plus human projection (see AI-native docs).
+Produces `certificate.json` for confluent rewriting systems.
+
+## Run calibration experiment (NAMM-2026-001) — closed
+
+```bash
+python -m namm.cli run-experiment --id NAMM-2026-001
+```
+
+Valid null result; no further search budget allocated per [`docs/RESEARCH_DIRECTION.md`](docs/RESEARCH_DIRECTION.md).
 
 ## Health loop (Cursor)
 
