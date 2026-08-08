@@ -93,6 +93,13 @@ class ExperimentConfig(BaseModel):
     )
     ast_max_depth: int = 3
     ast_max_leaves: int = 5
+    representation_ratio_threshold: float | None = 2.0
+    search_strategy: str = "random"
+    evolution_population: int = 20
+    evolution_generations: int = 5
+    rewriting_max_length: int = 6
+    rewriting_num_rules: int = 3
+    confluence_threshold: float = 1.0
 
     @property
     def effective_correlation_threshold(self) -> float:
@@ -107,8 +114,16 @@ class ExperimentConfig(BaseModel):
         return self.domain in ("program_ast", "program")
 
     @property
+    def is_rewriting_domain(self) -> bool:
+        return self.domain in ("rewriting", "string_rewriting")
+
+    @property
     def is_graph_string_domain(self) -> bool:
         return self.domain in ("finite_graphs", "graph_string", "graph")
+
+    @property
+    def effective_representation_ratio_threshold(self) -> float | None:
+        return self.representation_ratio_threshold
 
 
 class CandidateRecord(BaseModel):
