@@ -76,6 +76,7 @@ Human projection is **optional** for machine-to-machine handoff and **trust-only
 | `graph_string` / `finite_graphs` | Phase 1 string formulas (NAMM-2026-001) |
 | `rewriting` | Phase 2a string rewriting systems (NAMM-2026-002) |
 | `program_ast` | Phase 2b AST programs with evolutionary search (NAMM-2026-003) |
+| `meta_evaluation` | Phase 3 meta-evaluator fixed points E ≈ F(E) (NAMM-2026-004) |
 
 ---
 

@@ -19,12 +19,13 @@ Mathematical structures may exist that are natural for **machine cognition befor
 | **Phase 1** | Finite graph invariant search (string formulas, baselines) | Closed | [`NAMM-2026-001`](experiments/NAMM-2026-001/) — calibration null result |
 | **Phase 2b** | Program AST synthesis (Graph → Int), evolutionary search | **P1** | [`NAMM-2026-003`](experiments/NAMM-2026-003/) |
 | **Phase 2a** | String rewriting systems, confluence search, certificate-first | **P2** | [`NAMM-2026-002`](experiments/NAMM-2026-002/) |
-| **Phase 3** | Trans-level meta-evaluators (reflective agents) | **P3** | [`NAMM-2026-004`](experiments/NAMM-2026-004/) — scaffold only |
+| **Phase 3** | Trans-level meta-evaluators (reflective agents) | **P3** | [`NAMM-2026-004`](experiments/NAMM-2026-004/) — meta-evaluator fixed points |
 | **Protocol v2** | Hard acceptance gates, rejection logging, attack checklist | — | [`docs/PROTOCOL_V2.md`](docs/PROTOCOL_V2.md) |
 | **CI** | pytest + smoke search on every push to `main` | — | [`.github/workflows/ci.yml`](.github/workflows/ci.yml) |
 
 Full vision, falsifiability, and pipeline diagram: [`docs/VISION.md`](docs/VISION.md).  
 Research direction and roadmap: [`docs/RESEARCH_DIRECTION.md`](docs/RESEARCH_DIRECTION.md).  
+AI thinking topology (Phase 3 foundation): [`docs/AI_THINKING_TOPOLOGY.md`](docs/AI_THINKING_TOPOLOGY.md).  
 Brief manifesto: [`docs/MANIFESTO.md`](docs/MANIFESTO.md).
 
 ---
@@ -78,6 +79,14 @@ python -m namm.cli run-experiment --id NAMM-2026-002
 ```
 
 Produces `certificate.json` for confluent rewriting systems.
+
+## Run meta-evaluator experiment (NAMM-2026-004) — Priority 3
+
+```bash
+python -m namm.cli run-experiment --id NAMM-2026-004
+```
+
+Searches for meta-evaluator fixed points E ≈ F(E) on graphs order ≤ 6. See [`docs/AI_THINKING_TOPOLOGY.md`](docs/AI_THINKING_TOPOLOGY.md).
 
 ## Run calibration experiment (NAMM-2026-001) — closed
 

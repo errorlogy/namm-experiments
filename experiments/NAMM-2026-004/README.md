@@ -1,42 +1,50 @@
-# NAMM-2026-004 — Trans-Level Meta-Evaluators (Scaffold)
+# NAMM-2026-004 — Meta-Evaluator Fixed Points
 
-**Status:** documentation only — not yet implemented  
-**Domain:** `meta_evaluation` (proposed)
+**Domain:** `meta_evaluation`  
+**Status:** implemented  
+**Topology:** AI thinking topology (see [`docs/AI_THINKING_TOPOLOGY.md`](../../docs/AI_THINKING_TOPOLOGY.md))
 
 ---
 
 ## Research question
 
-Can we build **evaluators that score other evaluators** — measuring whether a discovery pipeline's gates (independence, representation ratio, generative holdout) discriminate signal from noise across domains, without human judgment in the loop?
+Can search discover **meta-evaluator fixed points** E ≈ F(E) on finite graphs (order ≤ 6), where:
 
-This is a **trans-level** experiment: the object of study is not graph invariants or rewriting systems, but the **meta-metrics** that accept or reject candidates in NAMM-2026-001 through 003.
+- **E** is an evaluator AST that maps graphs → scores and can reference `self` or `target`
+- **F(E)** is a meta-transformation on evaluator programs (canonicalize, add_zero, self_unfold, …)
+- **Fixed point:** E and F(E) agree on all benchmark graphs within tolerance
+
+This is a **trans-level** experiment under AI-native topology: the object of study is not graph invariants but **self-referential evaluator structure** stable under program transformation.
 
 ---
 
-## Proposed design (future)
+## Run
+
+```bash
+python -m namm.cli run-experiment --id NAMM-2026-004
+```
+
+Primary artifact: `artifacts/certificate.json` (evaluator AST, transform, fixed-point fraction, eval hashes).
+
+---
+
+## Design
 
 | Component | Role |
 |-----------|------|
-| **Evaluator registry** | Catalog of gate functions (`reject_if_correlated`, `reject_if_low_compression_asymmetry`, `generative_holdout_score`) |
-| **Synthetic candidates** | Known-positive and known-negative fixtures per domain |
-| **Meta-score** | True-positive rate, false-positive rate, calibration vs held-out synthetic set |
-| **Certificate** | `meta_certificate.json` with gate ROC-style summary and seed |
+| `src/namm/domains/meta/ast.py` | Meta-evaluator AST (leaf, self, target, binary ops) |
+| `src/namm/domains/meta/transform.py` | F(E) transform registry |
+| `src/namm/domains/meta/evaluator.py` | Graph evaluation with self/target context |
+| `src/namm/domains/meta/serializer.py` | Certificate-first artifacts |
+
+Benchmark graphs: connected graphs order ≤ 6 (atlas). Fixed-point threshold: 1.0 (exact agreement).
 
 ---
 
-## Dependencies
+## Related docs
 
-- Stable artifacts from NAMM-2026-001 (null baseline), 002 (rewriting), 003 (program AST)
-- [`docs/RESEARCH_DIRECTION.md`](../../docs/RESEARCH_DIRECTION.md) — Phase 4 roadmap
-
----
-
-## Not in scope (this scaffold)
-
-- No `config.yaml` or CLI runner yet
-- No production code under `src/namm/domains/meta/`
-
-When implemented, this experiment will **not** replace domain experiments; it audits whether our gates generalize.
+- [`docs/AI_THINKING_TOPOLOGY.md`](../../docs/AI_THINKING_TOPOLOGY.md) — AI vs human cognition topology
+- [`docs/RESEARCH_DIRECTION.md`](../../docs/RESEARCH_DIRECTION.md) — Phase 3 roadmap
 
 ---
 

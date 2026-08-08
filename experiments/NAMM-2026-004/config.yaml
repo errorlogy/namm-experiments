@@ -1,0 +1,22 @@
+experiment_id: NAMM-2026-004
+domain: meta_evaluation
+max_order: 6
+num_candidates: 50
+seed: 2026004
+meta_max_depth: 3
+meta_fixed_point_threshold: 1.0
+meta_include_self: true
+meta_nontrivial_only: true
+representation_ratio_threshold: 2.0
+research_question: >
+  Can search discover meta-evaluator fixed points E ≈ F(E) on finite graphs
+  (order ≤ 6), where F transforms evaluator programs and E can apply to itself
+  or other evaluators — objects stable under AI thinking topology rather than
+  human geometric intuition?
+meta_transforms:
+  - canonicalize
+  - add_zero
+  - double_halve
+  - self_unfold
+  - swap_commutative
+  - compose_identity
