@@ -1,0 +1,12 @@
+experiment_id: NAMM-2026-001
+domain: finite_graphs
+max_order: 8
+num_candidates: 50
+seed: 42
+research_question: >
+  Can random search discover a nontrivial graph invariant candidate that
+  agrees with known baselines on some graphs but is not equivalent to the
+  Wiener index on all connected graphs of order at most 8?
+baselines:
+  - wiener_index
+  - algebraic_connectivity

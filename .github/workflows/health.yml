@@ -1,0 +1,33 @@
+# Scheduled health check — mirrors scripts/health.ps1 on a weekly cadence.
+# Runs pytest only (no full experiment) to catch dependency drift on main.
+
+name: Scheduled health
+
+on:
+  schedule:
+    # Every Monday at 09:00 UTC
+    - cron: "0 9 * * 1"
+  workflow_dispatch: # Allow manual trigger from Actions tab
+
+jobs:
+  health:
+    name: Weekly health check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - name: Install project with dev dependencies
+        run: pip install -e ".[dev]"
+
+      - name: Run pytest suite
+        run: pytest tests/ -v
