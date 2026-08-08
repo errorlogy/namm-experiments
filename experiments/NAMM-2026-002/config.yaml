@@ -1,0 +1,24 @@
+experiment_id: NAMM-2026-002
+domain: program_ast
+max_order: 8
+train_max_order: 6
+num_candidates: 80
+seed: 2026
+research_question: >
+  Can random AST program synthesis discover a graph invariant whose canonical
+  representation is a verified program tree, passes independence gates vs known
+  baselines, and shows generative power on held-out graph families (trees,
+  bipartite, cubic)?
+baselines:
+  - wiener_index
+  - degree_sum
+  - clustering
+  - algebraic_connectivity
+correlation_rejection_threshold: 0.95
+correlation_atlas_order: 6
+held_out_families:
+  - trees
+  - bipartite
+  - cubic
+ast_max_depth: 3
+ast_max_leaves: 5

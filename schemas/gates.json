@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/errorlogy/namm-experiments/schemas/gates.json",
+  "title": "NAMM Acceptance Gates",
+  "description": "Multi-agent handoff schema for Protocol v2 acceptance gates",
+  "type": "object",
+  "required": [
+    "experiment_id",
+    "candidate_id",
+    "gates",
+    "novelty_level",
+    "signed_off"
+  ],
+  "properties": {
+    "experiment_id": {
+      "type": "string",
+      "pattern": "^NAMM-[0-9]{4}-[0-9]{3}$"
+    },
+    "candidate_id": {
+      "type": "string"
+    },
+    "novelty_level": {
+      "type": "string",
+      "enum": ["N0", "N1", "N2", "N3", "N4", "N5"]
+    },
+    "signed_off": {
+      "type": "boolean",
+      "description": "Agent-7 / meta-critic sign-off"
+    },
+    "gates": {
+      "type": "object",
+      "required": [
+        "non_equivalence",
+        "correlation",
+        "prior_art_simplify",
+        "novelty_floor",
+        "representation_logged",
+        "baselines_same_budget",
+        "negative_results_logged"
+      ],
+      "properties": {
+        "non_equivalence": { "$ref": "#/$defs/gate" },
+        "correlation": { "$ref": "#/$defs/gate" },
+        "prior_art_simplify": { "$ref": "#/$defs/gate" },
+        "novelty_floor": { "$ref": "#/$defs/gate" },
+        "representation_logged": { "$ref": "#/$defs/gate" },
+        "baselines_same_budget": { "$ref": "#/$defs/gate" },
+        "negative_results_logged": { "$ref": "#/$defs/gate" }
+      },
+      "additionalProperties": false
+    },
+    "attack_checklist": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["step", "passed"],
+        "properties": {
+          "step": { "type": "string" },
+          "passed": { "type": "boolean" },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "representation_metrics": {
+      "type": "object",
+      "properties": {
+        "json_bytes": { "type": "integer", "minimum": 0 },
+        "gzip_bytes": { "type": "integer", "minimum": 0 },
+        "eval_time_ms": { "type": "number", "minimum": 0 },
+        "token_count_estimate": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "baseline_results": {
+      "type": "object",
+      "properties": {
+        "max_correlation": { "type": "number" },
+        "correlated_baseline": { "type": "string" },
+        "comparisons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["baseline_id", "expression", "equivalent", "pearson_r"],
+            "properties": {
+              "baseline_id": { "type": "string" },
+              "expression": { "type": "string" },
+              "equivalent": { "type": "boolean" },
+              "pearson_r": { "type": "number" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "gate": {
+      "type": "object",
+      "required": ["passed"],
+      "properties": {
+        "passed": { "type": "boolean" },
+        "notes": { "type": "string" },
+        "evidence_ref": { "type": "string" }
+      }
+    }
+  }
+}

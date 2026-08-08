@@ -176,12 +176,12 @@ Generated from **L2 meta-operator** `random_composition_of_graph_statistics`: se
 
 Deterministic reproduction:
 
-```powershell
-cd c:\Users\Public\NAMM
-C:\Users\lawye\AppData\Local\Programs\Python\Python312\python.exe -m namm.cli run-experiment --id NAMM-2026-001
-C:\Users\lawye\AppData\Local\Programs\Python\Python312\python.exe -m namm.cli verify --expr "2*avg_degree + 5*wiener_index + 4*num_edges + 1*clustering" --baseline "1*wiener_index" --max-order 6
-C:\Users\lawye\AppData\Local\Programs\Python\Python312\python.exe experiments\analyze_namm_2026_001.py
-C:\Users\lawye\AppData\Local\Programs\Python\Python312\python.exe -m pytest -q
+```bash
+# From the repository root
+python -m namm.cli run-experiment --id NAMM-2026-001
+python -m namm.cli verify --expr "2*avg_degree + 5*wiener_index + 4*num_edges + 1*clustering" --baseline "1*wiener_index" --max-order 6
+python experiments/analyze_namm_2026_001.py
+python -m pytest -q
 ```
 
 ### 12. Prior-art analysis
@@ -226,7 +226,7 @@ The best discovered expression is essentially “mostly Wiener index, plus some 
 
 | Parameter | Value |
 |-----------|-------|
-| Python | 3.12 (`C:\Users\lawye\AppData\Local\Programs\Python\Python312\python.exe`) |
+| Python | 3.12+ |
 | Seed | 42 |
 | Candidates | 50 |
 | Max order | 8 |

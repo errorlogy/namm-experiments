@@ -10,3 +10,5 @@ research_question: >
 baselines:
   - wiener_index
   - algebraic_connectivity
+correlation_threshold: 0.95
+correlation_atlas_order: 6

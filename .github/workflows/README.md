@@ -32,8 +32,8 @@ Common failures:
 
 ## Run CI locally (mimic GitHub Actions)
 
-```powershell
-cd c:\Users\Public\NAMM
+```bash
+# From the repository root (after clone)
 python -m pip install -e ".[dev]"
 python -m pytest tests/ -v
 ```

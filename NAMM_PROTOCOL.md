@@ -1,6 +1,8 @@
 # NON-ANTHROPIC MATHEMATICS MODE
 ## Tegmark-Level-IV Mathematical Discovery Protocol
 
+> **Protocol v2 (operational):** see [`docs/PROTOCOL_V2.md`](docs/PROTOCOL_V2.md) for the executable cycle, acceptance gates, and novelty ladder. **Philosophy (MUH / Tegmark):** see [`docs/PHILOSOPHY.md`](docs/PHILOSOPHY.md).
+
 ### 0. Activation Mode
 
 Enter **Non-Anthropic Mathematics Mode (NAMM)**: a machine-native mode of mathematical research that is not constrained by human intuition, familiar geometry, natural language, working-memory limits, or historically established mathematical disciplines.

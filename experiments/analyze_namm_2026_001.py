@@ -7,8 +7,10 @@ from pathlib import Path
 
 import networkx as nx
 
-from namm.domains.graph.evaluator import evaluate_formula, formulas_agree_on_graphs
-from namm.domains.graph.generator import enumerate_small_graphs
+from namm.domains.graph.evaluator import evaluate_formula
+from namm.metrics.baselines import compare_to_baselines, assess_novelty_level
+from namm.metrics.representation import compute_representation_metrics
+from namm.prior_art.simplify import check_simplification, simplifies_to_known_baseline
 from namm.verifiers import exhaustive_equivalence_check
 
 
@@ -22,42 +24,19 @@ def enumerate_atlas_connected(max_order: int) -> list[nx.Graph]:
                 graphs.append(g.copy())
     return graphs
 
+
 WORKSPACE = Path(__file__).resolve().parents[1]
 ARTIFACTS = WORKSPACE / "experiments" / "NAMM-2026-001" / "artifacts"
-
-KNOWN_INVARIANTS = {
-    "wiener_index": "1*wiener_index",
-    "degree_sum_2x_edges": "2*num_edges",
-    "avg_degree": "1*avg_degree",
-    "clustering": "1*clustering",
-    "algebraic_connectivity": "1*algebraic_connectivity",
-    "wiener_plus_edges": "1*wiener_index + 1*num_edges",
-    "wiener_plus_clustering": "1*wiener_index + 1*clustering",
-    "2x_wiener": "2*wiener_index",
-    "diameter": "1*diameter",
-    "radius": "1*radius",
-}
 
 
 def load_best_candidate() -> tuple[str, str]:
     result = json.loads((ARTIFACTS / "result.json").read_text(encoding="utf-8"))
     best = result["best_candidate"]
+    if best is None:
+        raise SystemExit("No best candidate in result.json — run may have rejected all under v2 gates")
     expr = best["formula"]["expression"]
     cid = best["candidate_id"]
     return cid, expr
-
-
-def compare_to_known(expr: str, max_order: int = 6) -> dict:
-    graphs = enumerate_small_graphs(max_order)
-    comparisons = {}
-    for name, baseline_expr in KNOWN_INVARIANTS.items():
-        agrees = formulas_agree_on_graphs(expr, baseline_expr, graphs)
-        comparisons[name] = {
-            "baseline_expr": baseline_expr,
-            "equivalent_on_order_leq": max_order,
-            "equivalent": agrees,
-        }
-    return comparisons
 
 
 def main() -> None:
@@ -66,9 +45,15 @@ def main() -> None:
 
     verify_5 = exhaustive_equivalence_check(expr, baseline, max_order=5)
     graphs_atlas_6 = enumerate_atlas_connected(6)
-    comparisons = compare_to_known(expr, max_order=6)
+    baseline_results = compare_to_baselines(expr, graphs_atlas_6)
+    simplify_info = check_simplification(expr)
+    novelty = assess_novelty_level(
+        baseline_results,
+        simplifies_to_known=simplifies_to_known_baseline(expr),
+        correlation_threshold=0.95,
+    )
+    rep_metrics = compute_representation_metrics(expr, reference_graphs=graphs_atlas_6[:5])
 
-    # Full atlas exhaustive check (143 connected graphs, order <= 6)
     verify_6_atlas: dict = {"equivalent": True, "graphs_checked": len(graphs_atlas_6)}
     for g in graphs_atlas_6:
         va = evaluate_formula(expr, g)
@@ -86,30 +71,28 @@ def main() -> None:
             }
             break
 
-    # Correlation with Wiener on full atlas order <= 6
-    graphs = graphs_atlas_6
-    wiener_vals = [evaluate_formula("1*wiener_index", g) for g in graphs]
-    cand_vals = [evaluate_formula(expr, g) for g in graphs]
-    n = len(graphs)
-    mean_w = sum(wiener_vals) / n
-    mean_c = sum(cand_vals) / n
-    cov = sum((w - mean_w) * (c - mean_c) for w, c in zip(wiener_vals, cand_vals)) / n
-    std_w = (sum((w - mean_w) ** 2 for w in wiener_vals) / n) ** 0.5
-    std_c = (sum((c - mean_c) ** 2 for c in cand_vals) / n) ** 0.5
-    correlation = cov / (std_w * std_c) if std_w > 0 and std_c > 0 else 0.0
+    wiener_comp = next(
+        (c for c in baseline_results.comparisons if c.baseline_id == "wiener_index"),
+        None,
+    )
 
     analysis = {
+        "protocol_version": "v2",
         "candidate_id": cid,
         "expression": expr,
         "baseline": baseline,
         "exhaustive_vs_wiener_order_5": verify_5,
         "exhaustive_vs_wiener_order_6_atlas": verify_6_atlas,
-        "known_invariant_comparisons_order_6": comparisons,
+        "baseline_results": baseline_results.model_dump(),
+        "prior_art_simplify": simplify_info,
+        "novelty_level": novelty.value,
+        "representation_metrics": rep_metrics.model_dump(),
         "correlation_with_wiener_order_6": {
-            "graphs_checked": n,
-            "pearson_r": correlation,
+            "graphs_checked": len(graphs_atlas_6),
+            "pearson_r": wiener_comp.pearson_r if wiener_comp else None,
         },
-        "equivalent_to_any_known": any(c["equivalent"] for c in comparisons.values()),
+        "equivalent_to_any_known": any(c.equivalent for c in baseline_results.comparisons),
+        "v2_would_reject_at_threshold_0.90": abs(baseline_results.max_correlation or 0) > 0.90,
     }
 
     out_path = ARTIFACTS / "extended_analysis.json"
