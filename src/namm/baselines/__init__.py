@@ -52,6 +52,8 @@ class SearchResult:
 
 def run_search(config: ExperimentConfig, graphs: list | None = None) -> SearchResult:
     """Dispatch search by experiment domain."""
+    if config.is_tda_domain:
+        return tda_search(config)
     if config.is_open_problem_domain:
         return open_problem_search(config)
     if config.is_meta_domain:
@@ -977,6 +979,187 @@ def meta_search(
                         ),
                     ],
                     signed_off=fp_frac >= fp_threshold,
+                ),
+            )
+        )
+
+    return SearchResult(
+        candidates=candidates,
+        rejections=rejections,
+        best_generative=best_generative,
+    )
+
+
+def _baseline_graph_for_tda(name: str, order: int) -> nx.Graph:
+    if name == "cycle":
+        return nx.cycle_graph(max(3, order))
+    if name == "complete":
+        return nx.complete_graph(max(3, order))
+    return nx.path_graph(max(3, order))
+
+
+def _formula_from_tda(candidate_id: str, graph: nx.Graph, sig) -> InvariantFormula:
+    from namm.domains.tda.homology import PersistenceSignature
+
+    assert isinstance(sig, PersistenceSignature)
+    return InvariantFormula(
+        id=candidate_id,
+        expression=(
+            f"TDA[β1={sig.betti_1},H1={sig.total_persistence_h1:.4f},"
+            f"n={graph.number_of_nodes()}]"
+        ),
+        primitives=[
+            f"betti_1:{sig.betti_1}",
+            f"entropy:{sig.persistence_entropy_h1:.4f}",
+        ],
+        meta_origin="tda_persistence_search",
+        canonical_ast={
+            "signature": sig.to_dict(),
+            "edges": [[int(u), int(v)] for u, v in graph.edges()],
+            "order": graph.number_of_nodes(),
+        },
+        ast_hash=sig.signature_hash,
+    )
+
+
+def tda_search(config: ExperimentConfig) -> SearchResult:
+    """Search for graphs whose persistence signature differs from baseline."""
+    from namm.domains.tda.generator import random_tda_graph
+    from namm.domains.tda.homology import graph_persistence_signature, persistence_distance
+    from namm.domains.tda.serializer import compute_tda_representation_metrics
+
+    rng = random.Random(config.seed)
+    baseline_g = _baseline_graph_for_tda(
+        config.tda_baseline_graph, max(3, config.max_order // 2)
+    )
+    baseline_sig = graph_persistence_signature(
+        baseline_g,
+        max_edge_length=config.tda_max_edge_length,
+        filtration_steps=config.tda_filtration_steps,
+    )
+    ratio_threshold = config.effective_representation_ratio_threshold
+    min_dist = config.tda_min_baseline_distance
+
+    candidates: list[CandidateRecord] = []
+    rejections: list[RejectionRecord] = []
+    best_generative: dict | None = None
+
+    for _ in range(config.num_candidates):
+        gen_seed = rng.randint(0, 2**31 - 1)
+        graph, candidate_id = random_tda_graph(gen_seed, max_order=config.max_order)
+
+        try:
+            sig = graph_persistence_signature(
+                graph,
+                max_edge_length=config.tda_max_edge_length,
+                filtration_steps=config.tda_filtration_steps,
+            )
+        except (ValueError, ImportError) as exc:
+            rejections.append(
+                RejectionRecord(
+                    candidate_id=candidate_id,
+                    formula=InvariantFormula(
+                        id=candidate_id,
+                        expression="TDA[error]",
+                        meta_origin="tda_persistence_search",
+                    ),
+                    reason=f"tda_evaluation_error: {exc}",
+                )
+            )
+            continue
+
+        dist = persistence_distance(sig, baseline_sig)
+        if best_generative is None or dist > best_generative.get("best_distance", -1):
+            best_generative = {
+                "best_distance": dist,
+                "baseline": config.tda_baseline_graph,
+                "baseline_signature": baseline_sig.to_dict(),
+            }
+
+        rep_raw = compute_tda_representation_metrics(graph)
+        rep_metrics = RepresentationMetrics(
+            json_bytes=rep_raw["json_bytes"],
+            gzip_bytes=rep_raw["gzip_bytes"],
+            eval_time_ms=rep_raw["eval_time_ms"],
+            token_count_estimate=rep_raw["token_count_estimate"],
+            projection_token_estimate=rep_raw["projection_token_estimate"],
+        )
+
+        if ratio_threshold is not None:
+            rep_gate = reject_if_low_compression_asymmetry(
+                rep_metrics, threshold=ratio_threshold
+            )
+            if not rep_gate.passed:
+                rejections.append(
+                    RejectionRecord(
+                        candidate_id=candidate_id,
+                        formula=_formula_from_tda(candidate_id, graph, sig),
+                        reason=(
+                            f"representation_ratio_fail:"
+                            f"ratio={rep_gate.ratio:.4f}<{ratio_threshold}"
+                        ),
+                    )
+                )
+                continue
+
+        if dist < min_dist:
+            rejections.append(
+                RejectionRecord(
+                    candidate_id=candidate_id,
+                    formula=_formula_from_tda(candidate_id, graph, sig),
+                    reason=f"baseline_too_close:distance={dist:.4f}<{min_dist}",
+                    counterexample={
+                        "distance": dist,
+                        "signature": sig.to_dict(),
+                    },
+                )
+            )
+            continue
+
+        if sig.betti_1 == 0 and baseline_sig.betti_1 == 0:
+            rejections.append(
+                RejectionRecord(
+                    candidate_id=candidate_id,
+                    formula=_formula_from_tda(candidate_id, graph, sig),
+                    reason="no_h1_feature:betti_1=0",
+                )
+            )
+            continue
+
+        score = dist * (1.0 + sig.persistence_entropy_h1)
+
+        candidates.append(
+            CandidateRecord(
+                candidate_id=candidate_id,
+                formula=_formula_from_tda(candidate_id, graph, sig),
+                score=score,
+                agrees_with_baseline=False,
+                graphs_tested=1,
+                status="candidate",
+                novelty_level=None,
+                representation_metrics=rep_metrics,
+                attack_checklist=AttackChecklist(
+                    items=[
+                        AttackChecklistItem(
+                            step="T1",
+                            passed=dist >= min_dist,
+                            notes=f"persistence distance={dist:.4f}",
+                        ),
+                        AttackChecklistItem(
+                            step="T2",
+                            passed=sig.betti_1 > 0 or sig.total_persistence_h1 > 0,
+                            notes=(
+                                f"β₁={sig.betti_1}, "
+                                f"H¹ total={sig.total_persistence_h1:.4f}"
+                            ),
+                        ),
+                        AttackChecklistItem(
+                            step="T3",
+                            passed=True,
+                            notes=f"baseline={config.tda_baseline_graph}",
+                        ),
+                    ],
+                    signed_off=dist >= min_dist,
                 ),
             )
         )

@@ -117,6 +117,10 @@ class ExperimentConfig(BaseModel):
     open_problem_id: str = "kotzig_pk"
     pk_k_min: int = 3
     pk_k_max: int = 8
+    tda_max_edge_length: float = 3.0
+    tda_filtration_steps: int = 10
+    tda_min_baseline_distance: float = 0.5
+    tda_baseline_graph: str = "path"
 
     @property
     def effective_correlation_threshold(self) -> float:
@@ -149,6 +153,10 @@ class ExperimentConfig(BaseModel):
             "open_problem",
             "kotzig_pk",
         )
+
+    @property
+    def is_tda_domain(self) -> bool:
+        return self.domain in ("tda_frame", "tda", "topological_data_analysis")
 
     @property
     def effective_representation_ratio_threshold(self) -> float | None:

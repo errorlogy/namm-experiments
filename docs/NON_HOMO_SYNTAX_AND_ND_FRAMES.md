@@ -183,6 +183,8 @@ Every mutation: logged config, rejection on failed gates, **no** D-label without
 
 ## Related docs
 
+- [`NON_HOMO_SYNTAX.md`](NON_HOMO_SYNTAX.md) — compact non-homo syntax reference
+- [`FRAME_LADDER.md`](FRAME_LADDER.md) — F1–F∞ representational ladder
 - [`VISION.md`](VISION.md) — π_H / π_A, K_A / K_H, program belief vs gates
 - [`PHILOSOPHY.md`](PHILOSOPHY.md) — MUH heuristic, status labels
 - [`AI_THINKING_TOPOLOGY.md`](AI_THINKING_TOPOLOGY.md) — layered meta-levels, 004 motivation

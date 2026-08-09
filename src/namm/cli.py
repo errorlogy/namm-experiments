@@ -207,6 +207,54 @@ def run_experiment_impl(config: ExperimentConfig, output_dir: Path) -> Experimen
                 "eval_hash": eval_hash,
                 "counterexample": payload.get("is_counterexample", False),
             }
+        elif config.is_tda_domain and best.formula.canonical_ast:
+            import networkx as nx
+
+            from namm.domains.tda.homology import (
+                graph_persistence_signature,
+                persistence_distance,
+            )
+            from namm.domains.tda.serializer import build_tda_certificate
+
+            payload = best.formula.canonical_ast
+            g = nx.Graph()
+            g.add_nodes_from(range(payload["order"]))
+            g.add_edges_from((u, v) for u, v in payload["edges"])
+            baseline_g = nx.path_graph(max(3, config.max_order // 2))
+            if config.tda_baseline_graph == "cycle":
+                baseline_g = nx.cycle_graph(max(3, config.max_order // 2))
+            baseline_sig = graph_persistence_signature(
+                baseline_g,
+                max_edge_length=config.tda_max_edge_length,
+            )
+            sig = graph_persistence_signature(
+                g, max_edge_length=config.tda_max_edge_length
+            )
+            dist = persistence_distance(sig, baseline_sig)
+            certificate = build_tda_certificate(
+                candidate_id=best.candidate_id,
+                graph=g,
+                seed=config.seed,
+                baseline_signature=baseline_sig,
+                witness_bounds={
+                    "max_order": config.max_order,
+                    "tda_max_edge_length": config.tda_max_edge_length,
+                    "tda_min_baseline_distance": config.tda_min_baseline_distance,
+                    "baseline_graph": config.tda_baseline_graph,
+                    "distance_to_baseline": dist,
+                },
+                extra={
+                    "domain": config.domain,
+                    "protocol_version": "v2-tda-frame",
+                    "score": best.score,
+                },
+            )
+            verification = {
+                "domain": "tda_frame",
+                "signature_hash": sig.signature_hash,
+                "eval_hash": certificate["eval_hash"],
+                "distance_to_baseline": dist,
+            }
         else:
             verification = verify_candidate(
                 best.formula.expression,
@@ -265,6 +313,13 @@ def run_experiment_impl(config: ExperimentConfig, output_dir: Path) -> Experimen
         human_lines.append(
             "\n> Finite shadow search; counterexample would refute Kotzig for listed k."
         )
+    if config.is_tda_domain:
+        human_lines.append(f"- TDA baseline: {config.tda_baseline_graph}")
+        human_lines.append(f"- Min persistence distance: {config.tda_min_baseline_distance}")
+        human_lines.append(f"- Max edge length (Rips): {config.tda_max_edge_length}")
+        human_lines.append(
+            "\n> Trust certificate; persistence signature in certificate.json."
+        )
 
     if best:
         if config.is_rewriting_domain and best.formula.canonical_ast:
@@ -314,6 +369,20 @@ def run_experiment_impl(config: ExperimentConfig, output_dir: Path) -> Experimen
                     f"- Edges: {payload.get('edges')}",
                 ]
             )
+        elif config.is_tda_domain and best.formula.canonical_ast:
+            from namm.domains.tda.homology import PersistenceSignature
+            from namm.domains.tda.serializer import human_projection_from_tda
+
+            payload = best.formula.canonical_ast
+            sig = PersistenceSignature(**payload["signature"])
+            dist = generative_holdout.get("best_distance", 0.0) if generative_holdout else 0.0
+            proj = human_projection_from_tda(
+                sig,
+                candidate_id=best.candidate_id,
+                graph_order=payload["order"],
+                distance_to_baseline=dist,
+            )
+            human_lines.extend(["", proj])
         else:
             human_lines.extend(
                 [

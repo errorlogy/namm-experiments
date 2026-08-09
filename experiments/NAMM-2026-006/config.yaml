@@ -1,0 +1,14 @@
+experiment_id: NAMM-2026-006
+domain: tda_frame
+max_order: 8
+num_candidates: 40
+seed: 2026006
+tda_max_edge_length: 3.0
+tda_filtration_steps: 10
+tda_min_baseline_distance: 0.5
+tda_baseline_graph: path
+representation_ratio_threshold: 2.0
+research_question: >
+  Can TDA frame search discover finite graphs (order ≤ 8) whose persistent
+  homology signature on the geodesic metric differs nontrivially from a
+  path-graph baseline — machine-native topology artifacts with K_A << K_H?

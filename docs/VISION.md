@@ -118,7 +118,9 @@ CI (pytest + smoke search) is the merge gate. No production deployment — quali
 
 ## Related docs
 
-- [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md) — non-homo syntax and ND frames (concept only; not verification path)
+- [`NON_HOMO_SYNTAX.md`](NON_HOMO_SYNTAX.md) — non-homo syntax, compactification vs projection
+- [`FRAME_LADDER.md`](FRAME_LADDER.md) — F1–F∞ representational ladder
+- [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md) — extended ND mapping
 - [`RESEARCH_DIRECTION.md`](RESEARCH_DIRECTION.md) — AI-led roadmap, \(\pi_H\)/\(\pi_A\) notes
 - [`MANIFESTO.md`](MANIFESTO.md) — brief scientific manifesto
 - [`AI_NATIVE_NAMM.md`](AI_NATIVE_NAMM.md) — certificate-first Phase 2

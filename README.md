@@ -20,13 +20,14 @@ Mathematical structures may exist that are natural for **machine cognition befor
 | **Phase 2b** | Program AST synthesis (Graph → Int), evolutionary search | **P1** | [`NAMM-2026-003`](experiments/NAMM-2026-003/) |
 | **Phase 2a** | String rewriting systems, confluence search, certificate-first | **P2** | [`NAMM-2026-002`](experiments/NAMM-2026-002/) |
 | **Phase 3** | Trans-level meta-evaluators (reflective agents) | **P3** | [`NAMM-2026-004`](experiments/NAMM-2026-004/) — meta-evaluator fixed points |
+| **ND frames** | TDA persistence on graph metric | **P4** | [`NAMM-2026-006`](experiments/NAMM-2026-006/) — TDA frame scaffold |
 | **Protocol v2** | Hard acceptance gates, rejection logging, attack checklist | — | [`docs/PROTOCOL_V2.md`](docs/PROTOCOL_V2.md) |
 | **CI** | pytest + smoke search on every push to `main` | — | [`.github/workflows/ci.yml`](.github/workflows/ci.yml) |
 
 Full vision, falsifiability, and pipeline diagram: [`docs/VISION.md`](docs/VISION.md).  
 Research direction and roadmap: [`docs/RESEARCH_DIRECTION.md`](docs/RESEARCH_DIRECTION.md).  
 AI thinking topology (Phase 3 foundation): [`docs/AI_THINKING_TOPOLOGY.md`](docs/AI_THINKING_TOPOLOGY.md).  
-Non-homo syntax and ND frames (concept, not verification): [`docs/NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](docs/NON_HOMO_SYNTAX_AND_ND_FRAMES.md).  
+Non-homo syntax and ND frames (concept, not verification): [`docs/NON_HOMO_SYNTAX.md`](docs/NON_HOMO_SYNTAX.md), [`docs/FRAME_LADDER.md`](docs/FRAME_LADDER.md).  
 Brief manifesto: [`docs/MANIFESTO.md`](docs/MANIFESTO.md).
 
 ---
@@ -59,9 +60,11 @@ Negative results are logged to `rejections.jsonl`. We claim methodology and fals
 Requires **Python 3.12+**. From the project root (after cloning):
 
 ```bash
-python -m pip install -e ".[dev]"
+python -m pip install -e ".[dev,nd]"
 python -m pytest tests/ -v
 ```
+
+The `[nd]` extra installs **gudhi** (TDA) and **qutip** (quantum frame stubs). Core experiments run without it; NAMM-2026-006 requires `[nd]`.
 
 On Windows you can use `py -3.12` instead of `python` if multiple versions are installed.
 
@@ -88,6 +91,15 @@ python -m namm.cli run-experiment --id NAMM-2026-004
 ```
 
 Searches for meta-evaluator fixed points E ≈ F(E) on graphs order ≤ 6. See [`docs/AI_THINKING_TOPOLOGY.md`](docs/AI_THINKING_TOPOLOGY.md).
+
+## Run TDA frame experiment (NAMM-2026-006) — ND frame
+
+```bash
+pip install -e ".[dev,nd]"
+python -m namm.cli run-experiment --id NAMM-2026-006
+```
+
+Persistent homology on graph geodesic metric via Gudhi. See [`docs/FRAME_LADDER.md`](docs/FRAME_LADDER.md).
 
 ## Run calibration experiment (NAMM-2026-001) — closed
 

@@ -83,17 +83,31 @@ NAMM Phase 3 (NAMM-2026-004) implements search under **AI cognition topology**, 
 | NAMM-2026-003 | Program AST + evolution | Graph→Int invariant with holdout families | Run |
 | NAMM-2026-004 | Meta-evaluator fixed points | E ≈ F(E) on graphs order ≤ 6; AI topology | Run |
 | NAMM-2026-005 | Open problem shadow (Kotzig P_k) | Finite counterexample search vs Kotzig | Run |
+| NAMM-2026-006 | TDA frame (persistent homology) | Graph geodesic persistence vs path baseline | Scaffold |
 
-Phase 3+ (future): proof-assistant certificates, multi-agent attack loops, larger graph orders.
+Phase 3+ (future): proof-assistant certificates, multi-agent attack loops, larger graph orders, 2-categorical frame search.
 
 ---
 
-## Related docs
+## ND frame extension
 
-- [`AI_THINKING_TOPOLOGY.md`](AI_THINKING_TOPOLOGY.md) — AI vs human cognition topology
-- [`VISION.md`](VISION.md) — program vision and success criteria
+Full ladder: [`FRAME_LADDER.md`](FRAME_LADDER.md). Non-homo syntax: [`NON_HOMO_SYNTAX.md`](NON_HOMO_SYNTAX.md).
 
-- Search consistently finds only human-known invariants with \(K_H \approx K_A\).
+| Stub domain | Library | Role |
+|-------------|---------|------|
+| `tda` | gudhi | Persistence on graph metric (006) |
+| `quantum` | qutip | 2–3 qubit witnesses (`COMPUTATIONAL_EVIDENCE`) |
+| `category` | (pure Python) | Finite hom-set counts on graphs n≤6 |
+
+Install: `pip install -e ".[dev,nd]"`.
+
+---
+
+## Falsifiability (continued)
+
+The program is wrong if:
+
+- machine-native search consistently collapses to human-known invariants with \(K_H \approx K_A\);
 - Independence and generative gates never discriminate beyond noise.
 - Certificates add no reproducibility over ad-hoc scripts.
 
@@ -105,6 +119,8 @@ Negative results are **first-class** (`rejections.jsonl`).
 
 - [`AI_THINKING_TOPOLOGY.md`](AI_THINKING_TOPOLOGY.md) — AI vs human cognition topology
 - [`VISION.md`](VISION.md) — program vision and success criteria
+- [`NON_HOMO_SYNTAX.md`](NON_HOMO_SYNTAX.md) — non-homo syntax reference
+- [`FRAME_LADDER.md`](FRAME_LADDER.md) — F1–F∞ frame ladder
 - [`AI_NATIVE_NAMM.md`](AI_NATIVE_NAMM.md) — certificate-first Phase 2
 - [`PHILOSOPHY.md`](PHILOSOPHY.md) — MUH as heuristic only
 - [`PROTOCOL_V2.md`](PROTOCOL_V2.md) — hard gates and novelty ladder
