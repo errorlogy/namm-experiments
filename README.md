@@ -26,6 +26,7 @@ Mathematical structures may exist that are natural for **machine cognition befor
 Full vision, falsifiability, and pipeline diagram: [`docs/VISION.md`](docs/VISION.md).  
 Research direction and roadmap: [`docs/RESEARCH_DIRECTION.md`](docs/RESEARCH_DIRECTION.md).  
 AI thinking topology (Phase 3 foundation): [`docs/AI_THINKING_TOPOLOGY.md`](docs/AI_THINKING_TOPOLOGY.md).  
+Non-homo syntax and ND frames (concept, not verification): [`docs/NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](docs/NON_HOMO_SYNTAX_AND_ND_FRAMES.md).  
 Brief manifesto: [`docs/MANIFESTO.md`](docs/MANIFESTO.md).
 
 ---
