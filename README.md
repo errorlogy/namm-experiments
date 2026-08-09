@@ -6,7 +6,7 @@
 
 **Author:** Roman Kuznetsov · [NAMM research program](https://github.com/errorlogy/namm-experiments)
 
-**Project updates:** [@AGIminister on X](https://x.com/AGIminister)
+**Updates & discussion:** [@AGIminister](https://x.com/AGIminister)
 
 ---
 
@@ -27,9 +27,9 @@ We report **computational evidence** under explicit gates. Negative and null res
 | **Operational** | SNH gates, `certificate.json`, independence checks, generative holdout, novelty ladder | Executable; see [`docs/PROTOCOL_V2.md`](docs/PROTOCOL_V2.md) |
 | **Philosophical** | Structure as discovery, not invention; MUH widens search space; ND frames as **metaphors mapped to formal math** | `PHILOSOPHICAL_INFERENCE` — **non-evidential**; not a proof premise |
 
-> **PHILOSOPHICAL_INFERENCE** (philosophical motivation — not a proof premise): Math structures are not human constructions but observer-independent objects. Human formalism is a cognitively bounded coordinate system over this space. AI may discover verifiable invariants and representations that are non-intuitive to us.
+> Math structures are not human constructions but observer-independent objects. Human formalism is a cognitively bounded coordinate system over this space. AI may discover verifiable invariants and representations that are non-intuitive to us.
 
-**Operational falsifiability** — SNH gates and [Protocol v2](docs/PROTOCOL_V2.md) — does not depend on this inference; it is what makes claims testable. This stance only widens the search space.
+Credit: formulation by project author ([@AGIminister on X](https://x.com/AGIminister)). Label PHILOSOPHICAL_INFERENCE.
 
 Humans access structure through **constrained projections** (\(\pi_H\)): formulas, diagrams, prose. Machine search operates in different representational frames (\(\pi_A\)): AST programs, rewrite systems, relation tensors. Whether AI accesses descriptive levels humans compress away is **empirically testable** via \(K_A/K_H\) and certificate reproducibility — not settled by metaphysics alone.
 
