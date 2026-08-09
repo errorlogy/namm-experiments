@@ -111,6 +111,7 @@ Each experiment config states a falsifiable question. Negative results belong in
 | 2b | Program AST + evolutionary search | NAMM-2026-003 | **P1** — AI-native core |
 | 2a | String rewriting systems (confluence) | NAMM-2026-002 | **P2** |
 | 3 | Trans-level meta-evaluators | NAMM-2026-004 | **P3** — scaffold only |
+| ND | TDA persistence on graph metric | NAMM-2026-006 | **P4** — TDA frame scaffold |
 
 CI (pytest + smoke search) is the merge gate. No production deployment — quality is in the artifacts.
 
