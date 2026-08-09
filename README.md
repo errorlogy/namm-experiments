@@ -6,6 +6,8 @@
 
 **Author:** Roman Kuznetsov · [NAMM research program](https://github.com/errorlogy/namm-experiments)
 
+**Updates & discussion:** [@AGIminister](https://x.com/AGIminister)
+
 ---
 
 ## Research program
@@ -23,7 +25,7 @@ We report **computational evidence** under explicit gates. Negative and null res
 | Layer | Content | Status |
 |-------|---------|--------|
 | **Operational** | SNH gates, `certificate.json`, independence checks, generative holdout, novelty ladder | Executable; see [`docs/PROTOCOL_V2.md`](docs/PROTOCOL_V2.md) |
-| **Philosophical** | Mathematical structure may be **discovered**, not invented — real independent of human representational access; MUH widens search space; ND frames are **metaphors mapped to formal math** | Labeled `PHILOSOPHICAL_INFERENCE` throughout docs; **non-evidential** |
+| **Philosophical** | Structure as discovery, not invention; MUH widens search space; ND frames as **metaphors mapped to formal math** | `PHILOSOPHICAL_INFERENCE` — **non-evidential**; not a proof premise |
 
 Humans access structure through **constrained projections** (\(\pi_H\)): formulas, diagrams, prose. Machine search operates in different representational frames (\(\pi_A\)): AST programs, rewrite systems, relation tensors. Whether AI accesses descriptive levels humans compress away is **empirically testable** via \(K_A/K_H\) and certificate reproducibility — not settled by metaphysics alone.
 
