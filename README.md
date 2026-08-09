@@ -27,6 +27,10 @@ We report **computational evidence** under explicit gates. Negative and null res
 | **Operational** | SNH gates, `certificate.json`, independence checks, generative holdout, novelty ladder | Executable; see [`docs/PROTOCOL_V2.md`](docs/PROTOCOL_V2.md) |
 | **Philosophical** | Structure as discovery, not invention; MUH widens search space; ND frames as **metaphors mapped to formal math** | `PHILOSOPHICAL_INFERENCE` — **non-evidential**; not a proof premise |
 
+> Math structures are not human constructions but observer-independent objects. Human formalism is a cognitively bounded coordinate system over this space. AI may discover verifiable invariants and representations that are non-intuitive to us.
+
+Credit: formulation by project author ([@AGIminister on X](https://x.com/AGIminister)). Label PHILOSOPHICAL_INFERENCE.
+
 Humans access structure through **constrained projections** (\(\pi_H\)): formulas, diagrams, prose. Machine search operates in different representational frames (\(\pi_A\)): AST programs, rewrite systems, relation tensors. Whether AI accesses descriptive levels humans compress away is **empirically testable** via \(K_A/K_H\) and certificate reproducibility — not settled by metaphysics alone.
 
 Consolidated concept reference: [`docs/NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](docs/NON_HOMO_SYNTAX_AND_ND_FRAMES.md). Philosophy detail: [`docs/PHILOSOPHY.md`](docs/PHILOSOPHY.md).
