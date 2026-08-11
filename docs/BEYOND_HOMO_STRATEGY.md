@@ -1,6 +1,8 @@
 # Beyond Homo-Known Strategy
 
-**Operational definition** for NAMM experiments that search outside the span of human-named mathematical vocabulary.  
+> **Archive notice (closed chapter).** This document is **not** an active research axis. Forward strategy lives in [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) — Anthemium directs, NAMM executes the experiment cycle (007, 008, roadmap 009+).
+
+**Operational definition** (retained for experiment record) for NAMM runs that search outside the span of human-named mathematical vocabulary.  
 Roman Kuznetsov · NAMM research program
 
 ---
