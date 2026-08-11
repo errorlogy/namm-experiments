@@ -80,6 +80,7 @@ Domain libraries (optional `[nd]` extra): **gudhi** (TDA), **qutip** (quantum fr
 | Non-anthropic syntax (reference) | [`docs/NON_HOMO_SYNTAX.md`](docs/NON_HOMO_SYNTAX.md) |
 | ND frame ladder (F1–F∞) | [`docs/FRAME_LADDER.md`](docs/FRAME_LADDER.md) |
 | Open problems tierlist (finite shadows) | [`docs/OPEN_PROBLEMS_TIERLIST.md`](docs/OPEN_PROBLEMS_TIERLIST.md) |
+| Open-source landscape (automated discovery vs NAMM) | [`docs/OPEN_SOURCE_LANDSCAPE.md`](docs/OPEN_SOURCE_LANDSCAPE.md) |
 | Certificate-first Phase 2 | [`docs/AI_NATIVE_NAMM.md`](docs/AI_NATIVE_NAMM.md) |
 | Brief manifesto | [`docs/MANIFESTO.md`](docs/MANIFESTO.md) |
 | Anthemium lineage (Manifesto → NAMM) | [`docs/ANTHEMIUM_LINEAGE.md`](docs/ANTHEMIUM_LINEAGE.md) |
