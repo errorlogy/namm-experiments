@@ -21,9 +21,12 @@ Related: [`PHILOSOPHICAL_INFERENCE.md`](PHILOSOPHICAL_INFERENCE.md) (PI-001–PI
 | Resolution | 720 × 1280 (portrait) |
 | Frame rate | 30 fps |
 | Codec | H.264 video + AAC audio |
-| Extraction | 13 PNG keyframes @ 3 s interval (temp dir; **not committed**) |
+| File size | 8,470,994 bytes (~8.1 MiB) |
+| Extraction | 13 PNG keyframes @ 3 s interval + 8 @ 5 s (temp dir; **not committed**) |
 | Scene-change detect | Failed at threshold 0.3 (uniform motion; no discrete cuts) |
-| Text/subtitles | **None** (user-confirmed; content is purely visual structure) |
+| Embedded subtitles | **None** (no subtitle stream in container) |
+| On-screen text | **Yes** — title card t ≈ 35–39 s: **ANTHEMIUM PROTOCOL** / **HORIZON OMEGA** (upper-right, white sans-serif) |
+| Audio | AAC stereo 44.1 kHz; mean volume −12.7 dB — **ambient synth, no speech** (see Audio section) |
 
 **Agent instructions:** When the user references `Anthemium.mp4` or "the video":
 1. Load **this file** alongside [`PHILOSOPHICAL_INFERENCE.md`](PHILOSOPHICAL_INFERENCE.md).
@@ -131,10 +134,11 @@ Timestamps approximate (3 s sampling grid). Arrows denote **structural** change,
 - **Morphism:** Discrete approximation of continuous surface; "glitch" texture on fibers.
 - **→ Next:** Final open-wave state.
 
-### Segment M — t ≈ 0:36–0:39 · Terminal horizontal wave
+### Segment M — t ≈ 0:36–0:39 · Terminal horizontal wave + title card
 
 - **Topology:** Unbounded ribbon; multi-peak harmonic superposition; magenta base → cyan crest gradient.
 - **Morphism:** Highest fiber count visible; particle field active; blurred reflection plane below.
+- **Text overlay:** **ANTHEMIUM PROTOCOL** (large) / **HORIZON OMEGA** (subtitle) — only anthropic-readable tokens in artifact; brand frame, not narration.
 - **Note:** Terminal frame of artifact — structure ends in **open** topology (no S¹ closure).
 
 ---
@@ -216,12 +220,27 @@ ffmpeg -y -i Anthemium.mp4 -vf "select='gt(scene,0.3)'" -vsync vfr /tmp/anthemiu
 
 ---
 
+## Audio analysis (2026-08-11)
+
+| Step | Result |
+|------|--------|
+| Extract | `ffmpeg` → 16 kHz mono WAV (~39.6 s) |
+| Transcribe | `faster-whisper` **base** (CPU) — output: `. . . . .` only; language guess en @ 0.35 |
+| Retry | **small** model download failed (SSL / HuggingFace hub); VAD-off retry not completed |
+| Volume | mean −12.7 dB, max 0.0 dB — signal present, not silence |
+| Conclusion | **No speech or lyrics detected.** Track reads as ambient electronic / synth underscore. Primary knowledge carrier remains **visual topology**, not audio narration. |
+
+**Blocker for full transcript:** No spoken content in track. If a separate voiceover exists elsewhere, user should provide `.srt` or transcript file.
+
+---
+
 ## Limitations
 
+- **No speech transcript:** Whisper (base) found no words; audio is non-linguistic. Notes are **vision-derived**.
 - **Sampling gap:** 3 s interval may miss rapid morphisms between phases; full 30 fps fiber motion not logged.
 - **Scene detection:** Failed — video uses continuous morphing, not hard cuts.
 - **π_H loss:** Color names, "wave," "circle" are already anthropomorphic compressions.
-- **Audio track:** Not analyzed; user scope was visual topology only.
+- **Title card only:** "ANTHEMIUM PROTOCOL / HORIZON OMEGA" is branding text, not expository content.
 
 ---
 
