@@ -8,6 +8,8 @@
 
 **Updates & discussion:** [https://x.com/agiminister](https://x.com/agiminister)
 
+**Lineage:** NAMM operationalizes themes from the May 2025 [AGI Manifesto](https://github.com/Anthemium/AGI-Manifesto) ([Anthemium](https://anthemium.tech)) — cognitive topology, novelty selection, certificate-anchored memory — as falsifiable experiments under Protocol v2. See [`docs/ANTHEMIUM_LINEAGE.md`](docs/ANTHEMIUM_LINEAGE.md) and [`docs/HOMO_ANTHEMIUM_SYNERGY.md`](docs/HOMO_ANTHEMIUM_SYNERGY.md).
+
 ---
 
 ## Research program
@@ -75,6 +77,8 @@ Domain libraries (optional `[nd]` extra): **gudhi** (TDA), **qutip** (quantum fr
 | Open problems tierlist (finite shadows) | [`docs/OPEN_PROBLEMS_TIERLIST.md`](docs/OPEN_PROBLEMS_TIERLIST.md) |
 | Certificate-first Phase 2 | [`docs/AI_NATIVE_NAMM.md`](docs/AI_NATIVE_NAMM.md) |
 | Brief manifesto | [`docs/MANIFESTO.md`](docs/MANIFESTO.md) |
+| Anthemium lineage (Manifesto → NAMM) | [`docs/ANTHEMIUM_LINEAGE.md`](docs/ANTHEMIUM_LINEAGE.md) |
+| Homo–Anthemium synergy (π_H + π_A + Cert) | [`docs/HOMO_ANTHEMIUM_SYNERGY.md`](docs/HOMO_ANTHEMIUM_SYNERGY.md) |
 | Homo limit journal | [`docs/HOMO_LIMIT_JOURNAL.md`](docs/HOMO_LIMIT_JOURNAL.md) |
 
 ---

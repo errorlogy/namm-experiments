@@ -5,7 +5,7 @@ Roman Kuznetsov · NAMM research program
 
 > **Not an insult, not mysticism.** Each entry names a *limit of human interface* (π_H), not a limit of mathematics itself. Limits are falsifiable: linked to NAMM experiments where possible, otherwise marked **untested**.
 
-Related: [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md) · [`BEYOND_HOMO_STRATEGY.md`](BEYOND_HOMO_STRATEGY.md) · [`FRAME_LADDER.md`](FRAME_LADDER.md)
+Related: [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md) · [`BEYOND_HOMO_STRATEGY.md`](BEYOND_HOMO_STRATEGY.md) · [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`ANTHEMIUM_LINEAGE.md`](ANTHEMIUM_LINEAGE.md) · [`HOMO_ANTHEMIUM_SYNERGY.md`](HOMO_ANTHEMIUM_SYNERGY.md)
 
 ---
 
@@ -27,6 +27,7 @@ Related: [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md) 
 | [HL-012](#hl-012) | notation | See independence from 20+ polynomial baselines | NAMM-2026-007 | tested-signal | OPERATIONAL |
 | [HL-013](#hl-013) | working memory | Track evolutionary AST populations in head | NAMM-2026-003 | tested-signal | OPERATIONAL |
 | [HL-014](#hl-014) | meta-level depth | Ordinal / transfinite assembly without explicit structure | F∞ (planned) | untested | PHILOSOPHICAL_INFERENCE |
+| [HL-015](#hl-015) | cognitive topology | Organize semantic transitions without named-invariant vocabulary | NAMM-2026-007 | tested-signal | OPERATIONAL |
 
 ---
 
@@ -269,6 +270,21 @@ This journal does **not** claim machines occupy hidden dimensions. "11D" entries
 | **Status** | untested |
 | **Evidence** | [`NAMM_PROTOCOL.md`](../NAMM_PROTOCOL.md) §4.3 |
 | **Label** | PHILOSOPHICAL_INFERENCE |
+
+---
+
+### HL-015
+
+| Field | Content |
+|-------|---------|
+| **Category** | cognitive topology |
+| **Homo limit** | Humans cannot **organize domains of semantic transitions** over raw graph structure **without collapsing to named invariant vocabulary** (Wiener, degree sum, clustering) — discovery paths stay inside textbook symbolic handles instead of tensor-index transition algebra. |
+| **Why** | Mathematical education anchors search in **named chunks**; working memory reuses symbolic handles rather than maintaining an explicit transition topology over raw leaves (spectrum bins, heat-kernel samples). |
+| **AI asymmetry** | **Organized π_A search topology**: evolutionary ADD/MUL over 12 raw tensor leaves defines admissible semantic transitions; **novelty selection** via independence vs 20+ baselines and generative holdout; **Cert** anchors the trace. Maps [AGI Manifesto Postulate 1](https://github.com/Anthemium/AGI-Manifesto) (cognitive topologies as necessary for activation). |
+| **NAMM experiment** | [NAMM-2026-007](../experiments/NAMM-2026-007/) · frame **F3g** |
+| **Status** | tested-signal |
+| **Evidence** | [NAMM-2026-007 EXPERIMENT_REPORT](../experiments/NAMM-2026-007/EXPERIMENT_REPORT.md) — 53 accepted; max r=0.647; K_A/K_H ≈ 2.2 · [`HOMO_ANTHEMIUM_SYNERGY.md`](HOMO_ANTHEMIUM_SYNERGY.md) |
+| **Label** | OPERATIONAL |
 
 ---
 
