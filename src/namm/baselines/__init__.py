@@ -52,6 +52,8 @@ class SearchResult:
 
 def run_search(config: ExperimentConfig, graphs: list | None = None) -> SearchResult:
     """Dispatch search by experiment domain."""
+    if config.is_tensor_domain:
+        return tensor_search(config, graphs=graphs)
     if config.is_tda_domain:
         return tda_search(config)
     if config.is_open_problem_domain:
@@ -703,9 +705,9 @@ def open_problem_search(config: ExperimentConfig) -> SearchResult:
     """Finite-shadow counterexample search for catalogued open problems."""
     import uuid
 
-    from namm.domains.open_problem.pk_graph import PkSearchHit, search_pk_counterexamples
-
     problem = config.open_problem_id
+    if problem == "graceful_tree":
+        return _graceful_tree_search(config)
     if problem != "kotzig_pk":
         return SearchResult(
             candidates=[],
@@ -721,6 +723,8 @@ def open_problem_search(config: ExperimentConfig) -> SearchResult:
                 )
             ],
         )
+
+    from namm.domains.open_problem.pk_graph import PkSearchHit, search_pk_counterexamples
 
     result = search_pk_counterexamples(
         max_order=config.max_order,
@@ -838,6 +842,395 @@ def open_problem_search(config: ExperimentConfig) -> SearchResult:
             "k_range": [config.pk_k_min, config.pk_k_max],
         },
     )
+
+
+def _graceful_tree_search(config: ExperimentConfig) -> SearchResult:
+    """Graceful Tree Conjecture finite shadow."""
+    import uuid
+
+    from namm.domains.open_problem.graceful_tree import (
+        GracefulTreeHit,
+        search_graceful_tree_counterexamples,
+    )
+
+    max_order = config.graceful_max_order or config.max_order
+    result = search_graceful_tree_counterexamples(max_order=max_order)
+
+    def _hit_to_formula(hit: GracefulTreeHit) -> InvariantFormula:
+        edge_str = ",".join(f"{u}-{v}" for u, v in hit.edge_list)
+        return InvariantFormula(
+            id=f"graceful-{uuid.uuid4().hex[:8]}",
+            expression=(
+                f"GracefulTree[n={hit.tree_order},idx={hit.tree_index},"
+                f"edges={edge_str}]"
+            ),
+            primitives=[f"order:{hit.tree_order}"],
+            meta_origin="graceful_tree_counterexample_search",
+            canonical_ast={
+                "problem": "graceful_tree",
+                "tree_order": hit.tree_order,
+                "tree_index": hit.tree_index,
+                "edges": [list(e) for e in hit.edge_list],
+                "labeling": (
+                    {str(k): v for k, v in hit.labeling.items()}
+                    if hit.labeling is not None
+                    else None
+                ),
+                "is_counterexample": hit.is_counterexample,
+            },
+            ast_hash=f"graceful-{hit.tree_order}-{hit.tree_index}",
+        )
+
+    candidates: list[CandidateRecord] = []
+    rejections: list[RejectionRecord] = []
+
+    if result.counterexamples:
+        for hit in result.counterexamples:
+            formula = _hit_to_formula(hit)
+            candidates.append(
+                CandidateRecord(
+                    candidate_id=formula.id,
+                    formula=formula,
+                    score=1.0,
+                    agrees_with_baseline=False,
+                    graphs_tested=result.trees_scanned,
+                    status="counterexample",
+                    attack_checklist=AttackChecklist(
+                        items=[
+                            AttackChecklistItem(
+                                step="O1",
+                                passed=True,
+                                notes=(
+                                    f"Graceful tree counterexample: "
+                                    f"order {hit.tree_order} index {hit.tree_index}"
+                                ),
+                            )
+                        ],
+                        signed_off=True,
+                    ),
+                    representation_metrics=RepresentationMetrics(
+                        json_bytes=len(str(hit.edge_list)),
+                        gzip_bytes=len(str(hit.edge_list)),
+                        eval_time_ms=0.0,
+                        token_count_estimate=len(hit.edge_list) * 4,
+                        projection_token_estimate=40,
+                    ),
+                )
+            )
+    else:
+        for hit in result.verified_trees[:5]:
+            formula = _hit_to_formula(hit)
+            rejections.append(
+                RejectionRecord(
+                    candidate_id=formula.id,
+                    formula=formula,
+                    reason=f"graceful_labeling_exists:order={hit.tree_order}",
+                )
+            )
+        if result.verified_trees:
+            best = result.verified_trees[0]
+            formula = _hit_to_formula(best)
+            candidates.append(
+                CandidateRecord(
+                    candidate_id=f"verified-{best.tree_order}-{best.tree_index}",
+                    formula=formula,
+                    score=1.0,
+                    agrees_with_baseline=False,
+                    graphs_tested=result.trees_scanned,
+                    status="verified_shadow",
+                    attack_checklist=AttackChecklist(
+                        items=[
+                            AttackChecklistItem(
+                                step="O1",
+                                passed=False,
+                                notes=(
+                                    f"No counterexample order≤{max_order}; "
+                                    f"all {result.trees_scanned} trees graceful"
+                                ),
+                            )
+                        ],
+                        signed_off=False,
+                    ),
+                )
+            )
+
+    return SearchResult(
+        candidates=candidates,
+        rejections=rejections,
+        best_generative={
+            "problem": "graceful_tree",
+            "trees_scanned": result.trees_scanned,
+            "counterexample_count": len(result.counterexamples),
+            "max_order": max_order,
+        },
+    )
+
+
+def tensor_search(
+    config: ExperimentConfig,
+    graphs: list | None = None,
+) -> SearchResult:
+    """Raw tensor AST search — no named human invariants in vocabulary."""
+    from namm.domains.tensor.ast import ast_to_dict
+    from namm.domains.tensor.baselines import generate_tensor_baselines
+    from namm.domains.tensor.canonical import ast_hash, canonicalize
+    from namm.domains.tensor.evaluator import evaluate_tensor_ast
+    from namm.domains.tensor.evolution import evolutionary_tensor_population
+    from namm.domains.tensor.generator import random_tensor_ast
+    from namm.domains.tensor.serializer import compute_tensor_representation_metrics
+    from namm.metrics.independence import check_independence
+
+    heat_times = tuple(config.tensor_heat_times)
+    spectrum_size = config.tensor_spectrum_size
+    rng = random.Random(config.seed)
+    train_graphs = train_graph_set(config.train_max_order)
+    test_graphs = graphs if graphs is not None else enumerate_small_graphs(config.max_order)
+    atlas_graphs = _atlas_connected_graphs(config.correlation_atlas_order)
+    held_out = generate_held_out_families(
+        config.held_out_families, max_order=config.max_order
+    )
+    threshold = config.effective_correlation_threshold
+    ratio_threshold = config.effective_representation_ratio_threshold
+
+    tensor_baselines = generate_tensor_baselines(
+        spectrum_size=spectrum_size,
+        heat_times=heat_times,
+        max_degree=4,
+    )
+    baseline_vals: dict[str, list[float]] = {}
+    for bid, bnode in tensor_baselines.items():
+        baseline_vals[bid] = [
+            evaluate_tensor_ast(
+                bnode, g, spectrum_size=spectrum_size, heat_times=heat_times
+            )
+            for g in atlas_graphs
+        ]
+
+    candidates: list[CandidateRecord] = []
+    rejections: list[RejectionRecord] = []
+    best_generative: dict | None = None
+
+    def _fitness(node):
+        try:
+            vals = [
+                evaluate_tensor_ast(
+                    node, g, spectrum_size=spectrum_size, heat_times=heat_times
+                )
+                for g in test_graphs[:10]
+            ]
+            return float(max(vals) - min(vals)) if vals else 0.0
+        except (ValueError, ZeroDivisionError, FloatingPointError):
+            return 0.0
+
+    if config.search_strategy == "evolutionary":
+        ast_batch = evolutionary_tensor_population(
+            config.seed,
+            population_size=config.evolution_population,
+            generations=config.evolution_generations,
+            max_depth=config.ast_max_depth,
+            max_leaves=config.ast_max_leaves,
+            fitness_fn=_fitness,
+            return_count=config.num_candidates,
+            spectrum_size=spectrum_size,
+            heat_times=heat_times,
+        )
+    else:
+        ast_batch = [
+            random_tensor_ast(
+                seed=rng.randint(0, 2**31 - 1),
+                max_depth=config.ast_max_depth,
+                max_leaves=config.ast_max_leaves,
+                spectrum_size=spectrum_size,
+                heat_times=heat_times,
+            )
+            for _ in range(config.num_candidates)
+        ]
+
+    for ast, candidate_id in ast_batch:
+        canonical = canonicalize(ast)
+
+        try:
+            cand_vals = [
+                evaluate_tensor_ast(
+                    canonical, g, spectrum_size=spectrum_size, heat_times=heat_times
+                )
+                for g in atlas_graphs
+            ]
+        except (ValueError, ZeroDivisionError, FloatingPointError) as exc:
+            rejections.append(
+                RejectionRecord(
+                    candidate_id=candidate_id,
+                    formula=_formula_from_tensor(candidate_id, canonical),
+                    reason=f"evaluation_error: {exc}",
+                )
+            )
+            continue
+
+        indep = check_independence(cand_vals, baseline_vals, threshold=threshold)
+        baseline_results = _baseline_results_from_independence(
+            indep, atlas_graphs, _tensor_expression(canonical)
+        )
+
+        gen_result = generative_holdout_score(
+            lambda g: evaluate_tensor_ast(
+                canonical, g, spectrum_size=spectrum_size, heat_times=heat_times
+            ),
+            train_graphs,
+            held_out,
+        )
+        if best_generative is None or gen_result.aggregate_score > best_generative.get(
+            "aggregate_score", -1
+        ):
+            best_generative = {
+                "aggregate_score": gen_result.aggregate_score,
+                "per_family_variance": gen_result.per_family_variance,
+                "passed": gen_result.passed,
+                "families_passed": sum(
+                    1 for v in gen_result.per_family_variance.values() if v >= 1e-6
+                ),
+            }
+
+        attack = _build_attack_checklist(
+            non_equiv_pass=True,
+            correlation_pass=indep.independent,
+            simplify_pass=True,
+            max_r=indep.max_correlation,
+            correlated_baseline=indep.correlated_baseline,
+            simplify_info={"redundancy_note": "tensor-only baselines deg≤4"},
+        )
+        novelty = assess_novelty_level(
+            baseline_results,
+            simplifies_to_known=False,
+            correlation_threshold=threshold,
+        )
+        ast_metrics = compute_tensor_representation_metrics(
+            canonical,
+            test_graphs[:5],
+            spectrum_size=spectrum_size,
+            heat_times=heat_times,
+        )
+        rep_metrics = RepresentationMetrics(
+            json_bytes=ast_metrics["json_bytes"],
+            gzip_bytes=ast_metrics["gzip_bytes"],
+            eval_time_ms=ast_metrics["eval_time_ms"],
+            token_count_estimate=ast_metrics["token_count_estimate"],
+            projection_token_estimate=ast_metrics["projection_token_estimate"],
+        )
+
+        if ratio_threshold is not None:
+            rep_gate = reject_if_low_compression_asymmetry(
+                rep_metrics, threshold=ratio_threshold
+            )
+            if not rep_gate.passed:
+                rejections.append(
+                    RejectionRecord(
+                        candidate_id=candidate_id,
+                        formula=_formula_from_tensor(candidate_id, canonical),
+                        reason=(
+                            f"representation_ratio_fail:"
+                            f"ratio={rep_gate.ratio:.4f}<{ratio_threshold}"
+                        ),
+                        baseline_results=baseline_results,
+                        novelty_level=novelty,
+                    )
+                )
+                continue
+
+        if not indep.independent:
+            rejections.append(
+                RejectionRecord(
+                    candidate_id=candidate_id,
+                    formula=_formula_from_tensor(candidate_id, canonical),
+                    reason=(
+                        f"high_correlation_with_tensor_baseline:"
+                        f"{indep.correlated_baseline}:r={abs(indep.max_correlation):.4f}"
+                    ),
+                    baseline_results=baseline_results,
+                    novelty_level=novelty,
+                )
+            )
+            continue
+
+        families_with_variance = sum(
+            1 for v in gen_result.per_family_variance.values() if v >= 1e-6
+        )
+        if families_with_variance < 2:
+            rejections.append(
+                RejectionRecord(
+                    candidate_id=candidate_id,
+                    formula=_formula_from_tensor(candidate_id, canonical),
+                    reason=(
+                        f"generative_holdout_fail:families_passed="
+                        f"{families_with_variance}<2,"
+                        f"score={gen_result.aggregate_score:.4f}"
+                    ),
+                    baseline_results=baseline_results,
+                    novelty_level=novelty,
+                )
+            )
+            continue
+
+        values = [
+            evaluate_tensor_ast(
+                canonical, g, spectrum_size=spectrum_size, heat_times=heat_times
+            )
+            for g in test_graphs
+        ]
+        score = float(max(values) - min(values)) if values else 0.0
+
+        candidates.append(
+            CandidateRecord(
+                candidate_id=candidate_id,
+                formula=_formula_from_tensor(candidate_id, canonical),
+                score=score,
+                agrees_with_baseline=False,
+                graphs_tested=len(test_graphs),
+                status="candidate",
+                novelty_level=novelty,
+                representation_metrics=rep_metrics,
+                attack_checklist=attack,
+                baseline_results=baseline_results,
+            )
+        )
+
+    return SearchResult(
+        candidates=candidates,
+        rejections=rejections,
+        best_generative=best_generative,
+    )
+
+
+def _tensor_expression(node) -> str:
+    def _expr(n) -> str:
+        if n.is_leaf():
+            return n.name or "?"
+        sym = {"add": "+", "mul": "*"}[n.op]
+        return f"({_expr(n.left)} {sym} {_expr(n.right)})"
+
+    return _expr(node)
+
+
+def _formula_from_tensor(candidate_id: str, node) -> InvariantFormula:
+    from namm.domains.tensor.ast import ast_to_dict
+    from namm.domains.tensor.canonical import ast_hash, canonicalize
+
+    canonical = canonicalize(node)
+    return InvariantFormula(
+        id=candidate_id,
+        expression=_tensor_expression(canonical),
+        primitives=sorted(
+            {n.name for n in _collect_tensor_leaves(canonical) if n.name}
+        ),
+        meta_origin="raw_tensor_composition",
+        canonical_ast=ast_to_dict(canonical),
+        ast_hash=ast_hash(canonical),
+    )
+
+
+def _collect_tensor_leaves(node) -> list:
+    if node.is_leaf():
+        return [node]
+    return _collect_tensor_leaves(node.left) + _collect_tensor_leaves(node.right)
 
 
 def meta_search(

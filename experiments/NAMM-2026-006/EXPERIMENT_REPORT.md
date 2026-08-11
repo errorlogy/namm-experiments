@@ -1,45 +1,39 @@
 # NAMM-2026-006 — Experiment Report
 
 **Domain:** TDA frame (`tda_frame`)  
-**Date:** _pending first run_  
+**Date:** 2026-08-11  
 **Seed:** 2026006  
 **Frame:** F3f per [`docs/FRAME_LADDER.md`](../../docs/FRAME_LADDER.md)  
-**Status:** template — fill after `run-experiment`
+**Status:** honest null — representation gate blocked all candidates
 
 ## Summary
 
 | Metric | Value |
 |--------|-------|
-| Candidates accepted | _TBD_ |
-| Rejections | _TBD_ |
+| Candidates accepted | **0** |
+| Rejections | 40 |
 | Max graph order | 8 |
 | Baseline graph | path |
 | Min persistence distance | 0.5 |
 | Representation gate | K_A/K_H ≥ 2.0 |
 
-## Best candidate
-
-**ID:** _TBD_  
-**Signature hash:** _TBD_  
-**β₁ / H¹ total persistence:** _TBD_  
-**Distance to baseline:** _TBD_  
-**Certificate:** `artifacts/certificate.json`
-
 ## Research question
 
 Can TDA frame search discover finite graphs whose persistent homology signature on the geodesic metric differs nontrivially from a path-graph baseline?
 
+## Result
+
+**No accepted candidates.** All 40 generated graphs passed baseline-distance and H¹-feature checks but failed the **representation_ratio_fail** gate (ratios 1.70–1.91, all below threshold 2.0). Best near-miss: β₁=2 graph at order 5 with ratio 1.90.
+
+Generative holdout recorded best persistence distance **3.5** to path baseline (order-4 path signature).
+
 ## Honest assessment
 
-**What to report**
-
-- Count of graphs accepted vs rejected (`baseline_too_close`, `no_h1_feature`, `representation_ratio_fail`).
-- Whether accepted candidates show **compression asymmetry** (persistence JSON compact vs human projection).
-- Whether results are **calibration** (expected cycle-like graphs) vs unexpected signatures.
+TDA signatures are machine-compact but human projections remain short enough that K_A/K_H did not reach 2.0 in this budget (40 candidates). This is a **calibration null** for HL-010: persistence barcodes are searchable but compression asymmetry gate is tight on small graphs.
 
 **Limitations**
 
-- Rips on small graph metrics is a **finite shadow** of TDA — not full geometric topology.
+- Rips on small graph metrics is a finite shadow — not full geometric topology.
 - Path baseline is arbitrary; cycle/complete baselines may yield different acceptance rates.
 - **COMPUTATIONAL_EVIDENCE** only — no topological theorem claims.
 
@@ -47,16 +41,19 @@ Can TDA frame search discover finite graphs whose persistent homology signature 
 
 | Reason | Count |
 |--------|-------|
-| `baseline_too_close` | _TBD_ |
-| `no_h1_feature` | _TBD_ |
-| `representation_ratio_fail` | _TBD_ |
+| `representation_ratio_fail` | 40 |
 
 ## Artifacts
 
 - `config.yaml` — experiment parameters
-- `artifacts/certificate.json` — primary ground truth
-- `artifacts/candidates.jsonl` / `rejections.jsonl`
+- `artifacts/rejections.jsonl` — all 40 rejections
 - `artifacts/human_projection.md` — lossy audit
+
+## Reproduction
+
+```bash
+python -m namm.cli run-experiment --id NAMM-2026-006
+```
 
 ---
 

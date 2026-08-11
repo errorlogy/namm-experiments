@@ -39,6 +39,34 @@ def generate_family_graphs(
             if g.number_of_edges() > 0 and nx.is_connected(g):
                 graphs.append(g)
             seed += 1
+    elif family == "random_regular":
+        for n in range(4, max_order + 1):
+            if len(graphs) >= count:
+                break
+            for d in (3, 4):
+                if d >= n:
+                    continue
+                if (n * d) % 2 != 0:
+                    continue
+                try:
+                    g = nx.random_regular_graph(d, n, seed=n * 11 + d)
+                    if nx.is_connected(g):
+                        graphs.append(g)
+                        break
+                except nx.NetworkXError:
+                    continue
+        seed = 0
+        while len(graphs) < count and seed < 50:
+            n = 6 + (seed % max(1, max_order - 5))
+            d = 3 + (seed % 2)
+            if n <= max_order and (n * d) % 2 == 0:
+                try:
+                    g = nx.random_regular_graph(d, n, seed=seed * 17)
+                    if nx.is_connected(g):
+                        graphs.append(g)
+                except nx.NetworkXError:
+                    pass
+            seed += 1
     elif family == "cubic":
         for n in range(4, max_order + 1):
             if n % 2 != 0:

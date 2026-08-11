@@ -121,6 +121,11 @@ class ExperimentConfig(BaseModel):
     tda_filtration_steps: int = 10
     tda_min_baseline_distance: float = 0.5
     tda_baseline_graph: str = "path"
+    tensor_spectrum_size: int = 8
+    tensor_heat_times: list[float] = Field(
+        default_factory=lambda: [0.25, 0.5, 1.0, 2.0]
+    )
+    graceful_max_order: int | None = None
 
     @property
     def effective_correlation_threshold(self) -> float:
@@ -157,6 +162,14 @@ class ExperimentConfig(BaseModel):
     @property
     def is_tda_domain(self) -> bool:
         return self.domain in ("tda_frame", "tda", "topological_data_analysis")
+
+    @property
+    def is_tensor_domain(self) -> bool:
+        return self.domain in (
+            "raw_tensor",
+            "tensor_frame",
+            "tensor_program",
+        )
 
     @property
     def effective_representation_ratio_threshold(self) -> float | None:

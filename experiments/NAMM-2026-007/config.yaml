@@ -1,0 +1,26 @@
+experiment_id: NAMM-2026-007
+domain: raw_tensor
+max_order: 8
+train_max_order: 6
+num_candidates: 120
+seed: 2026007
+search_strategy: evolutionary
+evolution_population: 60
+evolution_generations: 8
+representation_ratio_threshold: 2.0
+correlation_rejection_threshold: 0.95
+correlation_atlas_order: 6
+tensor_spectrum_size: 8
+tensor_heat_times: [0.25, 0.5, 1.0, 2.0]
+held_out_families:
+  - trees
+  - bipartite
+  - cubic
+  - random_regular
+ast_max_depth: 4
+ast_max_leaves: 6
+research_question: >
+  Can evolutionary search over ADD/MUL/COMPOSE programs on raw adjacency-derived
+  tensor leaves (spectrum + heat-kernel samples) discover invariants independent
+  of 20+ polynomial baselines (degree ≤4), with K_A/K_H ≥ 2 and generative holdout
+  on ≥2 graph families — without any named human invariant vocabulary?

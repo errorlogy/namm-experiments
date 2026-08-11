@@ -1,0 +1,11 @@
+experiment_id: NAMM-2026-008
+domain: open_problem_shadow
+open_problem_id: graceful_tree
+max_order: 12
+graceful_max_order: 12
+num_candidates: 1
+seed: 2026008
+research_question: >
+  Does exhaustive enumeration of non-isomorphic trees up to order 12 find a
+  counterexample to the Graceful Tree Conjecture (tree without graceful labeling),
+  or certify the conjecture in this finite shadow?

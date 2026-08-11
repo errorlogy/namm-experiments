@@ -207,6 +207,41 @@ def run_experiment_impl(config: ExperimentConfig, output_dir: Path) -> Experimen
                 "eval_hash": eval_hash,
                 "counterexample": payload.get("is_counterexample", False),
             }
+        elif config.is_tensor_domain and best.formula.canonical_ast:
+            from namm.domains.tensor.ast import parse_ast_dict
+            from namm.domains.tensor.canonical import canonicalize as canon_tensor
+            from namm.domains.tensor.serializer import build_tensor_certificate
+
+            heat_times = tuple(config.tensor_heat_times)
+            ast_node = canon_tensor(parse_ast_dict(best.formula.canonical_ast))
+            ref_graphs = enumerate_small_graphs(config.max_order)[:20]
+            certificate = build_tensor_certificate(
+                candidate_id=best.candidate_id,
+                node=ast_node,
+                seed=config.seed,
+                reference_graphs=ref_graphs,
+                witness_bounds={
+                    "train_max_order": config.train_max_order,
+                    "test_max_order": config.max_order,
+                    "spectrum_size": config.tensor_spectrum_size,
+                    "heat_times": list(config.tensor_heat_times),
+                    "held_out_families": config.held_out_families,
+                    "graph_count": len(ref_graphs),
+                    "baseline_count": "20+ tensor polynomials deg≤4",
+                },
+                extra={
+                    "domain": config.domain,
+                    "protocol_version": "v2-beyond-homo-tensor",
+                    "generative_holdout": generative_holdout,
+                },
+                spectrum_size=config.tensor_spectrum_size,
+                heat_times=heat_times,
+            )
+            verification = {
+                "domain": "raw_tensor",
+                "ast_hash": best.formula.ast_hash,
+                "eval_hash": certificate["eval_hash"],
+            }
         elif config.is_tda_domain and best.formula.canonical_ast:
             import networkx as nx
 
@@ -313,6 +348,14 @@ def run_experiment_impl(config: ExperimentConfig, output_dir: Path) -> Experimen
         human_lines.append(
             "\n> Finite shadow search; counterexample would refute Kotzig for listed k."
         )
+    if config.is_tensor_domain:
+        human_lines.append(f"- Tensor spectrum size: {config.tensor_spectrum_size}")
+        human_lines.append(f"- Heat times: {config.tensor_heat_times}")
+        human_lines.append(f"- Train order: ≤ {config.train_max_order}")
+        human_lines.append(f"- Held-out families: {', '.join(config.held_out_families)}")
+        human_lines.append(
+            "\n> Beyond homo-known: numeric tensor leaves only (no wiener/degree_sum)."
+        )
     if config.is_tda_domain:
         human_lines.append(f"- TDA baseline: {config.tda_baseline_graph}")
         human_lines.append(f"- Min persistence distance: {config.tda_min_baseline_distance}")
@@ -369,6 +412,18 @@ def run_experiment_impl(config: ExperimentConfig, output_dir: Path) -> Experimen
                     f"- Edges: {payload.get('edges')}",
                 ]
             )
+        elif config.is_tensor_domain and best.formula.canonical_ast:
+            from namm.domains.tensor.ast import parse_ast_dict
+            from namm.domains.tensor.canonical import canonicalize as canon_tensor
+            from namm.domains.tensor.serializer import human_projection_from_tensor
+
+            ast_node = parse_ast_dict(best.formula.canonical_ast)
+            proj = human_projection_from_tensor(
+                canon_tensor(ast_node),
+                candidate_id=best.candidate_id,
+                trust_certificate=True,
+            )
+            human_lines.extend(["", proj])
         elif config.is_tda_domain and best.formula.canonical_ast:
             from namm.domains.tda.homology import PersistenceSignature
             from namm.domains.tda.serializer import human_projection_from_tda

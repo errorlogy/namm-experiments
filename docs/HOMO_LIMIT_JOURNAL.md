@@ -17,14 +17,14 @@ Related: [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md) 
 | [HL-002](#hl-002) | working memory | Hold full 11D field configuration | untested | untested | PHILOSOPHICAL_INFERENCE |
 | [HL-003](#hl-003) | compactification | Survey all compactification choices | untested | untested | PHILOSOPHICAL_INFERENCE |
 | [HL-004](#hl-004) | compactification | 11D→4D projection is lossy and non-canonical | F4 / frame ladder | tested-partial | OPERATIONAL |
-| [HL-005](#hl-005) | notation | Discovery starts from named invariant vocabulary | NAMM-2026-001, 007 | tested-null / untested | OPERATIONAL |
+| [HL-005](#hl-005) | notation | Discovery starts from named invariant vocabulary | NAMM-2026-001, 007 | tested-null / tested-signal | OPERATIONAL |
 | [HL-006](#hl-006) | meta-level depth | Stabilize evaluator-on-evaluator fixed points | NAMM-2026-004 | tested-signal | OPERATIONAL |
 | [HL-007](#hl-007) | search scale | Hold million-relation graphs as working objects | untested | untested | OPERATIONAL |
 | [HL-008](#hl-008) | search scale | Exhaustive finite shadow overnight (n≤8) | NAMM-2026-005, 008 | tested-partial | OPERATIONAL |
 | [HL-009](#hl-009) | notation | Treat certificate as primary, formula as audit | NAMM-2026-002, 003 | tested-signal | OPERATIONAL |
-| [HL-010](#hl-010) | notation | Read persistence barcodes as native invariants | NAMM-2026-006 | untested | OPERATIONAL |
+| [HL-010](#hl-010) | notation | Read persistence barcodes as native invariants | NAMM-2026-006 | tested-null | OPERATIONAL |
 | [HL-011](#hl-011) | search scale | Find novel confluent TRS by rule intuition | NAMM-2026-002 | tested-null | OPERATIONAL |
-| [HL-012](#hl-012) | notation | See independence from 20+ polynomial baselines | NAMM-2026-007 | untested | OPERATIONAL |
+| [HL-012](#hl-012) | notation | See independence from 20+ polynomial baselines | NAMM-2026-007 | tested-signal | OPERATIONAL |
 | [HL-013](#hl-013) | working memory | Track evolutionary AST populations in head | NAMM-2026-003 | tested-signal | OPERATIONAL |
 | [HL-014](#hl-014) | meta-level depth | Ordinal / transfinite assembly without explicit structure | F∞ (planned) | untested | PHILOSOPHICAL_INFERENCE |
 
@@ -131,8 +131,8 @@ This journal does **not** claim machines occupy hidden dimensions. "11D" entries
 | **Why** | Mathematical education and literature anchor search in **symbolic handles**; working memory reuses named chunks instead of raw tensor leaves. |
 | **AI asymmetry** | **Ban named primitives** in generator vocabulary; search only ADD/MUL/COMPOSE on raw adjacency-derived tensors (F3g). Independence checked vs 20+ polynomial baselines. |
 | **NAMM experiment** | [NAMM-2026-001](../experiments/NAMM-2026-001/) (calibration, homo-known) · [NAMM-2026-007](../experiments/NAMM-2026-007/) (beyond-named-math) |
-| **Status** | tested-null / untested |
-| **Evidence** | [NAMM-2026-001 EXPERIMENT_REPORT](../experiments/NAMM-2026-001/EXPERIMENT_REPORT.md) — closed calibration null; [`BEYOND_HOMO_STRATEGY.md`](BEYOND_HOMO_STRATEGY.md) |
+| **Status** | tested-null / tested-signal |
+| **Evidence** | [NAMM-2026-001 EXPERIMENT_REPORT](../experiments/NAMM-2026-001/EXPERIMENT_REPORT.md) — closed calibration null; [NAMM-2026-007 EXPERIMENT_REPORT](../experiments/NAMM-2026-007/EXPERIMENT_REPORT.md) — 53 tensor invariants, r≤0.647 |
 | **Label** | OPERATIONAL |
 
 ---
@@ -177,7 +177,7 @@ This journal does **not** claim machines occupy hidden dimensions. "11D" entries
 | **AI asymmetry** | **Deterministic exhaustive scan** with logged rejections and counterexample certificates — reproducible in one CI night. |
 | **NAMM experiment** | [NAMM-2026-005](../experiments/NAMM-2026-005/) (995 graphs, k∈3..10) · [NAMM-2026-008](../experiments/NAMM-2026-008/) (trees order ≤12) |
 | **Status** | tested-partial |
-| **Evidence** | [NAMM-2026-005 EXPERIMENT_REPORT](../experiments/NAMM-2026-005/EXPERIMENT_REPORT.md) — no counterexample in shadow; 008 pending first run |
+| **Evidence** | [NAMM-2026-005 EXPERIMENT_REPORT](../experiments/NAMM-2026-005/EXPERIMENT_REPORT.md) — no counterexample in shadow; [NAMM-2026-008 EXPERIMENT_REPORT](../experiments/NAMM-2026-008/EXPERIMENT_REPORT.md) — 987 trees order≤12, 0 counterexamples |
 | **Label** | OPERATIONAL |
 
 ---
@@ -206,8 +206,8 @@ This journal does **not** claim machines occupy hidden dimensions. "11D" entries
 | **Why** | Barcodes live in a space of multisets over ℝ²; human notation favors closed-form reals and low-degree polynomials. TDA is "native" to filtrations, not to chalkboard algebra. |
 | **AI asymmetry** | **Gudhi persistent homology** on graph geodesic metric; signature hash in certificate; baseline distance gate vs path graph. |
 | **NAMM experiment** | [NAMM-2026-006](../experiments/NAMM-2026-006/) |
-| **Status** | untested |
-| **Evidence** | [NAMM-2026-006 EXPERIMENT_REPORT](../experiments/NAMM-2026-006/EXPERIMENT_REPORT.md) (template — pending run) |
+| **Status** | tested-null |
+| **Evidence** | [NAMM-2026-006 EXPERIMENT_REPORT](../experiments/NAMM-2026-006/EXPERIMENT_REPORT.md) — 0/40 accepted; all failed K_A/K_H gate |
 | **Label** | OPERATIONAL |
 
 ---
@@ -236,8 +236,8 @@ This journal does **not** claim machines occupy hidden dimensions. "11D" entries
 | **Why** | Polynomial span over mixed tensor leaves lacks geometric picture; Pearson r across baselines requires computation, not inspection. Named formulas hide linear dependence. |
 | **AI asymmetry** | **Automated independence gates**: Pearson r ≤ τ vs full baseline library; search only in non-named tensor AST (spectrum, heat-kernel samples). |
 | **NAMM experiment** | [NAMM-2026-007](../experiments/NAMM-2026-007/) |
-| **Status** | untested |
-| **Evidence** | [`BEYOND_HOMO_STRATEGY.md`](BEYOND_HOMO_STRATEGY.md) · [NAMM-2026-007 README](../experiments/NAMM-2026-007/README.md) |
+| **Status** | tested-signal |
+| **Evidence** | [NAMM-2026-007 EXPERIMENT_REPORT](../experiments/NAMM-2026-007/EXPERIMENT_REPORT.md) — 53 accepted, max r=0.647 vs 20+ baselines |
 | **Label** | OPERATIONAL |
 
 ---
