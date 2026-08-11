@@ -84,6 +84,7 @@ Domain libraries (optional `[nd]` extra): **gudhi** (TDA), **qutip** (quantum fr
 | Brief manifesto | [`docs/MANIFESTO.md`](docs/MANIFESTO.md) |
 | Anthemium lineage (Manifesto → NAMM) | [`docs/ANTHEMIUM_LINEAGE.md`](docs/ANTHEMIUM_LINEAGE.md) |
 | Anthemium + NAMM synergy (experiments loop) | [`docs/ANTHEMIUM_NAMM_SYNERGY.md`](docs/ANTHEMIUM_NAMM_SYNERGY.md) |
+| Math object candidates (novelty registry) | [`docs/MATH_OBJECT_CANDIDATES.md`](docs/MATH_OBJECT_CANDIDATES.md) |
 
 ---
 
