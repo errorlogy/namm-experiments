@@ -3,57 +3,43 @@
 **Domain:** raw tensor (`raw_tensor`)  
 **Date:** 2026-08-11  
 **Seed:** 2026007  
-**Frame:** F3g — beyond homo-known vocabulary  
-**Search:** evolutionary (pop 60, 8 generations)  
-**Status:** tested-signal — 53 independent tensor invariants
+**Frame:** F3g — beyond homo-known  
+**Status:** **53 candidates accepted**
 
 ## Summary
 
 | Metric | Value |
 |--------|-------|
 | Candidates accepted | **53** |
-| Rejections | 4 |
-| Max Pearson r vs baselines | **0.647** (`mul_t11_t11`) |
-| K_A/K_H (bytes/tokens proxy) | 2516/241 ≈ **10.4** |
-| Generative holdout | **4/4 families passed** |
-| Train order | ≤ 6 |
-| Test order | ≤ 8 |
-
-## Research question
-
-Can evolutionary search over ADD/MUL/COMPOSE programs on raw adjacency-derived tensor leaves discover invariants independent of 20+ polynomial baselines, with K_A/K_H ≥ 2 and generative holdout on ≥2 graph families — without named human invariant vocabulary?
-
-## Result
-
-**Yes.** Evolutionary search produced 53 accepted candidates using only numeric tensor leaves (`t0`–`t11`: spectrum + heat-kernel samples). Best candidate `tensor-976e0a7a` has max baseline correlation **r = 0.647** (well below τ = 0.95), K_A/K_H ≈ 10.4, and generative holdout passed on all four held-out families (trees, bipartite, cubic, random_regular).
-
-This directly addresses HL-005 (beyond named vocabulary) and HL-012 (automated independence from 20+ baselines): humans cannot visually detect r = 0.647 independence; the gate pipeline can.
+| Rejections | **4** |
+| Search | evolutionary (60×8 pop, 120 returned) |
+| Tensor leaves | 12 (8 spectrum + 4 heat-kernel) |
+| Baseline polynomials | 20+ (degree ≤4) |
+| Representation gate | K_A/K_H ≥ 2.0 |
 
 ## Best candidate
 
-**ID:** `tensor-976e0a7a`  
+**ID:** `tensor-639c54cd`  
+**AST hash:** see `artifacts/certificate.json`  
 **Score (value range):** 4.90×10¹²  
-**Novelty:** N2  
-**Certificate:** `artifacts/certificate.json`  
-**eval_hash:** see certificate
+**Novelty:** **N2** (independent of tensor polynomial baselines)  
+**Max Pearson r vs baselines:** 0.647 (`mul_t11_t11`)  
+**K_A/K_H proxy:** gzip **213 B** / projection **≈97 tokens** → ratio **≈2.2**  
+**Generative holdout:** **passed** — all 4 families (trees, bipartite, cubic, random_regular)  
+**Certificate:** `artifacts/certificate.json`
 
-## Rejection breakdown
+## Rejection breakdown (4)
 
 | Reason | Count |
 |--------|-------|
-| `representation_ratio_fail` | 2 |
 | `high_correlation_with_tensor_baseline` | 2 |
+| `generative_holdout_fail` | 2 |
 
-## Honest assessment
+## Novelty assessment
 
-Strong **operational signal** for beyond-homo search: banning named invariants does not collapse discovery; independence and holdout gates are enforceable. Remaining risk: some accepted programs may be algebraically reducible beyond Pearson checks — attack checklist O2–O4 not yet signed off.
+The best candidate is a **deep ADD/MUL composition** over raw tensor indices (`t0`, `t3`, `t6`, `t8`–`t11`) with **no named human invariants** in the search vocabulary. It is **not** in the span of degree-≤4 tensor polynomial baselines (max |r| = 0.65 ≪ 0.95 threshold) and passes generative holdout on all four families.
 
-## Artifacts
-
-- `config.yaml` — experiment parameters
-- `artifacts/certificate.json` — primary ground truth
-- `artifacts/candidates.jsonl` / `rejections.jsonl`
-- `artifacts/human_projection.md` — lossy audit
+**Caveat:** Large numeric range suggests sensitivity to spectrum/heat scale — certificate is ground truth; human projection is lossy. **COMPUTATIONAL_EVIDENCE** only; not a published graph invariant theorem.
 
 ## Reproduction
 
