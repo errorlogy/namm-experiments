@@ -87,6 +87,7 @@ Domain libraries (optional `[nd]` extra): **gudhi** (TDA), **qutip** (quantum fr
 | Anthemium + NAMM synergy (experiments loop) | [`docs/ANTHEMIUM_NAMM_SYNERGY.md`](docs/ANTHEMIUM_NAMM_SYNERGY.md) |
 | Math object candidates (novelty registry) | [`docs/MATH_OBJECT_CANDIDATES.md`](docs/MATH_OBJECT_CANDIDATES.md) |
 | Math object hypotheses (falsifiable CONJECTURE registry) | [`docs/MATH_OBJECT_HYPOTHESES.md`](docs/MATH_OBJECT_HYPOTHESES.md) |
+| Mathematical fabric hypotheses (topological fuzzy dynamics, H-F registry) | [`docs/MATHEMATICAL_FABRIC_HYPOTHESES.md`](docs/MATHEMATICAL_FABRIC_HYPOTHESES.md) |
 | Philosophical inference registry (agent load) | [`docs/PHILOSOPHICAL_INFERENCE.md`](docs/PHILOSOPHICAL_INFERENCE.md) |
 
 ---
