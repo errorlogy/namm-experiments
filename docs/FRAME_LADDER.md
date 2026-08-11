@@ -75,6 +75,7 @@ Each rung is a **frame** \(\mathcal F = (\Sigma, \mathrm{Eval}, \kappa, \mathsf{
 | F3e | NAMM-2026-005 | `open_problem_shadow` | Finite shadow of Kotzig P_k |
 | F3f | NAMM-2026-006 | `tda_frame` | Persistence signature on graph metric |
 | F3g | NAMM-2026-007 | `raw_tensor` | Raw tensor programs (no named invariants) |
+| F3h | NAMM-2026-009 | `config_shadow` | 11D moduli vacua, 4D κ compactification fiber |
 | F3e₂ | NAMM-2026-008 | `open_problem_shadow` | Graceful Tree finite shadow |
 
 Each experiment fixes \((\Sigma, \mathrm{Eval}, \mathsf{Cert})\) in config; results are **COMPUTATIONAL_EVIDENCE** unless promoted by external proof.
