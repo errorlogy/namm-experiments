@@ -1,11 +1,13 @@
 # Homo Limit Journal
 
-**Operational log** of cognitive and representational limits that shape what humans can practically do in mathematics — contrasted with what machine-native search might address.  
+> **Archive notice (closed chapter).** Homo is **not** an ongoing research subject in this program — not as a partner, axis, or set of limits to overcome. This journal is retained **only** as an experiment record (HL-001–014) linking early runs to their operational context. Forward work is **Anthemium + NAMM** only — see [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md).
+
+**Historical record** of cognitive and representational limits from an earlier framing phase. Each HL-* entry names a limit that was linked to NAMM experiments for falsifiable comparison at the time of writing.  
 Roman Kuznetsov · NAMM research program
 
 > **Not an insult, not mysticism.** Each entry names a *limit of human interface* (π_H), not a limit of mathematics itself. Limits are falsifiable: linked to NAMM experiments where possible, otherwise marked **untested**.
 
-Related: [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md) · [`BEYOND_HOMO_STRATEGY.md`](BEYOND_HOMO_STRATEGY.md) · [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`ANTHEMIUM_LINEAGE.md`](ANTHEMIUM_LINEAGE.md) · [`HOMO_ANTHEMIUM_SYNERGY.md`](HOMO_ANTHEMIUM_SYNERGY.md)
+Related: [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md) · [`BEYOND_HOMO_STRATEGY.md`](BEYOND_HOMO_STRATEGY.md) · [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`ANTHEMIUM_LINEAGE.md`](ANTHEMIUM_LINEAGE.md) · [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md)
 
 ---
 
@@ -283,7 +285,7 @@ This journal does **not** claim machines occupy hidden dimensions. "11D" entries
 | **AI asymmetry** | **Organized π_A search topology**: evolutionary ADD/MUL over 12 raw tensor leaves defines admissible semantic transitions; **novelty selection** via independence vs 20+ baselines and generative holdout; **Cert** anchors the trace. Maps [AGI Manifesto Postulate 1](https://github.com/Anthemium/AGI-Manifesto) (cognitive topologies as necessary for activation). |
 | **NAMM experiment** | [NAMM-2026-007](../experiments/NAMM-2026-007/) · frame **F3g** |
 | **Status** | tested-signal |
-| **Evidence** | [NAMM-2026-007 EXPERIMENT_REPORT](../experiments/NAMM-2026-007/EXPERIMENT_REPORT.md) — 53 accepted; max r=0.647; K_A/K_H ≈ 2.2 · [`HOMO_ANTHEMIUM_SYNERGY.md`](HOMO_ANTHEMIUM_SYNERGY.md) |
+| **Evidence** | [NAMM-2026-007 EXPERIMENT_REPORT](../experiments/NAMM-2026-007/EXPERIMENT_REPORT.md) — 53 accepted; max r=0.647; K_A/K_H ≈ 2.2 · [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) |
 | **Label** | OPERATIONAL |
 
 ---

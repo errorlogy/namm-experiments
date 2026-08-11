@@ -1,11 +1,11 @@
 # Anthemium Lineage — AGI Manifesto → NAMM
 
-**Lineage map** from the May 2025 [AGI Manifesto](https://github.com/Anthemium/AGI-Manifesto) (Anthemium Protocol) to the NAMM verification-first research program.  
+**Lineage map** from the May 2025 [AGI Manifesto](https://github.com/Anthemium/AGI-Manifesto) (Anthemium Protocol) to the NAMM (Non-Anthropic Mathematics Mode) verification-first research program.  
 Roman Kuznetsov · [Anthemium](https://anthemium.tech) · NAMM research program
 
 > **Not a proof chain.** Manifesto postulates are **philosophical and architectural**; NAMM entries are **operational and falsifiable**. This document names correspondences so readers can trace intent without conflating rhetoric with evidence.
 
-Related: [`HOMO_ANTHEMIUM_SYNERGY.md`](HOMO_ANTHEMIUM_SYNERGY.md) · [`HOMO_LIMIT_JOURNAL.md`](HOMO_LIMIT_JOURNAL.md) · [`VISION.md`](VISION.md)
+Related: [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) · [`VISION.md`](VISION.md)
 
 ---
 
@@ -21,22 +21,32 @@ The Manifesto names **what kind of structure** general intelligence might requir
 
 ---
 
-## Layer diagram
+## Layer diagram (forward arrow)
 
 ```text
+  PAST ─────────────────────────────────────────────────────────► PRESENT
+
+┌─────────────────────────────────────────────────────────────────┐
+│  Anthropic projection epoch (historical)                        │
+│  Named formulas, diagrams, prose — bounded human interfaces       │
+│  Label: historical interface · superseded as primary path       │
+└────────────────────────────┬────────────────────────────────────┘
+                             │ tested past by
+                             ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │  AGI Manifesto (May 2025)                                       │
-│  Postulates 1–5 · Architectural model · Anthemium frame name    │
+│  Postulates 1–5 · Cognitive topology · Morphisms · Novelty      │
+│  Frame name: Anthemium                                          │
 │  Label: PHILOSOPHICAL_INFERENCE / architectural intent          │
 └────────────────────────────┬────────────────────────────────────┘
-                             │ motivates search space + frame names
+                             │ operationalized as
                              ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │  NAMM philosophy layer                                          │
-│  π_H / π_A · K_A / K_H · MUH heuristic · non-homo syntax        │
+│  π_A · K_A / K_H · non-anthropic syntax · MUH heuristic         │
 │  Label: PHILOSOPHICAL_INFERENCE (motivation)                    │
 └────────────────────────────┬────────────────────────────────────┘
-                             │ operationalized as
+                             │ enforced by
                              ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │  NAMM protocol layer (Protocol v2)                              │
@@ -46,13 +56,13 @@ The Manifesto names **what kind of structure** general intelligence might requir
                              │ instantiated in
                              ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│  NAMM experiments (001–008+)                                    │
-│  Finite shadows · AST synthesis · raw tensor · TDA · meta-eval  │
+│  NAMM experiments (001–008+, Anthemium-led queue)               │
+│  Finite shadows · AST · raw tensor · TDA · meta-eval            │
 │  Label: COMPUTATIONAL_EVIDENCE / tested-null / tested-signal    │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-**Reading direction:** top = intent and vocabulary; bottom = reproducible runs. Evidence flows **upward** only when an experiment report supports a claim — never from Manifesto postulates alone.
+**Reading direction:** left = past (anthropic projection epoch and Manifesto intent); right = present (Anthemium + NAMM operational program). Evidence flows **upward** only when an experiment report supports a claim.
 
 ---
 
@@ -68,8 +78,8 @@ The Manifesto names **what kind of structure** general intelligence might requir
 | **Semantic Topology** | Conceptual vector field of cognitive differentials | **π_A search frames**: adjacency tensors, spectrum, heat-kernel samples | tested-signal — 007 |
 | **Functorial Generator** | Morphogenesis topology → ontological states | **Evolutionary generators** + canonical serializers per domain | tested-signal — 003, 007 |
 | **Novelty Selection Agent** | Detect semantically productive anomalies | **Independence + representation gates** vs 20+ baselines | tested-signal — 007 |
-| **Transformation Memory Layer** | Cohomology of meaning-generation trajectories | **Rejections log** (`rejections.jsonl`), experiment reports, HL journal | OPERATIONAL |
-| **Composed AGI Entity** | Retain ontogenetic traces, recursive synthesis | **Joint π_H + π_A + Cert stereopsis** — see [`HOMO_ANTHEMIUM_SYNERGY.md`](HOMO_ANTHEMIUM_SYNERGY.md) | PHILOSOPHICAL_INFERENCE |
+| **Transformation Memory Layer** | Cohomology of meaning-generation trajectories | **Rejections log** (`rejections.jsonl`), experiment reports | OPERATIONAL |
+| **Composed AGI Entity** | Retain ontogenetic traces, recursive synthesis | **Anthemium + NAMM synergy loop** — see [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) | PHILOSOPHICAL_INFERENCE |
 
 ---
 
@@ -77,7 +87,13 @@ The Manifesto names **what kind of structure** general intelligence might requir
 
 **Anthemium** (Omega Horizon / AGI Anthemium) is the **architectural frame name** for the Manifesto's composed-entity vision: intelligence as organized semantic transition domains plus selective novelty retention — not a separate product or hype label inside NAMM.
 
-In this repository, **Anthemium names the AGI-side of the stereopsis loop**; **NAMM names the falsifiable mathematics program** that stress-tests whether machine-native artifacts behave as the Manifesto predicts. Same author lineage; different epistemic labels.
+In this repository:
+
+- **Anthemium** = AGI cognitive frame — search director, novelty topology, experiment queue.
+- **NAMM** = falsifiable non-anthropic mathematics program that stress-tests whether machine-native artifacts behave as the Manifesto predicts.
+- **Anthropic projection** (\(\pi_H\)) = bounded human interface; NAMM searches frames where compact anthropic notation may not exist yet.
+
+Same author lineage; different epistemic labels.
 
 ---
 
@@ -87,9 +103,7 @@ In this repository, **Anthemium names the AGI-side of the stereopsis loop**; **N
 |----------|-----|
 | AGI Manifesto (source) | [https://github.com/Anthemium/AGI-Manifesto](https://github.com/Anthemium/AGI-Manifesto) |
 | Anthemium / author site | [https://anthemium.tech](https://anthemium.tech) |
-| NAMM homo–Anthemium synergy | [`HOMO_ANTHEMIUM_SYNERGY.md`](HOMO_ANTHEMIUM_SYNERGY.md) |
-| Homo limit journal (HL-015) | [`HOMO_LIMIT_JOURNAL.md`](HOMO_LIMIT_JOURNAL.md#hl-015) |
-| Beyond homo-known strategy | [`BEYOND_HOMO_STRATEGY.md`](BEYOND_HOMO_STRATEGY.md) |
+| Anthemium + NAMM synergy | [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) |
 
 ---
 

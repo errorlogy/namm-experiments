@@ -1,14 +1,16 @@
-# NAMM Experiments
+# NAMM — Non-Anthropic Mathematics Mode
 
-> **Non-Anthropic Mathematics (NAMM):** a verification-first research program testing whether machine-native artifacts can certify mathematical structure before compact human projection exists.
+> **NAMM** (Non-Anthropic Mathematics Mode) is a verification-first research program testing whether machine-native artifacts can certify mathematical structure before compact human projection exists.
+
+> **Anthemium + NAMM:** [Anthemium](https://anthemium.tech) (AGI cognitive frame from the May 2025 [AGI Manifesto](https://github.com/Anthemium/AGI-Manifesto)) directs machine-native discovery; **NAMM** executes the verification-first experiment cycle — certificates, frame escalation, open-problem shadows. See [`docs/ANTHEMIUM_NAMM_SYNERGY.md`](docs/ANTHEMIUM_NAMM_SYNERGY.md).
 
 **Research governance:** AI-led search under human-set falsifiability gates — the author defines acceptance criteria and attack checklists; the AI researcher allocates search budget across domains. See [`docs/RESEARCH_DIRECTION.md`](docs/RESEARCH_DIRECTION.md).
 
-**Author:** [Roman Kuznetsov](https://anthemium.tech) · [NAMM research program](https://github.com/errorlogy/namm-experiments) · [Project site](https://anthemium.tech)
+**Author:** [Roman Kuznetsov](https://anthemium.tech) · [NAMM research program](https://github.com/errorlogy/namm-experiments) · [Project site](https://anthemium.tech) · [AGI Manifesto](https://github.com/Anthemium/AGI-Manifesto)
 
 **Updates & discussion:** [https://x.com/agiminister](https://x.com/agiminister)
 
-**Lineage:** NAMM operationalizes themes from the May 2025 [AGI Manifesto](https://github.com/Anthemium/AGI-Manifesto) ([Anthemium](https://anthemium.tech)) — cognitive topology, novelty selection, certificate-anchored memory — as falsifiable experiments under Protocol v2. See [`docs/ANTHEMIUM_LINEAGE.md`](docs/ANTHEMIUM_LINEAGE.md) and [`docs/HOMO_ANTHEMIUM_SYNERGY.md`](docs/HOMO_ANTHEMIUM_SYNERGY.md).
+**Lineage:** NAMM experiments develop the [Anthemium](https://anthemium.tech) research program — operationalizing the May 2025 [AGI Manifesto](https://github.com/Anthemium/AGI-Manifesto) as falsifiable runs under Protocol v2. Synergy is **Anthemium + NAMM**, not homo + AI partnership. See [`docs/ANTHEMIUM_LINEAGE.md`](docs/ANTHEMIUM_LINEAGE.md) and [`docs/ANTHEMIUM_NAMM_SYNERGY.md`](docs/ANTHEMIUM_NAMM_SYNERGY.md).
 
 ---
 
@@ -20,6 +22,8 @@ NAMM tests a **falsifiable claim**, not a metaphysical proof:
 
 We report **computational evidence** under explicit gates. Negative and null results are first-class (`rejections.jsonl`). We claim methodology and reproducible experiments — not breakthrough theorems.
 
+**Research targets** (Anthemium-led queue): **11D configuration shadows**, **M-theory moduli enumeration**, **trans-level Θ** (semantic transition algebra over raw structure), and **open-problem shadows** (Kotzig \(P_k\)-graphs, Graceful Tree conjecture as calibration). Some descriptive levels lie **beyond anthropic projection reach** — humans discover via bounded projections; NAMM searches frames where compact human notation may not exist yet.
+
 ---
 
 ## Epistemic stance
@@ -29,21 +33,19 @@ We report **computational evidence** under explicit gates. Negative and null res
 | **Operational** | SNH gates, `certificate.json`, independence checks, generative holdout, novelty ladder | Executable; see [`docs/PROTOCOL_V2.md`](docs/PROTOCOL_V2.md) |
 | **Philosophical** | Structure as discovery, not invention; MUH widens search space; ND frames as **metaphors mapped to formal math** | `PHILOSOPHICAL_INFERENCE` — **non-evidential**; not a proof premise |
 
-> Math structures are not human constructions but observer-independent objects. Human formalism is a cognitively bounded coordinate system over this space. AI may discover verifiable invariants and representations that are non-intuitive to us.
+> Mathematical structures may exist at descriptive levels **beyond anthropic projection reach**. Humans access structure through bounded projections; machine-native search operates in different representational frames. Whether non-anthropic artifacts certify structure humans cannot yet compress is **empirically testable** via \(K_A/K_H\) and certificate reproducibility — not settled by metaphysics alone.
 
 Credit: formulation by project author ([agiminister on X](https://x.com/agiminister)). Label PHILOSOPHICAL_INFERENCE.
 
-Humans access structure through **constrained projections** (\(\pi_H\)): formulas, diagrams, prose. Machine search operates in different representational frames (\(\pi_A\)): AST programs, rewrite systems, relation tensors. Whether AI accesses descriptive levels humans compress away is **empirically testable** via \(K_A/K_H\) and certificate reproducibility — not settled by metaphysics alone.
+Humans access structure through **anthropic projections** (\(\pi_H\)): formulas, diagrams, prose. Machine search operates in different representational frames (\(\pi_A\)): AST programs, rewrite systems, relation tensors. Verification-first discovery anchors both in `certificate.json`.
 
-Consolidated concept reference: [`docs/NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](docs/NON_HOMO_SYNTAX_AND_ND_FRAMES.md). Philosophy detail: [`docs/PHILOSOPHY.md`](docs/PHILOSOPHY.md).
-
-Homo limit log (cognitive/representational bounds vs AI-native search): [`docs/HOMO_LIMIT_JOURNAL.md`](docs/HOMO_LIMIT_JOURNAL.md).
+Consolidated concept reference: [`docs/NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](docs/NON_HOMO_SYNTAX_AND_ND_FRAMES.md) (non-anthropic syntax and ND frames). Philosophy detail: [`docs/PHILOSOPHY.md`](docs/PHILOSOPHY.md).
 
 ---
 
 ## Hypothesis
 
-Mathematical structures may exist that are natural for **machine cognition before human projection** — easier to search, verify, and compose as certificates or AST programs than to name in classical notation. Max Tegmark's Mathematical Universe Hypothesis (MUH) is used **only as philosophical motivation** to widen the search space; it is not a proof premise.
+Mathematical structures may exist that are natural for **machine cognition before anthropic projection** — easier to search, verify, and compose as certificates or AST programs than to name in classical notation. Max Tegmark's Mathematical Universe Hypothesis (MUH) is used **only as philosophical motivation** to widen the search space; it is not a proof premise.
 
 ---
 
@@ -57,6 +59,9 @@ Mathematical structures may exist that are natural for **machine cognition befor
 | **004** | Meta-evaluator fixed points under AI thinking topology | **P3** | [`NAMM-2026-004`](experiments/NAMM-2026-004/) |
 | **005** | Open-problem finite shadow — Kotzig \(P_k\)-graph counterexample search | **P2** | [`NAMM-2026-005`](experiments/NAMM-2026-005/) |
 | **006** | ND frame — TDA persistence on graph geodesic metric | **P4** | [`NAMM-2026-006`](experiments/NAMM-2026-006/) — TDA frame scaffold |
+| **007** | Raw tensor invariants — machine-native vocabulary (F3g) | **P1** | [`NAMM-2026-007`](experiments/NAMM-2026-007/) — **first operational signal** |
+| **008** | Open-problem shadow — Graceful Tree conjecture | **P2** | [`NAMM-2026-008`](experiments/NAMM-2026-008/) |
+| **009+** | 11D shadows, M-theory moduli, trans-level Θ | Planned | Anthemium-led queue — see [`docs/ANTHEMIUM_NAMM_SYNERGY.md`](docs/ANTHEMIUM_NAMM_SYNERGY.md) |
 | **Protocol v2** | Hard acceptance gates, rejection logging, attack checklist | — | [`docs/PROTOCOL_V2.md`](docs/PROTOCOL_V2.md) |
 | **CI** | pytest + smoke search on every push to `main` | — | [`.github/workflows/ci.yml`](.github/workflows/ci.yml) |
 
@@ -71,15 +76,14 @@ Domain libraries (optional `[nd]` extra): **gudhi** (TDA), **qutip** (quantum fr
 | Vision, falsifiability, pipeline | [`docs/VISION.md`](docs/VISION.md) |
 | Research direction and roadmap | [`docs/RESEARCH_DIRECTION.md`](docs/RESEARCH_DIRECTION.md) |
 | AI thinking topology (Phase 004 foundation) | [`docs/AI_THINKING_TOPOLOGY.md`](docs/AI_THINKING_TOPOLOGY.md) |
-| Non-homo syntax + ND frames (concept, consolidated) | [`docs/NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](docs/NON_HOMO_SYNTAX_AND_ND_FRAMES.md) |
-| Non-homo syntax (reference) | [`docs/NON_HOMO_SYNTAX.md`](docs/NON_HOMO_SYNTAX.md) |
+| Non-anthropic syntax + ND frames (concept, consolidated) | [`docs/NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](docs/NON_HOMO_SYNTAX_AND_ND_FRAMES.md) |
+| Non-anthropic syntax (reference) | [`docs/NON_HOMO_SYNTAX.md`](docs/NON_HOMO_SYNTAX.md) |
 | ND frame ladder (F1–F∞) | [`docs/FRAME_LADDER.md`](docs/FRAME_LADDER.md) |
 | Open problems tierlist (finite shadows) | [`docs/OPEN_PROBLEMS_TIERLIST.md`](docs/OPEN_PROBLEMS_TIERLIST.md) |
 | Certificate-first Phase 2 | [`docs/AI_NATIVE_NAMM.md`](docs/AI_NATIVE_NAMM.md) |
 | Brief manifesto | [`docs/MANIFESTO.md`](docs/MANIFESTO.md) |
 | Anthemium lineage (Manifesto → NAMM) | [`docs/ANTHEMIUM_LINEAGE.md`](docs/ANTHEMIUM_LINEAGE.md) |
-| Homo–Anthemium synergy (π_H + π_A + Cert) | [`docs/HOMO_ANTHEMIUM_SYNERGY.md`](docs/HOMO_ANTHEMIUM_SYNERGY.md) |
-| Homo limit journal | [`docs/HOMO_LIMIT_JOURNAL.md`](docs/HOMO_LIMIT_JOURNAL.md) |
+| Anthemium + NAMM synergy (experiments loop) | [`docs/ANTHEMIUM_NAMM_SYNERGY.md`](docs/ANTHEMIUM_NAMM_SYNERGY.md) |
 
 ---
 
@@ -157,6 +161,14 @@ python -m namm.cli run-experiment --id NAMM-2026-006
 ```
 
 Persistent homology on graph geodesic metric via Gudhi. See [`docs/FRAME_LADDER.md`](docs/FRAME_LADDER.md).
+
+## Run raw tensor experiment (NAMM-2026-007) — first operational signal
+
+```bash
+python -m namm.cli run-experiment --id NAMM-2026-007
+```
+
+Raw tensor invariants without named human-invariant vocabulary. See [`experiments/NAMM-2026-007/EXPERIMENT_REPORT.md`](experiments/NAMM-2026-007/EXPERIMENT_REPORT.md).
 
 ## Run calibration experiment (NAMM-2026-001) — closed
 
