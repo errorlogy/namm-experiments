@@ -64,3 +64,7 @@ README(*).md
 # Anthemium video artifact (π_A-native; not versioned — see docs/ANTHEMIUM_VIDEO_NOTES.md)
 Anthemium.mp4
 experiments/anthemium-video-extract/
+
+# Vendored upstream tools (shallow clones; not part of NAMM)
+external/
+
