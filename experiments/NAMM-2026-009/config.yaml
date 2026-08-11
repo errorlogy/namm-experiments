@@ -1,0 +1,16 @@
+experiment_id: NAMM-2026-009
+domain: config_shadow
+config_dim: 11
+shadow_dim: 4
+moduli_min: -1
+moduli_max: 1
+config_max_energy: 20.0
+flux_modulus: 3
+min_fiber_size: 2
+num_candidates: 50
+seed: 2026009
+representation_ratio_threshold: 2.0
+research_question: >
+  Can finite enumeration of 11-parameter moduli vacua find witnesses where the
+  compactification map κ (11D→4D, first 4 moduli) is non-injective (fiber size ≥ 2),
+  with K_A/K_H ≥ 2 between full certificate and 4D-only human projection?
