@@ -290,6 +290,51 @@ def run_experiment_impl(config: ExperimentConfig, output_dir: Path) -> Experimen
                 "eval_hash": certificate["eval_hash"],
                 "distance_to_baseline": dist,
             }
+        elif config.is_config_shadow_domain and best.formula.canonical_ast:
+            from namm.domains.config_shadow.serializer import build_config_shadow_certificate
+            from namm.domains.config_shadow.vacua import ModuliVacuum
+
+            payload = best.formula.canonical_ast
+            vacuum = ModuliVacuum(
+                moduli=tuple(payload["moduli"]),
+                shadow_4d=tuple(payload["shadow_4d"]),
+                fiber_size=payload["fiber_size"],
+                fiber_index=payload["fiber_index"],
+                stability_score=payload["stability_score"],
+                vacuum_id=payload.get("vacuum_id", best.candidate_id),
+            )
+            kappa_mode = payload.get("kappa_mode", config.kappa_mode)
+            certificate = build_config_shadow_certificate(
+                candidate_id=best.candidate_id,
+                vacuum=vacuum,
+                seed=config.seed,
+                witness_bounds={
+                    "config_dim": config.config_dim,
+                    "shadow_dim": config.shadow_dim,
+                    "moduli_range": [config.moduli_min, config.moduli_max],
+                    "max_energy": config.config_max_energy,
+                    "flux_modulus": config.flux_modulus,
+                    "vacua_scanned": generative_holdout.get("vacua_scanned")
+                    if generative_holdout
+                    else None,
+                    "ambiguous_fibers": generative_holdout.get("ambiguous_fibers")
+                    if generative_holdout
+                    else None,
+                },
+                extra={
+                    "domain": config.domain,
+                    "kappa_mode": kappa_mode,
+                    "kappa_sweep": generative_holdout.get("kappa_sweep")
+                    if generative_holdout
+                    else None,
+                },
+            )
+            verification = {
+                "domain": "config_shadow",
+                "vacuum_id": vacuum.vacuum_id,
+                "eval_hash": certificate["eval_hash"],
+                "fiber_size": vacuum.fiber_size,
+            }
         else:
             verification = verify_candidate(
                 best.formula.expression,
@@ -362,6 +407,22 @@ def run_experiment_impl(config: ExperimentConfig, output_dir: Path) -> Experimen
         human_lines.append(f"- Max edge length (Rips): {config.tda_max_edge_length}")
         human_lines.append(
             "\n> Trust certificate; persistence signature in certificate.json."
+        )
+    if config.is_config_shadow_domain:
+        human_lines.append(f"- Config dim: {config.config_dim}D")
+        human_lines.append(f"- Shadow dim: {config.shadow_dim}D")
+        human_lines.append(f"- κ mode: {config.kappa_mode}")
+        human_lines.append(
+            f"- Moduli range: [{config.moduli_min}, {config.moduli_max}]"
+        )
+        human_lines.append(f"- Max energy Σm²: {config.config_max_energy}")
+        human_lines.append(f"- Flux modulus: {config.flux_modulus}")
+        if generative_holdout and generative_holdout.get("kappa_sweep"):
+            human_lines.append(
+                f"- κ sweep: {generative_holdout['kappa_sweep']}"
+            )
+        human_lines.append(
+            "\n> HL-004: π_H sees shadow only; certificate preserves fiber."
         )
 
     if best:
@@ -438,6 +499,30 @@ def run_experiment_impl(config: ExperimentConfig, output_dir: Path) -> Experimen
                 distance_to_baseline=dist,
             )
             human_lines.extend(["", proj])
+        elif config.is_config_shadow_domain and best.formula.canonical_ast:
+            from namm.domains.config_shadow.serializer import human_projection_from_config
+            from namm.domains.config_shadow.vacua import ModuliVacuum
+
+            payload = best.formula.canonical_ast
+            vacuum = ModuliVacuum(
+                moduli=tuple(payload["moduli"]),
+                shadow_4d=tuple(payload["shadow_4d"]),
+                fiber_size=payload["fiber_size"],
+                fiber_index=payload["fiber_index"],
+                stability_score=payload["stability_score"],
+                vacuum_id=payload.get("vacuum_id", best.candidate_id),
+            )
+            proj = human_projection_from_config(
+                vacuum, candidate_id=best.candidate_id
+            )
+            human_lines.extend(["", proj])
+            human_lines.extend(
+                [
+                    f"- Fiber size (certificate only): {vacuum.fiber_size}",
+                    f"- Fiber index: {vacuum.fiber_index}",
+                    f"- 11D moduli (certificate): {list(vacuum.moduli)}",
+                ]
+            )
         else:
             human_lines.extend(
                 [

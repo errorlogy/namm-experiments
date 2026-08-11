@@ -52,6 +52,8 @@ class SearchResult:
 
 def run_search(config: ExperimentConfig, graphs: list | None = None) -> SearchResult:
     """Dispatch search by experiment domain."""
+    if config.is_config_shadow_domain:
+        return config_shadow_search(config)
     if config.is_tensor_domain:
         return tensor_search(config, graphs=graphs)
     if config.is_tda_domain:
@@ -65,6 +67,161 @@ def run_search(config: ExperimentConfig, graphs: list | None = None) -> SearchRe
     if config.is_program_domain:
         return program_search(config, graphs=graphs)
     return random_search(config, graphs=graphs)
+
+
+def _formula_from_vacuum(candidate_id: str, vacuum, *, kappa_mode: str) -> InvariantFormula:
+    from namm.domains.config_shadow.vacua import ModuliVacuum
+
+    assert isinstance(vacuum, ModuliVacuum)
+    return InvariantFormula(
+        id=candidate_id,
+        expression=(
+            f"ModuliVacuum[κ={kappa_mode},shadow={list(vacuum.shadow_4d)},"
+            f"fiber={vacuum.fiber_size}]"
+        ),
+        primitives=[f"kappa:{kappa_mode}", f"fiber:{vacuum.fiber_size}"],
+        meta_origin="config_shadow_ambiguous_vacua",
+        canonical_ast={
+            **vacuum.to_dict(),
+            "kappa_mode": kappa_mode,
+        },
+        ast_hash=vacuum.vacuum_id,
+    )
+
+
+def config_shadow_search(config: ExperimentConfig) -> SearchResult:
+    """11D moduli enumeration — ambiguous compactification witnesses (F3h)."""
+    from namm.domains.config_shadow.serializer import compute_config_representation_metrics
+    from namm.domains.config_shadow.vacua import search_ambiguous_vacua, sweep_kappa_modes
+
+    ratio_threshold = config.effective_representation_ratio_threshold
+    kappa_mode = config.kappa_mode
+    sweep_modes = config.kappa_sweep or []
+
+    if sweep_modes:
+        sweep = sweep_kappa_modes(
+            modes=sweep_modes,
+            config_dim=config.config_dim,
+            moduli_min=config.moduli_min,
+            moduli_max=config.moduli_max,
+            max_energy=config.config_max_energy,
+            flux_modulus=config.flux_modulus,
+            shadow_dim=config.shadow_dim,
+        )
+        best_row = max(sweep, key=lambda r: r.max_fiber_size)
+        kappa_mode = best_row.kappa_mode
+        search_result = search_ambiguous_vacua(
+            config_dim=config.config_dim,
+            moduli_min=config.moduli_min,
+            moduli_max=config.moduli_max,
+            max_energy=config.config_max_energy,
+            flux_modulus=config.flux_modulus,
+            shadow_dim=config.shadow_dim,
+            kappa_mode=kappa_mode,
+            min_fiber_size=config.min_fiber_size,
+            limit=config.num_candidates,
+            seed=config.seed,
+        )
+        sweep_summary = [
+            {
+                "kappa_mode": row.kappa_mode,
+                "vacua_scanned": row.vacua_scanned,
+                "ambiguous_fibers": row.ambiguous_fibers,
+                "max_fiber_size": row.max_fiber_size,
+            }
+            for row in sweep
+        ]
+    else:
+        search_result = search_ambiguous_vacua(
+            config_dim=config.config_dim,
+            moduli_min=config.moduli_min,
+            moduli_max=config.moduli_max,
+            max_energy=config.config_max_energy,
+            flux_modulus=config.flux_modulus,
+            shadow_dim=config.shadow_dim,
+            kappa_mode=kappa_mode,
+            min_fiber_size=config.min_fiber_size,
+            limit=config.num_candidates,
+            seed=config.seed,
+        )
+        sweep_summary = None
+
+    candidates: list[CandidateRecord] = []
+    rejections: list[RejectionRecord] = []
+
+    for vacuum in search_result.candidates:
+        candidate_id = vacuum.vacuum_id
+        rep_raw = compute_config_representation_metrics(vacuum)
+        rep_metrics = RepresentationMetrics(
+            json_bytes=rep_raw["json_bytes"],
+            gzip_bytes=rep_raw["gzip_bytes"],
+            eval_time_ms=rep_raw["eval_time_ms"],
+            token_count_estimate=rep_raw["token_count_estimate"],
+            projection_token_estimate=rep_raw["projection_token_estimate"],
+        )
+
+        if ratio_threshold is not None:
+            rep_gate = reject_if_low_compression_asymmetry(
+                rep_metrics, threshold=ratio_threshold
+            )
+            if not rep_gate.passed:
+                rejections.append(
+                    RejectionRecord(
+                        candidate_id=candidate_id,
+                        formula=_formula_from_vacuum(
+                            candidate_id, vacuum, kappa_mode=kappa_mode
+                        ),
+                        reason=(
+                            f"representation_ratio_fail:"
+                            f"ratio={rep_gate.ratio:.4f}<{ratio_threshold}"
+                        ),
+                    )
+                )
+                continue
+
+        candidates.append(
+            CandidateRecord(
+                candidate_id=candidate_id,
+                formula=_formula_from_vacuum(
+                    candidate_id, vacuum, kappa_mode=kappa_mode
+                ),
+                score=float(vacuum.fiber_size),
+                agrees_with_baseline=False,
+                graphs_tested=search_result.vacua_scanned,
+                status="candidate",
+                novelty_level=None,
+                representation_metrics=rep_metrics,
+                attack_checklist=AttackChecklist(
+                    items=[
+                        AttackChecklistItem(
+                            step="C1",
+                            passed=vacuum.fiber_size >= config.min_fiber_size,
+                            notes=f"κ={kappa_mode} fiber_size={vacuum.fiber_size}",
+                        ),
+                        AttackChecklistItem(
+                            step="C2",
+                            passed=True,
+                            notes=f"stability Σm²={vacuum.stability_score:.1f}",
+                        ),
+                    ],
+                    signed_off=vacuum.fiber_size >= config.min_fiber_size,
+                ),
+            )
+        )
+
+    best_generative: dict | None = {
+        "vacua_scanned": search_result.vacua_scanned,
+        "ambiguous_fibers": search_result.ambiguous_fibers,
+        "max_fiber_size": search_result.max_fiber_size,
+        "kappa_mode": kappa_mode,
+        "kappa_sweep": sweep_summary,
+    }
+
+    return SearchResult(
+        candidates=candidates,
+        rejections=rejections,
+        best_generative=best_generative,
+    )
 
 
 def wiener_baseline_expression() -> str:

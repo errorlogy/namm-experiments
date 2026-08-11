@@ -31,9 +31,41 @@ class ModuliVacuum:
         }
 
 
+KAPPA_MODES = ("first_4", "last_4", "middle_4", "flux_blocks_4")
+
+
+def project_shadow(
+    moduli: tuple[int, ...],
+    *,
+    shadow_dim: int = 4,
+    mode: str = "first_4",
+) -> tuple[int, ...]:
+    """κ compactification map: full moduli → shadow_dim effective coordinates."""
+    n = len(moduli)
+    if mode == "first_4":
+        return tuple(moduli[:shadow_dim])
+    if mode == "last_4":
+        return tuple(moduli[-shadow_dim:])
+    if mode == "middle_4":
+        start = max(0, (n - shadow_dim) // 2)
+        return tuple(moduli[start : start + shadow_dim])
+    if mode == "flux_blocks_4":
+        if n < shadow_dim:
+            raise ValueError(f"config_dim {n} < shadow_dim {shadow_dim}")
+        block = max(1, n // shadow_dim)
+        coords: list[int] = []
+        for i in range(shadow_dim):
+            chunk = moduli[i * block : (i + 1) * block]
+            if not chunk:
+                chunk = (moduli[i % n],)
+            coords.append(sum(chunk) % 3)
+        return tuple(coords)
+    raise ValueError(f"unknown kappa mode: {mode}")
+
+
 def project_shadow_4d(moduli: tuple[int, ...], shadow_dim: int = 4) -> tuple[int, ...]:
     """κ projection: first shadow_dim moduli as 4D effective shadow."""
-    return tuple(moduli[:shadow_dim])
+    return project_shadow(moduli, shadow_dim=shadow_dim, mode="first_4")
 
 
 def _stability_score(moduli: tuple[int, ...]) -> float:
@@ -60,6 +92,8 @@ def enumerate_admissible_vacua(
     moduli_max: int = 1,
     max_energy: float = 20.0,
     flux_modulus: int = 3,
+    shadow_dim: int = 4,
+    kappa_mode: str = "first_4",
 ) -> list[ModuliVacuum]:
     """Enumerate all admissible moduli vectors in bounded range."""
     values = range(moduli_min, moduli_max + 1)
@@ -67,10 +101,14 @@ def enumerate_admissible_vacua(
     for m in itertools.product(values, repeat=config_dim):
         if _is_admissible(m, max_energy=max_energy, flux_modulus=flux_modulus):
             raw.append(m)
-    fibers = fiber_map_from_vacua(raw, shadow_dim=4)
+    fibers = fiber_map_from_vacua(
+        raw,
+        shadow_dim=shadow_dim,
+        kappa_mode=kappa_mode,
+    )
     vacua: list[ModuliVacuum] = []
     for moduli in raw:
-        shadow = project_shadow_4d(moduli, shadow_dim=4)
+        shadow = project_shadow(moduli, shadow_dim=shadow_dim, mode=kappa_mode)
         fiber = fibers[shadow]
         idx = fiber.index(moduli)
         vid = _vacuum_id(moduli, shadow)
@@ -91,11 +129,12 @@ def fiber_map_from_vacua(
     moduli_list: list[tuple[int, ...]],
     *,
     shadow_dim: int = 4,
+    kappa_mode: str = "first_4",
 ) -> dict[tuple[int, ...], list[tuple[int, ...]]]:
-    """Group full configs by 4D shadow — measures non-injectivity of κ."""
+    """Group full configs by shadow — measures non-injectivity of κ."""
     fibers: dict[tuple[int, ...], list[tuple[int, ...]]] = {}
     for moduli in moduli_list:
-        shadow = project_shadow_4d(moduli, shadow_dim=shadow_dim)
+        shadow = project_shadow(moduli, shadow_dim=shadow_dim, mode=kappa_mode)
         fibers.setdefault(shadow, []).append(moduli)
     return fibers
 
@@ -122,6 +161,8 @@ def search_ambiguous_vacua(
     moduli_max: int = 1,
     max_energy: float = 20.0,
     flux_modulus: int = 3,
+    shadow_dim: int = 4,
+    kappa_mode: str = "first_4",
     min_fiber_size: int = 2,
     limit: int = 50,
     seed: int = 0,
@@ -135,6 +176,8 @@ def search_ambiguous_vacua(
         moduli_max=moduli_max,
         max_energy=max_energy,
         flux_modulus=flux_modulus,
+        shadow_dim=shadow_dim,
+        kappa_mode=kappa_mode,
     )
     ambiguous = [v for v in all_vacua if v.fiber_size >= min_fiber_size]
     ambiguous.sort(key=lambda v: (-v.fiber_size, -v.stability_score, v.vacuum_id))
@@ -157,3 +200,52 @@ def search_ambiguous_vacua(
         candidates=selected,
         max_fiber_size=max_fiber,
     )
+
+
+@dataclass(frozen=True)
+class KappaSweepRow:
+    """One κ projection mode in a sensitivity sweep."""
+
+    kappa_mode: str
+    vacua_scanned: int
+    ambiguous_fibers: int
+    max_fiber_size: int
+    best_vacuum: ModuliVacuum | None
+
+
+def sweep_kappa_modes(
+    *,
+    modes: list[str],
+    config_dim: int = 11,
+    moduli_min: int = -1,
+    moduli_max: int = 1,
+    max_energy: float = 20.0,
+    flux_modulus: int = 3,
+    shadow_dim: int = 4,
+) -> list[KappaSweepRow]:
+    """Compare fiber degeneracy across κ projection modes."""
+    rows: list[KappaSweepRow] = []
+    for mode in modes:
+        result = search_ambiguous_vacua(
+            config_dim=config_dim,
+            moduli_min=moduli_min,
+            moduli_max=moduli_max,
+            max_energy=max_energy,
+            flux_modulus=flux_modulus,
+            shadow_dim=shadow_dim,
+            kappa_mode=mode,
+            min_fiber_size=1,
+            limit=1,
+            seed=0,
+        )
+        best = result.candidates[0] if result.candidates else None
+        rows.append(
+            KappaSweepRow(
+                kappa_mode=mode,
+                vacua_scanned=result.vacua_scanned,
+                ambiguous_fibers=result.ambiguous_fibers,
+                max_fiber_size=result.max_fiber_size,
+                best_vacuum=best,
+            )
+        )
+    return rows

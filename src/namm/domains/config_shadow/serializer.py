@@ -28,7 +28,7 @@ def build_config_shadow_certificate(
         "vacuum": vacuum.to_dict(),
         "witness_bounds": witness_bounds,
         "compactification": {
-            "kappa": "first_4_moduli",
+            "kappa": extra.get("kappa_mode", "first_4") if extra else "first_4",
             "non_injective": vacuum.fiber_size >= 2,
             "fiber_size": vacuum.fiber_size,
         },

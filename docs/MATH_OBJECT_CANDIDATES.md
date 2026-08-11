@@ -164,6 +164,21 @@ Novelty ladder: **N2** — finite shadow of a physical landscape metaphor; not a
 
 **Ambiguous Moduli Fiber Witness:** **Ambiguous** because \(\kappa\) is non-injective; **Moduli Fiber** names the mathematical structure (preimage under compactification); **Witness** because the certificate is an existence proof in a finite shadow, not a continuous moduli space theorem. **AMFW-012e** links to `vac-012e1fe1`.
 
+### AMFW deep characterization (2026-08-11)
+
+Full analysis: [`AMFW_11D_HYPOTHESIS_RESEARCH.md`](AMFW_11D_HYPOTHESIS_RESEARCH.md) Part A.
+
+| Property | Value / formula |
+|----------|-----------------|
+| Fiber size 729 | \(3^{11-4-1} = 3^6\) — generic flux split on 7 tail coords |
+| Energy constraint | **Inactive** at ±1 grid (max Σm² = 11 ≪ 20) |
+| Shadow classes | 81 = \(3^4\); **uniform** fiber 729 each |
+| Witness tail | `(1,-1,-1,-1,1,-1,-1)` given head `(1,1,-1,-1)` |
+| Fiber index 492 | Lex position in κ-fiber (not physical weight) |
+| κ-sweep (010) | `first_4`, `last_4`, `middle_4`, `flux_blocks_4` — all max fiber 729 |
+
+`COMPUTATIONAL_EVIDENCE` · Extended in [NAMM-2026-010](../experiments/NAMM-2026-010/) — κ-insensitivity at ±1; 7D \([-2,2]\) grid yields max fiber 42 (non-uniform regime).
+
 ---
 
 ## 4. `meta-414d01c9` — Self-Reflective Evaluator Fixed Point (SREFP-414d) *(partial)*

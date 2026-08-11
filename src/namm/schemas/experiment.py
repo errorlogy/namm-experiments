@@ -126,6 +126,15 @@ class ExperimentConfig(BaseModel):
         default_factory=lambda: [0.25, 0.5, 1.0, 2.0]
     )
     graceful_max_order: int | None = None
+    config_dim: int = 11
+    shadow_dim: int = 4
+    moduli_min: int = -1
+    moduli_max: int = 1
+    config_max_energy: float = 20.0
+    flux_modulus: int = 3
+    min_fiber_size: int = 2
+    kappa_mode: str = "first_4"
+    kappa_sweep: list[str] = Field(default_factory=list)
 
     @property
     def effective_correlation_threshold(self) -> float:
@@ -170,6 +179,10 @@ class ExperimentConfig(BaseModel):
             "tensor_frame",
             "tensor_program",
         )
+
+    @property
+    def is_config_shadow_domain(self) -> bool:
+        return self.domain in ("config_shadow", "configuration_shadow", "moduli_shadow")
 
     @property
     def effective_representation_ratio_threshold(self) -> float | None:
