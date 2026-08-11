@@ -4,9 +4,9 @@
 
 **Research governance:** AI-led search under human-set falsifiability gates — the author defines acceptance criteria and attack checklists; the AI researcher allocates search budget across domains. See [`docs/RESEARCH_DIRECTION.md`](docs/RESEARCH_DIRECTION.md).
 
-**Author:** Roman Kuznetsov · [NAMM research program](https://github.com/errorlogy/namm-experiments)
+**Author:** [Roman Kuznetsov](https://anthemium.tech) · [NAMM research program](https://github.com/errorlogy/namm-experiments) · [Project site](https://anthemium.tech)
 
-**Updates & discussion:** [@AGIminister](https://x.com/AGIminister)
+**Updates & discussion:** [https://x.com/agiminister](https://x.com/agiminister)
 
 ---
 
@@ -29,11 +29,13 @@ We report **computational evidence** under explicit gates. Negative and null res
 
 > Math structures are not human constructions but observer-independent objects. Human formalism is a cognitively bounded coordinate system over this space. AI may discover verifiable invariants and representations that are non-intuitive to us.
 
-Credit: formulation by project author ([@AGIminister on X](https://x.com/AGIminister)). Label PHILOSOPHICAL_INFERENCE.
+Credit: formulation by project author ([agiminister on X](https://x.com/agiminister)). Label PHILOSOPHICAL_INFERENCE.
 
 Humans access structure through **constrained projections** (\(\pi_H\)): formulas, diagrams, prose. Machine search operates in different representational frames (\(\pi_A\)): AST programs, rewrite systems, relation tensors. Whether AI accesses descriptive levels humans compress away is **empirically testable** via \(K_A/K_H\) and certificate reproducibility — not settled by metaphysics alone.
 
 Consolidated concept reference: [`docs/NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](docs/NON_HOMO_SYNTAX_AND_ND_FRAMES.md). Philosophy detail: [`docs/PHILOSOPHY.md`](docs/PHILOSOPHY.md).
+
+Homo limit log (cognitive/representational bounds vs AI-native search): [`docs/HOMO_LIMIT_JOURNAL.md`](docs/HOMO_LIMIT_JOURNAL.md).
 
 ---
 
@@ -73,6 +75,7 @@ Domain libraries (optional `[nd]` extra): **gudhi** (TDA), **qutip** (quantum fr
 | Open problems tierlist (finite shadows) | [`docs/OPEN_PROBLEMS_TIERLIST.md`](docs/OPEN_PROBLEMS_TIERLIST.md) |
 | Certificate-first Phase 2 | [`docs/AI_NATIVE_NAMM.md`](docs/AI_NATIVE_NAMM.md) |
 | Brief manifesto | [`docs/MANIFESTO.md`](docs/MANIFESTO.md) |
+| Homo limit journal | [`docs/HOMO_LIMIT_JOURNAL.md`](docs/HOMO_LIMIT_JOURNAL.md) |
 
 ---
 
