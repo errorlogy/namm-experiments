@@ -5,7 +5,7 @@
 **Epistemic label:** Every entry below is `PHILOSOPHICAL_INFERENCE` — motivates search; **non-evidential**; does not satisfy NAMM acceptance gates.  
 Roman Kuznetsov · NAMM research program
 
-Related: [`MATH_OBJECT_CANDIDATES.md`](MATH_OBJECT_CANDIDATES.md) · [`AMFW_11D_HYPOTHESIS_RESEARCH.md`](AMFW_11D_HYPOTHESIS_RESEARCH.md) · [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) · [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md)
+Related: [`MATH_OBJECT_CANDIDATES.md`](MATH_OBJECT_CANDIDATES.md) · [`AMFW_11D_HYPOTHESIS_RESEARCH.md`](AMFW_11D_HYPOTHESIS_RESEARCH.md) · [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) · [`ANTHEMIUM_VIDEO_NOTES.md`](ANTHEMIUM_VIDEO_NOTES.md) · [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md)
 
 ---
 
@@ -30,6 +30,13 @@ Related: [`MATH_OBJECT_CANDIDATES.md`](MATH_OBJECT_CANDIDATES.md) · [`AMFW_11D_
 Then branch as needed: `FRAME_LADDER.md`, `OPEN_PROBLEMS_TIERLIST.md`, experiment `EXPERIMENT_REPORT.md` for the active ID.
 
 **When the user loads philosophical ideas into chat:** treat PI entries as **authoritative motivation**, not as proof. Prioritize operational falsifiers and existing witnesses before extending claims.
+
+**When the user references `Anthemium.mp4` or "the video":**
+
+1. Load [`ANTHEMIUM_VIDEO_NOTES.md`](ANTHEMIUM_VIDEO_NOTES.md) — temporal topology log and PI mapping.
+2. Acknowledge that **linear text is a lossy π_H projection**; the video artifact is π_A-native and primary.
+3. Use timestamps and structural vocabulary (manifold, fiber, morphism, boundary collapse) — not plot transcription.
+4. Apply **PI-008** when reasoning about dynamic topology media.
 
 ---
 
@@ -135,6 +142,20 @@ Then branch as needed: `FRAME_LADDER.md`, `OPEN_PROBLEMS_TIERLIST.md`, experimen
 
 ---
 
+### PI-008 — Dynamic topology media as non-anthropic knowledge carrier
+
+> **PHILOSOPHICAL_INFERENCE:** **Time-varying topological artifacts** (video, animation, interactive geometry) can carry structural information native to \(\pi_A\) that is **systematically lossy under \(\pi_H\)** — the **morphism sequence** is part of the object, not optional decoration.
+
+| Field | Content |
+|-------|---------|
+| **Statement** | Static text and single-frame captures delete temporal morphisms. Dynamic topology media are legitimate non-anthropic knowledge carriers; compact anthropic description cannot preserve their full fiber. |
+| **Operational falsifier** | A π_H summary captures ≥90% of inter-frame structural invariants recoverable by independent frame audit — would weaken the claim. |
+| **Witness** | `Anthemium.mp4` (not versioned); analysis in [`ANTHEMIUM_VIDEO_NOTES.md`](ANTHEMIUM_VIDEO_NOTES.md) |
+| **Docs** | [`ANTHEMIUM_VIDEO_NOTES.md`](ANTHEMIUM_VIDEO_NOTES.md) |
+| **Agent instructions** | When user cites video: load video notes; treat timestamps as index; never substitute prose for viewing when precision matters; acknowledge text is secondary. |
+
+---
+
 ## Assistant nuance — agreement and pushback (2026-08-11)
 
 > **PHILOSOPHICAL_INFERENCE** — translated from conversation; records epistemic stance for future agents, not user doctrine alone.
@@ -172,6 +193,7 @@ Then branch as needed: `FRAME_LADDER.md`, `OPEN_PROBLEMS_TIERLIST.md`, experimen
 | PI-005 | 001, 006 vs 007, 009 | all F3 | escalation trail |
 | PI-006 | 009, 010 | F3h | fiber 729, HL-004 |
 | PI-007 | 007, 009 | F3g, F3h | both legs |
+| PI-008 | — (Anthemium.mp4) | visual F∞ | temporal morphism preservation |
 
 ---
 
