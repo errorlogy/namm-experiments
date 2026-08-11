@@ -1,4 +1,4 @@
-# Non-Homo Syntax and ND Frames
+# Non-Anthropic Syntax and ND Frames
 
 **Concept document** — philosophical motivation and rigorous mapping for dimensional / representational frames in NAMM.  
 **Not** part of the verification path. Operational gates (`certificate.json`, independence, generative holdout, novelty ladder) do **not** depend on this document.
@@ -21,7 +21,7 @@ For executable methodology see [`PROTOCOL_V2.md`](PROTOCOL_V2.md). For π_H / π
 
 ## User hypothesis (`PHILOSOPHICAL_INFERENCE` throughout)
 
-> **PHILOSOPHICAL_INFERENCE:** Representation languages may exist that are **natural for non-human cognition** — easier to generate, verify, and compose as programs or certificates than to express in classical human notation. We call this family **non-homo syntax** (syntax not optimized for homo sapiens projection).
+> **PHILOSOPHICAL_INFERENCE:** Representation languages may exist that are **natural for non-human cognition** — easier to generate, verify, and compose as programs or certificates than to express in classical human notation. We call this family **non-anthropic syntax** (syntax not optimized for anthropic projection).
 
 ### Dimensional frames as research metaphors
 
@@ -29,7 +29,7 @@ Pop-culture and infographic labels such as **1D–11D** and **ND (N → ∞)** a
 
 > **PHILOSOPHICAL_INFERENCE:** A "dimension" in this document names a **level or mode of representation** — a frame in which objects can be specified, transformed, and certified — not a claim that cognition "lives inside" extra spatial axes.
 
-### Homo arose in 3D + time
+### Anthropic projection arose in 3D + time
 
 > **PHILOSOPHICAL_INFERENCE:** Human cognition evolved under 3D spatial navigation plus temporal sequencing. Geometric intuition, diagrammatic proof, and named formulas are **cognitive projections** of formal structure onto interfaces our biology favors. That projection is useful but **limited**: many admissible mathematical objects may have no short, stable human-readable form.
 
@@ -43,13 +43,13 @@ Human cognition applies **compactification**: infinite or high-combinatorial str
 
 AI operating in "other ND frames" (metaphorically) means: **different signature, evaluator, and certificate schema** — not literal embodiment in R^11.
 
-### AI + homo as joint access
+### AI + anthropic projection as joint access
 
 > **PHILOSOPHICAL_INFERENCE:** Human audit (π_H) and machine search (π_A) may **jointly** access levels of mathematics neither achieves alone: humans supply falsifiability, gates, and external confirmation; machines supply breadth of non-human artifact search. This is **joint access to descriptive levels**, not a hierarchy of ontological planes.
 
 ### Working belief (вера)
 
-> **PHILOSOPHICAL_INFERENCE (вера):** Mathematical structure may be **real independent of human representational access**. The program's working belief — explicitly **non-evidential**, not a theorem — is that tolerating non-homo syntax and searching across representational frames will surface objects with persistent \(K_A \ll K_H\) under verification. This belief **motivates** widening search; it does **not** satisfy any acceptance gate.
+> **PHILOSOPHICAL_INFERENCE (вера):** Mathematical structure may be **real independent of human representational access**. The program's working belief — explicitly **non-evidential**, not a theorem — is that tolerating non-anthropic syntax and searching across representational frames will surface objects with persistent \(K_A \ll K_H\) under verification. This belief **motivates** widening search; it does **not** satisfy any acceptance gate.
 
 ---
 
@@ -100,7 +100,7 @@ From NAMM protocol §4.3 ([`NAMM_PROTOCOL.md`](../NAMM_PROTOCOL.md)):
 
 `DEFINITION` · **ND (N → ∞)** in NAMM: **ordinal / recursive levels** of construction — not a spatial axis. The limit \(N \to \infty\) means: unbounded meta-lift, transfinite colimits of candidate families, or reflective hierarchies — **only when** an ordinal or colimit structure is explicitly defined.
 
-### Non-homo syntax — operational meaning
+### Non-anthropic syntax — operational meaning
 
 Pop labels are **rejected** as definitions. Operationally:
 
@@ -111,7 +111,7 @@ Pop labels are **rejected** as definitions. Operationally:
 | **Rewrite systems** | Confluent TRS with verification (NAMM-2026-002) |
 | **Relation tensors / hypergraphs** | Permitted machine-native specs (Protocol §4.5) |
 
-`DEFINITION` · **Non-homo syntax:** a representation language \(L_A\) such that for object \(X\), \(K_A(X) \ll K_H(X)\) under comparable verification cost — see [`REPRESENTATION_METRICS.md`](REPRESENTATION_METRICS.md).
+`DEFINITION` · **Non-anthropic syntax:** a representation language \(L_A\) such that for object \(X\), \(K_A(X) \ll K_H(X)\) under comparable verification cost — see [`REPRESENTATION_METRICS.md`](REPRESENTATION_METRICS.md).
 
 ---
 
@@ -183,7 +183,7 @@ Every mutation: logged config, rejection on failed gates, **no** D-label without
 
 ## Related docs
 
-- [`NON_HOMO_SYNTAX.md`](NON_HOMO_SYNTAX.md) — compact non-homo syntax reference
+- [`NON_HOMO_SYNTAX.md`](NON_HOMO_SYNTAX.md) — compact non-anthropic syntax reference
 - [`FRAME_LADDER.md`](FRAME_LADDER.md) — F1–F∞ representational ladder
 - [`VISION.md`](VISION.md) — π_H / π_A, K_A / K_H, program belief vs gates
 - [`PHILOSOPHY.md`](PHILOSOPHY.md) — MUH heuristic, status labels

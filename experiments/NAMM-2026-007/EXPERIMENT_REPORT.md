@@ -3,7 +3,7 @@
 **Domain:** raw tensor (`raw_tensor`)  
 **Date:** 2026-08-11  
 **Seed:** 2026007  
-**Frame:** F3g — beyond homo-known  
+**Frame:** F3g — beyond named-invariant vocabulary  
 **Status:** **53 candidates accepted**
 
 ## Summary
@@ -50,7 +50,7 @@ python -m pytest tests/test_tensor_domain.py -q
 
 ## Strategy link
 
-[`docs/BEYOND_HOMO_STRATEGY.md`](../../docs/BEYOND_HOMO_STRATEGY.md)
+[`docs/ANTHEMIUM_NAMM_SYNERGY.md`](../../docs/ANTHEMIUM_NAMM_SYNERGY.md)
 
 ---
 

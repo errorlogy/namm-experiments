@@ -2,7 +2,7 @@
 
 **Domain:** `open_problem_shadow`  
 **Problem:** Graceful Tree Conjecture (T0 tierlist)  
-**Strategy:** [`docs/BEYOND_HOMO_STRATEGY.md`](../../docs/BEYOND_HOMO_STRATEGY.md)
+**Strategy:** [`docs/ANTHEMIUM_NAMM_SYNERGY.md`](../../docs/ANTHEMIUM_NAMM_SYNERGY.md)
 
 ## Run
 

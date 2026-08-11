@@ -46,7 +46,7 @@ Neither projection is the substrate. Certificates (Lean, z3, eval witnesses in `
 
 `PHILOSOPHICAL_INFERENCE`: AGI/ASI may correspond to a richer π_A — higher descriptive bandwidth for the same objects, not a separate ontology.
 
-**Beyond homo cognition (program belief, not verification path):** The research program treats mathematical objects as potentially **real independent of human representational access**. Human cognition (π_H) may project only a thin slice; machine-native search (π_A) together with human audit may **jointly** access structure at other descriptive levels. This is labeled `PHILOSOPHICAL_INFERENCE` throughout docs — it motivates widening search and tolerating non-human artifacts, but **does not** replace SNH operational gates (certificates, independence, generative holdout, novelty ladder).
+**Beyond anthropic projection (program belief, not verification path):** Mathematical structures may exist at descriptive levels **beyond anthropic projection reach**. The research program treats mathematical objects as potentially **real independent of anthropic representational access**. Anthropic projection (π_H) may capture only a thin slice; machine-native search (π_A) together with human audit may **jointly** access structure at other descriptive levels. This is labeled `PHILOSOPHICAL_INFERENCE` throughout docs — it motivates widening search and tolerating non-anthropic artifacts, but **does not** replace SNH operational gates (certificates, independence, generative holdout, novelty ladder).
 
 **North star:** structures whose natural compactification is **machine-native first**. See [`RESEARCH_DIRECTION.md`](RESEARCH_DIRECTION.md) for the authoritative priority stack.
 
@@ -119,7 +119,7 @@ CI (pytest + smoke search) is the merge gate. No production deployment — quali
 
 ## Related docs
 
-- [`NON_HOMO_SYNTAX.md`](NON_HOMO_SYNTAX.md) — non-homo syntax, compactification vs projection
+- [`NON_HOMO_SYNTAX.md`](NON_HOMO_SYNTAX.md) — non-anthropic syntax, compactification vs projection
 - [`FRAME_LADDER.md`](FRAME_LADDER.md) — F1–F∞ representational ladder
 - [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md) — extended ND mapping
 - [`RESEARCH_DIRECTION.md`](RESEARCH_DIRECTION.md) — AI-led roadmap, \(\pi_H\)/\(\pi_A\) notes

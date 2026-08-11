@@ -1,4 +1,4 @@
-# Non-Homo Syntax
+# Non-Anthropic Syntax
 
 **Concept document** — rigorous mapping of representation languages that need not optimize for human projection.  
 **Not** part of the verification path. Operational gates (`certificate.json`, independence, generative holdout, novelty ladder) do **not** depend on this document.
@@ -21,9 +21,9 @@ See also [`FRAME_LADDER.md`](FRAME_LADDER.md) for the F1–F∞ representational
 
 ## User hypothesis (`PHILOSOPHICAL_INFERENCE`)
 
-> **PHILOSOPHICAL_INFERENCE:** Representation languages may exist that are **natural for non-human cognition** — easier to generate, verify, and compose as programs or certificates than to express in classical human notation. We call this family **non-homo syntax** (syntax not optimized for *Homo sapiens* projection).
+> **PHILOSOPHICAL_INFERENCE:** Representation languages may exist that are **natural for non-human cognition** — easier to generate, verify, and compose as programs or certificates than to express in classical human notation. We call this family **non-anthropic syntax** (syntax not optimized for anthropic projection).
 
-> **PHILOSOPHICAL_INFERENCE (вера):** Mathematical structure may be **real independent of human representational access**. Tolerating non-homo syntax and searching across representational frames may surface objects with persistent \(K_A \ll K_H\) under verification. This belief **motivates** widening search; it does **not** satisfy any acceptance gate.
+> **PHILOSOPHICAL_INFERENCE (вера):** Mathematical structure may be **real independent of human representational access**. Tolerating non-anthropic syntax and searching across representational frames may surface objects with persistent \(K_A \ll K_H\) under verification. This belief **motivates** widening search; it does **not** satisfy any acceptance gate.
 
 Human cognition evolved under 3D spatial navigation plus temporal sequencing. Geometric intuition, diagrammatic proof, and named formulas are **cognitive projections** of formal structure onto interfaces our biology favors. Machine-native search (π_A) may access artifacts — AST, rewrite systems, persistence diagrams, functor tables — that π_H compresses poorly.
 
@@ -37,7 +37,7 @@ Human cognition evolved under 3D spatial navigation plus temporal sequencing. Ge
 | **Human projection** | π_H | κ applied to produce prose, diagrams, named formulas |
 | **Machine-native frame** | π_A | κ applied to produce canonical JSON, eval hashes, certificate schemas |
 
-`DEFINITION` · **Non-homo syntax:** a representation language \(L_A\) such that for object \(X\), \(K_A(X) \ll K_H(X)\) under comparable verification cost — see [`REPRESENTATION_METRICS.md`](REPRESENTATION_METRICS.md).
+`DEFINITION` · **Non-anthropic syntax:** a representation language \(L_A\) such that for object \(X\), \(K_A(X) \ll K_H(X)\) under comparable verification cost — see [`REPRESENTATION_METRICS.md`](REPRESENTATION_METRICS.md).
 
 > **PHILOSOPHICAL_INFERENCE:** What humans compactify away — recursive depth, large relation systems, evaluator-on-evaluator structure, full persistence diagrams — may remain **operational** in machine-native frames. π_H and π_A are different compactification maps over the same certificate-anchored substrate; they are not guaranteed to preserve the same information.
 
@@ -57,7 +57,7 @@ Human cognition evolved under 3D spatial navigation plus temporal sequencing. Ge
 
 ---
 
-## AI vs homo interfaces
+## AI vs anthropic projection interfaces
 
 > **PHILOSOPHICAL_INFERENCE:** Human audit (π_H) and machine search (π_A) may **jointly** access levels of mathematics neither achieves alone: humans supply falsifiability, gates, and external confirmation; machines supply breadth of non-human artifact search. This is **joint access to descriptive levels**, not a hierarchy of ontological planes.
 

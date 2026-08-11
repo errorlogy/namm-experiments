@@ -1,8 +1,8 @@
 # NAMM-2026-007 — Raw Tensor Invariants (Beyond Named Math)
 
 **Domain:** `raw_tensor`  
-**Frame:** F3g — beyond homo-known vocabulary  
-**Strategy:** [`docs/BEYOND_HOMO_STRATEGY.md`](../../docs/BEYOND_HOMO_STRATEGY.md)
+**Frame:** F3g — beyond named-invariant vocabulary  
+**Strategy:** [`docs/ANTHEMIUM_NAMM_SYNERGY.md`](../../docs/ANTHEMIUM_NAMM_SYNERGY.md)
 
 ## Run
 

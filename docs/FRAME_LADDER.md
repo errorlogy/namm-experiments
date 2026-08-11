@@ -1,6 +1,6 @@
 # Frame Ladder (F1 → F∞)
 
-**Concept document** — maps representational **frames** (not physical dimensions) from pop-culture metaphors through formal mathematics to NAMM experiments and the homo bottleneck.  
+**Concept document** — maps representational **frames** (not physical dimensions) from pop-culture metaphors through formal mathematics to NAMM experiments and the anthropic projection bottleneck.  
 **Not** part of the verification path.
 
 Roman Kuznetsov · NAMM research program
@@ -25,7 +25,7 @@ Roman Kuznetsov · NAMM research program
 F1  Pop-D metaphor          (cultural interface — not science)
 F2  Formal math substrate   (definitions, theorems, proof assistants)
 F3  NAMM experiment frame   (Σ, Eval, Cert — executable)
-F4  Homo bottleneck         (π_H compression limit)
+F4  Anthropic projection bottleneck         (π_H compression limit)
 F∞  Ordinal / colimit limit (transfinite assembly — explicit structure only)
 ```
 
@@ -83,9 +83,9 @@ Each experiment fixes \((\Sigma, \mathrm{Eval}, \mathsf{Cert})\) in config; resu
 
 ---
 
-## F4 — Homo bottleneck (`DEFINITION` + `PHILOSOPHICAL_INFERENCE`)
+## F4 — Anthropic projection bottleneck (`DEFINITION` + `PHILOSOPHICAL_INFERENCE`)
 
-`DEFINITION` · **Homo bottleneck:** the point where \(K_H(X) \gg K_A(X)\) under fixed verification cost — human projection requires prose, metaphor, or lossy summary where the machine artifact remains compact and exact.
+`DEFINITION` · **Anthropic projection bottleneck:** the point where \(K_H(X) \gg K_A(X)\) under fixed verification cost — human projection requires prose, metaphor, or lossy summary where the machine artifact remains compact and exact.
 
 | Signal | Operational proxy |
 |--------|-------------------|
@@ -144,7 +144,7 @@ These sources inform frame definitions; they do **not** validate NAMM results.
 
 ## Related docs
 
-- [`NON_HOMO_SYNTAX.md`](NON_HOMO_SYNTAX.md) — non-homo syntax, π_H / π_A
+- [`NON_HOMO_SYNTAX.md`](NON_HOMO_SYNTAX.md) — non-anthropic syntax, π_H / π_A
 - [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md) — extended ND mapping
 - [`AI_THINKING_TOPOLOGY.md`](AI_THINKING_TOPOLOGY.md) — Phase 3 topology
 - [`RESEARCH_DIRECTION.md`](RESEARCH_DIRECTION.md) — experiment roadmap

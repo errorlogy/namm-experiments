@@ -56,7 +56,7 @@ Graph order capped at 20 for tractability; config uses ≤ 8.
 ## Related docs
 
 - [`docs/FRAME_LADDER.md`](../../docs/FRAME_LADDER.md) — F1–F∞ ladder
-- [`docs/NON_HOMO_SYNTAX.md`](../../docs/NON_HOMO_SYNTAX.md) — non-homo syntax
+- [`docs/NON_HOMO_SYNTAX.md`](../../docs/NON_HOMO_SYNTAX.md) — non-anthropic syntax
 - [`docs/RESEARCH_DIRECTION.md`](../../docs/RESEARCH_DIRECTION.md) — roadmap
 
 ---

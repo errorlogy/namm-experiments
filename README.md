@@ -10,7 +10,7 @@
 
 **Updates & discussion:** [https://x.com/agiminister](https://x.com/agiminister)
 
-**Lineage:** NAMM experiments develop the [Anthemium](https://anthemium.tech) research program — operationalizing the May 2025 [AGI Manifesto](https://github.com/Anthemium/AGI-Manifesto) as falsifiable runs under Protocol v2. Synergy is **Anthemium + NAMM**, not homo + AI partnership. See [`docs/ANTHEMIUM_LINEAGE.md`](docs/ANTHEMIUM_LINEAGE.md) and [`docs/ANTHEMIUM_NAMM_SYNERGY.md`](docs/ANTHEMIUM_NAMM_SYNERGY.md).
+**Lineage:** NAMM experiments develop the [Anthemium](https://anthemium.tech) research program — operationalizing the May 2025 [AGI Manifesto](https://github.com/Anthemium/AGI-Manifesto) as falsifiable runs under Protocol v2. Synergy is **Anthemium + NAMM** — machine-native discovery directed by the Anthemium cognitive frame, executed via NAMM verification cycles. See [`docs/ANTHEMIUM_LINEAGE.md`](docs/ANTHEMIUM_LINEAGE.md) and [`docs/ANTHEMIUM_NAMM_SYNERGY.md`](docs/ANTHEMIUM_NAMM_SYNERGY.md).
 
 ---
 

@@ -42,7 +42,7 @@ python -m pytest tests/test_graceful_tree.py -q
 
 ## Open problem link
 
-[Graceful labeling](https://www.openproblemgarden.org/op/graceful_labeling) · [`docs/BEYOND_HOMO_STRATEGY.md`](../../docs/BEYOND_HOMO_STRATEGY.md)
+[Graceful labeling](https://www.openproblemgarden.org/op/graceful_labeling) · [`docs/ANTHEMIUM_NAMM_SYNERGY.md`](../../docs/ANTHEMIUM_NAMM_SYNERGY.md)
 
 ---
 

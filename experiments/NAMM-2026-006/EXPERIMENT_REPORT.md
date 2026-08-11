@@ -30,9 +30,9 @@ All graphs with sufficient persistence distance to the path baseline failed the 
 
 ## Honest assessment
 
-TDA frame search **did find** graphs whose persistence signature differs from the path baseline (best distance 3.5), but **none** cleared F4 (homo bottleneck) at the default ratio threshold. This is a **calibration null**: the frame works for topology discrimination but not yet for beyond-homo compression at order ≤8.
+TDA frame search **did find** graphs whose persistence signature differs from the path baseline (best distance 3.5), but **none** cleared F4 (anthropic projection bottleneck) at the default ratio threshold. This is a **calibration null**: the frame works for topology discrimination but not yet for beyond-anthropic compression at order ≤8.
 
-**Frame escalation:** combine with **NAMM-2026-007** (`raw_tensor`) per [`docs/BEYOND_HOMO_STRATEGY.md`](../../docs/BEYOND_HOMO_STRATEGY.md).
+**Frame escalation:** combine with **NAMM-2026-007** (`raw_tensor`) per [`docs/ANTHEMIUM_NAMM_SYNERGY.md`](../../docs/ANTHEMIUM_NAMM_SYNERGY.md).
 
 ## Reproduction
 

@@ -91,7 +91,7 @@ Phase 3+ (future): proof-assistant certificates, multi-agent attack loops, large
 
 ## ND frame extension
 
-Full ladder: [`FRAME_LADDER.md`](FRAME_LADDER.md). Non-homo syntax: [`NON_HOMO_SYNTAX.md`](NON_HOMO_SYNTAX.md).
+Full ladder: [`FRAME_LADDER.md`](FRAME_LADDER.md). Non-anthropic syntax: [`NON_HOMO_SYNTAX.md`](NON_HOMO_SYNTAX.md).
 
 | Stub domain | Library | Role |
 |-------------|---------|------|
@@ -119,7 +119,7 @@ Negative results are **first-class** (`rejections.jsonl`).
 
 - [`AI_THINKING_TOPOLOGY.md`](AI_THINKING_TOPOLOGY.md) — AI vs human cognition topology
 - [`VISION.md`](VISION.md) — program vision and success criteria
-- [`NON_HOMO_SYNTAX.md`](NON_HOMO_SYNTAX.md) — non-homo syntax reference
+- [`NON_HOMO_SYNTAX.md`](NON_HOMO_SYNTAX.md) — non-anthropic syntax reference
 - [`FRAME_LADDER.md`](FRAME_LADDER.md) — F1–F∞ frame ladder
 - [`AI_NATIVE_NAMM.md`](AI_NATIVE_NAMM.md) — certificate-first Phase 2
 - [`PHILOSOPHY.md`](PHILOSOPHY.md) — MUH as heuristic only

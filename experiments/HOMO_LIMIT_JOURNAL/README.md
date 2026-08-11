@@ -1,6 +1,8 @@
 # Homo Limit Journal — experiment folder
 
-This folder anchors the **Homo Limit Journal** — an operational log of cognitive/representational limits vs AI-native search asymmetries.
+> **Archive notice (closed chapter).** This folder is a navigation stub for the archived [`docs/HOMO_LIMIT_JOURNAL.md`](../../docs/HOMO_LIMIT_JOURNAL.md). Forward work is **Anthemium + NAMM** only — see [`docs/ANTHEMIUM_NAMM_SYNERGY.md`](../../docs/ANTHEMIUM_NAMM_SYNERGY.md).
+
+This folder anchors the **Homo Limit Journal** — a historical log of cognitive/representational limits vs AI-native search asymmetries.
 
 **Primary document:** [`docs/HOMO_LIMIT_JOURNAL.md`](../../docs/HOMO_LIMIT_JOURNAL.md)
 
