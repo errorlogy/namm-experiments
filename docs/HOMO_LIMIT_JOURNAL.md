@@ -133,7 +133,7 @@ This journal does **not** claim machines occupy hidden dimensions. "11D" entries
 | **AI asymmetry** | **Ban named primitives** in generator vocabulary; search only ADD/MUL/COMPOSE on raw adjacency-derived tensors (F3g). Independence checked vs 20+ polynomial baselines. |
 | **NAMM experiment** | [NAMM-2026-001](../experiments/NAMM-2026-001/) (calibration, homo-known) · [NAMM-2026-007](../experiments/NAMM-2026-007/) (beyond-named-math) |
 | **Status** | tested-null / tested-signal |
-| **Evidence** | [NAMM-2026-001 EXPERIMENT_REPORT](../experiments/NAMM-2026-001/EXPERIMENT_REPORT.md) — closed calibration null; [NAMM-2026-007 EXPERIMENT_REPORT](../experiments/NAMM-2026-007/EXPERIMENT_REPORT.md) — 53 tensor invariants, r≤0.647 |
+| **Evidence** | [NAMM-2026-001 EXPERIMENT_REPORT](../experiments/NAMM-2026-001/EXPERIMENT_REPORT.md) — closed calibration null; [NAMM-2026-007 EXPERIMENT_REPORT](../experiments/NAMM-2026-007/EXPERIMENT_REPORT.md) — **tested-signal**: 53 accepted; best `tensor-639c54cd` (N2), max r=0.647 vs baselines |
 | **Label** | OPERATIONAL |
 
 ---
@@ -238,7 +238,7 @@ This journal does **not** claim machines occupy hidden dimensions. "11D" entries
 | **AI asymmetry** | **Automated independence gates**: Pearson r ≤ τ vs full baseline library; search only in non-named tensor AST (spectrum, heat-kernel samples). |
 | **NAMM experiment** | [NAMM-2026-007](../experiments/NAMM-2026-007/) |
 | **Status** | tested-signal |
-| **Evidence** | [NAMM-2026-007 EXPERIMENT_REPORT](../experiments/NAMM-2026-007/EXPERIMENT_REPORT.md) — 53 accepted, max r=0.647 vs 20+ baselines |
+| **Evidence** | [NAMM-2026-007 EXPERIMENT_REPORT](../experiments/NAMM-2026-007/EXPERIMENT_REPORT.md) — **tested-signal**: 53/57 pass gates; lead `tensor-639c54cd` **N2**, max r=0.647 (`mul_t11_t11`), holdout OK |
 | **Label** | OPERATIONAL |
 
 ---
