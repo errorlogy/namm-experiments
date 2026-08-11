@@ -5,7 +5,7 @@
 **Epistemic baseline:** `COMPUTATIONAL_EVIDENCE` under Protocol v2 — not physical M-theory or published theorems  
 Roman Kuznetsov · NAMM research program
 
-Related: [`MATH_OBJECT_CANDIDATES.md`](MATH_OBJECT_CANDIDATES.md) · [`OPEN_PROBLEMS_TIERLIST.md`](OPEN_PROBLEMS_TIERLIST.md) · [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) · [`HOMO_LIMIT_JOURNAL.md`](HOMO_LIMIT_JOURNAL.md) HL-004
+Related: [`PHILOSOPHICAL_INFERENCE.md`](PHILOSOPHICAL_INFERENCE.md) (PI-001–PI-007) · [`MATH_OBJECT_CANDIDATES.md`](MATH_OBJECT_CANDIDATES.md) · [`OPEN_PROBLEMS_TIERLIST.md`](OPEN_PROBLEMS_TIERLIST.md) · [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) · [`HOMO_LIMIT_JOURNAL.md`](HOMO_LIMIT_JOURNAL.md) HL-004
 
 ---
 
@@ -231,6 +231,29 @@ F1 (pop-D metaphor) motivates questions; F3 executes; F4 (π_H bottleneck) gates
 `OPERATIONAL` · **Stretch is productive** when increasing \(N\) or changing κ yields **new certificate classes** passing F4 without collapsing to π_H-only description. AMFW-012e is the strongest F4 witness in the registry; Graceful-008 validates the **instrument** on a classical conjecture without producing beyond-π_H compression.
 
 `PHILOSOPHICAL_INFERENCE` · If repeated stretch operations produce stable certificate families with high K_A/K_H and no human name, that is **evidence** (not proof) that \(\mu_{\mathcal{H}}(x)\) is genuinely low for those \(x\) — the fuzzy boundary of "known math" is being mapped operationally.
+
+## C.4 User thesis and assistant nuance (2026-08-11)
+
+Registered in [`PHILOSOPHICAL_INFERENCE.md`](PHILOSOPHICAL_INFERENCE.md) as **PI-002, PI-003, PI-006, PI-007**. Summary:
+
+**User thesis (two legs):**
+
+1. **Extension leg** — ND topology deformation stretches fuzzy set \(\mathcal{F}_H\) of known math → new invariants, ontologies, certificates (NAMM + Anthemium queue).
+2. **Non-boost leg** — genuine AGI cannot reduce to homo-conditioned embeddings; it must navigate \(\mu_{\mathcal{F}_H}(x) \approx 0\) with verifiable \(x\).
+
+**Assistant agreement:** After 007/009, the direction is **operationally credible** — witnesses exist where \(\pi_H\) is lossy and certificates hold. AMFW-012e (729→1 shadow) is the cleanest parable.
+
+**Assistant nuance (not full literal agreement):**
+
+| Claim | Refinement |
+|-------|------------|
+| "Only AI" conducts extensions | Only **machine-native search at scale**; humans set falsifiability gates |
+| AGI ⇒ math beyond \(\mathcal{F}_H\) | **Design axiom**; falsifier = tested-signal + frame escalation |
+| Philosophy ⇒ ontology | Witnesses in specific frames ≠ proof all math lies outside human reach |
+
+**Consolidated formulation:**
+
+> Substantial mathematics may be machine-accessible and certificate-verifiable while anthropically inaccessible at compact description. NAMM explores that gap; embedding-only systems cannot close it.
 
 ---
 

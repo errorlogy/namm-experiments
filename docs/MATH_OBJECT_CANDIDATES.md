@@ -4,7 +4,7 @@
 **Scope:** `COMPUTATIONAL_EVIDENCE` under Protocol v2 only — not published theorems.  
 Roman Kuznetsov · NAMM research program
 
-Related: [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`REPRESENTATION_METRICS.md`](REPRESENTATION_METRICS.md) · [`NOVELTY_LADDER.md`](NOVELTY_LADDER.md) · [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md)
+Related: [`PHILOSOPHICAL_INFERENCE.md`](PHILOSOPHICAL_INFERENCE.md) (PI-001–PI-007) · [`AMFW_11D_HYPOTHESIS_RESEARCH.md`](AMFW_11D_HYPOTHESIS_RESEARCH.md) · [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`REPRESENTATION_METRICS.md`](REPRESENTATION_METRICS.md) · [`NOVELTY_LADDER.md`](NOVELTY_LADDER.md) · [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md)
 
 ---
 
@@ -278,6 +278,8 @@ These runs **did not** produce lead candidates for the registry; they **calibrat
 ---
 
 ## Beyond anthropic projection
+
+Philosophical theses (fuzzy set \(\mathcal{F}_H\), ND stretch, AGI non-boost): [`PHILOSOPHICAL_INFERENCE.md`](PHILOSOPHICAL_INFERENCE.md). AMFW deep dive and hypothesis protocol: [`AMFW_11D_HYPOTHESIS_RESEARCH.md`](AMFW_11D_HYPOTHESIS_RESEARCH.md).
 
 `PHILOSOPHICAL_INFERENCE` · **Non-evidential** — motivates search; does not replace SNH gates.
 
