@@ -5,7 +5,7 @@
 **Epistemic label:** Every entry below is `PHILOSOPHICAL_INFERENCE` — motivates search; **non-evidential**; does not satisfy NAMM acceptance gates.  
 Roman Kuznetsov · NAMM research program
 
-Related: [`MATH_OBJECT_CANDIDATES.md`](MATH_OBJECT_CANDIDATES.md) · [`AMFW_11D_HYPOTHESIS_RESEARCH.md`](AMFW_11D_HYPOTHESIS_RESEARCH.md) · [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) · [`ANTHEMIUM_VIDEO_NOTES.md`](ANTHEMIUM_VIDEO_NOTES.md) · [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md)
+Related: [`MATH_OBJECT_CANDIDATES.md`](MATH_OBJECT_CANDIDATES.md) · [`MATH_OBJECT_HYPOTHESES.md`](MATH_OBJECT_HYPOTHESES.md) · [`AMFW_11D_HYPOTHESIS_RESEARCH.md`](AMFW_11D_HYPOTHESIS_RESEARCH.md) · [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) · [`ANTHEMIUM_VIDEO_NOTES.md`](ANTHEMIUM_VIDEO_NOTES.md) · [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md)
 
 ---
 
@@ -25,7 +25,8 @@ Related: [`MATH_OBJECT_CANDIDATES.md`](MATH_OBJECT_CANDIDATES.md) · [`AMFW_11D_
 
 1. **This file** — `docs/PHILOSOPHICAL_INFERENCE.md` (user theses, falsifiers, agent priorities)
 2. **Novelty registry** — `docs/MATH_OBJECT_CANDIDATES.md` (lead candidates, epistemic status, K_A/K_H)
-3. **Discovery loop** — `docs/ANTHEMIUM_NAMM_SYNERGY.md` (Anthemium frame → NAMM experiment queue)
+3. **Hypothesis registry** — `docs/MATH_OBJECT_HYPOTHESES.md` (H-001+, falsifiable CONJECTURE claims, experiment status)
+4. **Discovery loop** — `docs/ANTHEMIUM_NAMM_SYNERGY.md` (Anthemium frame → NAMM experiment queue)
 
 Then branch as needed: `FRAME_LADDER.md`, `OPEN_PROBLEMS_TIERLIST.md`, experiment `EXPERIMENT_REPORT.md` for the active ID.
 
