@@ -5,7 +5,7 @@
 **Epistemic label:** Every entry below is `PHILOSOPHICAL_INFERENCE` — motivates search; **non-evidential**; does not satisfy NAMM acceptance gates.  
 Roman Kuznetsov · NAMM research program
 
-Related: [`MATH_OBJECT_CANDIDATES.md`](MATH_OBJECT_CANDIDATES.md) · [`MATH_OBJECT_HYPOTHESES.md`](MATH_OBJECT_HYPOTHESES.md) · [`AMFW_11D_HYPOTHESIS_RESEARCH.md`](AMFW_11D_HYPOTHESIS_RESEARCH.md) · [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) · [`ANTHEMIUM_VIDEO_NOTES.md`](ANTHEMIUM_VIDEO_NOTES.md) · [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md)
+Related: [`MATH_OBJECT_CANDIDATES.md`](MATH_OBJECT_CANDIDATES.md) · [`MATH_OBJECT_HYPOTHESES.md`](MATH_OBJECT_HYPOTHESES.md) · [`MATHEMATICAL_FABRIC_HYPOTHESES.md`](MATHEMATICAL_FABRIC_HYPOTHESES.md) · [`AMFW_11D_HYPOTHESIS_RESEARCH.md`](AMFW_11D_HYPOTHESIS_RESEARCH.md) · [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) · [`ANTHEMIUM_VIDEO_NOTES.md`](ANTHEMIUM_VIDEO_NOTES.md) · [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md)
 
 ---
 
@@ -26,18 +26,20 @@ Related: [`MATH_OBJECT_CANDIDATES.md`](MATH_OBJECT_CANDIDATES.md) · [`MATH_OBJE
 1. **This file** — `docs/PHILOSOPHICAL_INFERENCE.md` (user theses, falsifiers, agent priorities)
 2. **Novelty registry** — `docs/MATH_OBJECT_CANDIDATES.md` (lead candidates, epistemic status, K_A/K_H)
 3. **Hypothesis registry** — `docs/MATH_OBJECT_HYPOTHESES.md` (H-001+, falsifiable CONJECTURE claims, experiment status)
-4. **Discovery loop** — `docs/ANTHEMIUM_NAMM_SYNERGY.md` (Anthemium frame → NAMM experiment queue)
+4. **Fabric dynamics** — `docs/MATHEMATICAL_FABRIC_HYPOTHESES.md` (H-F001–H-F050) — load when user cites **mathematical fabric**, **topological fuzzy dynamics**, or Anthemium topology beyond PI-008
+5. **Discovery loop** — `docs/ANTHEMIUM_NAMM_SYNERGY.md` (Anthemium frame → NAMM experiment queue)
 
-Then branch as needed: `FRAME_LADDER.md`, `OPEN_PROBLEMS_TIERLIST.md`, experiment `EXPERIMENT_REPORT.md` for the active ID.
+Then branch as needed: `FRAME_LADDER.md`, `ANTHEMIUM_VIDEO_NOTES.md`, `OPEN_PROBLEMS_TIERLIST.md`, experiment `EXPERIMENT_REPORT.md` for the active ID.
 
 **When the user loads philosophical ideas into chat:** treat PI entries as **authoritative motivation**, not as proof. Prioritize operational falsifiers and existing witnesses before extending claims.
 
 **When the user references `Anthemium.mp4` or "the video":**
 
 1. Load [`ANTHEMIUM_VIDEO_NOTES.md`](ANTHEMIUM_VIDEO_NOTES.md) — temporal topology log and PI mapping.
-2. Acknowledge that **linear text is a lossy π_H projection**; the video artifact is π_A-native and primary.
-3. Use timestamps and structural vocabulary (manifold, fiber, morphism, boundary collapse) — not plot transcription.
-4. Apply **PI-008** when reasoning about dynamic topology media.
+2. Load [`MATHEMATICAL_FABRIC_HYPOTHESES.md`](MATHEMATICAL_FABRIC_HYPOTHESES.md) — fabric metaphor, fuzzy dynamics framework, H-F001–H-F050.
+3. Acknowledge that **linear text is a lossy π_H projection**; the video artifact is π_A-native and primary.
+4. Use timestamps and structural vocabulary (manifold, fiber, morphism, boundary collapse) — not plot transcription.
+5. Apply **PI-008** when reasoning about dynamic topology media.
 
 ---
 

@@ -4,7 +4,7 @@
 **Scope:** Protocol v2 only — `COMPUTATIONAL_EVIDENCE` upgrades status; no entry here is a published theorem.  
 Roman Kuznetsov · NAMM research program
 
-Related: [`MATH_OBJECT_CANDIDATES.md`](MATH_OBJECT_CANDIDATES.md) · [`PHILOSOPHICAL_INFERENCE.md`](PHILOSOPHICAL_INFERENCE.md) · [`AMFW_11D_HYPOTHESIS_RESEARCH.md`](AMFW_11D_HYPOTHESIS_RESEARCH.md) · [`NAMM_OPEN_PROBLEMS_QUEUE.md`](NAMM_OPEN_PROBLEMS_QUEUE.md) · [`OPEN_PROBLEMS_TIERLIST.md`](OPEN_PROBLEMS_TIERLIST.md)
+Related: [`MATH_OBJECT_CANDIDATES.md`](MATH_OBJECT_CANDIDATES.md) · [`PHILOSOPHICAL_INFERENCE.md`](PHILOSOPHICAL_INFERENCE.md) · [`MATHEMATICAL_FABRIC_HYPOTHESES.md`](MATHEMATICAL_FABRIC_HYPOTHESES.md) (H-F001–H-F050 — fabric dynamics, extends H-001+) · [`AMFW_11D_HYPOTHESIS_RESEARCH.md`](AMFW_11D_HYPOTHESIS_RESEARCH.md) · [`NAMM_OPEN_PROBLEMS_QUEUE.md`](NAMM_OPEN_PROBLEMS_QUEUE.md) · [`OPEN_PROBLEMS_TIERLIST.md`](OPEN_PROBLEMS_TIERLIST.md)
 
 ---
 
@@ -233,7 +233,8 @@ Adapted from [`AMFW_11D_HYPOTHESIS_RESEARCH.md`](AMFW_11D_HYPOTHESIS_RESEARCH.md
 1. [`PHILOSOPHICAL_INFERENCE.md`](PHILOSOPHICAL_INFERENCE.md) — user theses (non-evidential)
 2. [`MATH_OBJECT_CANDIDATES.md`](MATH_OBJECT_CANDIDATES.md) — lead objects, epistemic status
 3. **`MATH_OBJECT_HYPOTHESES.md`** (this file) — falsifiable claims and status
-4. [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) — discovery loop
+4. [`MATHEMATICAL_FABRIC_HYPOTHESES.md`](MATHEMATICAL_FABRIC_HYPOTHESES.md) — fabric / fuzzy dynamics (H-F001–H-F050); load when user cites Anthemium, fabric, or topological fuzzy dynamics
+5. [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) — discovery loop
 
 **When running an experiment:** check whether the run tests, refutes, or partially resolves an H-ID; update this file's status row and link the report.
 
