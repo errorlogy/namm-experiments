@@ -187,7 +187,10 @@ Sources consulted: [Open Problem Garden](https://www.openproblemgarden.org/), [D
 
 ## Related
 
+- [`docs/NAMM_OPEN_PROBLEMS_QUEUE.md`](NAMM_OPEN_PROBLEMS_QUEUE.md) — running experiments, planned queue, attack vs calibration
 - [`experiments/NAMM-2026-005/README.md`](../experiments/NAMM-2026-005/README.md)
+- [`experiments/NAMM-2026-008/README.md`](../experiments/NAMM-2026-008/README.md)
+- [`docs/AMFW_11D_HYPOTHESIS_RESEARCH.md`](AMFW_11D_HYPOTHESIS_RESEARCH.md) — 11D pairing (Graceful calibration + AMFW target)
 - [`docs/RESEARCH_DIRECTION.md`](RESEARCH_DIRECTION.md)
 - [`docs/VISION.md`](VISION.md)
 
