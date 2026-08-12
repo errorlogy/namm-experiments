@@ -1,6 +1,6 @@
 # NAMM Domain Universe
 
-> **Для людей:** см. [**MATHEMATICS_SECTIONS_RU.md**](MATHEMATICS_SECTIONS_RU.md) — классическая математика vs NAMM-рамки vs метафора, без «каши».
+> **Для людей:** см. [**MATHEMATICS_SECTIONS_RU.md**](MATHEMATICS_SECTIONS_RU.md) — три слоя (классика / гипотезы / PI). Классическая база: [**MATHEMATICS_LIBRARY_BASE.md**](MATHEMATICS_LIBRARY_BASE.md).
 
 **Permanent catalog** of mathematical and physical domains NAMM can operate in — the authoritative map from formal math substrate → Python modules → experiment IDs → frame ladder rungs.
 

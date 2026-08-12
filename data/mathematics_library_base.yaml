@@ -1,0 +1,345 @@
+# NAMM Mathematics Library Base
+# Classical mathematical sections + PyPI library mapping.
+# NOT NAMM frames, NOT metaphors, NOT hypothesis registries.
+# Maintainer: Roman Kuznetsov · NAMM research program
+# Schema version: 1
+
+schema_version: 1
+updated: "2026-08-12"
+
+sections:
+  - id: algebra
+    name_ru: Алгебра
+    name_en: Algebra
+    subfields: [rings, fields, polynomials, symbolic_expressions, linear_systems]
+    python_libs:
+      - {name: sympy, pip: sympy, namm_extra: null, status: installed}
+      - {name: numpy, pip: numpy, namm_extra: null, status: installed}
+    classical_refs:
+      - "Lang, Algebra"
+      - "Dummit & Foote, Abstract Algebra"
+    namm_connected: true
+    namm_notes: "Support layer for 001 (formula simplify), 003 (SymPy equivalence gate)"
+
+  - id: linear_algebra
+    name_ru: Линейная алгебра
+    name_en: Linear algebra
+    subfields: [matrices, eigenvalues, spectral_decomposition, vector_spaces]
+    python_libs:
+      - {name: numpy, pip: numpy, namm_extra: null, status: installed}
+      - {name: scipy, pip: scipy, namm_extra: null, status: installed}
+    classical_refs:
+      - "Strang, Introduction to Linear Algebra"
+    namm_connected: true
+    namm_notes: "Spectral features in 007 (raw tensor frame)"
+
+  - id: analysis
+    name_ru: Математический анализ
+    name_en: Mathematical analysis
+    subfields: [limits, integration, series, real_functions, complex_analysis]
+    python_libs:
+      - {name: sympy, pip: sympy, namm_extra: null, status: installed}
+      - {name: scipy, pip: scipy, namm_extra: null, status: installed}
+    classical_refs:
+      - "Rudin, Principles of Mathematical Analysis"
+    namm_connected: false
+
+  - id: numerical_analysis
+    name_ru: Численные методы
+    name_en: Numerical analysis
+    subfields: [integration, ode, sparse_linear, optimization_numerical]
+    python_libs:
+      - {name: numpy, pip: numpy, namm_extra: null, status: installed}
+      - {name: scipy, pip: scipy, namm_extra: null, status: installed}
+    classical_refs:
+      - "Trefethen & Bau, Numerical Linear Algebra"
+    namm_connected: true
+    namm_notes: "Heat-kernel and spectral numerics in 007"
+
+  - id: topology
+    name_ru: Топология
+    name_en: Topology
+    subfields: [point-set, algebraic, homotopy, simplicial]
+    python_libs:
+      - {name: gudhi, pip: gudhi, namm_extra: nd, status: optional}
+      - {name: networkx, pip: networkx, namm_extra: null, status: installed}
+    classical_refs:
+      - "Hatcher, Algebraic Topology"
+      - "Munkres, Topology"
+    namm_connected: true
+    namm_notes: "006 TDA scaffold on graph geodesic metric"
+
+  - id: algebraic_topology
+    name_ru: Алгебраическая топология
+    name_en: Algebraic topology
+    subfields: [homology, cohomology, persistent_homology, filtrations]
+    python_libs:
+      - {name: gudhi, pip: gudhi, namm_extra: nd, status: optional}
+    classical_refs:
+      - "Edelsbrunner & Harer, Computational Topology"
+    namm_connected: true
+    namm_notes: "Persistent homology via gudhi in 006"
+
+  - id: tda
+    name_ru: Топологический анализ данных (TDA)
+    name_en: Topological data analysis
+    subfields: [persistent_homology, mapper, filtrations, barcode]
+    python_libs:
+      - {name: gudhi, pip: gudhi, namm_extra: nd, status: optional}
+      - {name: ripser, pip: ripser, namm_extra: null, status: planned}
+    classical_refs:
+      - "Carlsson, Topology and Data"
+    namm_connected: true
+    namm_notes: "006 — null calibration on geodesic metric"
+
+  - id: differential_geometry
+    name_ru: Дифференциальная геометрия
+    name_en: Differential geometry
+    subfields: [manifolds, curvature, connections, riemannian]
+    python_libs:
+      - {name: geomstats, pip: geomstats, namm_extra: null, status: planned}
+      - {name: networkx, pip: networkx, namm_extra: null, status: installed}
+    classical_refs:
+      - "do Carmo, Riemannian Geometry"
+    namm_connected: false
+    namm_notes: "Planned discrete curvature shadows (differential_geometry_shadow)"
+
+  - id: geometry
+    name_ru: Геометрия
+    name_en: Geometry
+    subfields: [euclidean, projective, convex, computational]
+    python_libs:
+      - {name: shapely, pip: shapely, namm_extra: null, status: planned}
+      - {name: numpy, pip: numpy, namm_extra: null, status: installed}
+    classical_refs:
+      - "Coxeter, Introduction to Geometry"
+    namm_connected: false
+
+  - id: combinatorics
+    name_ru: Комбинаторика
+    name_en: Combinatorics
+    subfields: [enumeration, generating_functions, designs, extremal]
+    python_libs:
+      - {name: networkx, pip: networkx, namm_extra: null, status: installed}
+      - {name: sympy, pip: sympy, namm_extra: null, status: installed}
+    classical_refs:
+      - "Stanley, Enumerative Combinatorics"
+    namm_connected: true
+    namm_notes: "001 formula search over graph statistics"
+
+  - id: graph_theory
+    name_ru: Теория графов
+    name_en: Graph theory
+    subfields: [connectivity, paths, coloring, spectral_graph]
+    python_libs:
+      - {name: networkx, pip: networkx, namm_extra: null, status: installed}
+    classical_refs:
+      - "Diestel, Graph Theory"
+      - "Bondy & Murty, Graph Theory"
+    namm_connected: true
+    namm_notes: "001, 003, 005, 006, 008 — primary substrate"
+
+  - id: discrete_mathematics
+    name_ru: Дискретная математика
+    name_en: Discrete mathematics
+    subfields: [graphs, logic, counting, algorithms]
+    python_libs:
+      - {name: networkx, pip: networkx, namm_extra: null, status: installed}
+      - {name: sympy, pip: sympy, namm_extra: null, status: installed}
+    classical_refs:
+      - "Rosen, Discrete Mathematics and Its Applications"
+    namm_connected: true
+    namm_notes: "Shared substrate across early experiments"
+
+  - id: number_theory
+    name_ru: Теория чисел
+    name_en: Number theory
+    subfields: [divisibility, congruences, primes, diophantine]
+    python_libs:
+      - {name: sympy, pip: sympy, namm_extra: null, status: installed}
+      - {name: gmpy2, pip: gmpy2, namm_extra: null, status: planned}
+    classical_refs:
+      - "Hardy & Wright, An Introduction to the Theory of Numbers"
+    namm_connected: false
+    namm_notes: "Planned number_theory_shadow domain"
+
+  - id: group_theory
+    name_ru: Теория групп
+    name_en: Group theory
+    subfields: [finite_groups, representations, permutations]
+    python_libs:
+      - {name: sympy, pip: sympy, namm_extra: null, status: installed}
+      - {name: gap, pip: null, namm_extra: null, status: skip}
+    classical_refs:
+      - "Rotman, An Introduction to the Theory of Groups"
+    namm_connected: false
+    namm_notes: "GAP not on PyPI; sympy covers small permutation groups"
+
+  - id: category_theory
+    name_ru: Теория категорий
+    name_en: Category theory
+    subfields: [categories, functors, natural_transformations, limits]
+    python_libs:
+      - {name: networkx, pip: networkx, namm_extra: null, status: installed}
+    classical_refs:
+      - "Mac Lane, Categories for the Working Mathematician"
+    namm_connected: false
+    namm_notes: "Stub hom-set counts in src/namm/domains/category/"
+
+  - id: universal_algebra
+    name_ru: Универсальная алгебра
+    name_en: Universal algebra
+    subfields: [term_algebras, varieties, congruences, term_rewriting]
+    python_libs: []
+    classical_refs:
+      - "Baader & Nipkow, Term Rewriting and All That"
+    namm_connected: true
+    namm_notes: "Classical substrate for NAMM rewriting frame (002)"
+
+  - id: logic
+    name_ru: Математическая логика
+    name_en: Mathematical logic
+    subfields: [propositional, first_order, proof_theory, model_theory]
+    python_libs:
+      - {name: z3-solver, pip: z3-solver, namm_extra: null, status: installed}
+      - {name: python-sat, pip: python-sat, namm_extra: null, status: installed}
+    classical_refs:
+      - "Enderton, A Mathematical Introduction to Logic"
+    namm_connected: false
+    namm_notes: "SMT stub in namm.verifiers"
+
+  - id: set_theory
+    name_ru: Теория множеств
+    name_en: Set theory
+    subfields: [axiomatic, ordinals, cardinals, foundations]
+    python_libs: []
+    classical_refs:
+      - "Jech, Set Theory"
+    namm_connected: false
+
+  - id: probability
+    name_ru: Теория вероятностей
+    name_en: Probability theory
+    subfields: [distributions, stochastic_processes, measure_based]
+    python_libs:
+      - {name: numpy, pip: numpy, namm_extra: null, status: installed}
+      - {name: scipy, pip: scipy, namm_extra: null, status: installed}
+    classical_refs:
+      - "Feller, An Introduction to Probability Theory"
+    namm_connected: false
+
+  - id: statistics
+    name_ru: Математическая статистика
+    name_en: Statistics
+    subfields: [estimation, hypothesis_testing, regression, bayesian]
+    python_libs:
+      - {name: scipy, pip: scipy, namm_extra: null, status: installed}
+      - {name: numpy, pip: numpy, namm_extra: null, status: installed}
+    classical_refs:
+      - "Casella & Berger, Statistical Inference"
+    namm_connected: false
+
+  - id: optimization
+    name_ru: Математическое программирование и оптимизация
+    name_en: Optimization
+    subfields: [linear_programming, convex, evolutionary, metaheuristics]
+    python_libs:
+      - {name: optuna, pip: optuna, namm_extra: null, status: installed}
+      - {name: scipy, pip: scipy, namm_extra: null, status: installed}
+    classical_refs:
+      - "Boyd & Vandenberghe, Convex Optimization"
+    namm_connected: true
+    namm_notes: "Evolutionary search budgets in 003, Optuna in deps"
+
+  - id: dynamical_systems
+    name_ru: Динамические системы
+    name_en: Dynamical systems
+    subfields: [flows, fixed_points, chaos, ergodic]
+    python_libs:
+      - {name: scipy, pip: scipy, namm_extra: null, status: installed}
+    classical_refs:
+      - "Strogatz, Nonlinear Dynamics and Chaos"
+    namm_connected: false
+
+  - id: computability
+    name_ru: Теория вычислимости
+    name_en: Computability theory
+    subfields: [turing_machines, recursion, fixed_points, halting]
+    python_libs: []
+    classical_refs:
+      - "Sipser, Introduction to the Theory of Computation"
+    namm_connected: true
+    namm_notes: "Meta-evaluator fixed points (004) — partial classical overlap"
+
+  - id: quantum_mechanics
+    name_ru: Квантовая механика
+    name_en: Quantum mechanics
+    subfields: [hilbert_spaces, qubits, entanglement, density_operators]
+    python_libs:
+      - {name: qutip, pip: qutip, namm_extra: nd, status: optional}
+    classical_refs:
+      - "Nielsen & Chuang, Quantum Computation and Quantum Information"
+    namm_connected: false
+    namm_notes: "Quantum domain stub only; no experiment yet"
+
+  - id: statistical_mechanics
+    name_ru: Статистическая механика
+    name_en: Statistical mechanics
+    subfields: [ensembles, partition_functions, ising, phase_transitions]
+    python_libs:
+      - {name: numpy, pip: numpy, namm_extra: null, status: installed}
+    classical_refs:
+      - "Pathria & Beale, Statistical Mechanics"
+    namm_connected: false
+
+  - id: mathematical_physics
+    name_ru: Математическая физика
+    name_en: Mathematical physics
+    subfields: [field_theory, integrable_systems, spectral_methods]
+    python_libs:
+      - {name: sympy, pip: sympy, namm_extra: null, status: installed}
+    classical_refs:
+      - "Reed & Simon, Methods of Modern Mathematical Physics"
+    namm_connected: false
+
+  - id: order_theory
+    name_ru: Теория порядков
+    name_en: Order theory
+    subfields: [posets, lattices, well_quasi_orders]
+    python_libs:
+      - {name: networkx, pip: networkx, namm_extra: null, status: installed}
+    classical_refs:
+      - "Davey & Priestley, Introduction to Lattices and Order"
+    namm_connected: false
+
+  - id: information_theory
+    name_ru: Теория информации
+    name_en: Information theory
+    subfields: [entropy, coding, channel_capacity, kolmogorov_complexity]
+    python_libs:
+      - {name: numpy, pip: numpy, namm_extra: null, status: installed}
+    classical_refs:
+      - "Cover & Thomas, Elements of Information Theory"
+    namm_connected: false
+    namm_notes: "K_A/K_H metrics in NAMM are operational, not this classical field"
+
+  - id: measure_theory
+    name_ru: Теория меры
+    name_en: Measure theory
+    subfields: [sigma_algebras, lebesgue, integration, probability_foundations]
+    python_libs:
+      - {name: scipy, pip: scipy, namm_extra: null, status: installed}
+    classical_refs:
+      - "Folland, Real Analysis"
+    namm_connected: false
+
+  - id: functional_analysis
+    name_ru: Функциональный анализ
+    name_en: Functional analysis
+    subfields: [banach_spaces, hilbert_spaces, operators, spectral_theory]
+    python_libs:
+      - {name: scipy, pip: scipy, namm_extra: null, status: installed}
+      - {name: numpy, pip: numpy, namm_extra: null, status: installed}
+    classical_refs:
+      - "Conway, A Course in Functional Analysis"
+    namm_connected: false

@@ -5,7 +5,7 @@
 **Epistemic label:** Every entry below is `PHILOSOPHICAL_INFERENCE` — motivates search; **non-evidential**; does not satisfy NAMM acceptance gates.  
 Roman Kuznetsov · NAMM research program
 
-Related: [`NAMM_DOMAIN_UNIVERSE.md`](NAMM_DOMAIN_UNIVERSE.md) · [`MATH_OBJECT_CANDIDATES.md`](MATH_OBJECT_CANDIDATES.md) · [`MATH_OBJECT_HYPOTHESES.md`](MATH_OBJECT_HYPOTHESES.md) · [`MATHEMATICAL_FABRIC_HYPOTHESES.md`](MATHEMATICAL_FABRIC_HYPOTHESES.md) · [`AMFW_11D_HYPOTHESIS_RESEARCH.md`](AMFW_11D_HYPOTHESIS_RESEARCH.md) · [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) · [`ANTHEMIUM_VIDEO_NOTES.md`](ANTHEMIUM_VIDEO_NOTES.md) · [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md)
+Related: [`NAMM_DOMAIN_UNIVERSE.md`](NAMM_DOMAIN_UNIVERSE.md) · [`MATHEMATICS_LIBRARY_BASE.md`](MATHEMATICS_LIBRARY_BASE.md) · [`MATH_OBJECT_CANDIDATES.md`](MATH_OBJECT_CANDIDATES.md) · [`MATH_OBJECT_HYPOTHESES.md`](MATH_OBJECT_HYPOTHESES.md) · [`MATHEMATICAL_FABRIC_HYPOTHESES.md`](MATHEMATICAL_FABRIC_HYPOTHESES.md) · [`AMFW_11D_HYPOTHESIS_RESEARCH.md`](AMFW_11D_HYPOTHESIS_RESEARCH.md) · [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) · [`ANTHEMIUM_VIDEO_NOTES.md`](ANTHEMIUM_VIDEO_NOTES.md) · [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md)
 
 ---
 
@@ -24,6 +24,7 @@ Related: [`NAMM_DOMAIN_UNIVERSE.md`](NAMM_DOMAIN_UNIVERSE.md) · [`MATH_OBJECT_C
 **At the start of every NAMM research task**, read in order:
 
 1. **This file** — `docs/PHILOSOPHICAL_INFERENCE.md` (user theses, falsifiers, agent priorities)
+2a. **Classical math library** — `data/mathematics_library_base.yaml` (classical sections + Python libs on PyPI; **not** NAMM frames, **not** metaphors). Human guide: [`MATHEMATICS_LIBRARY_BASE.md`](MATHEMATICS_LIBRARY_BASE.md). Loader: `namm.matlib.load_mathematics_sections()`.
 2. **Domain catalog** — `docs/NAMM_DOMAIN_UNIVERSE.md` (math/physics domains, libs, experiment IDs, operational vs stub vs planned)
 3. **Novelty registry** — `docs/MATH_OBJECT_CANDIDATES.md` (lead candidates, epistemic status, K_A/K_H)
 4. **Hypothesis registry** — `docs/MATH_OBJECT_HYPOTHESES.md` (H-001+, falsifiable CONJECTURE claims, experiment status)
