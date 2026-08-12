@@ -1,5 +1,7 @@
 # NAMM Domain Universe
 
+> **Для людей:** см. [**MATHEMATICS_SECTIONS_RU.md**](MATHEMATICS_SECTIONS_RU.md) — классическая математика vs NAMM-рамки vs метафора, без «каши».
+
 **Permanent catalog** of mathematical and physical domains NAMM can operate in — the authoritative map from formal math substrate → Python modules → experiment IDs → frame ladder rungs.
 
 **Naming rationale:** *Domain Universe* (Russian: **«Вселенная доменов NAMM»** or **«Каталог математических доменов»**) — a single load target for agents at research-task start. Prefer this title over scattered per-domain READMEs when choosing a frame or escalating after null results.

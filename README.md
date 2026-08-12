@@ -73,6 +73,7 @@ Domain libraries (optional `[nd]` extra): **gudhi** (TDA), **qutip** (quantum fr
 
 | Topic | Document |
 |-------|----------|
+| **Разделы математики vs NAMM-рамки (RU, для людей)** | [`docs/MATHEMATICS_SECTIONS_RU.md`](docs/MATHEMATICS_SECTIONS_RU.md) |
 | Vision, falsifiability, pipeline | [`docs/VISION.md`](docs/VISION.md) |
 | Research direction and roadmap | [`docs/RESEARCH_DIRECTION.md`](docs/RESEARCH_DIRECTION.md) |
 | AI thinking topology (Phase 004 foundation) | [`docs/AI_THINKING_TOPOLOGY.md`](docs/AI_THINKING_TOPOLOGY.md) |
