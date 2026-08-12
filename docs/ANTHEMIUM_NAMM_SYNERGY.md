@@ -5,7 +5,7 @@ Roman Kuznetsov · [Anthemium](https://anthemium.tech) · NAMM research program
 
 > **Framing:** Synergy is **Anthemium + NAMM** only. Anthemium organizes machine-native search topology, novelty selection, and frame escalation; NAMM runs **GENERATE → FORMALIZE → ATTACK → VERIFY** and anchors claims in `certificate.json`. Human audit sets falsifiability gates — governance, not co-discovery.
 
-Related: [`ANTHEMIUM_LINEAGE.md`](ANTHEMIUM_LINEAGE.md) · [`VISION.md`](VISION.md) · [`PROTOCOL_V2.md`](PROTOCOL_V2.md)
+Related: [`NAMM_DOMAIN_UNIVERSE.md`](NAMM_DOMAIN_UNIVERSE.md) · [`ANTHEMIUM_LINEAGE.md`](ANTHEMIUM_LINEAGE.md) · [`VISION.md`](VISION.md) · [`PROTOCOL_V2.md`](PROTOCOL_V2.md)
 
 ---
 

@@ -5,7 +5,7 @@
 **Epistemic label:** Every entry below is `PHILOSOPHICAL_INFERENCE` — motivates search; **non-evidential**; does not satisfy NAMM acceptance gates.  
 Roman Kuznetsov · NAMM research program
 
-Related: [`MATH_OBJECT_CANDIDATES.md`](MATH_OBJECT_CANDIDATES.md) · [`MATH_OBJECT_HYPOTHESES.md`](MATH_OBJECT_HYPOTHESES.md) · [`MATHEMATICAL_FABRIC_HYPOTHESES.md`](MATHEMATICAL_FABRIC_HYPOTHESES.md) · [`AMFW_11D_HYPOTHESIS_RESEARCH.md`](AMFW_11D_HYPOTHESIS_RESEARCH.md) · [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) · [`ANTHEMIUM_VIDEO_NOTES.md`](ANTHEMIUM_VIDEO_NOTES.md) · [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md)
+Related: [`NAMM_DOMAIN_UNIVERSE.md`](NAMM_DOMAIN_UNIVERSE.md) · [`MATH_OBJECT_CANDIDATES.md`](MATH_OBJECT_CANDIDATES.md) · [`MATH_OBJECT_HYPOTHESES.md`](MATH_OBJECT_HYPOTHESES.md) · [`MATHEMATICAL_FABRIC_HYPOTHESES.md`](MATHEMATICAL_FABRIC_HYPOTHESES.md) · [`AMFW_11D_HYPOTHESIS_RESEARCH.md`](AMFW_11D_HYPOTHESIS_RESEARCH.md) · [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) · [`ANTHEMIUM_VIDEO_NOTES.md`](ANTHEMIUM_VIDEO_NOTES.md) · [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md)
 
 ---
 
@@ -24,10 +24,11 @@ Related: [`MATH_OBJECT_CANDIDATES.md`](MATH_OBJECT_CANDIDATES.md) · [`MATH_OBJE
 **At the start of every NAMM research task**, read in order:
 
 1. **This file** — `docs/PHILOSOPHICAL_INFERENCE.md` (user theses, falsifiers, agent priorities)
-2. **Novelty registry** — `docs/MATH_OBJECT_CANDIDATES.md` (lead candidates, epistemic status, K_A/K_H)
-3. **Hypothesis registry** — `docs/MATH_OBJECT_HYPOTHESES.md` (H-001+, falsifiable CONJECTURE claims, experiment status)
-4. **Fabric dynamics** — `docs/MATHEMATICAL_FABRIC_HYPOTHESES.md` (H-F001–H-F050) — load when user cites **mathematical fabric**, **topological fuzzy dynamics**, or Anthemium topology beyond PI-008
-5. **Discovery loop** — `docs/ANTHEMIUM_NAMM_SYNERGY.md` (Anthemium frame → NAMM experiment queue)
+2. **Domain catalog** — `docs/NAMM_DOMAIN_UNIVERSE.md` (math/physics domains, libs, experiment IDs, operational vs stub vs planned)
+3. **Novelty registry** — `docs/MATH_OBJECT_CANDIDATES.md` (lead candidates, epistemic status, K_A/K_H)
+4. **Hypothesis registry** — `docs/MATH_OBJECT_HYPOTHESES.md` (H-001+, falsifiable CONJECTURE claims, experiment status)
+5. **Fabric dynamics** — `docs/MATHEMATICAL_FABRIC_HYPOTHESES.md` (H-F001–H-F050) — load when user cites **mathematical fabric**, **topological fuzzy dynamics**, or Anthemium topology beyond PI-008
+6. **Discovery loop** — `docs/ANTHEMIUM_NAMM_SYNERGY.md` (Anthemium frame → NAMM experiment queue)
 
 Then branch as needed: `FRAME_LADDER.md`, `ANTHEMIUM_VIDEO_NOTES.md`, `OPEN_PROBLEMS_TIERLIST.md`, experiment `EXPERIMENT_REPORT.md` for the active ID.
 

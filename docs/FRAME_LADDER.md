@@ -146,6 +146,7 @@ These sources inform frame definitions; they do **not** validate NAMM results.
 
 ## Related docs
 
+- [`NAMM_DOMAIN_UNIVERSE.md`](NAMM_DOMAIN_UNIVERSE.md) — domain catalog (libs, experiments, status)
 - [`NON_HOMO_SYNTAX.md`](NON_HOMO_SYNTAX.md) — non-anthropic syntax, π_H / π_A
 - [`NON_HOMO_SYNTAX_AND_ND_FRAMES.md`](NON_HOMO_SYNTAX_AND_ND_FRAMES.md) — extended ND mapping
 - [`AI_THINKING_TOPOLOGY.md`](AI_THINKING_TOPOLOGY.md) — Phase 3 topology
