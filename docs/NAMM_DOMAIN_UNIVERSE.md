@@ -10,15 +10,75 @@ Related: [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`RESEARCH_DIRECTION.md`](RESEA
 
 ---
 
-## 1. Purpose
+> **Быстрая справка · Quick reference:** [**8 operational**](#status-operational) · [**3 stub**](#status-stub) · [**7 planned**](#status-planned) — jump to [fields index](#разделы-математики-и-смежных-областей--mathematical--physics-fields-index) below.
+
+## Разделы математики и смежных областей · Mathematical & Physics Fields Index
+
+<a id="status-operational"></a><a id="status-stub"></a><a id="status-planned"></a>
+
+| Раздел (RU) | Section (EN) | NAMM domain_id | Status | Experiments |
+|-------------|--------------|----------------|--------|-------------|
+| Комбинаторика | Graph theory | `finite_graphs` | **operational** | 001 |
+| Теория графов | Network algorithms | `finite_graphs` | **operational** | 001, 003, 005, 006, 008 (substrate) |
+| Программный синтез | Program synthesis | `program_ast` | **operational** | 003 |
+| Теория переписывания | Rewriting systems | `rewriting` | **operational** | 002 |
+| Топология | Topology | `tda_frame` | **operational** (scaffold) | 006 |
+| TDA | Persistent homology | `tda_frame` | **operational** (scaffold) | 006 |
+| Сырой тензорный анализ | Spectral & tensor | `raw_tensor` | **operational** | 007 |
+| Мета-вычисление | Meta-evaluation | `meta_evaluation` | **operational** | 004 |
+| Теория конфигурационных пространств | Moduli & compactification | `config_shadow` | **operational** | 009, 010 |
+| Квантовая механика | Quantum mechanics | `quantum` | **stub** | — |
+| Теория категорий | Category theory | `category` | **stub** | — |
+| Символическая алгебра | Symbolic algebra | `symbolic_algebra` | **operational** (support) | supports 001, 003 |
+| SMT | Formal verification | `smt_verification` | **stub** | — |
+| Теория чисел | Number theory | `number_theory_shadow` | **planned** | — |
+| Дифференциальная геометрия | Differential geometry | `differential_geometry_shadow` | **planned** | — |
+| Trans-level Θ | Semantic transition algebra | `trans_level_theta` | **planned** | 011 |
+| Открытые задачи | Open problems | `open_problem_shadow` | **operational** | 005, 008 |
+| Математическая ткань | Mathematical fabric (fuzzy dynamics) | `mathematical_fabric` | **planned** (registry) | 006→007→009 trail |
+
+**Counts (2026-08-12):** **8 operational** domain adapters · **3 stub** (quantum, category, smt_verification) · **7 planned** (trans-level Θ, open-problem moduli, number theory, differential geometry, proof-assistant, mathematical fabric, multi-parameter topology).
+
+---
+
+## Содержание · Table of Contents
+
+- [1. Назначение · Purpose](#1-назначение--purpose)
+- [2. Сводная таблица доменов · Master domain table](#2-сводная-таблица-доменов--master-domain-table)
+- [3. Разделы доменов · Domain sections](#3-разделы-доменов-все-основные-области-математики--domain-sections-all-major-math-areas)
+  - [3.1 Комбинаторика · Combinatorics & graph theory](#31-комбинаторика-и-теория-графов--combinatorics--graph-theory)
+  - [3.2 Программный синтез · Program synthesis](#32-программный-синтез--program-synthesis--evolutionary-search)
+  - [3.3 Теория переписывания · Rewriting systems](#33-теория-переписывания--rewriting-systems)
+  - [3.4 Топология и TDA · Topology & TDA](#34-топология-и-tda--topology--tda)
+  - [3.5 Сырой тензорный анализ · Raw tensor / spectral](#35-сырой-тензорный-анализ--raw-tensor--spectral)
+  - [3.6 Мета-вычисление · Meta-evaluator fixed points](#36-мета-вычисление--meta-evaluator-fixed-points)
+  - [3.7 Конфигурационные пространства · Configuration spaces / moduli](#37-конфигурационные-пространства--configuration-spaces--moduli-shadows)
+  - [3.8 Квантовая механика · Quantum mechanics](#38-квантовая-механика--quantum-mechanics)
+  - [3.9 Теория категорий · Category theory](#39-теория-категорий--category-theory)
+  - [3.10 Символическая алгебра · Symbolic algebra](#310-символическая-алгебра--symbolic-algebra)
+  - [3.11 SMT · Formal verification](#311-smt--verification)
+  - [3.12 Открытые задачи · Open problem shadows](#312-открытые-задачи--open-problem-shadows)
+  - [3.13 Trans-level Θ · Semantic transition algebra](#313-trans-level-θ--semantic-transition-algebra)
+  - [3.14 Математическая ткань · Mathematical fabric / fuzzy dynamics](#314-математическая-ткань--mathematical-fabric--fuzzy-dynamics)
+  - [3.15 Теория чисел · Number theory shadows](#315-теория-чисел--number-theory-shadows)
+  - [3.16 Дифференциальная геометрия · Differential geometry shadows](#316-дифференциальная-геометрия--differential-geometry-shadows)
+- [4. Индекс эксперимент ↔ домен · Experiment ↔ domain index](#4-индекс-эксперимент--домен--experiment--domain-index)
+- [5. Справочник библиотек · Library reference](#5-справочник-библиотек--library-reference)
+- [6. Планируемое расширение · Planned domain expansion](#6-планируемое-расширение-доменов--planned-domain-expansion)
+- [7. Инструкции для агента · Agent instructions](#7-инструкции-для-агента--agent-instructions)
+- [8. Карта кода · Code map](#8-карта-кода--code-map)
+
+---
+
+## 1. Назначение · Purpose
 
 This document is the **permanent map** of math/physics domains NAMM can search, verify, and certificate-anchor. It answers:
 
 | Question | Where to look |
 |----------|---------------|
-| Which domain fits a new experiment? | §3 domain table + §4 sections |
+| Which domain fits a new experiment? | [Fields index](#разделы-математики-и-смежных-областей--mathematical--physics-fields-index) + §3 sections |
 | What library enables which frame? | §5 library reference |
-| What is operational vs stub vs planned? | Status column in §3 |
+| What is operational vs stub vs planned? | [Quick reference](#status-operational) + Status column in index |
 | How to escalate after null (001, 006)? | §7 agent instructions |
 
 **Agent requirement:** read this file at the **start of every NAMM research task**, immediately after [`PHILOSOPHICAL_INFERENCE.md`](PHILOSOPHICAL_INFERENCE.md) (see agent load protocol there). Then branch to the active experiment's `config.yaml`, domain module under `src/namm/domains/`, and relevant hypothesis registries.
@@ -27,7 +87,7 @@ This document is the **permanent map** of math/physics domains NAMM can search, 
 
 ---
 
-## 2. Master domain table
+## 2. Сводная таблица доменов · Master domain table
 
 | Domain ID | Mathematical field | NAMM frame(s) | Python lib(s) | Status | Experiment IDs | Notes |
 |-----------|-------------------|---------------|---------------|--------|----------------|-------|
@@ -50,13 +110,13 @@ This document is the **permanent map** of math/physics domains NAMM can search, 
 | `proof_assistant` | Proof-assistant certificates | F2 | Lean / Mathlib (external) | **planned** | — | Tierlist T1; not in repo |
 | `mathematical_fabric` | Fabric dynamics · fuzzy topology | F1→F∞ cross-cutting | — (concept layer) | **planned** (registry) | 006→007→009 trail | [`MATHEMATICAL_FABRIC_HYPOTHESES.md`](MATHEMATICAL_FABRIC_HYPOTHESES.md) H-F001–H-F050 |
 
-**Counts (2026-08-12):** **8 operational** domain adapters with experiment configs · **4 stub** (quantum, category, smt_verification, symbolic as cross-cutting support counted separately) · **6+ planned** expansion targets.
+**Counts (2026-08-12):** **8 operational** domain adapters with experiment configs · **3 stub** (quantum, category, smt_verification) · **7 planned** expansion targets (see [fields index](#разделы-математики-и-смежных-областей--mathematical--physics-fields-index)).
 
 ---
 
-## 3. Domain sections (all major math areas)
+## 3. Разделы доменов (все основные области математики) · Domain sections (all major math areas)
 
-### 3.1 Combinatorics & graph theory
+### 3.1 Комбинаторика и теория графов · Combinatorics & graph theory
 
 | Field | Content |
 |-------|---------|
@@ -71,7 +131,7 @@ Core generators: `enumerate_small_graphs`, `random_invariant_formula`. Evaluator
 
 ---
 
-### 3.2 Program synthesis / evolutionary search
+### 3.2 Программный синтез · Program synthesis / evolutionary search
 
 | Field | Content |
 |-------|---------|
@@ -86,7 +146,7 @@ Evolutionary population over ADD/MUL/leaf programs; SymPy equivalence gate via `
 
 ---
 
-### 3.3 Rewriting systems
+### 3.3 Теория переписывания · Rewriting systems
 
 | Field | Content |
 |-------|---------|
@@ -101,7 +161,7 @@ Confluence score, normalization, `rules_to_dict()` certificate serialization.
 
 ---
 
-### 3.4 Topology & TDA
+### 3.4 Топология и TDA · Topology & TDA
 
 | Field | Content |
 |-------|---------|
@@ -116,7 +176,7 @@ Persistent homology on graph geodesic metric; `PersistenceSignature`, `graph_per
 
 ---
 
-### 3.5 Raw tensor / spectral
+### 3.5 Сырой тензорный анализ · Raw tensor / spectral
 
 | Field | Content |
 |-------|---------|
@@ -131,7 +191,7 @@ Persistent homology on graph geodesic metric; `PersistenceSignature`, `graph_per
 
 ---
 
-### 3.6 Meta-evaluator fixed points
+### 3.6 Мета-вычисление · Meta-evaluator fixed points
 
 | Field | Content |
 |-------|---------|
@@ -146,7 +206,7 @@ Search for E ≈ F(E) on graphs order ≤ 6; transform registry (`identity`, `ca
 
 ---
 
-### 3.7 Configuration spaces / moduli shadows
+### 3.7 Конфигурационные пространства · Configuration spaces / moduli shadows
 
 | Field | Content |
 |-------|---------|
@@ -161,7 +221,7 @@ Search for E ≈ F(E) on graphs order ≤ 6; transform registry (`identity`, `ca
 
 ---
 
-### 3.8 Quantum mechanics
+### 3.8 Квантовая механика · Quantum mechanics
 
 | Field | Content |
 |-------|---------|
@@ -176,7 +236,7 @@ Search for E ≈ F(E) on graphs order ≤ 6; transform registry (`identity`, `ca
 
 ---
 
-### 3.9 Category theory
+### 3.9 Теория категорий · Category theory
 
 | Field | Content |
 |-------|---------|
@@ -191,7 +251,7 @@ Finite shadow: graphs as objects, homomorphisms as morphisms; `graph_category_sh
 
 ---
 
-### 3.10 Symbolic algebra
+### 3.10 Символическая алгебра · Symbolic algebra
 
 | Field | Content |
 |-------|---------|
@@ -206,7 +266,7 @@ AST→SymPy mapping, baseline equivalence checks, prior-art simplification.
 
 ---
 
-### 3.11 SMT / verification
+### 3.11 SMT · Formal verification
 
 | Field | Content |
 |-------|---------|
@@ -221,7 +281,7 @@ AST→SymPy mapping, baseline equivalence checks, prior-art simplification.
 
 ---
 
-### 3.12 Open problem shadows
+### 3.12 Открытые задачи · Open problem shadows
 
 | Field | Content |
 |-------|---------|
@@ -236,7 +296,7 @@ Full tierlist: [`OPEN_PROBLEMS_TIERLIST.md`](OPEN_PROBLEMS_TIERLIST.md). T0 prob
 
 ---
 
-### 3.13 Trans-level Θ
+### 3.13 Trans-level Θ · Semantic transition algebra
 
 | Field | Content |
 |-------|---------|
@@ -251,7 +311,7 @@ Semantic transition algebra over raw structure — morphisms between certificate
 
 ---
 
-### 3.14 Mathematical fabric / fuzzy dynamics
+### 3.14 Математическая ткань · Mathematical fabric / fuzzy dynamics
 
 | Field | Content |
 |-------|---------|
@@ -266,7 +326,37 @@ Operational metaphor: base space B, fibers over κ-shadows, fuzzy membership μ_
 
 ---
 
-## 4. Experiment ↔ domain index
+### 3.15 Теория чисел · Number theory shadows
+
+| Field | Content |
+|-------|---------|
+| **Domain ID** | `number_theory_shadow` |
+| **Module** | — (planned) |
+| **Library** | TBD (`sympy`, `gmpy2`, Sage external) |
+| **Frames** | F2 |
+| **Experiments** | — |
+| **Status** | **planned** |
+
+Finite shadows for divisor sums, Goldbach bounds, and related tierlist T2–T3 entries. See [`OPEN_PROBLEMS_TIERLIST.md`](OPEN_PROBLEMS_TIERLIST.md).
+
+---
+
+### 3.16 Дифференциальная геометрия · Differential geometry shadows
+
+| Field | Content |
+|-------|---------|
+| **Domain ID** | `differential_geometry_shadow` |
+| **Module** | — (planned) |
+| **Library** | TBD (`gudhi`, discrete curvature libs) |
+| **Frames** | ND |
+| **Experiments** | — |
+| **Status** | **planned** |
+
+Simplicial and graph curvature proxies; Ricci curvature on graphs; fiber bundles over config base. See §6 planned expansion.
+
+---
+
+## 4. Индекс эксперимент ↔ домен · Experiment ↔ domain index
 
 | Experiment | Domain ID | Status |
 |------------|-----------|--------|
@@ -285,7 +375,7 @@ Operational metaphor: base space B, fibers over κ-shadows, fuzzy membership μ_
 
 ---
 
-## 5. Library reference
+## 5. Справочник библиотек · Library reference
 
 Install all domain libraries:
 
@@ -312,7 +402,7 @@ pip install -e ".[dev,nd]"
 
 ---
 
-## 6. Planned domain expansion
+## 6. Планируемое расширение доменов · Planned domain expansion
 
 | Target | Suggested libs | Frame | Rationale |
 |--------|---------------|-------|-----------|
@@ -329,9 +419,9 @@ Escalation heuristic (PI-003): when current frame saturates (006 null → 007 si
 
 ---
 
-## 7. Agent instructions
+## 7. Инструкции для агента · Agent instructions
 
-### 7.1 Picking a domain for a new experiment
+### 7.1 Выбор домена для нового эксперимента · Picking a domain for a new experiment
 
 1. **Read this catalog** + active PI entries in [`PHILOSOPHICAL_INFERENCE.md`](PHILOSOPHICAL_INFERENCE.md).
 2. **Match falsifier shape:**
@@ -343,7 +433,7 @@ Escalation heuristic (PI-003): when current frame saturates (006 null → 007 si
 4. **Fix config:** `experiments/NAMM-YYYY-NNN/config.yaml` → `domain: <domain_id>`.
 5. **Document frame rung** in `EXPERIMENT_REPORT.md` (F3a–F3h, F∞).
 
-### 7.2 Escalation path (after null or saturation)
+### 7.2 Путь эскалации · Escalation path (after null or saturation)
 
 ```text
   finite_graphs (001 null)
@@ -360,7 +450,7 @@ Escalation heuristic (PI-003): when current frame saturates (006 null → 007 si
 
 Consult [`FRAME_LADDER.md`](FRAME_LADDER.md), rejection logs (`rejections.jsonl`), and [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) queue before inventing a new domain ID.
 
-### 7.3 Stub → operational promotion checklist
+### 7.3 Чеклист stub → operational · Stub → operational promotion checklist
 
 - [ ] Domain module with generator, evaluator, serializer
 - [ ] `run_search` dispatch branch in baselines
@@ -368,13 +458,13 @@ Consult [`FRAME_LADDER.md`](FRAME_LADDER.md), rejection logs (`rejections.jsonl`
 - [ ] Experiment config + pytest module
 - [ ] Entry in this catalog (status → operational)
 
-### 7.4 When to load fabric hypotheses
+### 7.4 Когда загружать fabric-гипотезы · When to load fabric hypotheses
 
 If the user cites **mathematical fabric**, **topological fuzzy dynamics**, **Anthemium.mp4**, or frame escalation beyond F3h → also load [`MATHEMATICAL_FABRIC_HYPOTHESES.md`](MATHEMATICAL_FABRIC_HYPOTHESES.md).
 
 ---
 
-## 8. Code map
+## 8. Карта кода · Code map
 
 | Domain ID | Package path |
 |-----------|--------------|

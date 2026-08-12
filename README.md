@@ -89,7 +89,7 @@ Domain libraries (optional `[nd]` extra): **gudhi** (TDA), **qutip** (quantum fr
 | Math object hypotheses (falsifiable CONJECTURE registry) | [`docs/MATH_OBJECT_HYPOTHESES.md`](docs/MATH_OBJECT_HYPOTHESES.md) |
 | Mathematical fabric hypotheses (topological fuzzy dynamics, H-F registry) | [`docs/MATHEMATICAL_FABRIC_HYPOTHESES.md`](docs/MATHEMATICAL_FABRIC_HYPOTHESES.md) |
 | Philosophical inference registry (agent load) | [`docs/PHILOSOPHICAL_INFERENCE.md`](docs/PHILOSOPHICAL_INFERENCE.md) |
-| Domain universe catalog (math/physics domains, agent load) | [`docs/NAMM_DOMAIN_UNIVERSE.md`](docs/NAMM_DOMAIN_UNIVERSE.md) |
+| Domain universe catalog (math/physics **fields index** + TOC, agent load) | [`docs/NAMM_DOMAIN_UNIVERSE.md`](docs/NAMM_DOMAIN_UNIVERSE.md) |
 
 ---
 
