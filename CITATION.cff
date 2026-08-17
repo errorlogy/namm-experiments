@@ -1,0 +1,46 @@
+cff-version: 1.2.0
+message: "If you use this research, please cite it as below."
+title: "Non-Anthropic Mathematics Mode (NAMM)"
+version: 0.1
+date-released: 2026-08-17
+type: software
+license: CC-BY-4.0
+repository-code: "https://github.com/errorlogy/namm-experiments"
+url: "https://github.com/errorlogy/namm-experiments"
+abstract: >-
+  Verification-first research program testing whether machine-native artifacts can
+  certify mathematical structure before compact human projection exists — certificates,
+  frame escalation, compression asymmetry (K_A/K_H), and open-problem shadows.
+keywords:
+  - non-anthropic mathematics
+  - machine-native discovery
+  - verification-first
+  - mathematical certificates
+  - Anthemium
+authors:
+  - family-names: Kuznetsov
+    given-names: Roman
+    affiliation: Anthemium
+    orcid: ""
+    website: "https://anthemium.tech"
+    social:
+      - type: x
+        value: AGIminister
+preferred-citation:
+  type: software
+  title: "Non-Anthropic Mathematics Mode (NAMM)"
+  authors:
+    - family-names: Kuznetsov
+      given-names: Roman
+  year: 2026
+  url: "https://github.com/errorlogy/namm-experiments"
+  notes: "Verification-first machine-native math discovery research program"
+references:
+  - type: software
+    title: "Endogenous Initiative Architecture (EIA)"
+    authors:
+      - family-names: Kuznetsov
+        given-names: Roman
+    year: 2026
+    url: "https://github.com/errorlogy/eia"
+    notes: "Sibling Anthemium research program on proactive AI with endogenous initiative"

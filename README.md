@@ -87,6 +87,7 @@ Domain libraries (optional `[nd]` extra): **gudhi** (TDA), **qutip** (quantum fr
 | Brief manifesto | [`docs/MANIFESTO.md`](docs/MANIFESTO.md) |
 | Anthemium lineage (Manifesto → NAMM) | [`docs/ANTHEMIUM_LINEAGE.md`](docs/ANTHEMIUM_LINEAGE.md) |
 | Anthemium + NAMM synergy (experiments loop) | [`docs/ANTHEMIUM_NAMM_SYNERGY.md`](docs/ANTHEMIUM_NAMM_SYNERGY.md) |
+| **PROACTIVE AI — endogenous initiative architecture** | [`proactive-ai/README.md`](proactive-ai/README.md) · [`docs/proactive-ai/INTEGRATION.md`](docs/proactive-ai/INTEGRATION.md) |
 | Math object candidates (novelty registry) | [`docs/MATH_OBJECT_CANDIDATES.md`](docs/MATH_OBJECT_CANDIDATES.md) |
 | Math object hypotheses (falsifiable CONJECTURE registry) | [`docs/MATH_OBJECT_HYPOTHESES.md`](docs/MATH_OBJECT_HYPOTHESES.md) |
 | Mathematical fabric hypotheses (topological fuzzy dynamics, H-F registry) | [`docs/MATHEMATICAL_FABRIC_HYPOTHESES.md`](docs/MATHEMATICAL_FABRIC_HYPOTHESES.md) |
@@ -242,3 +243,18 @@ python -m pytest tests/ -v
 ```
 
 Details: [`.github/workflows/README.md`](.github/workflows/README.md)
+
+---
+
+## License and citation
+
+This research program is licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](LICENSE). You may share and adapt the material for any purpose, including commercially, provided you give appropriate credit.
+
+**Required attribution:**
+
+- **Non-Anthropic Mathematics Mode (NAMM)** — Roman Kuznetsov  
+  [https://github.com/errorlogy/namm-experiments](https://github.com/errorlogy/namm-experiments) · [https://anthemium.tech](https://anthemium.tech) · [https://x.com/AGIminister](https://x.com/AGIminister)
+
+Machine-readable metadata: [`CITATION.cff`](CITATION.cff).
+
+**Sibling research program:** [Endogenous Initiative Architecture (EIA)](https://github.com/errorlogy/eia) — proactive AI with endogenous initiative; integrated in this repository via [`proactive-ai/`](proactive-ai/README.md). When you use that integration, cite both NAMM and EIA as described in `LICENSE`.
