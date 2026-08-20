@@ -1,0 +1,4 @@
+NAMM-2026-023 run 2026-08-18T20:46:35.828757+00:00
+non_1d_score=102.0266
+pairwise={'K1_vs_K3': 3.336104, 'K1_vs_K5': 2.102528, 'K1_vs_K6': 5.442177, 'K3_vs_K5': 1.260374, 'K3_vs_K6': 2.119684, 'K5_vs_K6': 3.34368}
+hypothesis_support={'H-CCT-001': True, 'H-CCT-004': True, 'H-CCT-012': True}

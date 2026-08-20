@@ -8,11 +8,11 @@
 
 Roman Kuznetsov · NAMM research program
 
-Related: [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`RESEARCH_DIRECTION.md`](RESEARCH_DIRECTION.md) · [`PHILOSOPHICAL_INFERENCE.md`](PHILOSOPHICAL_INFERENCE.md) · [`OPEN_PROBLEMS_TIERLIST.md`](OPEN_PROBLEMS_TIERLIST.md) · [`MATHEMATICAL_FABRIC_HYPOTHESES.md`](MATHEMATICAL_FABRIC_HYPOTHESES.md) · [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) · [`src/namm/domains/`](../src/namm/domains/)
+Related: [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`RESEARCH_DIRECTION.md`](RESEARCH_DIRECTION.md) · [`PHILOSOPHICAL_INFERENCE.md`](PHILOSOPHICAL_INFERENCE.md) · [`OPEN_PROBLEMS_TIERLIST.md`](OPEN_PROBLEMS_TIERLIST.md) · [`MATHEMATICAL_FABRIC_HYPOTHESES.md`](MATHEMATICAL_FABRIC_HYPOTHESES.md) · [`CONSENSUS_NON_OPTIMALITY_HYPOTHESIS.md`](CONSENSUS_NON_OPTIMALITY_HYPOTHESIS.md) · [`COGNITIVE_CLASS_TAXONOMY.md`](COGNITIVE_CLASS_TAXONOMY.md) · [`MYTHOGENESIS_CCT_CNS_GAME_THEORY.md`](MYTHOGENESIS_CCT_CNS_GAME_THEORY.md) · [`SCIENTIFIC_STACK.md`](SCIENTIFIC_STACK.md) · [`SCI_FLOW.md`](SCI_FLOW.md) · [`ANTHEMIUM_NAMM_SYNERGY.md`](ANTHEMIUM_NAMM_SYNERGY.md) · [`src/namm/domains/`](../src/namm/domains/) · [`src/namm/sci_flow/`](../src/namm/sci_flow/)
 
 ---
 
-> **Быстрая справка · Quick reference:** [**8 operational**](#status-operational) · [**3 stub**](#status-stub) · [**7 planned**](#status-planned) — jump to [fields index](#разделы-математики-и-смежных-областей--mathematical--physics-fields-index) below.
+> **Быстрая справка · Quick reference:** [**8 operational**](#status-operational) · [**3 stub**](#status-stub) · [**9 planned**](#status-planned) — jump to [fields index](#разделы-математики-и-смежных-областей--mathematical--physics-fields-index) below.
 
 ## Разделы математики и смежных областей · Mathematical & Physics Fields Index
 
@@ -37,9 +37,15 @@ Related: [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`RESEARCH_DIRECTION.md`](RESEA
 | Дифференциальная геометрия | Differential geometry | `differential_geometry_shadow` | **planned** | — |
 | Trans-level Θ | Semantic transition algebra | `trans_level_theta` | **planned** | 011 |
 | Открытые задачи | Open problems | `open_problem_shadow` | **operational** | 005, 008 |
+| ИИ-Наука и нейросимвольные вычисления | AI Science & Prior Art | `ai_science` | **operational** | `prior_art/arxiv.py`, 004 |
 | Математическая ткань | Mathematical fabric (fuzzy dynamics) | `mathematical_fabric` | **planned** (registry) | 006→007→009 trail |
+| Мультиагентные системы · консенсус | Multi-agent consensus (social MAS) | `multi_agent_consensus` | **planned** (registry) | 021–022 (proposed) |
+| Когнитивные классы · таксономия | Cognitive class taxonomy (homo + AI + hybrid) | `cognitive_class_taxonomy` | **planned** (registry) | 023–025, 029 (proposed) |
+| Политический мифогенез · GT 2.0 | Political mythogenesis (CNS + CCT overlay) | `multi_agent_consensus` | **planned** (registry) | 026–028 (proposed) |
+| AMAT · антимедианная топология ИИ | Anti-Median AI Topology (typicality phases; median = named proxy); **H-AMAT-006–010**: catastrophe A₃, information geometry, fractal dim, Lyapunov attractor, sheaf cohomology | `ai_science` + TDA overlay | **planned** (registry) | 013–014, 023 analog, **030**, 037–041 (planned) |
 
-**Counts (2026-08-12):** **8 operational** domain adapters · **3 stub** (quantum, category, smt_verification) · **7 planned** (trans-level Θ, open-problem moduli, number theory, differential geometry, proof-assistant, mathematical fabric, multi-parameter topology).
+**Counts (2026-08-18):** **9 operational** domain adapters (incl. `ai_science` Prior Art) · **3 stub** (quantum, category, smt_verification) · **9 planned**.
+
 
 ---
 
@@ -64,6 +70,10 @@ Related: [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`RESEARCH_DIRECTION.md`](RESEA
   - [3.14 Математическая ткань · Mathematical fabric / fuzzy dynamics](#314-математическая-ткань--mathematical-fabric--fuzzy-dynamics)
   - [3.15 Теория чисел · Number theory shadows](#315-теория-чисел--number-theory-shadows)
   - [3.16 Дифференциальная геометрия · Differential geometry shadows](#316-дифференциальная-геометрия--differential-geometry-shadows)
+  - [3.17 Мультиагентный консенсус · Multi-agent consensus](#317-мультиагентный-консенсус--multi-agent-consensus)
+  - [3.18 Когнитивные классы · Cognitive class taxonomy](#318-когнитивные-классы--cognitive-class-taxonomy)
+  - [3.19 Политический мифогенез · Political mythogenesis](#319-политический-мифогенез--political-mythogenesis)
+  - [3.20 AMAT · Anti-Median AI Topology](#320-amat--anti-median-ai-topology)
 - [4. Индекс эксперимент ↔ домен · Experiment ↔ domain index](#4-индекс-эксперимент--домен--experiment--domain-index)
 - [5. Справочник библиотек · Library reference](#5-справочник-библиотек--library-reference)
 - [6. Планируемое расширение · Planned domain expansion](#6-планируемое-расширение-доменов--planned-domain-expansion)
@@ -111,8 +121,11 @@ This document is the **permanent map** of math/physics domains NAMM can search, 
 | `differential_geometry_shadow` | Differential geometry · discrete shadows | ND | TBD | **planned** | — | Simplicial / graph curvature proxies |
 | `proof_assistant` | Proof-assistant certificates | F2 | Lean / Mathlib (external) | **planned** | — | Tierlist T1; not in repo |
 | `mathematical_fabric` | Fabric dynamics · fuzzy topology | F1→F∞ cross-cutting | — (concept layer) | **planned** (registry) | 006→007→009 trail | [`MATHEMATICAL_FABRIC_HYPOTHESES.md`](MATHEMATICAL_FABRIC_HYPOTHESES.md) H-F001–H-F050 |
+| `multi_agent_consensus` | Multi-agent systems · consensus non-optimality | F3a + dynamics overlay | `networkx`, `numpy`, `scipy` | **planned** (registry) | 021–022 (proposed) | [`CONSENSUS_NON_OPTIMALITY_HYPOTHESIS.md`](CONSENSUS_NON_OPTIMALITY_HYPOTHESIS.md) H-CNS-001–H-CNS-013 |
+| `cognitive_class_taxonomy` | Cognitive classes · homo K0–K7 + AI K_AI_μ/nd + proto-subject + hybrid | F3f + F3g + F4 overlay | `numpy`, `gudhi` `[nd]`, embedding APIs | **planned** (registry) | 023–025, 029 (proposed) | [`COGNITIVE_CLASS_TAXONOMY.md`](COGNITIVE_CLASS_TAXONOMY.md) H-CCT-001–H-CCT-021 |
+| `anti_median_ai_topology` | AMAT · typicality vs off-typical phases (median = named proxy, §0); H-AMAT-006–010: cusp catastrophe, info-geometry, fractal dim, Lyapunov, sheaf cohomology | F3f + `ai_science` | `numpy`, `ripser` `[science]`, RPL JSON | **planned** (registry) | 013–014, **030**, 037–041 (planned) | [`ANTI_MEDIAN_AI_TOPOLOGY.md`](ANTI_MEDIAN_AI_TOPOLOGY.md) H-AMAT-001–010 · **§0 binding** |
 
-**Counts (2026-08-12):** **8 operational** domain adapters with experiment configs · **3 stub** (quantum, category, smt_verification) · **7 planned** expansion targets (see [fields index](#разделы-математики-и-смежных-областей--mathematical--physics-fields-index)).
+**Counts (2026-08-18):** **8 operational** domain adapters with experiment configs · **3 stub** (quantum, category, smt_verification) · **9 planned** expansion targets (see [fields index](#разделы-математики-и-смежных-областей--mathematical--physics-fields-index)).
 
 ---
 
@@ -358,6 +371,68 @@ Simplicial and graph curvature proxies; Ricci curvature on graphs; fiber bundles
 
 ---
 
+### 3.17 Мультиагентный консенсус · Multi-agent consensus
+
+| Field | Content |
+|-------|---------|
+| **Domain ID** | `multi_agent_consensus` (cross-cutting concept + graph substrate) |
+| **Module** | — (hypothesis registry; adapter planned) |
+| **Library** | `networkx`, `numpy`, `scipy` (opinion dynamics, Kuramoto proxy) |
+| **Frames** | F3a (graph) + dynamical overlay; links to 014 Kuramoto covariates |
+| **Experiments** | **021** (opinion graph welfare fiber + `cns_simulation`, proposed), **022** (catastrophe + Kuramoto–vote sweep, proposed) |
+| **Config surface** | `cns_simulation.max_non_optimality` (primary), `max_anti_consensus` (alias), `fuzzy_contours[]`, `anti_consensus_metric`, `bound_mode` — see CNS doc §4 |
+| **Status** | **planned** (registry operational) |
+
+Core thesis: **permanent non-optimality of consensus** (перманентная неоптимальность консенсуса) — collective agreement at equilibrium is structurally suboptimal, not merely transiently so. Research lenses: catastrophe theory, fuzzy logic, entropy, dynamical systems, social choice. **Simulation design:** scenarios expose controllable **`max_non_optimality`** (alias `max_anti_consensus`) — upper bound on permanent gap within fuzzy socio-political contours (regions, blocs, ideological clusters, policy domains); membership functions: triangular, trapezoidal, gaussian, ramp, spatial_soft, issue_tag. Contrasts classical consensus→optimum with **bounded permanent gap** (H-CNS-011–H-CNS-013). Application: society/politics as multi-agent environment; **political mythogenesis** as narrative consensus output (H-MCG-001) — see [`MYTHOGENESIS_CCT_CNS_GAME_THEORY.md`](MYTHOGENESIS_CCT_CNS_GAME_THEORY.md). Full registry: [`CONSENSUS_NON_OPTIMALITY_HYPOTHESIS.md`](CONSENSUS_NON_OPTIMALITY_HYPOTHESIS.md) (H-CNS-001–H-CNS-013). Load when user cites consensus non-optimality, social MAS modeling, political forecasting, political mythogenesis, or `max_non_optimality` / fuzzy contour simulation params.
+
+---
+
+### 3.18 Когнитивные классы · Cognitive class taxonomy
+
+| Field | Content |
+|-------|---------|
+| **Domain ID** | `cognitive_class_taxonomy` (cross-cutting: **strata** + **AI topology**) |
+| **Module** | — (hypothesis registry; adapter planned) |
+| **Library** | Axis A: `numpy` / conversion metrics. Axis B: `gudhi`/`ripser` `[science]` on **AI** embeddings |
+| **Frames** | F3g/F4 for homo strata; F3f TDA **only** for AI phases |
+| **Experiments** | **023** (AI-phase / embedding topology — not homo homology), **024** (3σ **stratal** heuristic), **025** (class-heterogeneous MAS + CNS), **029** (conversion) |
+| **Status** | **planned** (registry operational) |
+
+Core thesis: **two frames.** **(A) Homo-agent classes K0–K7** are **socio-cognitive strata** (functional roles, modal-median position, cognitive-capital allocation) — **not** topological phases, **not** Betti classes. **(B) AI-agent classes K_AI_μ / K_AI_nd** **are** topological phases of the training/representation/MAS manifold (median compactification vs anti-median / chimera). **Hybrid classes** \(K_{\mathrm{hybrid}} = (k_{\mathrm{homo}}, k_{\mathrm{AI}}, \phi)\) couple a **stratum** to a **phase** — irreducible to either axis alone (H-CCT-018–019). **Proto-subject:** running LLM agents occupy Axis B (default K_AI_μ) and may be **role-analog** steered toward Axis A labels without becoming human K. **+3σ IQ heuristic** (H-CCT-015) maps to **upper strata**, not to homology. **Resource conversion** (H-CCT-016–017): same \(\tau\) → different \(U_{\mathrm{out}}\) by stratum and AI phase. **Class mode switching** is a small operational case. Links cognitive capitalism to CNS. **Open frontier.** Full registry: [`COGNITIVE_CLASS_TAXONOMY.md`](COGNITIVE_CLASS_TAXONOMY.md) (H-CCT-001, H-CCT-001B, H-CCT-004/004A, …019). Load when user cites cognitive classes, K1–K7, K_AI_μ, hybrid class, proto-subject, class mode, cognitive capitalism, +3σ, or token utility asymmetry.
+
+---
+
+### 3.19 Политический мифогенез · Political mythogenesis
+
+| Field | Content |
+|-------|---------|
+| **Domain ID** | `multi_agent_consensus` + `cognitive_class_taxonomy` (cross-cutting overlay) |
+| **Module** | — (hypothesis registry; no separate adapter) |
+| **Library** | `networkx`, `numpy`, `scipy` (opinion dynamics + class-tagged agents) |
+| **Frames** | F3a (graph) + dynamics + class overlay + GT 2.0 game layer |
+| **Experiments** | **026** (myth-as-consensus on class-tagged graphs, proposed), **027** (GT 2.0 CNE + myth cheap talk, proposed), **028** (myth shift catastrophe + class mobility, proposed) |
+| **Config surface** | `cns_simulation` + `mythogenesis` block — class composition weights, narrative operator, myth shift sweep |
+| **Status** | **planned** (registry operational) |
+
+Core thesis: **political mythogenesis** (политический мифогенез) — endogenous production of collective narrative fixed points that are **outputs of the consensus operator** \(\mathcal{C}\) with high \(\mu_{\mathrm{cns}}\) and **permanent** \(\Delta W > 0\) (H-MCG-001). **Class-selective:** K1 modal majority consumes and stabilizes myths; K5–K7 generate counter-myths at translation cost \(\delta E\); K_AI_μ amplifies median myth channel. **Game Theory 2.0:** cognitive-class-heterogeneous players; **consensus non-optimal equilibrium (CNE)** replaces Nash-as-optimum; myth as cheap talk with fiber loss. **Hybrid game classes** \(\mathcal{G}_{\mathrm{hybrid}}(k_{\mathrm{homo}}, k_{\mathrm{AI}}, \phi)\) at homo×AI interface — new equilibria not reducible to homo-only or AI-only games (H-MCG-013–015); resource conversion payoff term links to H-CCT-016–017. **Open research frontier** — not closed theory (MCG §7.1). Full registry: [`MYTHOGENESIS_CCT_CNS_GAME_THEORY.md`](MYTHOGENESIS_CCT_CNS_GAME_THEORY.md) (H-MCG-001–H-MCG-015). Load when user cites political mythogenesis, мифогенез, Game Theory 2.0, GT 2.0, CNE, myth channel, hybrid game, or H-MCG.
+
+---
+
+### 3.20 AMAT · Anti-Median AI Topology
+
+| Field | Content |
+|-------|---------|
+| **Domain ID** | `anti_median_ai_topology` (overlay on `ai_science` + `tda_frame`) |
+| **Module** | `namm.metrics.phase_lock` + antigravity embeddings |
+| **Library** | `numpy`; optional `ripser` / `gudhi` on **activations** (future) |
+| **Frames** | F3f TDA + F3g tensor; **not** homo strata |
+| **Experiments** | **013–014** (text \(M_0\) escape), **023** (synthetic AI-phase TDA), **030** (RPL JSON loop) |
+| **Status** | **planned** (registry operational; 030 Run) |
+
+Core thesis: **AMAT** is an **AI-science** direction — topology of the training/representation manifold. Compact phase = **typicality / high-density basin** (\(K_{\mathrm{AI\_}\mu}\), location \(B_*\) barycenter). Brand **anti-median** = **off-typical noncompact** phase (\(K_{\mathrm{AI\_nd}}\)). **Median** (\(B_{\mathrm{gmed}}\)) is a **named robust proxy**, not the CE or MMLU estimator. See registry **§0**. AGI-proximity proxy = persistent non-compact geometry. **RPL** is the instrument. Homo K0–K7 out of scope. **H-AMAT-006–010** (2026-08-19) extend the registry with five mathematical lenses on "свет в ячейке" (β₁≥1 nontrivial homology): catastrophe theory A₃ cusp (006), information-geometry geodesic curvature (007), fractal/self-similar dimension (008), Lyapunov / strange attractor (009), sheaf cohomology H¹ obstruction (010) — with planned experiments 037–041. Full registry: [`ANTI_MEDIAN_AI_TOPOLOGY.md`](ANTI_MEDIAN_AI_TOPOLOGY.md). Load when user cites AMAT, Anti-Median, typicality gravity, K_AI_nd, RPL as AI science, or «свет в ячейке».
+
+---
+
 ## 4. Индекс эксперимент ↔ домен · Experiment ↔ domain index
 
 | Experiment | Domain ID | Status |
@@ -374,6 +449,21 @@ Simplicial and graph curvature proxies; Ricci curvature on graphs; fiber bundles
 | NAMM-2026-010 | `config_shadow` | Run (κ-sweep calibration) |
 | NAMM-2026-011 | `trans_level_theta` | Planned |
 | NAMM-2026-012 | `open_problem_moduli` | Scaffold |
+| NAMM-2026-021 | `multi_agent_consensus` | **Run** (kuramoto variant: mean ΔW=0.28, H-CNS-013 supported) |
+| NAMM-2026-022 | `multi_agent_consensus` | **Run** (Kuramoto–vote sweep n=300; regret spike=0.20, hysteresis max=0.67) |
+| NAMM-2026-023 | `cognitive_class_taxonomy` | **Run** (class separation; non-1D score=102; K1–K5 d-gap=1.58σ) |
+| NAMM-2026-024 | `cognitive_class_taxonomy` | **Run** (3σ antigravity; jump@3σ=0.71, β₁@3σ=77.6) |
+| NAMM-2026-025 | `cognitive_class_taxonomy` + `multi_agent_consensus` | **Run** (class-heterogeneous MAS; chimera R*=0.83; dissent better 87.5%) |
+| NAMM-2026-029 | `cognitive_class_taxonomy` | **Run** (resource conversion; asymmetry ratio 8.2× high-impact) |
+| NAMM-2026-030 | `anti_median_ai_topology` | **Run** (AMAT / RPL JSON loop; mean lift \(d_{\mathrm{med}}\)≈1.43, 45 cells) |
+|| NAMM-2026-037 | `anti_median_ai_topology` | **Planned** (cusp A₃ catastrophe boundary; H-AMAT-006) |
+|| NAMM-2026-038 | `anti_median_ai_topology` | **Planned** (Fisher-metric geodesic curvature pilot; H-AMAT-007) |
+|| NAMM-2026-039 | `anti_median_ai_topology` | **Planned** (layer-wise TDA + box-counting fractal dim; H-AMAT-008) |
+|| NAMM-2026-040 | `anti_median_ai_topology` | **Planned** (multi-session Lyapunov proxy + TDA; H-AMAT-009) |
+|| NAMM-2026-041 | `anti_median_ai_topology` | **Planned** (attention head disagreement as H¹ proxy; H-AMAT-010) |
+| NAMM-2026-026 | `multi_agent_consensus` + `cognitive_class_taxonomy` | **Run** (myth-as-consensus; ΔW_myth=0.18; H-MCG-001/008 supported) |
+| NAMM-2026-027 | `multi_agent_consensus` (GT 2.0) | **Run** (CNE stable G-1μ/G-6×nd; chimera G-3×μ excluded; myth adoption=1.0 on G-1μ) |
+| NAMM-2026-028 | `multi_agent_consensus` + `cognitive_class_taxonomy` | **Run** (myth shift hysteresis max=0.85; class transition rate=81%) |
 
 ---
 
@@ -383,6 +473,8 @@ Install all domain libraries:
 
 ```bash
 pip install -e ".[dev,nd]"
+pip install -e ".[science]"   # entropy/fuzzy/TDA/nolds extras — see docs/SCIENTIFIC_STACK.md
+pip install -e ".[dev,nd,science]"
 ```
 
 | Package | Version (pyproject) | Enables | Domain IDs |
@@ -390,17 +482,21 @@ pip install -e ".[dev,nd]"
 | `networkx` | ≥3.2 | Graph enumeration, invariants, open-problem search | `finite_graphs`, `open_problem_shadow`, graph substrate |
 | `sympy` | ≥1.12 | Symbolic equivalence, simplification | `symbolic_algebra`, `program_ast`, `raw_tensor` |
 | `numpy` | ≥1.26 | Tensor features, linear algebra | `raw_tensor` |
-| `scipy` | ≥1.11 | Spectral decomposition, sparse ops | `raw_tensor` |
+| `scipy` | ≥1.11 | Spectral decomposition, sparse ops, ODE (Kuramoto) | `raw_tensor`, `multi_agent_consensus` |
 | `z3-solver` | ≥4.12 | SMT verification (stub) | `smt_verification` |
 | `python-sat` | ≥1.8 | SAT solvers (future) | `smt_verification` |
 | `gudhi` | ≥3.9 `[nd]` | Persistent homology, simplicial complexes | `tda_frame` |
 | `qutip` | ≥5.0 `[nd]` | Finite-dim quantum systems | `quantum` |
+| `dit` | ≥1.5 `[science]` | Discrete information theory (optional) | information_theory / CNS entropy |
+| `scikit-fuzzy` | ≥0.4.2 `[science]` | Fuzzy defuzzification (optional) | fuzzy_logic / CNS contours |
+| `ripser` | ≥0.6.4 `[science]` | Lightweight persistent homology | TDA / CCT β₁ proxies |
+| `nolds` | ≥0.5.2 `[science]` | Nonlinear dynamics metrics (optional) | dynamical_systems |
 | `optuna` | ≥3.5 | Hyperparameter search (CLI) | cross-cutting |
 | `hypothesis` | ≥6.92 | Property-based tests | cross-cutting |
 | `pydantic` | ≥2.5 | Config schema | cross-cutting |
 | `hydra-core` | ≥1.3 | Experiment config | cross-cutting |
 
-**Core deps always installed.** **ND extras** (`gudhi`, `qutip`) required for TDA and quantum stubs/tests.
+**Core deps always installed.** **ND extras** (`gudhi`, `qutip`) for TDA and quantum stubs. **Science extras** for extended entropy/fuzzy/TDA/nolds — see [`SCIENTIFIC_STACK.md`](SCIENTIFIC_STACK.md). In-repo modules: `namm.metrics.entropy`, `namm.metrics.fuzzy`, `namm.metrics.catastrophe`. **Sci Flow** ([`SCI_FLOW.md`](SCI_FLOW.md)) routes experiments 021–029 to these modules via [`data/sci_flow_registry.yaml`](../data/sci_flow_registry.yaml); CLI: `namm sci-flow run --experiment NAMM-2026-021`.
 
 ---
 
@@ -416,6 +512,9 @@ pip install -e ".[dev,nd]"
 | Multi-parameter persistence | `gudhi` | F3f+ | Beyond single geodesic filtration |
 | Trans-level Θ (011) | meta + tensor composition | F∞ | Morphism search between raw structures |
 | Graceful moduli hybrid (012) | config_shadow + open_problem | F3e₂+F3h | Fiber degeneracy over graceful labelings |
+| Multi-agent consensus (021–022) | networkx + scipy ODE | F3a + dynamics | Permanent consensus suboptimality; `max_non_optimality` bounds on fuzzy socio-political contours |
+| Cognitive class taxonomy (023–025, 029) | gudhi + numpy + embedding APIs | F3f+F3g+F4 | K0–K7 / K_AI / hybrid class separation; 3σ transition; conversion asymmetry |
+| Political mythogenesis (026–028) | networkx + scipy ODE | F3a + dynamics + GT 2.0 | Myth-as-CNS-output; CNE; hybrid game classes; myth shift dynamics |
 
 Escalation heuristic (PI-003): when current frame saturates (006 null → 007 signal → 009 moduli), **change configuration space** before widening search budget alone.
 
@@ -464,6 +563,22 @@ Consult [`FRAME_LADDER.md`](FRAME_LADDER.md), rejection logs (`rejections.jsonl`
 
 If the user cites **mathematical fabric**, **topological fuzzy dynamics**, **Anthemium.mp4**, or frame escalation beyond F3h → also load [`MATHEMATICAL_FABRIC_HYPOTHESES.md`](MATHEMATICAL_FABRIC_HYPOTHESES.md).
 
+### 7.5 Когда загружать CNS-гипотезы · When to load consensus non-optimality hypotheses
+
+If the user cites **consensus non-optimality**, **перманентная неоптимальность консенсуса**, **multi-agent society**, **political process modeling**, **`max_non_optimality`**, **fuzzy contours**, or **H-CNS** → also load [`CONSENSUS_NON_OPTIMALITY_HYPOTHESIS.md`](CONSENSUS_NON_OPTIMALITY_HYPOTHESIS.md) (§4 for simulation params).
+
+### 7.6 Когда загружать CCT-гипотезы · When to load cognitive class taxonomy
+
+If the user cites **cognitive classes**, **когнитивные классы**, **K1–K7**, **hybrid class**, **гибридный класс**, **cognitive capitalism**, **когнитивный капитализм**, **+3σ IQ mapping**, **resource conversion**, **token utility**, or **H-CCT** → also load [`COGNITIVE_CLASS_TAXONOMY.md`](COGNITIVE_CLASS_TAXONOMY.md). For **K_AI_μ / K_AI_nd / phase lock as AI science** prefer §7.8 AMAT first.
+
+### 7.7 Когда загружать MCG-гипотезы · When to load political mythogenesis hypotheses
+
+If the user cites **political mythogenesis**, **политический мифогенез**, **мифогенез**, **Game Theory 2.0**, **GT 2.0**, **CNE**, **consensus non-optimal equilibrium**, **myth channel**, **hybrid game**, **гибридная игра**, or **H-MCG** → also load [`MYTHOGENESIS_CCT_CNS_GAME_THEORY.md`](MYTHOGENESIS_CCT_CNS_GAME_THEORY.md). Cross-load [`CONSENSUS_NON_OPTIMALITY_HYPOTHESIS.md`](CONSENSUS_NON_OPTIMALITY_HYPOTHESIS.md) for CNS operators; [`COGNITIVE_CLASS_TAXONOMY.md`](COGNITIVE_CLASS_TAXONOMY.md) for K1–K7, hybrid classes (§4.4), resource conversion (§4.6).
+
+### 7.8 Когда загружать AMAT · When to load Anti-Median AI Topology
+
+If the user cites **AMAT**, **Anti-Median AI Topology**, **антимедианная топология**, **typicality gravity**, **K_AI_nd**, **K_AI_μ** as **AI science**, **RPL**, **representation phase lock**, **median embedding gravity** (representation, not sociology) → load [`ANTI_MEDIAN_AI_TOPOLOGY.md`](ANTI_MEDIAN_AI_TOPOLOGY.md) first (**§0 terminology is binding**), then CCT §4 Axis B only, [`data/prompts/k_ai_nd_phase_lock.v1.json`](../data/prompts/k_ai_nd_phase_lock.v1.json), experiment **030**. Do **not** load mythogenesis / homo K-strata unless asked. Do **not** treat median as the CE/MMLU estimator.
+
 ---
 
 ## 8. Карта кода · Code map
@@ -480,6 +595,7 @@ If the user cites **mathematical fabric**, **topological fuzzy dynamics**, **Ant
 | `config_shadow` | `src/namm/domains/config_shadow/` |
 | `quantum` | `src/namm/domains/quantum/` |
 | `category` | `src/namm/domains/category/` |
+| `anti_median_ai_topology` | `src/namm/metrics/phase_lock.py` + [`docs/ANTI_MEDIAN_AI_TOPOLOGY.md`](ANTI_MEDIAN_AI_TOPOLOGY.md) |
 
 Registry dict: `src/namm/domains/__init__.py` → `DOMAIN_REGISTRY`.
 

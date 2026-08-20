@@ -1,0 +1,23 @@
+experiment_id: NAMM-2026-013
+domain: meta_evaluation
+hypothesis_id: H-CA-001
+hypothesis_doc: docs/COGNITIVE_ANTIGRAVITY_HYPOTHESIS.md
+branch: hypothesis/cognitive-antigravity
+status: scaffold
+seed: 2026013
+research_question: >
+  Does cognitive antigravity v1 prompt protocol increase distance-from-median
+  and falsifiability on a fixed task battery without increasing hallucination,
+  compared to default system prompt?
+protocol_version: cognitive-antigravity-v1
+arms:
+  - control
+  - antigravity-v1
+metrics:
+  - distance_from_median
+  - invariant_coherence
+  - falsifiability_score
+  - formalizability_score
+  - hallucination_rate
+  - pipeline_compliance
+  - task_accuracy

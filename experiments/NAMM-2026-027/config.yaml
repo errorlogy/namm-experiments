@@ -1,0 +1,58 @@
+experiment_id: NAMM-2026-027
+domain: multi_agent_consensus
+hypothesis_id: H-MCG-009
+hypothesis_doc: docs/MYTHOGENESIS_CCT_CNS_GAME_THEORY.md
+branch: hypothesis/political-mythogenesis
+status: run
+seed: 2026027
+research_question: >
+  Do GT 2.0 consensus non-optimal equilibria (CNE) exist under myth cheap talk
+  with class-heterogeneous and hybrid homo×AI players?
+protocol_version: gt2-cne-v1
+
+num_players: 24
+seeds:
+  - 42
+  - 99
+  - 202
+  - 314
+
+hybrid_configs:
+  - k_homo: K1
+    k_ai: K_AI_mu
+    phi: 1.0
+    share: 0.8
+  - k_homo: K1
+    k_ai: K_AI_nd
+    phi: 1.2
+    share: 0.2
+  - k_homo: K3
+    k_ai: K_AI_mu
+    phi: 1.0
+    share: 1.0
+  - k_homo: K6
+    k_ai: K_AI_nd
+    phi: 1.5
+    share: 1.0
+
+num_seeds: 10
+seeds: [42, 99, 202, 314, 512, 777, 888, 999, 1024, 2048]
+
+sci_modules:
+  - game_theory_2_0
+  - consensus
+  - cognitive_class
+
+myth_channel:
+  signal: [1.0, 0.25, 0.05]
+  institutionalization: 0.85
+  adoption_threshold_k1: 0.55
+
+hypotheses:
+  - H-MCG-009
+  - H-MCG-010
+  - H-MCG-013
+  - H-MCG-014
+falsifiers:
+  - F-MCG-5
+  - F-MCG-9

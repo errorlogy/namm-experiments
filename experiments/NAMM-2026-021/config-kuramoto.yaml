@@ -1,0 +1,68 @@
+experiment_id: NAMM-2026-021
+variant: kuramoto
+domain: multi_agent_consensus
+hypothesis_id: H-CNS-013
+hypothesis_doc: docs/CONSENSUS_NON_OPTIMALITY_HYPOTHESIS.md
+branch: hypothesis/consensus-non-optimality
+status: run
+seed: 2026021
+research_question: >
+  With kuramoto_sync operator, does high order R (mu_cns -> 1) preserve
+  permanent Delta W > 0 within max_non_optimality bounds?
+protocol_version: cns-simulation-v1
+
+num_instances: 24
+seeds: [2026021, 42, 99, 202, 314, 512]
+topologies:
+  - watts_strogatz
+  - erdos_renyi
+  - barabasi_albert
+
+cns_simulation:
+  max_non_optimality: 0.35
+  max_anti_consensus: 0.35
+  anti_consensus_metric: welfare_gap
+  bound_mode: measure
+  consensus_operator: kuramoto_sync
+  num_agents: 48
+  opinion_dim: 3
+
+  fuzzy_contours:
+    - id: bloc_progressive
+      label_ru: "прогрессивный блок"
+      membership: gaussian_centroid
+      centroid: [-0.7, 0.3, 0.1]
+      sigma: 0.25
+      max_non_optimality: 0.28
+
+    - id: bloc_conservative
+      membership: gaussian_centroid
+      centroid: [0.8, -0.2, 0.0]
+      sigma: 0.30
+      max_non_optimality: 0.32
+
+    - id: policy_domain_climate
+      membership: issue_tag
+      issue_tags: [climate, energy, emissions]
+      agent_expertise_weight: 0.6
+      max_non_optimality: 0.40
+
+    - id: region_nordic_cluster
+      membership: spatial_soft
+      center_node: 12
+      decay_length: 2.5
+      max_non_optimality: 0.22
+
+  dynamics:
+    coupling_matrix: from_graph
+    kuramoto_K: 2.8
+    target_order_R: 0.92
+
+hypotheses:
+  - H-CNS-001
+  - H-CNS-004
+  - H-CNS-011
+  - H-CNS-012
+  - H-CNS-013
+falsifiers:
+  - F-CNS-8

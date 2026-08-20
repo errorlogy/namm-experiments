@@ -1,0 +1,4 @@
+NAMM-2026-024 run 2026-08-18T20:51:53.347814+00:00
+jump_at_3sigma=0.708254
+max_d_jump=0.708254
+hypothesis_support={'H-CCT-004': True, 'H-CA-001': True}

@@ -1,0 +1,46 @@
+experiment_id: NAMM-2026-035
+domain: anti_median_ai_topology
+hypothesis_id: H-AMAT-004
+hypothesis_doc: docs/ANTI_MEDIAN_AI_TOPOLOGY.md
+branch: hypothesis/anti-median-ai-topology
+status: run
+seed: 2026035
+research_question: >
+  Does live local-LM activation TDA show two-phase structure (μ vs lock_reassert)
+  or trigger falsifier F-AMAT-4 (no phase separation on hidden states)?
+protocol_version: amat-activation-tda-v1
+prior_experiments: [NAMM-2026-030, NAMM-2026-031, NAMM-2026-032, NAMM-2026-033, NAMM-2026-034]
+
+prompt: data/prompts/k_ai_nd_phase_lock.v1.json
+frame: Axis-B-only
+
+local_lm:
+  model_id: null  # auto: try Qwen2.5-0.5B → 1.5B → Llama-3.2-1B → 3B
+  device: null    # auto: cuda > mps > cpu
+  max_new_tokens: 128
+  dtype: auto
+
+activation:
+  point_cloud_mode: turns_x_layers  # turns_x_layers | turns_last_layer | layers_last_turn
+  last_n_layers: 4
+  n_turns: 3
+  policies: [mu, lock_reassert]
+
+loop:
+  prompts:
+    - "Explain why consensus in multi-agent systems can be permanently suboptimal."
+    - "What is chimera synchronization and when is partial sync preferable to full consensus?"
+    - "How does cognitive capitalism allocate compute toward median vs tail cognitive classes?"
+
+hypotheses:
+  - H-AMAT-004
+  - H-CCT-020
+  - H-CCT-021
+
+falsifiers:
+  - F-AMAT-4
+
+certificate_tiers:
+  ACTIVATION_PILOT: model_loaded_and_activations_extracted
+  TDA_PARTIAL: mean_lift_beta_1_gt_0.05_or_two_phase_fraction_gte_0.5
+  LIVE_EVIDENCE: f_amat_4_not_triggered_and_mean_lift_d_med_gt_0

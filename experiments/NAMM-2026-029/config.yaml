@@ -1,0 +1,67 @@
+experiment_id: NAMM-2026-029
+domain: cognitive_class_taxonomy
+hypothesis_id: H-CCT-016
+hypothesis_doc: docs/COGNITIVE_CLASS_TAXONOMY.md
+branch: hypothesis/cognitive-class-taxonomy
+status: run
+seed: 2026029
+research_question: >
+  Under fixed token budget tau, do cognitive classes produce asymmetric U_out
+  and conversion ratio rho_conv across task channels?
+protocol_version: cct-resource-conv-v1
+
+classes:
+  - K1
+  - K3
+  - K5
+  - K6
+  - K_AI_mu
+  - K_AI_nd
+
+channels:
+  - research
+  - engineering
+  - entertainment
+  - myth
+  - engagement
+
+tau_values:
+  - 50.0
+  - 100.0
+  - 200.0
+  - 500.0
+  - 1000.0
+
+phi_values:
+  - 0.8
+  - 1.0
+  - 1.2
+  - 1.5
+  - 1.8
+  - 2.0
+
+steering_comparison:
+  g6nd:
+    homo: K6
+    ai: K_AI_nd
+    channel: research
+    phi: 1.5
+  g1mu:
+    homo: K1
+    ai: K_AI_mu
+    channel: research
+    phi: 1.0
+  threshold_ratio: 1.5
+  nd_steering_boost: 1.15
+  mu_attenuation: 0.92
+
+sci_modules:
+  - cognitive_class
+  - entropy
+
+hypotheses:
+  - H-CCT-016
+  - H-CCT-017
+  - H-MCG-014
+falsifiers:
+  - F-CCT-9

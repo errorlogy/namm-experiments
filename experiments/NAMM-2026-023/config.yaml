@@ -1,0 +1,44 @@
+experiment_id: NAMM-2026-023
+domain: cognitive_class_taxonomy
+hypothesis_id: H-CCT-001
+hypothesis_doc: docs/COGNITIVE_CLASS_TAXONOMY.md
+branch: hypothesis/cognitive-class-taxonomy
+status: run
+seed: 2026023
+research_question: >
+  Do homo class proxies K1, K3, K5, K6 occupy separable regions in
+  (d, D_eff, beta_1) embedding topology space?
+protocol_version: cct-embedding-v1
+
+classes:
+  - K1
+  - K3
+  - K5
+  - K6
+
+n_samples: 40
+embed_dim: 8
+seeds:
+  - 42
+  - 137
+  - 256
+  - 512
+  - 777
+  - 888
+  - 999
+  - 1024
+  - 2048
+  - 4096
+
+sci_modules:
+  - cognitive_class
+  - tda
+  - entropy
+
+hypotheses:
+  - H-CCT-001
+  - H-CCT-004
+  - H-CCT-012
+falsifiers:
+  - F-CCT-1
+  - F-CCT-3

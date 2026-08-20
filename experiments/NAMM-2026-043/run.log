@@ -1,0 +1,10 @@
+2026-08-19T15:14:38.672135+00:00 NAMM-2026-043 complete
+certificate=NULL
+generator=llama3.2:latest  embedder=nomic-embed-text  embed_dim=768
+pca_dims=8  tda_backend=ripser
+mean_lift_d_eff=-0.5
+mean_lift_beta_1=0.0
+mean_lift_d_med=2.422314
+mean_decay_gap=0.64341
+d_eff_resolved=False
+hybrid_evidence=False

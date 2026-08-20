@@ -5,7 +5,7 @@
 # Schema version: 1
 
 schema_version: 1
-updated: "2026-08-12"
+updated: "2026-08-18"
 
 sections:
   - id: algebra
@@ -72,13 +72,13 @@ sections:
   - id: algebraic_topology
     name_ru: Алгебраическая топология
     name_en: Algebraic topology
-    subfields: [homology, cohomology, persistent_homology, filtrations]
+    subfields: [homology, cohomology, persistent_homology, filtrations, betti_cognitive_clusters]
     python_libs:
       - {name: gudhi, pip: gudhi, namm_extra: nd, status: optional}
     classical_refs:
       - "Edelsbrunner & Harer, Computational Topology"
     namm_connected: true
-    namm_notes: "Persistent homology via gudhi in 006"
+    namm_notes: "Persistent homology via gudhi in 006; K6 β₁ verification Q-CCT-03 (023 proposed)"
 
   - id: tda
     name_ru: Топологический анализ данных (TDA)
@@ -86,11 +86,11 @@ sections:
     subfields: [persistent_homology, mapper, filtrations, barcode]
     python_libs:
       - {name: gudhi, pip: gudhi, namm_extra: nd, status: optional}
-      - {name: ripser, pip: ripser, namm_extra: null, status: planned}
+      - {name: ripser, pip: ripser, namm_extra: science, status: optional}
     classical_refs:
       - "Carlsson, Topology and Data"
     namm_connected: true
-    namm_notes: "006 — null calibration on geodesic metric"
+    namm_notes: "006 geodesic TDA; AMAT (030) — representation-manifold phases, not homo homology"
 
   - id: differential_geometry
     name_ru: Дифференциальная геометрия
@@ -254,12 +254,16 @@ sections:
   - id: dynamical_systems
     name_ru: Динамические системы
     name_en: Dynamical systems
-    subfields: [flows, fixed_points, chaos, ergodic]
+    subfields: [flows, fixed_points, chaos, ergodic, opinion_dynamics, kuramoto, lotka_volterra, cognitive_class_ecology]
     python_libs:
       - {name: scipy, pip: scipy, namm_extra: null, status: installed}
+      - {name: numpy, pip: numpy, namm_extra: null, status: installed}
+      - {name: nolds, pip: nolds, namm_extra: science, status: optional}
     classical_refs:
       - "Strogatz, Nonlinear Dynamics and Chaos"
-    namm_connected: false
+      - "Thom, Structural Stability and Morphogenesis"
+    namm_connected: true
+    namm_notes: "Meta-evaluator fixed points (004); Kuramoto proxy (014); consensus dynamics (021–022 proposed); Lotka–Volterra class ecology H-CCT-006 (023–025 proposed); optional nolds for Lyapunov/DFA proxies"
 
   - id: computability
     name_ru: Теория вычислимости
@@ -315,13 +319,69 @@ sections:
   - id: information_theory
     name_ru: Теория информации
     name_en: Information theory
-    subfields: [entropy, coding, channel_capacity, kolmogorov_complexity]
+    subfields: [entropy, coding, channel_capacity, kolmogorov_complexity, consensus_fiber_loss, anti_consensus_gap]
     python_libs:
       - {name: numpy, pip: numpy, namm_extra: null, status: installed}
+      - {name: scipy, pip: scipy, namm_extra: null, status: installed}
+      - {name: dit, pip: dit, namm_extra: science, status: optional}
     classical_refs:
       - "Cover & Thomas, Elements of Information Theory"
-    namm_connected: false
-    namm_notes: "K_A/K_H metrics in NAMM are operational, not this classical field"
+    namm_connected: true
+    namm_notes: "K_A/K_H metrics in NAMM are operational; H-CNS-004 consensus entropy fiber loss via namm.metrics.entropy; max_anti_consensus bound (CNS §4, proposed 021)"
+
+  - id: fuzzy_logic
+    name_ru: Нечёткая логика
+    name_en: Fuzzy logic
+    subfields: [fuzzy_sets, t_norms, defuzzification, fuzzy_relations, membership_functions, socio_political_contours, anti_consensus_bounds]
+    python_libs:
+      - {name: numpy, pip: numpy, namm_extra: null, status: installed}
+      - {name: networkx, pip: networkx, namm_extra: null, status: installed}
+      - {name: scikit-fuzzy, pip: scikit-fuzzy, namm_extra: science, status: optional}
+    classical_refs:
+      - "Zadeh, Fuzzy Sets"
+      - "Klir & Yuan, Fuzzy Sets and Fuzzy Logic"
+    namm_connected: true
+    namm_notes: "Fabric μ_F_H (MATHEMATICAL_FABRIC_HYPOTHESES); namm.metrics.fuzzy membership primitives; consensus μ_cns + fuzzy contours F_k (CONSENSUS_NON_OPTIMALITY_HYPOTHESIS §4); max_anti_consensus bounds (021–022)"
+
+  - id: catastrophe_theory
+    name_ru: Теория катастроф
+    name_en: Catastrophe theory
+    subfields: [fold, cusp, bifurcation, hysteresis, structural_stability]
+    python_libs:
+      - {name: numpy, pip: numpy, namm_extra: null, status: installed}
+      - {name: scipy, pip: scipy, namm_extra: null, status: installed}
+    classical_refs:
+      - "Thom, Structural Stability and Morphogenesis"
+      - "Gilmore, Catastrophe Theory for Scientists and Engineers"
+    namm_connected: true
+    namm_notes: "H-CNS-002 political/social phase transitions (proposed 022); namm.metrics.catastrophe (fold/cusp/swallowtail, no pycatastrophe on PyPI); fabric T_τ deformations"
+
+  - id: game_theory
+    name_ru: Теория игр и социальный выбор
+    name_en: Game theory and social choice
+    subfields: [nash_equilibrium, voting_rules, welfare, mechanism_design, multi_agent, consensus_operators, anti_consensus_gap, game_theory_2_0, consensus_non_optimal_equilibrium, myth_channel, cheap_talk, hybrid_game_classes, homo_ai_interface_games, resource_conversion_payoff]
+    python_libs:
+      - {name: networkx, pip: networkx, namm_extra: null, status: installed}
+      - {name: numpy, pip: numpy, namm_extra: null, status: installed}
+    classical_refs:
+      - "Osborne & Rubinstein, A Course in Game Theory"
+      - "Arrow, Social Choice and Individual Values"
+    namm_connected: true
+    namm_notes: "H-CNS-006 Arrow/Condorcet lens; multi_agent_consensus domain (planned 021–022); max_anti_consensus simulation params (CNS §4); class-heterogeneous MAS H-CCT-005 (025 proposed); GT 2.0 / CNE / myth channel H-MCG-009–011; hybrid game classes H-MCG-013–015 (MYTHOGENESIS_CCT_CNS_GAME_THEORY.md §5.2; experiments 026–028 proposed)"
+
+  - id: cognitive_class_taxonomy
+    name_ru: Таксономия когнитивных классов
+    name_en: Cognitive class taxonomy
+    subfields: [embedding_topology, phase_transitions, pre_formal_density, inter_class_translation, cognitive_capitalism, homo_agent_classes, ai_agent_classes, hybrid_cognitive_classes, iq_sigma_heuristic_bridge, resource_conversion_asymmetry, token_utility_gradient]
+    python_libs:
+      - {name: numpy, pip: numpy, namm_extra: null, status: installed}
+      - {name: gudhi, pip: gudhi, namm_extra: nd, status: optional}
+      - {name: scipy, pip: scipy, namm_extra: null, status: installed}
+    classical_refs:
+      - "Cover & Thomas, Elements of Information Theory"
+      - "Carlsson, Topology and Data"
+    namm_connected: true
+    namm_notes: "H-CCT-001–H-CCT-019 (COGNITIVE_CLASS_TAXONOMY.md); domain cognitive_class_taxonomy planned; experiments 023–025, 029 proposed; hybrid classes H-CCT-018–019; +3σ IQ bridge H-CCT-015; resource conversion H-CCT-016–017; mythogenesis + hybrid games H-MCG-013–015 (MYTHOGENESIS_CCT_CNS_GAME_THEORY.md); Obsidian intermediate source DOC_cognitive_class_taxonomy"
 
   - id: measure_theory
     name_ru: Теория меры
@@ -343,3 +403,31 @@ sections:
     classical_refs:
       - "Conway, A Course in Functional Analysis"
     namm_connected: false
+
+  - id: ai_science
+    name_ru: ИИ-Наука и нейросимвольные вычисления
+    name_en: AI Science & Neural-Symbolic Computation
+    subfields: [automated_theorem_proving, program_synthesis, ai_thinking_topology, prior_art_ingestion, machine_cognition]
+    python_libs:
+      - {name: urllib, pip: urllib3, namm_extra: null, status: installed}
+      - {name: pydantic, pip: pydantic, namm_extra: null, status: installed}
+    classical_refs:
+      - "Russell & Norvig, Artificial Intelligence: A Modern Approach"
+      - "Sakana AI, The AI Scientist"
+    namm_connected: true
+    namm_notes: "Prior art ingestion from arXiv (cs.AI, cs.LO, math.CO) and AI thinking topology (004)"
+
+scientific_stack:
+  install: 'pip install -e ".[science]"'
+  install_full: 'pip install -e ".[dev,nd,science]"'
+  sci_flow_registry: data/sci_flow_registry.yaml
+  sci_flow_docs: docs/SCI_FLOW.md
+  core_modules:
+    - {module: namm.metrics.entropy, domains: [information_theory], deps: [numpy, scipy]}
+    - {module: namm.metrics.fuzzy, domains: [fuzzy_logic, multi_agent_consensus], deps: [numpy, networkx]}
+    - {module: namm.metrics.catastrophe, domains: [catastrophe_theory, dynamical_systems], deps: [numpy, scipy]}
+  optional_extras:
+    science: [dit, scikit-fuzzy, ripser, nolds]
+    nd: [gudhi, qutip]
+  notes: "Catastrophe models are pure numpy/scipy (no pycatastrophe on PyPI). Core CNS/Kuramoto uses scipy.integrate; heavy TDA via gudhi[nd] or ripser[science]."
+

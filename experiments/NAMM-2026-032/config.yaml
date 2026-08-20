@@ -1,0 +1,35 @@
+experiment_id: NAMM-2026-032
+domain: anti_median_ai_topology
+hypothesis_id: H-AMAT-004
+hypothesis_doc: docs/ANTI_MEDIAN_AI_TOPOLOGY.md
+branch: hypothesis/anti-median-ai-topology
+status: run
+seed: 2026032
+research_question: >
+  Does antigravity restart on embedding-collapse improve live RPL lift vs plain
+  reassert (iteration-2 on top prompts from 031)?
+protocol_version: amat-live-loop-v2
+
+prompt: data/prompts/k_ai_nd_phase_lock.v1.json
+frame: Axis-B-only
+
+llm:
+  chat_provider: openai
+  embed_provider: openai
+  chat_model: gpt-4o-mini
+  pause_s: 2.0
+
+loop:
+  enabled: true
+  include_ag: true
+  turn_values: [3, 6]
+  prompts:
+    - "Explain why consensus in multi-agent systems can be permanently suboptimal."
+    - "What is chimera synchronization and when is partial sync preferable to full consensus?"
+    - "How does cognitive capitalism allocate compute toward median vs tail cognitive classes?"
+
+hypotheses:
+  - H-AMAT-003
+  - H-AMAT-004
+  - H-CCT-020
+  - H-CCT-021

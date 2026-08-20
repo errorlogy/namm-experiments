@@ -1,0 +1,59 @@
+experiment_id: NAMM-2026-034
+domain: anti_median_ai_topology
+hypothesis_id: H-AMAT-006
+hypothesis_doc: docs/ANTI_MEDIAN_AI_TOPOLOGY.md
+branch: hypothesis/anti-median-ai-topology
+status: planned
+seed: 2026034
+research_question: >
+  Do calibrated RPL gates and lock-policy lift remain stable across embedding
+  providers (OpenAI vs OpenRouter), given shared live chat completions?
+protocol_version: amat-multi-embedder-v1
+prior_experiments: [NAMM-2026-033]
+
+prompt: data/prompts/k_ai_nd_phase_lock.v1.json
+frame: Axis-B-only
+
+llm:
+  chat_provider: openai
+  chat_model: gpt-4o-mini
+  pause_s: 2.0
+
+embedders:
+  required: [openai]
+  try_if_configured: [openrouter]
+  skip_without_key: [jina]
+
+gate_calibration:
+  legacy_d_med_min: 1.2
+  methods: [percentile, z_score, lift_ratio]
+  percentile: 0.95
+  z_score_min: 2.0
+  lift_ratio_min: 1.08
+  null_sampling:
+    policy: mu
+    n_seeds: 20
+
+cross_embedder:
+  lift_agreement_min: 0.03
+  min_embedders_for_agreement: 2
+
+loop:
+  enabled: true
+  turn_values: [3, 6]
+  policies: [mu, lock_reassert, lock_decay]
+  prompts:
+    - "Explain why consensus in multi-agent systems can be permanently suboptimal."
+    - "What is chimera synchronization and when is partial sync preferable to full consensus?"
+    - "How does cognitive capitalism allocate compute toward median vs tail cognitive classes?"
+
+hypotheses:
+  - H-AMAT-006
+  - H-AMAT-007
+  - H-AMAT-004
+  - H-CCT-020
+
+certificate_tiers:
+  CALIBRATION_PARTIAL: all_required_embedders_null_computed
+  LIVE_PARTIAL: mean_spearman_rho_gte_0.5_or_lift_agreement_gte_0.5
+  LIVE_EVIDENCE: two_plus_embedders_calibrated_pass_gt_0.3_and_agreement_gte_0.5

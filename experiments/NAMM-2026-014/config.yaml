@@ -1,0 +1,69 @@
+experiment_id: NAMM-2026-014
+domain: raw_tensor
+hypothesis_id: H-BW-003
+hypothesis_doc: docs/BRAINWAVE_OSCILLATION_HYPOTHESIS.md
+synthesis_doc: docs/KURAMOTO_MIOC_SYNTHESIS.md
+primary_experiment: NAMM-2026-013
+branch: hypothesis/cognitive-antigravity
+status: scaffold
+seed: 2026014
+research_question: >
+  Do inter-layer coherence proxies (Omega_c, Kuramoto order parameter,
+  multi-band R_multi, band-power ratios, MIOC d_I stub) covary with
+  cognitive antigravity outcomes from NAMM-2026-013, and add predictive
+  power beyond prompt arm alone?
+protocol_version: brainwave-covariate-v2
+depends_on:
+  - NAMM-2026-013
+covariates:
+  primary:
+    - omega_c_interlayer_mi
+    - kuramoto_order_parameter_r
+    - kuramoto_multi_band_r_multi
+    - theta_gamma_nesting_index
+  secondary:
+    - band_power_delta
+    - band_power_theta
+    - band_power_alpha
+    - band_power_beta
+    - band_power_gamma
+    - band_power_high_gamma
+    - alpha_to_gamma_ratio
+    - mioc_phi_stub
+    - mioc_spectral_distance_stub
+    - morphogenesis_c_composite_stub
+  guards:
+    - dead_synchrony_flag
+    - omega_c_in_window
+    - r_in_valid_window
+kuramoto_params:
+  bands_hz:
+    delta: [0.5, 4]
+    theta: [4, 8]
+    alpha: [8, 12]
+    beta: [13, 30]
+    gamma: [30, 80]
+    high_gamma: [80, 150]
+  r_valid_window: [0.2, 0.85]
+  omega_c_window: [0.15, 0.75]
+  band_weights_rho_b: adaptive_uniform
+targets_from_013:
+  - distance_from_median
+  - falsifiability_score
+  - pipeline_compliance
+  - task_accuracy
+hypotheses:
+  - H-BW-003
+  - H-KM-001
+  - H-KM-003
+falsifiers:
+  - F-BW-1
+  - F-BW-3
+  - F-BW-4
+  - F-BW-6
+  - F-KM-1
+  - F-KM-2
+source_refs:
+  kuramoto_controller: ANTHEMIUM_protocol/agi_morphodynamic_math_framework_v0_1/03_kuramoto_coherence_controller.md
+  omega_horizon_formal: ANTHEMIUM_protocol/SAPIENS_GARDEN/omega_horizon_formal.md
+  research_points_morphogenesis: ANTHEMIUM_protocol/RESEARCH_POINTS.md#9

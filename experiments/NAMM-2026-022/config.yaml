@@ -1,0 +1,69 @@
+experiment_id: NAMM-2026-022
+domain: multi_agent_consensus
+hypothesis_id: H-CNS-002
+hypothesis_doc: docs/CONSENSUS_NON_OPTIMALITY_HYPOTHESIS.md
+synthesis_doc: docs/KURAMOTO_MIOC_SYNTHESIS.md
+branch: hypothesis/consensus-non-optimality
+status: run
+seed: 2026022
+research_question: >
+  Does forced consensus near a catastrophe locus in coupled Kuramoto-vote dynamics
+  increase regret vs delayed consensus, with permanent gap at high mu_cns?
+protocol_version: cns-simulation-v1
+
+cns_simulation:
+  max_non_optimality: 0.40
+  max_anti_consensus: 0.40
+  anti_consensus_metric: welfare_gap
+  bound_mode: measure
+  consensus_operator: kuramoto_sync
+  num_agents: 36
+  opinion_dim: 3
+
+  fuzzy_contours:
+    - id: bloc_progressive
+      membership: gaussian_centroid
+      centroid: [-0.6, 0.4, 0.0]
+      sigma: 0.25
+      max_non_optimality: 0.35
+
+    - id: bloc_conservative
+      membership: gaussian_centroid
+      centroid: [0.7, -0.3, 0.1]
+      sigma: 0.30
+      max_non_optimality: 0.38
+
+  dynamics:
+    coupling_matrix: from_graph
+    kuramoto_K: 1.8
+    target_order_R: 0.85
+
+  sweep:
+    - param: max_non_optimality
+      values: [0.10, 0.20, 0.35, 0.50]
+    - param: consensus_operator
+      values: [vote, defuzzify_mean, kuramoto_sync]
+    - param: fuzzy_contours[0].sigma
+      values: [0.15, 0.25, 0.40]
+    - param: kuramoto_K
+      values: [0.5, 1.0, 1.8, 2.5, 3.5]
+    - param: vote_threshold
+      values: [0.0, 0.25, 0.5, 0.75, 1.0]
+
+  record: hysteresis_loop
+
+hypotheses:
+  - H-CNS-002
+  - H-CNS-005
+  - H-CNS-011
+  - H-CNS-013
+falsifiers:
+  - F-CNS-2
+  - F-CNS-5
+  - F-CNS-8
+
+sci_modules:
+  - catastrophe
+  - kuramoto
+  - consensus
+  - fuzzy

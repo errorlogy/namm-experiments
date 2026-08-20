@@ -1,0 +1,11 @@
+2026-08-19T23:36:05.392476+00:00 NAMM-2026-044 complete
+certificate=HYBRID_PILOT
+generator=llama3.2:latest  embedder=nomic-embed-text  embed_dim=768
+pca_dims_requested=8  pca_rank_eps=1e-06
+n_turns_list=[6, 9, 12] tda_max_dim=1 tda_k_neighbors=5
+mean_lift_d_eff=0.111111
+mean_lift_beta_1=-0.222222
+mean_lift_d_med=1.150422
+mean_two_phase_fraction=1.0
+d_eff_resolved=False
+hybrid_evidence=False

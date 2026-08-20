@@ -1,0 +1,4 @@
+NAMM-2026-028 run 2026-08-18T20:51:25.831230+00:00
+max_hysteresis=0.852408
+mean_transition_rate=0.8106
+hypothesis_support={'H-MCG-005': True, 'H-MCG-006': True, 'H-CNS-002': True}

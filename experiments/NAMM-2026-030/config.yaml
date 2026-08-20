@@ -1,0 +1,55 @@
+experiment_id: NAMM-2026-030
+domain: cognitive_class_taxonomy
+hypothesis_id: H-CCT-020
+hypothesis_doc: docs/COGNITIVE_CLASS_TAXONOMY.md
+branch: hypothesis/cognitive-class-taxonomy
+status: run
+seed: 2026030
+research_question: >
+  Does the JSON K_AI_nd phase-lock system prompt, applied as a steering
+  operator on synthetic embedding trajectories, move Axis-B phase from
+  K_AI_mu toward K_AI_nd gates (d_med, beta1, R* in (0,1)), and does
+  omitting per-turn reassert collapse back to the median attractor?
+protocol_version: k-ai-nd-phase-lock-v1
+
+prompt: data/prompts/k_ai_nd_phase_lock.v1.json
+prompt_schema: schemas/k_ai_nd_phase_lock.json
+frame: Axis-B-only
+
+n_samples: 40
+embed_dim: 8
+n_turns: 6
+gain: 0.85
+decay: 0.55
+
+loop:
+  enabled: true
+  gain_values: [0.35, 0.55, 0.75, 0.85, 1.0]
+  decay_values: [0.35, 0.55, 0.80]
+  turn_values: [3, 6, 12]
+
+seeds:
+  - 42
+  - 137
+  - 256
+  - 512
+  - 777
+  - 888
+  - 999
+  - 1024
+  - 2048
+  - 4096
+
+sci_modules:
+  - cognitive_class
+  - antigravity
+
+hypotheses:
+  - H-CCT-001B
+  - H-CCT-003
+  - H-CCT-013
+  - H-CCT-020
+  - H-CCT-021
+falsifiers:
+  - F-CCT-2
+  - F-CCT-4

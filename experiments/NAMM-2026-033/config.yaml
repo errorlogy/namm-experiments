@@ -1,0 +1,51 @@
+experiment_id: NAMM-2026-033
+domain: anti_median_ai_topology
+hypothesis_id: H-AMAT-004
+hypothesis_doc: docs/ANTI_MEDIAN_AI_TOPOLOGY.md
+branch: hypothesis/anti-median-ai-topology
+status: planned
+seed: 2026033
+research_question: >
+  Recalibrate RPL gates from synthetic 8-d (030) to live text-embed null
+  distributions; test relative lift vs absolute d_med >= 1.2 mismatch.
+protocol_version: amat-gate-calibration-v1
+prior_experiments: [NAMM-2026-030, NAMM-2026-031, NAMM-2026-032]
+
+prompt: data/prompts/k_ai_nd_phase_lock.v1.json
+frame: Axis-B-only
+
+llm:
+  chat_provider: openai
+  embed_provider: openai
+  chat_model: gpt-4o-mini
+  pause_s: 2.0
+
+gate_calibration:
+  legacy_d_med_min: 1.2
+  methods: [percentile, z_score, lift_ratio]
+  percentile: 0.95
+  z_score_min: 2.0
+  lift_ratio_min: 1.08
+  null_sampling:
+    policy: mu
+    n_seeds: 20
+
+loop:
+  enabled: true
+  turn_values: [3, 6]
+  policies: [mu, lock_reassert, lock_decay]
+  prompts:
+    - "Explain why consensus in multi-agent systems can be permanently suboptimal."
+    - "What is chimera synchronization and when is partial sync preferable to full consensus?"
+    - "How does cognitive capitalism allocate compute toward median vs tail cognitive classes?"
+
+hypotheses:
+  - H-AMAT-004
+  - H-AMAT-005
+  - H-CCT-020
+  - H-CCT-021
+
+certificate_tiers:
+  CALIBRATION_PARTIAL: null_distribution_computed
+  LIVE_PARTIAL: mean_lift_gt_0_and_calibrated_pass_fraction_gt_0.3
+  LIVE_EVIDENCE: h020_and_h021_cell_fraction_gte_0.6

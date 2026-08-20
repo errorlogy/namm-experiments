@@ -1,0 +1,126 @@
+# NAMM LLM provider registry — API + local backends
+# Keys live in .env / .env.local (never commit). See .env.example
+
+version: "1"
+
+env_search_paths:
+  - ".env.local"
+  - ".env"
+  - "${NAMM_ENV_FILE}"
+
+defaults:
+  chat_provider: auto
+  embed_provider: auto
+  chat_model: null
+  embed_model: null
+  timeout_s: 120
+
+# auto priority: first configured provider wins
+auto_priority:
+  chat: [openai, deepseek, openrouter, gemini, groq, cerebras, ollama, lmstudio]
+  embed: [openai, gemini, jina, openrouter, local_st]
+
+providers:
+  openai:
+    kind: openai_compat
+    label: OpenAI
+    env_key: OPENAI_API_KEY
+    base_url: https://api.openai.com/v1
+    chat_models: [gpt-4o-mini, gpt-4o]
+    embed_models: [text-embedding-3-small, text-embedding-3-large]
+    default_chat: gpt-4o-mini
+    default_embed: text-embedding-3-small
+
+  openrouter:
+    kind: openai_compat
+    label: OpenRouter
+    env_key: OPENROUTER_API_KEY
+    base_url: https://openrouter.ai/api/v1
+    extra_headers:
+      HTTP-Referer: https://github.com/namm-research/namm
+      X-Title: NAMM
+    chat_models:
+      - meta-llama/llama-3.3-70b-instruct:free
+      - deepseek/deepseek-r1:free
+      - google/gemma-3-12b-it:free
+    embed_models:
+      - openai/text-embedding-3-small
+      - qwen/qwen3-embedding-0.6b
+    default_chat: meta-llama/llama-3.3-70b-instruct:free
+    default_embed: openai/text-embedding-3-small
+
+  gemini:
+    kind: gemini
+    label: Google Gemini
+    env_keys: [GEMINI_API_KEY, GOOGLE_API_KEY]
+    base_url: https://generativelanguage.googleapis.com/v1beta
+    chat_models: [gemini-2.0-flash, gemini-2.5-flash-preview-05-20]
+    embed_models: [gemini-embedding-001, text-embedding-004]
+    default_chat: gemini-2.0-flash
+    default_embed: gemini-embedding-001
+
+  groq:
+    kind: openai_compat
+    label: Groq
+    env_key: GROQ_API_KEY
+    base_url: https://api.groq.com/openai/v1
+    chat_only: true
+    chat_models: [llama-3.3-70b-versatile, llama-3.1-8b-instant]
+    default_chat: llama-3.3-70b-versatile
+
+  deepseek:
+    kind: openai_compat
+    label: DeepSeek
+    env_key: DEEPSEEK_API_KEY
+    base_url: https://api.deepseek.com/v1
+    chat_models: [deepseek-chat]
+    default_chat: deepseek-chat
+
+  cerebras:
+    kind: openai_compat
+    label: Cerebras
+    env_key: CEREBRAS_API_KEY
+    base_url: https://api.cerebras.ai/v1
+    chat_only: true
+    chat_models: [llama-3.3-70b]
+    default_chat: llama-3.3-70b
+
+  jina:
+    kind: jina
+    label: Jina AI
+    env_key: JINA_API_KEY
+    embed_only: true
+    base_url: https://api.jina.ai/v1
+    embed_models: [jina-embeddings-v5-text-small, jina-embeddings-v5-text-nano]
+    default_embed: jina-embeddings-v5-text-small
+
+  ollama:
+    kind: openai_compat
+    label: Ollama (local)
+    env_key: OLLAMA_API_KEY
+    base_url: http://127.0.0.1:11434/v1
+    optional_key: true
+    chat_models: [llama3.2, qwen2.5, mistral]
+    embed_models: [nomic-embed-text, mxbai-embed-large]
+    default_chat: llama3.2
+    default_embed: nomic-embed-text
+    health_url: http://127.0.0.1:11434/api/tags
+
+  lmstudio:
+    kind: openai_compat
+    label: LM Studio (local)
+    env_key: LMSTUDIO_API_KEY
+    base_url: http://127.0.0.1:1234/v1
+    optional_key: true
+    health_url: http://127.0.0.1:1234/v1/models
+    chat_models: [local-model]
+    embed_models: [local-embed]
+    default_chat: local-model
+    default_embed: local-embed
+
+  local_st:
+    kind: local_sentence_transformers
+    label: sentence-transformers (local CPU/GPU)
+    embed_only: true
+    model: all-MiniLM-L6-v2
+    optional_key: true

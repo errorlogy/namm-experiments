@@ -1,0 +1,9 @@
+2026-08-20T00:04:48.015089+00:00 NAMM-2026-042 complete
+certificate=ACTIVATION_PILOT
+model=Qwen/Qwen2.5-1.5B-Instruct device=cpu n_layers=28 hidden_dim=1536
+is_fallback=False
+mean_lift_d_eff=0.0
+mean_lift_beta_1=0.166666
+mean_lift_d_med=-0.397577
+d_eff_resolved=False
+activation_evidence=False

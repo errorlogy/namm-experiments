@@ -1,0 +1,53 @@
+experiment_id: NAMM-2026-026
+domain: multi_agent_consensus
+hypothesis_id: H-MCG-001
+hypothesis_doc: docs/MYTHOGENESIS_CCT_CNS_GAME_THEORY.md
+branch: hypothesis/political-mythogenesis
+status: run
+seed: 2026026
+research_question: >
+  On class-tagged opinion graphs, does myth-as-consensus produce high mu_cns
+  with mandatory permanent Delta W_myth > 0?
+protocol_version: mcg-myth-consensus-v1
+
+cns_simulation:
+  consensus_operator: defuzzify_mean
+  num_agents: 48
+  opinion_dim: 3
+  max_non_optimality: 0.35
+  kuramoto_K: 2.2
+
+class_compositions:
+  - K1: 0.85
+    K3: 0.10
+    K6: 0.05
+  - K1: 0.60
+    K3: 0.25
+    K6: 0.15
+  - K1: 0.50
+    K5: 0.30
+    K6: 0.20
+
+mythogenesis:
+  signal: [1.0, 0.25, 0.08]
+  channel: myth
+  contour_weighting:
+    k1_saturation_boost: 1.8
+    mixed_dampening: 0.85
+
+num_seeds: 10
+seeds: [42, 99, 202, 314, 512, 777, 888, 999, 1024, 2048]
+
+hypotheses:
+  - H-MCG-001
+  - H-MCG-007
+  - H-MCG-008
+
+sci_modules:
+  - consensus
+  - cognitive_class
+  - fuzzy
+
+falsifiers:
+  - F-MCG-1
+  - F-MCG-8

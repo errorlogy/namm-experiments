@@ -1,0 +1,5 @@
+NAMM-2026-029 run 2026-08-18T20:51:28.785583+00:00
+sweep_size=600
+asymmetry_high_impact=8.175
+asymmetry_noise=9.7477
+hypothesis_support={'H-CCT-016': True, 'H-CCT-017': False, 'H-MCG-014': True}

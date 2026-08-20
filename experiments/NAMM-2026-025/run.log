@@ -1,0 +1,5 @@
+NAMM-2026-025 run 2026-08-18T20:52:02.176282+00:00
+mean_delta_w_k1=0.020139
+mean_delta_w_mixed=0.000407
+dissent_better_frac=0.875
+hypothesis_support={'H-CCT-005': True, 'H-CCT-007': True, 'H-CNS-005': True, 'H-CNS-010': True}

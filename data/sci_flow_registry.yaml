@@ -1,0 +1,249 @@
+# NAMM Sci Flow — declarative routing from hypotheses/experiments to scientific modules.
+# Maintainer: Roman Kuznetsov · NAMM research program
+# Schema version: 1
+
+schema_version: 1
+updated: "2026-08-18"
+
+# Pipeline stages (documentation anchor; enforced by SciFlowRunner)
+stages:
+  - load_config
+  - select_modules
+  - check_dependencies
+  - run_modules
+  - aggregate
+  - certificate_check
+
+modules:
+  entropy:
+    import_path: namm.metrics.entropy
+    namm_extra: null
+    domains: [information_theory, multi_agent_consensus]
+    description: Shannon entropy, mutual information, delta_h_fiber, opinion_entropy
+
+  fuzzy:
+    import_path: namm.metrics.fuzzy
+    namm_extra: null
+    domains: [fuzzy_logic, multi_agent_consensus]
+    description: Membership functions and fuzzy contour primitives
+
+  catastrophe:
+    import_path: namm.metrics.catastrophe
+    namm_extra: null
+    domains: [catastrophe_theory, dynamical_systems]
+    description: Thom fold/cusp/swallowtail potentials, hysteresis, bifurcation detection
+
+  consensus:
+    import_path: namm.metrics.consensus_non_optimality
+    namm_extra: null
+    domains: [multi_agent_consensus, game_theory]
+    description: CNS simulation, welfare gap, fuzzy contours, consensus operators
+
+  kuramoto:
+    import_path: namm.metrics.consensus_non_optimality
+    namm_extra: null
+    domains: [multi_agent_consensus, dynamical_systems]
+    description: Kuramoto–vote coupling sweeps (uses consensus module)
+    requires: [consensus]
+
+  cognitive_class:
+    import_path: namm.metrics.cognitive_class
+    namm_extra: null
+    domains: [cognitive_class_taxonomy]
+    description: Class separation, MAS batches, embedding metrics
+
+  game_theory_2_0:
+    import_path: namm.metrics.cognitive_class
+    namm_extra: null
+    domains: [multi_agent_consensus, game_theory]
+    description: GT 2.0 CNE sweeps, hybrid game classes
+    requires: [consensus, cognitive_class]
+
+  tda:
+    import_path: namm.domains.tda.homology
+    namm_extra: nd
+    domains: [tda_frame, cognitive_class_taxonomy]
+    description: Persistent homology signatures on graph geodesic metric
+
+  antigravity:
+    import_path: namm.metrics.antigravity_embedding
+    namm_extra: null
+    domains: [cognitive_class_taxonomy]
+    description: Antigravity embedding distance and sigma sweeps
+
+  information_geometry:
+    import_path: namm.metrics.information_geometry
+    namm_extra: null
+    domains: [anti_median_ai_topology, information_geometry]
+    description: Fisher-metric geodesic curvature via logit-gradient norm proxy
+
+  fractal_tda:
+    import_path: namm.metrics.fractal_tda
+    namm_extra: null
+    domains: [anti_median_ai_topology, tda_frame]
+    description: Box-counting fractal dimension and layer-wise d_f profiles for H-AMAT-008
+
+branches:
+  CNS:
+    label: Consensus Non-Optimality
+    default_modules: [entropy, fuzzy, consensus]
+    hypothesis_prefix: H-CNS
+  CCT:
+    label: Cognitive Class Taxonomy
+    default_modules: [cognitive_class, entropy]
+    hypothesis_prefix: H-CCT
+  MCG:
+    label: Political Mythogenesis + GT 2.0
+    default_modules: [consensus, cognitive_class, catastrophe, fuzzy]
+    hypothesis_prefix: H-MCG
+  AMAT:
+    label: Anti-Median AI Topology
+    default_modules: [fractal_tda, cognitive_class]
+    hypothesis_prefix: H-AMAT
+
+hypothesis_routes:
+  H-AMAT-008:
+    modules: [fractal_tda, cognitive_class]
+    branch: AMAT
+  H-CNS-001:
+    modules: [entropy, fuzzy, consensus]
+    branch: CNS
+  H-CNS-002:
+    modules: [catastrophe, kuramoto, consensus]
+    branch: CNS
+  H-CNS-011:
+    modules: [entropy, fuzzy, consensus, kuramoto]
+    branch: CNS
+  H-CCT-001:
+    modules: [cognitive_class, entropy, tda]
+    branch: CCT
+  H-CCT-020:
+    modules: [cognitive_class, antigravity]
+    branch: CCT
+  H-CCT-005:
+    modules: [cognitive_class, consensus]
+    branch: CCT
+  H-MCG-001:
+    modules: [consensus, cognitive_class, fuzzy]
+    branch: MCG
+  H-MCG-005:
+    modules: [catastrophe, cognitive_class, consensus]
+    branch: MCG
+  H-MCG-009:
+    modules: [game_theory_2_0, consensus, cognitive_class]
+    branch: MCG
+
+experiment_routes:
+  NAMM-2026-021:
+    modules: [entropy, fuzzy, consensus, kuramoto]
+    branch: CNS
+    handler: run_021
+    hypotheses: [H-CNS-001, H-CNS-004, H-CNS-011]
+  NAMM-2026-022:
+    modules: [catastrophe, kuramoto, consensus, fuzzy]
+    branch: CNS
+    handler: run_022
+    hypotheses: [H-CNS-002]
+  NAMM-2026-023:
+    modules: [cognitive_class, tda, entropy]
+    branch: CCT
+    handler: run_023
+    hypotheses: [H-CCT-001]
+  NAMM-2026-024:
+    modules: [antigravity, cognitive_class, catastrophe]
+    branch: CCT
+    handler: run_024
+    hypotheses: [H-CCT-003]
+  NAMM-2026-025:
+    modules: [cognitive_class, consensus]
+    branch: CCT
+    handler: run_025
+    hypotheses: [H-CCT-005]
+  NAMM-2026-026:
+    modules: [consensus, cognitive_class, fuzzy]
+    branch: MCG
+    handler: run_026
+    hypotheses: [H-MCG-001, H-MCG-008]
+  NAMM-2026-027:
+    modules: [game_theory_2_0, consensus, cognitive_class]
+    branch: MCG
+    handler: run_027
+    hypotheses: [H-MCG-009]
+  NAMM-2026-028:
+    modules: [catastrophe, cognitive_class, consensus]
+    branch: MCG
+    handler: run_028
+    hypotheses: [H-MCG-005, H-CNS-002]
+  NAMM-2026-029:
+    modules: [cognitive_class, entropy]
+    branch: CCT
+    handler: run_029
+    hypotheses: [H-CCT-016, H-CCT-017]
+  NAMM-2026-030:
+    modules: [cognitive_class, antigravity]
+    branch: CCT
+    handler: run_030
+    hypotheses: [H-CCT-001B, H-CCT-013, H-CCT-020, H-CCT-021]
+  NAMM-2026-033:
+    modules: [cognitive_class, antigravity]
+    branch: CCT
+    handler: run_033
+    hypotheses: [H-AMAT-004, H-AMAT-005, H-CCT-020, H-CCT-021]
+  NAMM-2026-034:
+    modules: [cognitive_class, antigravity]
+    branch: CCT
+    handler: run_034
+    hypotheses: [H-AMAT-006, H-AMAT-007, H-AMAT-004, H-CCT-020]
+  NAMM-2026-035:
+    modules: [cognitive_class]
+    branch: CCT
+    handler: run_035
+    hypotheses: [H-AMAT-004, H-CCT-020, H-CCT-021]
+  NAMM-2026-036:
+    modules: [cognitive_class]
+    branch: CCT
+    handler: run_036
+    hypotheses: [H-AMAT-004, H-CCT-020, H-CCT-021]
+    description: PCA-reduced activation TDA v3 — D_eff fix via pca_dims sweep
+  NAMM-2026-039:
+    modules: [fractal_tda, cognitive_class]
+    branch: AMAT
+    handler: run_039
+    hypotheses: [H-AMAT-008]
+    description: Layer-wise box-counting fractal dimension — nd-phase non-integer d_f
+  NAMM-2026-038:
+    modules: [information_geometry]
+    branch: AMAT
+    handler: run_038
+    hypotheses: [H-AMAT-007]
+    description: Fisher-metric geodesic curvature pilot — logit-gradient proxy
+  NAMM-2026-042:
+    modules: [cognitive_class]
+    branch: AMAT
+    handler: run_042
+    hypotheses: [H-AMAT-004, H-CCT-020, H-CCT-021]
+    description: Activation TDA on ≥1.5B model — D_eff separation test (resolves 035/036 isotropic collapse)
+  NAMM-2026-043:
+    modules: [cognitive_class]
+    branch: AMAT
+    handler: run_043
+    hypotheses: [H-AMAT-004, H-CCT-020, H-CCT-021]
+    description: >
+      Hybrid nomic-embed-text TDA — llama3.2 generates, nomic-embed-text (768-d) embeds.
+      Resolves D_eff question after 042 logprob-proxy (20-d) collapsed to zero TDA.
+  NAMM-2026-044:
+    modules: [cognitive_class]
+    branch: AMAT
+    handler: run_044
+    hypotheses: [H-AMAT-004, H-CCT-020, H-CCT-021]
+    description: >
+      D_eff stability sensitivity — larger point clouds (n_turns 6/9/12, 2 completions/turn),
+      safe PCA cap, cosine ripser metric, full diagnostics. Follow-up to 043 NULL result.
+  NAMM-2026-045:
+    modules: [cognitive_class]
+    branch: AMAT
+    handler: run_045
+    hypotheses: [H-AMAT-004, H-CCT-020, H-CCT-021]
+    description: >
+      Real hidden states on Qwen2.5-1.5B — 044 sweet-spot protocol (n_turns=6, pca=8,
+      cosine ripser) to test D_eff separation vs 035 (0.5B HS) and 044 (nomic hybrid).

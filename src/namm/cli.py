@@ -596,6 +596,35 @@ def run_experiment(
     experiment_id: str = typer.Option(..., "--id", help="Experiment ID, e.g. NAMM-2026-001"),
 ) -> None:
     """Run a NAMM experiment and write artifacts."""
+    sci_flow_ids = {
+        f"NAMM-2026-0{i}" for i in range(21, 31)
+    }
+    if experiment_id in sci_flow_ids:
+        from namm.sci_flow import run_sci_flow
+
+        result = run_sci_flow(experiment_id)
+        output_dir = WORKSPACE / "experiments" / experiment_id / "artifacts"
+        typer.echo(f"Experiment {experiment_id} complete (sci-flow).")
+        typer.echo(f"  Modules: {', '.join(result.modules_used)}")
+        typer.echo(f"  Certificate status: {result.certificate.get('status')}")
+        typer.echo(f"  Hypothesis confirmed: {result.experiment_result.get('hypothesis_confirmed')}")
+        typer.echo(f"  Artifacts: {output_dir}")
+        return
+
+    if experiment_id == "NAMM-2026-013":
+        import sys
+        exp_dir = str(WORKSPACE / "experiments" / "NAMM-2026-013")
+        if exp_dir not in sys.path:
+            sys.path.insert(0, exp_dir)
+        from run_experiment import run_namm_2026_013_benchmark
+        res = run_namm_2026_013_benchmark()
+        output_dir = WORKSPACE / "experiments" / experiment_id / "artifacts"
+        typer.echo(f"Experiment {experiment_id} (Cognitive Antigravity) complete.")
+        typer.echo(f"  Hypothesis Confirmed: {res['hypothesis_confirmed']}")
+        typer.echo(f"  D_med Lift: +{res['metrics_summary']['d_med_lift_percent']}%")
+        typer.echo(f"  Artifacts: {output_dir}")
+        return
+
     config = _load_config(experiment_id)
     output_dir = WORKSPACE / "experiments" / experiment_id / "artifacts"
     result = run_experiment_impl(config, output_dir)
@@ -603,6 +632,7 @@ def run_experiment(
     typer.echo(f"  Candidates: {result.candidates_found}")
     typer.echo(f"  Rejections: {result.rejections}")
     typer.echo(f"  Artifacts: {output_dir}")
+
 
 
 @app.command("verify")
@@ -616,6 +646,159 @@ def verify(
     import orjson
 
     typer.echo(orjson.dumps(result, option=orjson.OPT_INDENT_2).decode())
+sci_flow_app = typer.Typer(help="Sci Flow — route experiments to scientific modules")
+app.add_typer(sci_flow_app, name="sci-flow")
+
+llm_app = typer.Typer(help="LLM + embedding providers (API and local)")
+app.add_typer(llm_app, name="llm")
+
+
+@sci_flow_app.command("run")
+def sci_flow_run(
+    experiment_id: str = typer.Option(..., "--experiment", "-e", help="Experiment ID"),
+    variant: Optional[str] = typer.Option(None, "--variant", help="Config variant (e.g. kuramoto)"),
+) -> None:
+    """Run an experiment through the sci-flow pipeline."""
+    from namm.sci_flow import run_sci_flow
+
+    result = run_sci_flow(experiment_id, variant=variant)
+    output_dir = WORKSPACE / "experiments" / experiment_id / "artifacts"
+    typer.echo(f"Sci-flow {experiment_id} complete.")
+    typer.echo(f"  Modules: {', '.join(result.modules_used)}")
+    typer.echo(f"  Branch: {result.branch}")
+    typer.echo(f"  Certificate: {result.certificate.get('status')}")
+    typer.echo(f"  Artifacts: {output_dir}")
+
+
+@sci_flow_app.command("describe")
+def sci_flow_describe(
+    experiment_id: str = typer.Option(..., "--experiment", "-e", help="Experiment ID"),
+) -> None:
+    """Show resolved modules for an experiment without running."""
+    import orjson
+    from namm.sci_flow import SciFlowRunner
+
+    runner = SciFlowRunner()
+    desc = runner.describe_modules(experiment_id)
+    typer.echo(orjson.dumps(desc, option=orjson.OPT_INDENT_2).decode())
+
+
+@sci_flow_app.command("catalog")
+def sci_flow_catalog() -> None:
+    """List all sci-flow registered modules."""
+    import orjson
+    from namm.sci_flow.adapters import module_catalog
+
+    typer.echo(orjson.dumps(module_catalog(), option=orjson.OPT_INDENT_2).decode())
+
+
+@app.command("search-arxiv")
+def search_arxiv_cmd(
+    query: str = typer.Option(..., "--query", "-q", help="Search query string"),
+    max_results: int = typer.Option(5, "--max-results", "-n", help="Max results to fetch"),
+    cat: Optional[str] = typer.Option(None, "--cat", "-c", help="Comma-separated arXiv categories e.g. cs.AI,math.CO"),
+) -> None:
+    """Search arXiv literature for Prior Art and open problem references."""
+    from namm.prior_art.arxiv import search_arxiv
+
+    categories = cat.split(",") if cat else ["cs.AI", "cs.LO", "math.CO", "stat.ML"]
+    papers = search_arxiv(query=query, max_results=max_results, categories=categories)
+
+    typer.echo(f"Found {len(papers)} papers on arXiv for query: '{query}'")
+    for idx, paper in enumerate(papers, 1):
+        typer.echo(f"\n[{idx}] {paper.title}")
+        typer.echo(f"    Authors: {', '.join(paper.authors[:3])}")
+        typer.echo(f"    arXiv ID: {paper.arxiv_id} | Published: {paper.published[:10]}")
+        typer.echo(f"    Categories: {', '.join(paper.categories)}")
+        typer.echo(f"    URL: {paper.abs_url}")
+        typer.echo(f"    Summary: {paper.summary[:200]}...")
+
+
+@llm_app.command("status")
+def llm_status_cmd() -> None:
+    """Show configured LLM/embedding providers and auto-selection."""
+    import orjson
+    from namm.llm.client import provider_status
+
+    typer.echo(orjson.dumps(provider_status(), option=orjson.OPT_INDENT_2).decode())
+
+
+@llm_app.command("embed")
+def llm_embed_cmd(
+    text: str = typer.Argument(..., help="Text to embed"),
+    provider: Optional[str] = typer.Option(None, "--provider", "-p"),
+    model: Optional[str] = typer.Option(None, "--model", "-m"),
+) -> None:
+    """Embed text and print vector shape + first values."""
+    import orjson
+    from namm.llm.client import embed
+
+    vec = embed(text, provider=provider, model=model)
+    typer.echo(
+        orjson.dumps(
+            {"shape": list(vec.shape), "head": vec[:8].tolist(), "provider": provider or "auto"},
+            option=orjson.OPT_INDENT_2,
+        ).decode()
+    )
+
+
+@llm_app.command("chat")
+def llm_chat_cmd(
+    prompt: str = typer.Argument(..., help="User prompt"),
+    system: Optional[str] = typer.Option(None, "--system", "-s"),
+    provider: Optional[str] = typer.Option(None, "--provider", "-p"),
+    model: Optional[str] = typer.Option(None, "--model", "-m"),
+) -> None:
+    """Send a chat completion via configured provider."""
+    from namm.llm.client import chat
+
+    typer.echo(chat(prompt, system=system, provider=provider, model=model))
+
+
+@llm_app.command("loop")
+def llm_loop_cmd(
+    chat_provider: Optional[str] = typer.Option(None, "--chat-provider"),
+    embed_provider: Optional[str] = typer.Option(None, "--embed-provider"),
+    skip_chat: bool = typer.Option(False, "--skip-chat"),
+    pause_s: float = typer.Option(2.0, "--pause-s"),
+) -> None:
+    """Run NAMM-2026-031 live AMAT loop (prompts × turns × policies)."""
+    import orjson
+    from namm.metrics.live_embeddings import run_phase_lock_live_loop
+
+    result = run_phase_lock_live_loop(
+        chat_provider=chat_provider,
+        embed_provider=embed_provider,
+        skip_chat=skip_chat,
+        pause_s=pause_s,
+    )
+    typer.echo(orjson.dumps(result, option=orjson.OPT_INDENT_2).decode())
+
+
+@llm_app.command("probe")
+def llm_probe_cmd(
+    prompt: Optional[str] = typer.Option(
+        None,
+        "--prompt",
+        help="User turn for AMAT live probe (default: CNS question)",
+    ),
+    embed_provider: Optional[str] = typer.Option(None, "--embed-provider"),
+    chat_provider: Optional[str] = typer.Option(None, "--chat-provider"),
+    skip_chat: bool = typer.Option(False, "--skip-chat", help="Embed prompts only, no LLM completion"),
+) -> None:
+    """Run AMAT phase-lock live embedding probe (030 pilot)."""
+    import orjson
+    from namm.metrics.live_embeddings import run_phase_lock_live_probe
+
+    kwargs: dict = {
+        "chat_provider": chat_provider,
+        "embed_provider": embed_provider,
+        "skip_chat": skip_chat,
+    }
+    if prompt:
+        kwargs["user_prompt"] = prompt
+    result = run_phase_lock_live_probe(**kwargs)
+    typer.echo(orjson.dumps(result, option=orjson.OPT_INDENT_2).decode())
 
 
 def main() -> None:
@@ -624,3 +807,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

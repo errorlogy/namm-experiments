@@ -1,0 +1,7 @@
+NAMM-2026-022 run 2026-08-18T20:46:32.800931+00:00
+sweep_size=300
+mean_delta_w=0.289914
+mean_regret_spike=0.200237
+mean_gap_at_high_mu_cns=0.357967
+max_hysteresis=0.666667
+hypothesis_support={'H-CNS-002': True, 'H-CNS-005': True, 'H-CNS-011': True, 'H-CNS-013': True}

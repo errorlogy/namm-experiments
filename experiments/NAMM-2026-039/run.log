@@ -1,0 +1,11 @@
+2026-08-19T11:42:55.948414+00:00 NAMM-2026-039 complete
+certificate=FRACTAL_EVIDENCE
+hypothesis_confirmed=False
+model=Qwen/Qwen2.5-0.5B-Instruct device=cpu
+n_turns=3 pca_dim=3
+mean_lift_df=-0.02569
+mean_lift_non_int_gap=0.019629
+H-AMAT-008a=False
+H-AMAT-008b=True
+H-AMAT-008c=True
+most_informative_layers=[{'layer': 19, 'count': 2}, {'layer': 17, 'count': 2}, {'layer': 4, 'count': 1}, {'layer': 20, 'count': 1}, {'layer': 3, 'count': 1}]
