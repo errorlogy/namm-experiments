@@ -74,6 +74,33 @@ from namm.metrics.fuzzy import (
 )
 from namm.metrics.representation import compute_representation_metrics
 
+from namm.metrics.activation_tda import (
+    LocalLM,
+    activation_barycenter,
+    build_point_cloud,
+    evaluate_activation_trajectory,
+    load_local_lm,
+)
+from namm.metrics.attention_h1 import (
+    assign_h1_certificate,
+    compare_policies_h1,
+    h1_proxy_from_attentions,
+    run_attention_h1_session,
+)
+from namm.metrics.cusp_boundary import (
+    apply_relative_onset,
+    assign_cusp_certificate,
+    blend_system,
+    recompute_cusp_from_cells,
+    run_cusp_boundary_sweep,
+)
+from namm.metrics.lyapunov_tda import (
+    assign_lyapunov_certificate,
+    compare_lyapunov_policies,
+    lyapunov_from_pair,
+    rosenstein_lambda1,
+)
+
 __all__ = [
     "KNOWN_BASELINE_EXPRESSIONS",
     "assess_novelty_level",
@@ -132,5 +159,23 @@ __all__ = [
     "spatial_soft",
     "trapezoidal",
     "triangular",
+    "LocalLM",
+    "activation_barycenter",
+    "build_point_cloud",
+    "evaluate_activation_trajectory",
+    "load_local_lm",
+    "assign_h1_certificate",
+    "compare_policies_h1",
+    "h1_proxy_from_attentions",
+    "run_attention_h1_session",
+    "apply_relative_onset",
+    "assign_cusp_certificate",
+    "blend_system",
+    "recompute_cusp_from_cells",
+    "run_cusp_boundary_sweep",
+    "assign_lyapunov_certificate",
+    "compare_lyapunov_policies",
+    "lyapunov_from_pair",
+    "rosenstein_lambda1",
 ]
 

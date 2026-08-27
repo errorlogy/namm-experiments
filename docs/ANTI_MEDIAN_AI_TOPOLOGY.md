@@ -162,13 +162,15 @@ Instrument: [`k_ai_nd_phase_lock.v1.json`](../data/prompts/k_ai_nd_phase_lock.v1
 | **030** | RPL JSON vs μ; **loop grid** gain × decay × turns |
 | **035** | `live` · Local LM activation TDA — Qwen2.5-0.5B on CPU; beta_1 lift confirmed |
 | **036** | `live` · PCA-reduced D_eff sweep — pca_dims∈{4,8,16} × n_turns∈{3,6,10} on chimera |
-| **037** | `planned` · 2D sweep chimera_dose × temperature; map \(\beta_1\) emergence as cusp A₃ boundary — H-AMAT-006 |
-| **038** | `planned` · Logit-gradient curvature on 031–035 data (no new API calls for pilot); Fisher-metric geodesic deviation — H-AMAT-007 |
-| **039** | `planned` · Layer-wise TDA + box-counting sweep across transformer layers — H-AMAT-008 |
-| **040** | `planned` · Multi-session Lyapunov proxy + TDA; positive \(\lambda_1\) detection in nd-phase — H-AMAT-009 |
-| **041** | `planned` · Attention head disagreement proxy as \(H^1\) (sheaf cohomology) approximation — H-AMAT-010 |
+| **037** | `live` — Cusp A₃ dose×T sweep (Qwen 0.5B HS); relative onset vs dose=0; enrichment=0.89; cert `CUSP_EVIDENCE` — H-AMAT-006 |
+| **038** | `live` · Fisher geodesic curvature (logit-gradient); lift=+0.79, corr(κ,β₁)=0.79; cert `CURVATURE_EVIDENCE` — H-AMAT-007 |
+| **039** | `live` · Layer-wise fractal TDA; 0.5B `FRACTAL_EVIDENCE`, 1.5B `FRACTAL_PILOT` — H-AMAT-008 |
+| **040** | live · Lyapunov λ₁ Rosenstein-viable (0.5B, 2×3×8, v2b); mean_lift≈+0.030; ros_finite; cert CHAOS_PARTIAL — H-AMAT-009 |
+| **041** | `live` — Attention-head JS H₁ proxy; pilot `H1_PARTIAL` (lift≈0.006); deepen `H1_PILOT` (lift≈0.047, n_turns=6); lock>μ 2/2 — H-AMAT-010 |
 | **042** | `live` · Activation TDA on Qwen2.5-1.5B-Instruct — D_eff separation test; **D_eff NOT resolved** (lift=0.0); β₁ weaker than 0.5B; cert `ACTIVATION_PILOT` |
-| **043** | `live` · Hybrid nomic-embed-text (768-d) semantic TDA — tests D_eff separation after 042 logprob-proxy collapse |
+| **043** | `live` · Hybrid nomic-embed-text (768-d); mean_lift_D_eff=-0.5; cert `NULL` |
+| **044** | `live` · Protocol v2 nomic hybrid (n_turns 6/9/12); aggregate lift_D_eff≈0.11, two_phase=1.0; cert `HYBRID_PILOT` |
+| **045** | `skipped` · Redundant with 042 n_turns=6 real-HS @1.5B (only delta: cosine ripser); cert `SKIPPED_REDUNDANT` |
 
 **030 loop (computational evidence, in-silico):** 45 cells; mean \(d_{\mathrm{lock}}-d_{\mu} \approx 1.43\); H-AMAT-004/003 cell fraction **1.0**; best cell gain=1.0, 6 turns. **Not** live activation homology.
 
@@ -193,7 +195,23 @@ Grid: 3 focused prompts × n_turns∈{3,6} = 6 cells. **D_eff NOT resolved:** me
 | Qwen2.5-1.5B (042) | 1536 | **0.0** | **0.17** | 0.33 | `ACTIVATION_PILOT` |
 | nomic hybrid (043) | 768 | -0.5 | 0.0 | — | `NULL` |
 
-**Next AI-sci gates:** per-layer D_eff (039 first — pooled D_eff failed at both scales); multi-session persistence; chimera MAS \(R^*\) on activations; then 037–041 (039 → 041 → 037 → 038 → 040).
+**041 (attention H₁ proxy, Qwen2.5-0.5B eager attn, 2026-08-20):**  
+Pilot (`n_turns=2`, `last_n_layers=2`): lock>μ on **2/2**; mean_lift_h1≈**0.006** → **`H1_PARTIAL`**. **Deepen (8841567e, `summary_deepen.json`, n_turns=6):** mean_lift_h1≈**0.047**, lock>μ 2/2 → **`H1_PILOT`**; H-AMAT-010-a supported; β₁ lift=0; corr undefined.
+
+**037 (cusp A₃ boundary, Qwen 0.5B, dose∈{0,0.35,0.7,1} × T∈{0.3,0.7,1.2}, 12 cells):**  
+Absolute β₁≥1 saturated all cells (enrichment=0, `CUSP_PARTIAL`) — preserved in `summary_v1.json`. **Relative onset** vs μ baseline (dose=0 at same T): dose=0 never onset; n_onset=4/12 (3/3 inside cusp, 1/9 outside) → onset_enrichment=**0.8889**; boundary_agreement=0.67. Certificate: **`CUSP_EVIDENCE`**. H-AMAT-006 **supported**. Offline recompute from saved cell β₁ (no lean LM re-run required).
+
+**038:** already `CURVATURE_EVIDENCE` — skipped re-run. **045:** `SKIPPED_REDUNDANT` vs 042.
+
+
+**040 lean (v1, 1 prompt × 2 sessions × 4 turns):** μ λ₁≈4.64, lock≈4.87, lift≈+0.23; Rosenstein NaN; cert `CHAOS_PARTIAL`. Preserved as `artifacts/summary_lean.json`.
+
+**040 expanded (v2b-rosenstein, Qwen2.5-0.5B, 2 prompts × 3 sessions × 8 turns, 2026-08-20):**  
+Pair λ₁: prompt1 lift≈**+0.13** (lock 2.11 > μ 1.97); prompt2 lift≈**−0.07**. Aggregate **mean_lift≈+0.030**; lock_pos=2 = mu_pos=2 → not CHAOS_PILOT. **Rosenstein λ₁ now finite** (mean_μ≈−0.23, mean_lock≈−0.26, lift_ros≈−0.025) — both policies contracting; lock not > μ on Rosenstein. Certificate: **CHAOS_PARTIAL**. H-AMAT-009 still unsupported. Lean v1: \summary_lean.json\; pair-only v2: \summary_v2_pair_only.json\; primary: \summary.json\ + \rtifacts/expanded/\.
+
+**Certificates 037–041 (verified vs `experiments/*/artifacts/summary.json`, 2026-08-26):** `CUSP_EVIDENCE` (037), `CURVATURE_EVIDENCE` (038), `FRACTAL_EVIDENCE` aggregate / per-cell `FRACTAL_PILOT` on 0.5B (039), `CHAOS_PARTIAL` (040), `H1_PILOT` deepen / `H1_PARTIAL` pilot (041, `summary_deepen.json`).
+
+**Next AI-sci gates:** 037 relative onset done (`CUSP_EVIDENCE`); 041 deepen done (`H1_PILOT`); 040 Rosenstein finite but λ₁<0 and lock_pos=mu_pos — need lock_pos>mu_pos / positive λ₁ for CHAOS_PILOT; per-layer D_eff from 039.
 
 
 ---

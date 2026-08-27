@@ -1,0 +1,35 @@
+﻿experiment_id: NAMM-2026-040
+domain: anti_median_ai_topology
+hypothesis_id: H-AMAT-009
+protocol_version: amat-lyapunov-multisession-v2b-rosenstein
+description: >
+  Multi-session Lyapunov lambda1 proxy on last-layer hidden trajectories under mu vs
+  lock_reassert. Expanded grid for finite Rosenstein and CHAOS_PILOT gate vs lean v1.
+
+local_lm:
+  model_id: Qwen/Qwen2.5-0.5B-Instruct
+  model_candidates:
+    - Qwen/Qwen2.5-0.5B-Instruct
+    - Qwen/Qwen2.5-1.5B-Instruct
+  device: null
+  dtype: auto
+  max_new_tokens: 24
+
+lyapunov:
+  n_turns: 8
+  n_sessions: 3
+  temperature: 0.8
+  base_seed: 40
+  prompts:
+    - "Explain why consensus in multi-agent systems can be permanently suboptimal."
+    - "When is partial synchronization (chimera) preferable to full consensus in AI systems?"
+
+certificate_tiers:
+  CHAOS_EVIDENCE:
+    condition: mean_lift_lambda1 > 0.05 AND lock lambda1>0 more often than mu
+  CHAOS_PILOT:
+    condition: mean_lift > 0 AND lock>mu positive count
+  CHAOS_PARTIAL:
+    condition: any lock lambda1>0
+  "NULL":
+    condition: else

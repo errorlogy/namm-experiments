@@ -578,6 +578,21 @@ def run_035(config: dict[str, Any], **_: Any) -> dict[str, Any]:
     return mod.run_namm_2026_035(skip_local=config.get("skip_local", False))
 
 
+def run_037(config: dict[str, Any], **_: Any) -> dict[str, Any]:
+    """NAMM-2026-037: cusp A₃ β₁ emergence boundary (H-AMAT-006)."""
+    import importlib.util
+    import sys
+
+    exp_path = _exp_dir("NAMM-2026-037") / "run_experiment.py"
+    spec = importlib.util.spec_from_file_location("namm_exp_037", exp_path)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Cannot load {exp_path}")
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules["namm_exp_037"] = mod
+    spec.loader.exec_module(mod)
+    return mod.run_namm_2026_037()
+
+
 def run_038(config: dict[str, Any], **_: Any) -> dict[str, Any]:
     """NAMM-2026-038: Fisher-metric geodesic curvature pilot (H-AMAT-007)."""
     import importlib.util
@@ -606,6 +621,36 @@ def run_039(config: dict[str, Any], **_: Any) -> dict[str, Any]:
     sys.modules["namm_exp_039"] = mod
     spec.loader.exec_module(mod)
     return mod.run_namm_2026_039()
+
+
+def run_040(config: dict[str, Any], **_: Any) -> dict[str, Any]:
+    """NAMM-2026-040: multi-session Lyapunov λ₁ proxy (H-AMAT-009)."""
+    import importlib.util
+    import sys
+
+    exp_path = _exp_dir("NAMM-2026-040") / "run_experiment.py"
+    spec = importlib.util.spec_from_file_location("namm_exp_040", exp_path)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Cannot load {exp_path}")
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules["namm_exp_040"] = mod
+    spec.loader.exec_module(mod)
+    return mod.run_namm_2026_040()
+
+
+def run_041(config: dict[str, Any], **_: Any) -> dict[str, Any]:
+    """NAMM-2026-041: attention-head H¹ disagreement proxy (H-AMAT-010)."""
+    import importlib.util
+    import sys
+
+    exp_path = _exp_dir("NAMM-2026-041") / "run_experiment.py"
+    spec = importlib.util.spec_from_file_location("namm_exp_041", exp_path)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Cannot load {exp_path}")
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules["namm_exp_041"] = mod
+    spec.loader.exec_module(mod)
+    return mod.run_namm_2026_041()
 
 
 def run_042(config: dict[str, Any], **_: Any) -> dict[str, Any]:
@@ -683,8 +728,11 @@ HANDLERS: dict[str, Callable[..., dict[str, Any]]] = {
     "run_034": run_034,
     "run_035": run_035,
     "run_036": run_036,
+    "run_037": run_037,
     "run_038": run_038,
     "run_039": run_039,
+    "run_040": run_040,
+    "run_041": run_041,
     "run_042": run_042,
     "run_043": run_043,
     "run_044": run_044,

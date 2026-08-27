@@ -205,18 +205,38 @@ experiment_routes:
     handler: run_036
     hypotheses: [H-AMAT-004, H-CCT-020, H-CCT-021]
     description: PCA-reduced activation TDA v3 — D_eff fix via pca_dims sweep
-  NAMM-2026-039:
-    modules: [fractal_tda, cognitive_class]
+  NAMM-2026-037:
+    modules: [catastrophe, cusp_boundary, cognitive_class]
     branch: AMAT
-    handler: run_039
-    hypotheses: [H-AMAT-008]
-    description: Layer-wise box-counting fractal dimension — nd-phase non-integer d_f
+    handler: run_037
+    hypotheses: [H-AMAT-006]
+    description: >
+      Cusp A₃ β₁ emergence boundary — chimera_dose × temperature sweep vs
+      theoretical bifurcation set Δ=4a³+27b²
   NAMM-2026-038:
     modules: [information_geometry]
     branch: AMAT
     handler: run_038
     hypotheses: [H-AMAT-007]
     description: Fisher-metric geodesic curvature pilot — logit-gradient proxy
+  NAMM-2026-039:
+    modules: [fractal_tda, cognitive_class]
+    branch: AMAT
+    handler: run_039
+    hypotheses: [H-AMAT-008]
+    description: Layer-wise box-counting fractal dimension — nd-phase non-integer d_f
+  NAMM-2026-040:
+    modules: [lyapunov_tda]
+    branch: AMAT
+    handler: run_040
+    hypotheses: [H-AMAT-009]
+    description: Multi-session Lyapunov λ₁ proxy — nd-phase chaos vs μ fixed-point
+  NAMM-2026-041:
+    modules: [attention_h1, cognitive_class]
+    branch: AMAT
+    handler: run_041
+    hypotheses: [H-AMAT-010]
+    description: Attention-head disagreement as H¹ (sheaf cohomology) proxy
   NAMM-2026-042:
     modules: [cognitive_class]
     branch: AMAT

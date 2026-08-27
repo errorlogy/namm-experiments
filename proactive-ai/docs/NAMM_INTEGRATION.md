@@ -121,6 +121,31 @@ Priority experiments (NAMM queue): 003 (P1), 007 (first signal), 002/005/008 (P2
 
 ---
 
+## AMAT loop → EIA governor (interim, 2026-08)
+
+Anti-Median AI Topology (AMAT) tests whether **off-typical phase** ($K_{AI_{nd}}$) is measurable in live LLM geometry when steered by Representation Phase Lock (RPL). Terminology: **typicality / high-density** is primary; geometric median is a named robust proxy only ([`docs/ANTI_MEDIAN_AI_TOPOLOGY.md`](../../docs/ANTI_MEDIAN_AI_TOPOLOGY.md) §0).
+
+| NAMM experiment | Certificate (interim) | EIA mapping |
+|-----------------|----------------------|-------------|
+| **037** cusp / relative β₁ onset | `CUSP_EVIDENCE` | **Initiative dose gate** — onset vs μ-baseline at same $T$, not absolute β₁≥1 (037 blocker lesson) |
+| **038** Fisher geodesic κ | `CURVATURE_EVIDENCE` | **Trajectory monitor** — lock path curvature > μ; good runtime scalar for antigravity restart |
+| **039** layer-wise fractal $d_f$ | `FRACTAL_EVIDENCE` (0.5B agg.) / `FRACTAL_PILOT` (cells) | **Layer profile** — nd-phase non-integer gap; per-layer, not pooled |
+| **040** Lyapunov λ₁ | `CHAOS_PARTIAL` | **Not** primary nd-signature — both policies compressive; do not use λ₁>0 alone for contact trigger |
+| **041** attention H¹ proxy | `H1_PARTIAL` | **Weak** head-disagreement lift; sign ok, below pilot threshold — not sole governor input |
+| **042–045** pooled $D_{eff}$ | collapse / skipped | **Do not use pooled D_eff** as runtime gate for proactive contact |
+
+**EIA recommendations (Ring 2–3):**
+
+1. **Contact Governor** — prefer **relative / calibrated gates** (033-style null + 037-style μ-baseline), not fixed absolute topology thresholds.
+2. **Antigravity restart** — trigger on κ rise + fractal non-integer gap + $d(h(y), B_*)$ lift, not $D_{eff}$ or Rosenstein λ₁ alone.
+3. **Proactive risk** — initiative that stays in $K_{AI_\mu}$ looks safe but epistemically collapsed; initiative in $K_{AI_{nd}}$ needs certificate-backed trace before external contact (spec §13, Contact Governor).
+4. **Runtime stack** — κ + relative cusp onset + typicality distance; **defer D_eff and Rosenstein λ₁** until per-layer protocol matures (039 path).
+
+See also: [`docs/COGNITIVE_ANTIGRAVITY_HYPOTHESIS.md`](../../docs/COGNITIVE_ANTIGRAVITY_HYPOTHESIS.md), RPL [`data/prompts/k_ai_nd_phase_lock.v1.json`](../../data/prompts/k_ai_nd_phase_lock.v1.json).
+
+
+---
+
 ## Links
 
 - NAMM repository: https://github.com/errorlogy/namm-experiments

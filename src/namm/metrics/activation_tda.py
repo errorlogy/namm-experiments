@@ -74,8 +74,13 @@ def load_local_lm(
     device: str | None = None,
     dtype: str = "auto",
     candidates: list[str] | None = None,
+    attn_implementation: str | None = None,
 ) -> LocalLM:
-    """Load smallest working causal LM from candidates (fallback chain)."""
+    """Load smallest working causal LM from candidates (fallback chain).
+
+    Set ``attn_implementation="eager"`` when you need ``output_attentions=True``
+    (SDPA / flash-attn backends omit attention maps).
+    """
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -91,11 +96,13 @@ def load_local_lm(
             tokenizer = AutoTokenizer.from_pretrained(mid, trust_remote_code=True)
             if tokenizer.pad_token is None:
                 tokenizer.pad_token = tokenizer.eos_token
-            model = AutoModelForCausalLM.from_pretrained(
-                mid,
-                torch_dtype=torch_dtype,
-                trust_remote_code=True,
-            )
+            load_kwargs: dict[str, Any] = {
+                "torch_dtype": torch_dtype,
+                "trust_remote_code": True,
+            }
+            if attn_implementation:
+                load_kwargs["attn_implementation"] = attn_implementation
+            model = AutoModelForCausalLM.from_pretrained(mid, **load_kwargs)
             model.to(device)
             model.eval()
             n_layers = getattr(model.config, "num_hidden_layers", None) or getattr(

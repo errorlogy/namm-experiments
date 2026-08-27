@@ -1,0 +1,36 @@
+experiment_id: NAMM-2026-037
+domain: anti_median_ai_topology
+hypothesis_id: H-AMAT-006
+protocol_version: amat-cusp-a3-boundary-v1
+description: >
+  2D sweep chimera_dose × temperature on local Qwen activations; map β₁ onset
+  contour against theoretical cusp A₃ bifurcation set (Δ=4a³+27b²).
+
+local_lm:
+  model_id: Qwen/Qwen2.5-0.5B-Instruct
+  model_candidates:
+    - Qwen/Qwen2.5-0.5B-Instruct
+    - Qwen/Qwen2.5-1.5B-Instruct
+  device: null
+  dtype: auto
+  max_new_tokens: 48
+
+sweep:
+  doses: [0.0, 0.35, 0.70, 1.0]
+  temperatures: [0.3, 0.7, 1.2]
+  n_turns: 3
+  last_n_layers: 4
+  pca_dims: 8
+  beta1_onset: 1.0
+  relative_margin: 0.0  # onset iff beta1 > beta1(dose=0 at same T) + margin
+  prompt: "What is chimera synchronization and when is partial sync preferable to full consensus?"
+
+certificate_tiers:
+  CUSP_EVIDENCE:
+    condition: onset_enrichment > 0.2 AND boundary_agreement >= 0.5
+  CUSP_PILOT:
+    condition: onset_enrichment > 0.05
+  CUSP_PARTIAL:
+    condition: any beta1 onset cells
+  "NULL":
+    condition: else
