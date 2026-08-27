@@ -67,6 +67,8 @@ Mathematical structures may exist that are natural for **machine cognition befor
 
 Domain libraries (optional `[nd]` extra): **gudhi** (TDA), **qutip** (quantum frame stubs), pure-Python category hom-set counts. Install: `pip install -e ".[dev,nd]"`.
 
+**AMAT topology pilots (037–041):** Activation-manifold and catastrophe-theory checks on local LLM hidden states — cusp dose boundary ([NAMM-2026-037](experiments/NAMM-2026-037/)), curvature ([038](experiments/NAMM-2026-038/)), layer-wise fractal TDA ([039](experiments/NAMM-2026-039/)), Lyapunov proxy ([040](experiments/NAMM-2026-040/)), and attention-head H₁ disagreement ([041](experiments/NAMM-2026-041/)). Methodology and certificate semantics: [docs/ANTI_MEDIAN_AI_TOPOLOGY.md](docs/ANTI_MEDIAN_AI_TOPOLOGY.md). Requires optional `pip install -e ".[science,llm-local]"` for full local-model runs; unit tests cover metric helpers without GPU.
+
 ---
 
 ## Documentation

@@ -4,6 +4,17 @@
 **Protocol:** `amat-activation-tda-v2`  
 **Question:** Does D_eff finally resolve on real activations at Qwen2.5-1.5B after 035 (0.5B, β₁↑ D_eff=0) and 043/044 (nomic hybrid NULL)?
 
+
+## Skip decision (2026-08-20)
+
+**Status:** `SKIPPED_REDUNDANT` — heavy 1.5B reload not executed.
+
+Protocol is largely redundant with **NAMM-2026-042** `n_turns=6` cells on the same model/space (`Qwen2.5-1.5B`, real hidden states, last_n_layers=4, pca_dims=8). Only material delta would be ripser metric **cosine vs euclidean**; unlikely to resolve the D_eff=0 rank collapse seen in 042.
+
+Adopted from 042 n6: mean_lift_d_eff=0.0, mean_lift_beta_1≈-0.67, cert `ACTIVATION_PILOT`. Prefer deepen **041** (H1) / per-layer **039** next.
+
+Artifacts: `artifacts/summary.json` records the skip certificate.
+
 ## Protocol (044 sweet spot on real HS)
 
 | Parameter | Value |

@@ -64,10 +64,26 @@ def test_provider_status_structure(monkeypatch):
     assert any(p["id"] == "gemini" for p in status["providers"])
 
 
+_CHAT_PROVIDER_ENV_KEYS = (
+    "OPENAI_API_KEY",
+    "OPENROUTER_API_KEY",
+    "GEMINI_API_KEY",
+    "GOOGLE_API_KEY",
+    "DEEPSEEK_API_KEY",
+    "CEREBRAS_API_KEY",
+    "JINA_API_KEY",
+    "OLLAMA_API_KEY",
+    "LMSTUDIO_API_KEY",
+)
+
+
 def test_resolve_provider_with_key(monkeypatch):
     monkeypatch.setenv("GROQ_API_KEY", "gsk-test")
     monkeypatch.delenv("NAMM_CHAT_PROVIDER", raising=False)
-    name = resolve_provider("chat", "auto")
+    for key in _CHAT_PROVIDER_ENV_KEYS:
+        monkeypatch.delenv(key, raising=False)
+    with patch("namm.llm.registry._health_ok", return_value=False):
+        name = resolve_provider("chat", "auto")
     assert name == "groq"
 
 
