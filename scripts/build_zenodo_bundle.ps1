@@ -81,7 +81,8 @@ $excludePatterns = @(
     "*.zip",
     ".env",
     ".env.*",
-    "2310.20360v3.pdf"
+    "2310.20360v3.pdf",
+    "README(4).md"
 )
 
 $excludeArgs = foreach ($pattern in $excludePatterns) {

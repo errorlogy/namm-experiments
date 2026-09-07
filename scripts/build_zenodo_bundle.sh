@@ -40,6 +40,7 @@ tar \
   --exclude='2310.20360v3.pdf' \
   --exclude='pytest_followup.txt' \
   --exclude='experiments/REPO_AUDIT_DRAFT.md' \
+  --exclude='README(4).md' \
   -cf - . | tar -xf - -C "$STAGING"
 
 rm -f "$BUNDLE"
