@@ -1,8 +1,5 @@
-# Release pipeline for NAMM — quality gate + Zenodo source bundle.
-#
-# Trigger: annotated version tag (v*). Runs pytest, builds a tarball via
-# scripts/build_zenodo_bundle.ps1, uploads a CI artifact, and attaches the
-# bundle to a GitHub Release.
+# Build sdist/wheel on version tags and upload as GitHub release artifacts.
+# Zenodo upload is manual — see docs/ZENODO_RELEASE.md.
 
 name: Release
 
@@ -14,13 +11,9 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: release-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
-  release:
-    name: Test and publish release bundle
+  build:
+    name: Build package (Python 3.12)
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -35,25 +28,23 @@ jobs:
           cache: pip
           cache-dependency-path: pyproject.toml
 
-      - name: Install project with dev dependencies
-        run: pip install -e ".[dev]"
+      - name: Install build tools
+        run: pip install build twine
 
-      - name: Run pytest suite
-        run: pytest tests/ -v
+      - name: Build sdist and wheel
+        run: python -m build
 
-      - name: Build Zenodo source bundle
-        shell: pwsh
-        run: ./scripts/build_zenodo_bundle.ps1 -Version "${{ github.ref_name }}"
-
-      - name: Upload release artifact
+      - name: Upload dist artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: zenodo-bundle-${{ github.ref_name }}
-          path: dist/*.tar.gz
+          name: python-dist
+          path: dist/*
           retention-days: 90
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/*.tar.gz
+          files: dist/*
           generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

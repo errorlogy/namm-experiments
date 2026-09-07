@@ -2,6 +2,7 @@
 
 import pytest
 
+pytestmark = pytest.mark.nd
 pytest.importorskip("gudhi")
 
 import networkx as nx

@@ -195,6 +195,7 @@ class _MockModel:
         return torch.zeros((1, 6), dtype=torch.long)
 
 
+@pytest.mark.llm
 def test_compare_curvature_mock():
     model = _MockModel()
     tokenizer = _MockTokenizer()

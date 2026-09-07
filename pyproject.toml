@@ -61,6 +61,9 @@ where = ["src"]
 testpaths = ["tests"]
 pythonpath = ["src"]
 markers = [
-    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
-    "llm: marks tests that require live LLM API keys or local GPU models",
+    "amat: AMAT topology pilot unit tests (NAMM-2026-037/040/041 helpers)",
+    "slow: tests that exceed ~30s or heavy search loops (skipped in default CI)",
+    "nd: requires optional [nd] extras (gudhi, qutip)",
+    "llm: requires torch/transformers or live LLM keys ([llm-local] extra); skipped in default CI",
 ]
+addopts = "-ra"

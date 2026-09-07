@@ -2,8 +2,8 @@
 
 This repository publishes software snapshots to [Zenodo](https://zenodo.org). GitHub Actions validates code and builds Python packages; **you upload the Zenodo bundle manually**.
 
-**Concept record (NAMM):** [https://zenodo.org/records/22646895](https://zenodo.org/records/22646895)  
-**Sibling program (EIA, separate deposit):** [Endogenous Initiative Architecture](https://github.com/errorlogy/eia)
+**Sibling deposit (EIA, already published):** [https://zenodo.org/records/22646895](https://zenodo.org/records/22646895) — Endogenous Initiative Architecture  
+**NAMM deposit:** create a **new upload** (separate concept DOI); link to EIA via *related identifier* (`is related to`)
 
 ---
 
@@ -99,28 +99,25 @@ Re-run the script after changing the version string in `pyproject.toml`.
 
 ---
 
-## Upload to Zenodo (new version of existing concept)
+## Upload to Zenodo (recommended: new NAMM deposit)
 
-Use this flow to publish **v0.2.0** as a new version linked to concept DOI `10.5281/zenodo.22646895`.
+**Do not** use *New version* on [22646895](https://zenodo.org/records/22646895) unless that record is explicitly the NAMM concept deposit. If 22646895 is the **EIA** release (as published today), NAMM needs its **own** upload.
 
-1. Sign in at [zenodo.org](https://zenodo.org).
-2. Open the existing deposit: [record 22646895](https://zenodo.org/records/22646895).
-3. Click **New version** (keeps the same concept DOI; Zenodo assigns a new version DOI).
-4. **Upload** `dist/namm-experiments-0.2.0.tar.gz` (drag-and-drop or **Files** → upload).
-5. Confirm or update metadata (or sync from `.zenodo.json` if using GitHub–Zenodo integration):
-   - **Title:** Non-Anthropic Mathematics Mode (NAMM)
+1. Sign in at [zenodo.org](https://zenodo.org) → **Upload** → **New upload**.
+2. **Upload** `dist/namm-experiments-0.2.0.tar.gz`.
+3. Metadata (or sync from `.zenodo.json`):
+   - **Title:** Non-Anthropic Mathematics Mode (NAMM) — verification-first machine-native math discovery
    - **Version:** 0.2.0
    - **Authors:** Roman Kuznetsov (Anthemium)
-   - **Description:** Verification-first machine-native math discovery — certificates, frame escalation, AMAT topology pilots (037–041).
+   - **Description:** Protocol v2 tooling, Sci Flow, experiment scaffolds, AMAT pilots 037–041 with tiered certificates and documented falsifications (incl. D_eff null). See `ZENODO_README.txt` inside the archive.
    - **License:** CC-BY-4.0
-   - **Related identifier:** `https://github.com/errorlogy/namm-experiments` (relation: *is supplement to* or *is derived from*)
-   - **Related identifier (optional):** `https://github.com/errorlogy/eia` — sibling EIA program (relation: *is related to*)
-6. **Publish** the new version.
-7. Copy the **version-specific** DOI into `CITATION.cff` (`preferred-citation.doi` and `identifiers`) and commit on `main`.
+   - **Related identifier:** `10.5281/zenodo.22646895` (EIA sibling program; relation: *is related to*)
+   - **Related identifier:** `https://github.com/errorlogy/namm-experiments` (relation: *is supplement to*)
+4. **Publish** → copy the new **concept DOI** and **version DOI** into `CITATION.cff` and `README.md`.
 
-### Fresh deposit (alternative)
+### New version (only if NAMM already has its own concept DOI)
 
-If you prefer a separate concept DOI instead of versioning 22646895: **Upload** → **New upload**, upload the same file, fill metadata as above, publish, then update `CITATION.cff` with the new concept DOI.
+If you already created a separate NAMM concept record: open that deposit → **New version** → upload the same tarball → publish → update version-specific DOI in `CITATION.cff`.
 
 ---
 

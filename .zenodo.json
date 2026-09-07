@@ -1,0 +1,29 @@
+{
+  "title": "Non-Anthropic Mathematics Mode (NAMM)",
+  "description": "Verification-first research program testing whether machine-native artifacts can certify mathematical structure before compact human projection exists. Includes finite graph invariant search, certificate-first protocol v2, ND frame pilots, and AMAT topology experiments (NAMM-2026-037–041).",
+  "creators": [
+    {
+      "name": "Kuznetsov, Roman",
+      "affiliation": "Anthemium",
+      "orcid": ""
+    }
+  ],
+  "keywords": [
+    "non-anthropic mathematics",
+    "machine-native discovery",
+    "verification-first",
+    "mathematical certificates",
+    "Anthemium"
+  ],
+  "license": "cc-by-4.0",
+  "upload_type": "software",
+  "access_right": "open",
+  "communities": [],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/errorlogy/namm-experiments",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}

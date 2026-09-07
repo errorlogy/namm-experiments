@@ -1,5 +1,8 @@
 # unit smoke for attention H1 / lyapunov / cusp helpers
 import numpy as np
+import pytest
+
+pytestmark = pytest.mark.amat
 
 from namm.metrics.attention_h1 import assign_h1_certificate, h1_proxy_from_attentions, pairwise_js
 from namm.metrics.cusp_boundary import (

@@ -2,6 +2,7 @@
 
 import pytest
 
+pytestmark = pytest.mark.nd
 pytest.importorskip("qutip")
 
 from namm.domains.quantum.state import bell_state_witness, three_qubit_ghz_fidelity

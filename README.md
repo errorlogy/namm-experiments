@@ -64,7 +64,7 @@ Mathematical structures may exist that are natural for **machine cognition befor
 | **009+** | 11D shadows, M-theory moduli, trans-level Θ | Planned | Anthemium-led queue — see [`docs/ANTHEMIUM_NAMM_SYNERGY.md`](docs/ANTHEMIUM_NAMM_SYNERGY.md) |
 | **Protocol v2** | Hard acceptance gates, rejection logging, attack checklist | — | [`docs/PROTOCOL_V2.md`](docs/PROTOCOL_V2.md) |
 | **CI** | pytest + AMAT unit tests + smoke search on every push to `main` | — | [`.github/workflows/ci.yml`](.github/workflows/ci.yml) |
-| **Release** | Tag `v*` → pytest + Zenodo tarball artifact | — | [`.github/workflows/release.yml`](.github/workflows/release.yml) · [`docs/ZENODO_RELEASE.md`](docs/ZENODO_RELEASE.md) |
+| **Release** | Tag `v*` → sdist/wheel GitHub Release | — | [`.github/workflows/release.yml`](.github/workflows/release.yml) · [`docs/ZENODO_RELEASE.md`](docs/ZENODO_RELEASE.md) |
 
 Domain libraries (optional `[nd]` extra): **gudhi** (TDA), **qutip** (quantum frame stubs), pure-Python category hom-set counts. Install: `pip install -e ".[dev,nd]"`.
 
@@ -235,21 +235,23 @@ See `NAMM_PROTOCOL.md`, [`docs/PROTOCOL_V2.md`](docs/PROTOCOL_V2.md), and `promp
 Every push and pull request to `main` runs CI:
 
 - `pip install -e ".[dev]"`
-- `pytest tests/ -v` (full suite)
-- Explicit AMAT unit tests (`test_amat_041_037_040.py`, catastrophe, fractal TDA, information geometry)
+- AMAT unit tests: `pytest tests/test_amat_041_037_040.py -m amat`
+- Fast suite: `pytest tests/ -m "not llm and not slow"`
 - Lightweight smoke search (10 candidates)
+- Optional (non-blocking): ND-frame tests with `[dev,nd]`
 
-A weekly scheduled workflow re-runs pytest on `main`. There is no production deployment — CI is the quality gate before merge.
+A weekly scheduled workflow re-runs the same fast pytest checks on `main`. There is no production deployment — CI is the quality gate before merge.
 
-**Tag releases (`v*`):** pushes a [release workflow](.github/workflows/release.yml) that re-runs pytest, builds a [Zenodo-ready tarball](docs/ZENODO_RELEASE.md) (excludes `.git`, logs, `artifacts/`), and attaches it to a GitHub Release. Zenodo upload is manual — see [`docs/ZENODO_RELEASE.md`](docs/ZENODO_RELEASE.md). Deposit: [Zenodo 22646895](https://zenodo.org/records/22646895).
+**Tag releases (`v*`):** [release workflow](.github/workflows/release.yml) builds sdist/wheel and attaches them to a GitHub Release. Zenodo source bundle is built locally — see [`docs/ZENODO_RELEASE.md`](docs/ZENODO_RELEASE.md). Sibling EIA deposit: [Zenodo 22646895](https://zenodo.org/records/22646895).
 
 **Run the same checks locally:**
 
 ```bash
 python -m pip install -e ".[dev]"
-python -m pytest tests/ -v
+python -m pytest tests/test_amat_041_037_040.py -v -m amat
+python -m pytest tests/ -v -m "not llm and not slow"
 powershell -ExecutionPolicy Bypass -File scripts/build_zenodo_bundle.ps1   # Windows
-bash scripts/build_zenodo_bundle.sh 0.2.0                                 # Linux/macOS
+bash scripts/build_zenodo_bundle.sh                                       # Linux/macOS
 ```
 
 Details: [`.github/workflows/README.md`](.github/workflows/README.md)
@@ -265,6 +267,6 @@ This research program is licensed under the [Creative Commons Attribution 4.0 In
 - **Non-Anthropic Mathematics Mode (NAMM)** — Roman Kuznetsov  
   [https://github.com/errorlogy/namm-experiments](https://github.com/errorlogy/namm-experiments) · [https://anthemium.tech](https://anthemium.tech) · [https://x.com/AGIminister](https://x.com/AGIminister)
 
-Machine-readable metadata: [`CITATION.cff`](CITATION.cff).
+Machine-readable metadata: [`CITATION.cff`](CITATION.cff). Sibling EIA Zenodo deposit: [22646895](https://zenodo.org/records/22646895) (`10.5281/zenodo.22646895`); NAMM upload checklist: [`docs/ZENODO_RELEASE.md`](docs/ZENODO_RELEASE.md).
 
 **Sibling research program:** [Endogenous Initiative Architecture (EIA)](https://github.com/errorlogy/eia) — proactive AI with endogenous initiative; integrated in this repository via [`proactive-ai/`](proactive-ai/README.md). When you use that integration, cite both NAMM and EIA as described in `LICENSE`.
