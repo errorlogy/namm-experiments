@@ -1,0 +1,291 @@
+{
+  "generated_at": "2026-08-18T22:08:56.759204+00:00",
+  "protocol": "cns-cct-mcg-loop-v4",
+  "round": 4,
+  "sci_flow": true,
+  "series": [
+    "NAMM-2026-021",
+    "NAMM-2026-022",
+    "NAMM-2026-023",
+    "NAMM-2026-024",
+    "NAMM-2026-025",
+    "NAMM-2026-026",
+    "NAMM-2026-027",
+    "NAMM-2026-028",
+    "NAMM-2026-029",
+    "NAMM-2026-030"
+  ],
+  "experiments": {
+    "NAMM-2026-021": {
+      "status": "Run",
+      "sci_modules": [
+        "entropy",
+        "fuzzy",
+        "consensus",
+        "kuramoto"
+      ],
+      "certificate": "PARTIAL_EVIDENCE",
+      "hypothesis_confirmed": true,
+      "key_metrics": {
+        "mean_delta_w_global": 0.002307,
+        "positive_gap_fraction": 1.0,
+        "mean_gap_at_high_mu_cns": 0.002527
+      },
+      "hypothesis_support": {
+        "H-CNS-001": true,
+        "H-CNS-004": true,
+        "H-CNS-011": true,
+        "H-CNS-012": true,
+        "H-CNS-013": true
+      }
+    },
+    "NAMM-2026-022": {
+      "status": "Run",
+      "sci_modules": [
+        "catastrophe",
+        "kuramoto",
+        "consensus",
+        "fuzzy"
+      ],
+      "certificate": "PARTIAL_EVIDENCE",
+      "hypothesis_confirmed": true,
+      "key_metrics": {
+        "mean_regret_spike_forced_vs_delayed": 0.200237,
+        "mean_gap_at_high_mu_cns": 0.357967,
+        "max_hysteresis_width": 0.666667
+      },
+      "hypothesis_support": {
+        "H-CNS-002": true,
+        "H-CNS-005": true,
+        "H-CNS-011": true,
+        "H-CNS-013": true
+      }
+    },
+    "NAMM-2026-023": {
+      "status": "Run",
+      "sci_modules": [
+        "cognitive_class",
+        "tda",
+        "entropy"
+      ],
+      "certificate": "PARTIAL_EVIDENCE",
+      "hypothesis_confirmed": true,
+      "key_metrics": {
+        "non_1d_score": 107.7551
+      },
+      "hypothesis_support": {
+        "H-CCT-001": true,
+        "H-CCT-004": true,
+        "H-CCT-012": true
+      }
+    },
+    "NAMM-2026-024": {
+      "status": "Run",
+      "sci_modules": [
+        "antigravity",
+        "cognitive_class",
+        "catastrophe"
+      ],
+      "certificate": "PARTIAL_EVIDENCE",
+      "hypothesis_confirmed": true,
+      "key_metrics": {
+        "jump_at_3sigma": 0.63821,
+        "mean_beta1_at_3sigma": 79.2
+      },
+      "hypothesis_support": {
+        "H-CCT-004": true,
+        "H-CA-001": true
+      }
+    },
+    "NAMM-2026-025": {
+      "status": "Run",
+      "sci_modules": [
+        "cognitive_class",
+        "consensus"
+      ],
+      "certificate": "PARTIAL_EVIDENCE",
+      "hypothesis_confirmed": true,
+      "key_metrics": {
+        "mean_order_R_mixed": 0.857851,
+        "dissent_preserving_better_fraction": 0.9
+      },
+      "hypothesis_support": {
+        "H-CCT-005": true,
+        "H-CCT-007": true,
+        "H-CNS-005": true,
+        "H-CNS-010": true
+      }
+    },
+    "NAMM-2026-026": {
+      "status": "Run",
+      "sci_modules": [
+        "consensus",
+        "cognitive_class",
+        "fuzzy"
+      ],
+      "certificate": "PARTIAL_EVIDENCE",
+      "hypothesis_confirmed": true,
+      "key_metrics": {
+        "mean_delta_w_myth": 0.282158,
+        "mean_gap_high_k1": 0.464392,
+        "mean_gap_mixed": 0.191041
+      },
+      "hypothesis_support": {
+        "H-MCG-001": true,
+        "H-MCG-007": true,
+        "H-MCG-008": true
+      }
+    },
+    "NAMM-2026-027": {
+      "status": "Run",
+      "sci_modules": [
+        "game_theory_2_0",
+        "consensus",
+        "cognitive_class"
+      ],
+      "certificate": "PARTIAL_EVIDENCE",
+      "hypothesis_confirmed": true,
+      "key_metrics": {},
+      "hypothesis_support": {
+        "H-MCG-009": true,
+        "H-MCG-010": true,
+        "H-MCG-013": true,
+        "H-MCG-014": true
+      }
+    },
+    "NAMM-2026-028": {
+      "status": "Run",
+      "sci_modules": [
+        "catastrophe",
+        "cognitive_class",
+        "consensus"
+      ],
+      "certificate": "PARTIAL_EVIDENCE",
+      "hypothesis_confirmed": true,
+      "key_metrics": {
+        "max_hysteresis_width": 0.852408,
+        "mean_class_transition_rate": 0.8111
+      },
+      "hypothesis_support": {
+        "H-MCG-005": true,
+        "H-MCG-006": true,
+        "H-CNS-002": true
+      }
+    },
+    "NAMM-2026-029": {
+      "status": "Run",
+      "sci_modules": [
+        "cognitive_class",
+        "entropy"
+      ],
+      "certificate": "PARTIAL_EVIDENCE",
+      "hypothesis_confirmed": true,
+      "key_metrics": {
+        "asymmetry_high_impact_ratio": 8.175
+      },
+      "hypothesis_support": {
+        "H-CCT-016": true,
+        "H-CCT-017": true,
+        "H-MCG-014": true
+      }
+    },
+    "NAMM-2026-030": {
+      "status": "Run",
+      "sci_modules": [
+        "cognitive_class",
+        "antigravity"
+      ],
+      "certificate": "PARTIAL_EVIDENCE",
+      "hypothesis_confirmed": true,
+      "key_metrics": {
+        "prompt_vs_m0_distance": 0.6415,
+        "lock_d_med": 1.573511,
+        "mu_d_med": 0.081858,
+        "lock_gate_pass": 0.5,
+        "decay_gate_pass": 0.0
+      },
+      "hypothesis_support": {
+        "H-CCT-001B": true,
+        "H-CCT-013": true,
+        "H-CCT-020": true,
+        "H-CCT-021": true,
+        "H-CCT-003": true,
+        "R_star_in_interval": true
+      }
+    },
+    "NAMM-2026-021-kuramoto": {
+      "status": "Run",
+      "variant": "kuramoto",
+      "sci_modules": [
+        "entropy",
+        "fuzzy",
+        "consensus",
+        "kuramoto"
+      ],
+      "certificate": "PARTIAL_EVIDENCE",
+      "hypothesis_confirmed": true,
+      "key_metrics": {
+        "mean_delta_w_global": 0.280209,
+        "positive_gap_fraction": 1.0,
+        "mean_gap_at_high_mu_cns": 0.286224
+      },
+      "hypothesis_support": {
+        "H-CNS-001": true,
+        "H-CNS-004": true,
+        "H-CNS-011": true,
+        "H-CNS-012": true,
+        "H-CNS-013": true
+      }
+    }
+  },
+  "supported_flags": [
+    "NAMM-2026-021:H-CNS-001",
+    "NAMM-2026-021:H-CNS-004",
+    "NAMM-2026-021:H-CNS-011",
+    "NAMM-2026-021:H-CNS-012",
+    "NAMM-2026-021:H-CNS-013",
+    "NAMM-2026-022:H-CNS-002",
+    "NAMM-2026-022:H-CNS-005",
+    "NAMM-2026-022:H-CNS-011",
+    "NAMM-2026-022:H-CNS-013",
+    "NAMM-2026-023:H-CCT-001",
+    "NAMM-2026-023:H-CCT-004",
+    "NAMM-2026-023:H-CCT-012",
+    "NAMM-2026-024:H-CCT-004",
+    "NAMM-2026-024:H-CA-001",
+    "NAMM-2026-025:H-CCT-005",
+    "NAMM-2026-025:H-CCT-007",
+    "NAMM-2026-025:H-CNS-005",
+    "NAMM-2026-025:H-CNS-010",
+    "NAMM-2026-026:H-MCG-001",
+    "NAMM-2026-026:H-MCG-007",
+    "NAMM-2026-026:H-MCG-008",
+    "NAMM-2026-027:H-MCG-009",
+    "NAMM-2026-027:H-MCG-010",
+    "NAMM-2026-027:H-MCG-013",
+    "NAMM-2026-027:H-MCG-014",
+    "NAMM-2026-028:H-MCG-005",
+    "NAMM-2026-028:H-MCG-006",
+    "NAMM-2026-028:H-CNS-002",
+    "NAMM-2026-029:H-CCT-016",
+    "NAMM-2026-029:H-CCT-017",
+    "NAMM-2026-029:H-MCG-014",
+    "NAMM-2026-030:H-CCT-001B",
+    "NAMM-2026-030:H-CCT-013",
+    "NAMM-2026-030:H-CCT-020",
+    "NAMM-2026-030:H-CCT-021",
+    "NAMM-2026-030:H-CCT-003",
+    "NAMM-2026-030:R_star_in_interval",
+    "NAMM-2026-021-kuramoto:H-CNS-001",
+    "NAMM-2026-021-kuramoto:H-CNS-004",
+    "NAMM-2026-021-kuramoto:H-CNS-011",
+    "NAMM-2026-021-kuramoto:H-CNS-012",
+    "NAMM-2026-021-kuramoto:H-CNS-013"
+  ],
+  "unsupported_flags": [],
+  "aggregate_verdict": {
+    "CNS": "re-run 021\u2013022 (+ kuramoto variant)",
+    "CCT": "re-run 023\u2013025, 029 + new 030 phase-lock",
+    "MCG": "re-run 026\u2013028"
+  }
+}

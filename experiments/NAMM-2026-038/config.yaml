@@ -1,0 +1,35 @@
+experiment_id: NAMM-2026-038
+hypothesis_id: H-AMAT-007
+domain: anti_median_ai_topology
+protocol_version: fisher-geodesic-curvature-v1
+
+description: >
+  Fisher-metric geodesic curvature pilot. Computes ||∇_h log P_θ|| at each turn
+  as a proxy for Fisher metric; derives discrete curvature κ_t along μ vs
+  lock_reassert trajectories. Tests H-AMAT-007-a (lock > mu curvature) and
+  H-AMAT-007-b (curvature lift correlates with β₁ lift from 035).
+
+model:
+  model_id: Qwen/Qwen2.5-0.5B-Instruct
+  device: auto   # cpu | cuda | mps | auto
+
+experiment:
+  n_turns: 3
+  max_new_tokens: 128
+  prompts: default   # uses FOCUSED_PROMPTS from activation_tda
+
+# β₁ lifts from NAMM-2026-035 v2 (3-turn, last_n_layers=8) — used for correlation
+beta1_lifts_from_035:
+  - -1.0   # prompt 0: consensus suboptimal
+  -  4.0   # prompt 1: chimera sync
+  -  0.0   # prompt 2: cognitive capitalism
+
+certificates:
+  CURVATURE_EVIDENCE:
+    description: lift>0.1 AND |corr(κ,β₁)|≥0.5
+  CURVATURE_PARTIAL:
+    description: lock>mu on ≥2/3 prompts
+  CURVATURE_PILOT:
+    description: any lift>0
+  CURVATURE_NULL:
+    description: lift≤0

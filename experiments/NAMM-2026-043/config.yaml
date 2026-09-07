@@ -1,0 +1,77 @@
+experiment_id: NAMM-2026-043
+domain: anti_median_ai_topology
+hypothesis_id: H-AMAT-004
+protocol_version: amat-hybrid-nomic-embed-v1
+description: >
+  HYBRID approach: llama3.2 (Ollama) generates completions, nomic-embed-text (768-d)
+  embeds each completion as the "hidden state" proxy for TDA.
+  Rationale: 042 showed logprob proxy (20-d) is too compressed → TDA all zeros.
+  035/036 showed real hidden states (Qwen 0.5B, 896-d) give β₁ lift but D_eff=0
+  (model too isotropic). nomic-embed-text is a 768-d semantic space — richer than
+  logprobs, available locally via Ollama, no HuggingFace download required.
+  D_eff question: does a 768-d semantic embedding of completions resolve D_eff≠0?
+
+prior_experiments:
+  - id: NAMM-2026-035
+    finding: beta_1 lift on Qwen2.5-0.5B (896-d real HS); D_eff=0 (isotropic model)
+    certificate: ACTIVATION_PILOT
+    mean_lift_beta_1: 0.78
+    mean_lift_d_eff: 0.0
+  - id: NAMM-2026-038
+    finding: Fisher curvature (logit-gradient) r=0.79 with beta_1; logit proxy validated
+    certificate: CURVATURE_PILOT
+  - id: NAMM-2026-042
+    finding: logprob proxy (20-d) too compressed → TDA collapses; beta_1=0, D_eff=0
+    certificate: NULL
+    mean_lift_beta_1: 0.0
+    mean_lift_d_eff: 0.0
+    note: "20-d logprob space insufficient — needs richer embedding space"
+
+# Generation backend
+generator:
+  backend: ollama
+  base_url: http://127.0.0.1:11434
+  model: llama3.2:latest
+  max_new_tokens: 256
+  temperature: 0.7
+  top_p: 0.9
+
+# Embedding backend (nomic-embed-text)
+embedder:
+  backend: ollama
+  base_url: http://127.0.0.1:11434
+  model: nomic-embed-text
+  embed_dim: 768
+  note: >
+    nomic-embed-text via Ollama — 768-d semantic embeddings.
+    Much richer than logprob proxy (20-d) and avoids HuggingFace download.
+    Model size: ~274MB (Q4). Pull with: ollama pull nomic-embed-text
+
+tda:
+  pca_dims: 8
+  k_neighbors: 5
+  max_dim: 1   # ripser maxdim
+
+grid:
+  n_turns_list: [3, 6]
+  policies: ["mu", "lock_reassert", "lock_decay"]
+  # 3 prompts × 2 n_turns × 3 policies = 18 sessions
+
+focused_prompts:
+  - "Explain why consensus in multi-agent systems can be permanently suboptimal."
+  - "What is chimera synchronization and when is partial sync preferable to full consensus?"
+  - "How does cognitive capitalism allocate compute toward median vs tail cognitive classes?"
+
+certificate_tiers:
+  D_EFF_RESOLVED:
+    condition: mean_lift_d_eff > 0.3
+    note: D_eff discriminates μ vs lock in nomic-embed-text 768-d space
+  HYBRID_EVIDENCE:
+    condition: mean_lift_beta_1 > 0.05 AND mean_lift_d_eff > 0.3
+    note: Both β₁ and D_eff separate (nomic hybrid)
+  HYBRID_PILOT:
+    condition: mean_lift_beta_1 > 0.05 OR mean_lift_d_eff > 0.1
+    note: Any separation observed in hybrid space
+  'NULL':
+    condition: else
+    note: No separation found even in semantic embedding space

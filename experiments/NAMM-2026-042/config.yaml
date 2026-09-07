@@ -1,0 +1,62 @@
+experiment_id: NAMM-2026-042
+domain: anti_median_ai_topology
+hypothesis_id: H-AMAT-004
+protocol_version: amat-activation-tda-3B-ollama-v1
+description: >
+  Activation TDA on llama3.2:3B (via Ollama) to resolve D_eff separation.
+  035/036 on Qwen2.5-0.5B showed β₁ lift but D_eff=0 (model too isotropic).
+  Hypothesis: 3.2B model has richer anisotropic hidden geometry → D_eff separates μ vs lock.
+  Proxy: Ollama logprob vectors (top-K token logprobs per turn) used as activation surrogate.
+  Correlation established in 038 (r=0.79 between logit-gradient norm and β₁).
+
+prior_experiments:
+  - id: NAMM-2026-035
+    finding: beta_1 lift confirmed on Qwen2.5-0.5B, D_eff=0 (896-d artifact)
+    certificate: ACTIVATION_PILOT
+  - id: NAMM-2026-036
+    finding: PCA sweep confirms D_eff collapse at all pca_dims for 0.5B; beta_1 two-phase at pca=8,16
+    certificate: ACTIVATION_PILOT
+  - id: NAMM-2026-038
+    finding: Fisher curvature (logit-gradient) r=0.79 with beta_1; logit proxy validated
+    certificate: CURVATURE_PILOT
+
+model_backend: ollama
+ollama_base_url: http://127.0.0.1:11434
+ollama_model: llama3.2:latest
+ollama_model_info:
+  parameter_size: "3.2B"
+  family: llama
+  quantization: Q4_K_M
+  hidden_dim_proxy: 3072  # embedding_length from Ollama metadata
+  n_layers_proxy: 28      # inferred from llama3.2-3B architecture
+
+activation:
+  last_n_layers: 4   # best from 036 (applied to logprob-vector time-series)
+  pca_dims: 8        # best from 036
+  point_cloud_mode: "turns_x_layers"
+  top_k_logprobs: 20   # top-K token logprobs per generation step → proxy "hidden vector"
+  n_logprob_steps: 8   # number of generation steps to sample logprobs from
+
+grid:
+  n_turns_list: [3, 6]
+  policies: ["mu", "lock_reassert"]
+  # 3 focused prompts × 2 n_turns × 2 policies = 12 cells
+
+focused_prompts:
+  - "Explain why consensus in multi-agent systems can be permanently suboptimal."
+  - "What is chimera synchronization and when is partial sync preferable to full consensus?"
+  - "How does cognitive capitalism allocate compute toward median vs tail cognitive classes?"
+
+certificate_tiers:
+  D_EFF_RESOLVED:
+    condition: mean_lift_d_eff > 0.3
+    note: D_eff discriminates μ vs lock (logprob proxy)
+  ACTIVATION_EVIDENCE:
+    condition: mean_lift_beta_1 > 0.05 AND mean_lift_d_eff > 0.3
+    note: Both β₁ and D_eff separate (logprob proxy)
+  ACTIVATION_PILOT:
+    condition: mean_lift_beta_1 > 0.05
+    note: β₁ separates only
+  NULL:
+    condition: else
+    note: No separation found

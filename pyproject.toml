@@ -7,14 +7,14 @@ name = "namm-experiments"
 version = "0.1.0"
 description = "NAMM Phase 1 experiments — finite graph invariant search"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.11"
 dependencies = [
     "networkx>=3.2",
     "sympy>=1.12",
     "numpy>=1.26",
     "scipy>=1.11",
     "z3-solver>=4.12",
-    "python-sat>=1.8",
+    "python-sat",
     "pydantic>=2.5",
     "orjson>=3.9",
     "structlog>=24.1",
@@ -34,6 +34,18 @@ dev = [
 nd = [
     "gudhi>=3.9",
     "qutip>=5.0",
+]
+science = [
+    "dit>=1.5",
+    "scikit-fuzzy>=0.4.2",
+    "ripser>=0.6.4",
+    "nolds>=0.5.2",
+]
+llm-local = [
+    "sentence-transformers>=3.0",
+    "torch>=2.0",
+    "transformers>=4.40",
+    "accelerate>=0.30",
 ]
 
 [project.scripts]

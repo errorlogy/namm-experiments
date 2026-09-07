@@ -5,7 +5,7 @@
 **Epistemic baseline:** Each H-F entry carries its own label (`CONJECTURE`, `PHILOSOPHICAL_INFERENCE`, or `OPERATIONAL`); none is a published theorem.  
 Roman Kuznetsov · NAMM research program
 
-Related: [`ANTHEMIUM_VIDEO_NOTES.md`](ANTHEMIUM_VIDEO_NOTES.md) · [`PHILOSOPHICAL_INFERENCE.md`](PHILOSOPHICAL_INFERENCE.md) (PI-001–PI-008) · [`MATH_OBJECT_HYPOTHESES.md`](MATH_OBJECT_HYPOTHESES.md) (H-001–H-007) · [`AMFW_11D_HYPOTHESIS_RESEARCH.md`](AMFW_11D_HYPOTHESIS_RESEARCH.md) · [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`AI_THINKING_TOPOLOGY.md`](AI_THINKING_TOPOLOGY.md)
+Related: [`ANTHEMIUM_VIDEO_NOTES.md`](ANTHEMIUM_VIDEO_NOTES.md) · [`PHILOSOPHICAL_INFERENCE.md`](PHILOSOPHICAL_INFERENCE.md) (PI-001–PI-008) · [`MATH_OBJECT_HYPOTHESES.md`](MATH_OBJECT_HYPOTHESES.md) (H-001–H-007) · [`AMFW_11D_HYPOTHESIS_RESEARCH.md`](AMFW_11D_HYPOTHESIS_RESEARCH.md) · [`CONSENSUS_NON_OPTIMALITY_HYPOTHESIS.md`](CONSENSUS_NON_OPTIMALITY_HYPOTHESIS.md) (H-CNS-001–H-CNS-013) · [`COGNITIVE_CLASS_TAXONOMY.md`](COGNITIVE_CLASS_TAXONOMY.md) (H-CCT-001–H-CCT-010) · [`FRAME_LADDER.md`](FRAME_LADDER.md) · [`AI_THINKING_TOPOLOGY.md`](AI_THINKING_TOPOLOGY.md)
 
 ---
 
@@ -702,6 +702,23 @@ Ranked by **fabric dynamics impact** (\(\Delta\mu\), new certificate classes, Θ
 | H-F003, H-F022, H-F027, H-F029 | **H-006** |
 | H-F019 | **H-007**, PI-008 |
 | H-F046, H-F047 | **H-shadow-008**, **H-shadow-005** |
+| H-F021, H-F024 | **H-CNS-003**, **H-CNS-008** ([`CONSENSUS_NON_OPTIMALITY_HYPOTHESIS.md`](CONSENSUS_NON_OPTIMALITY_HYPOTHESIS.md)) |
+
+### H-F → H-CNS (consensus non-optimality)
+
+| H-F | Relates to H-CNS |
+|-----|------------------|
+| H-F011–H-F014 | H-CNS-002 (catastrophe / μ-boundary); H-CNS-011 (fuzzy contour boundaries) |
+| H-F021, H-F024, H-F028 | H-CNS-003, H-CNS-008 (fiber = consensus loss); H-CNS-012 (simulation bounds) |
+| H-F042, H-F043 | H-CNS-009 (meta fixed-point consensus trap) |
+
+### H-F → H-CCT (cognitive class taxonomy)
+
+| H-F | Relates to H-CCT |
+|-----|------------------|
+| H-F011–H-F014 | H-CCT-004 (phase transition / μ-boundary at class shift) |
+| H-F021, H-F024, H-F028 | H-CCT-005 (fiber = inter-class translation loss); K1 κ-projection |
+| H-F012 | H-CCT-001 (glow radius ↔ low-μ K5–K7 pre-formal content) |
 
 ### H-F → PI
 
@@ -733,6 +750,8 @@ Ranked by **fabric dynamics impact** (\(\Delta\mu\), new certificate classes, Θ
 2. Map experiment proposals to **H-F IDs** and **fabric phase** (compact / extended / diffuse / F∞).
 3. Report \(\mu\) proxy, fiber size, and whether \(T_\tau\) produced **new certificate class** — not only acceptance count.
 4. Do **not** conflate fabric metaphor with physical claims; label `PHILOSOPHICAL_INFERENCE` entries accordingly.
+5. When user cites **consensus non-optimality** or social MAS → cross-load [`CONSENSUS_NON_OPTIMALITY_HYPOTHESIS.md`](CONSENSUS_NON_OPTIMALITY_HYPOTHESIS.md); map κ-fiber degeneracy to consensus information loss (H-CNS-008); for simulation params load §4 (`max_anti_consensus`, fuzzy contours).
+6. When user cites **cognitive classes** or **cognitive capitalism** → cross-load [`COGNITIVE_CLASS_TAXONOMY.md`](COGNITIVE_CLASS_TAXONOMY.md); map \(\mu_{\mathcal{F}_H}\) low bands to K5–K7; map κ-fiber to K1 consensus projection (H-CCT-005).
 
 ---
 

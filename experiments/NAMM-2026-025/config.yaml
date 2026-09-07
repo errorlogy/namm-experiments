@@ -1,0 +1,46 @@
+experiment_id: NAMM-2026-025
+domain: cognitive_class_taxonomy
+hypothesis_id: H-CCT-005
+hypothesis_doc: docs/COGNITIVE_CLASS_TAXONOMY.md
+branch: hypothesis/cognitive-class-taxonomy
+status: run
+seed: 2026025
+research_question: >
+  In class-heterogeneous MAS, does consensus welfare gap and translation cost
+  delta_E differ from fiber-preserving aggregation?
+protocol_version: cct-mas-cns-v1
+
+cns_simulation:
+  consensus_operator: defuzzify_mean
+  num_agents: 48
+  opinion_dim: 3
+  max_non_optimality: 0.35
+  kuramoto_K: 2.5
+
+class_compositions:
+  - K1: 1.0
+  - K1: 0.80
+    K3: 0.12
+    K6: 0.08
+  - K1: 0.60
+    K5: 0.25
+    K6: 0.15
+  - K1: 0.50
+    K3: 0.20
+    K5: 0.20
+    K6: 0.10
+
+num_seeds: 10
+seeds: [42, 99, 202, 314, 512, 777, 888, 999, 1024, 2048]
+
+sci_modules:
+  - cognitive_class
+  - consensus
+
+hypotheses:
+  - H-CCT-005
+  - H-CCT-007
+  - H-CNS-005
+  - H-CNS-010
+falsifiers:
+  - F-CCT-6

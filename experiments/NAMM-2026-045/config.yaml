@@ -1,0 +1,67 @@
+experiment_id: NAMM-2026-045
+domain: anti_median_ai_topology
+hypothesis_id: H-AMAT-004
+protocol_version: amat-activation-tda-v2
+description: >
+  Real hidden-state TDA on Qwen2.5-1.5B (fallback 0.5B) using 044 sweet-spot protocol:
+  n_turns=6, last_n_layers=4, pca_dims=8, cosine ripser, policies μ vs lock_reassert.
+  Tests whether D_eff separation resolves on richer activations at 1.5B after 035 (0.5B HS,
+  β₁ lift but D_eff=0) and 043/044 (nomic hybrid NULL / unstable D_eff).
+
+prior_experiments:
+  - id: NAMM-2026-035
+    finding: Qwen2.5-0.5B real HS — β₁ lift +0.78, D_eff=0 (isotropic?)
+    certificate: LIVE_EVIDENCE
+    mean_lift_beta_1: 0.78
+    mean_lift_d_eff: 0.0
+  - id: NAMM-2026-043
+    finding: nomic 768-d hybrid — D_eff=-0.5, β₁=0 (sampling collapse)
+    certificate: NULL
+    mean_lift_d_eff: -0.5
+    mean_lift_beta_1: 0.0
+  - id: NAMM-2026-044
+    finding: protocol v2 — two_phase=1.0; best D_eff at n=6 (+0.33) but unstable
+    certificate: NULL
+    mean_lift_d_eff: 0.11
+    mean_lift_beta_1: -0.22
+
+local_lm:
+  model_id: Qwen/Qwen2.5-1.5B-Instruct
+  model_candidates:
+    - Qwen/Qwen2.5-1.5B-Instruct
+    - Qwen/Qwen2.5-0.5B-Instruct
+  device: null
+  dtype: auto
+  max_new_tokens: 64
+
+activation:
+  point_cloud_mode: turns_x_layers
+  last_n_layers: 4
+  n_turns: 6
+  policies: [mu, lock_reassert]
+
+tda:
+  pca_dims: 8
+  k_neighbors: 5
+  max_dim: 1
+  ripser_metric: cosine
+
+loop:
+  prompts:
+    - "Explain why consensus in multi-agent systems can be permanently suboptimal."
+    - "What is chimera synchronization and when is partial sync preferable to full consensus?"
+    - "How does cognitive capitalism allocate compute toward median vs tail cognitive classes?"
+
+certificate_tiers:
+  D_EFF_RESOLVED:
+    condition: mean_lift_d_eff > 0.3
+    note: D_eff discriminates μ vs lock in real activation space
+  HYBRID_EVIDENCE:
+    condition: mean_lift_beta_1 > 0.05 AND mean_lift_d_eff > 0.3
+    note: Both β₁ and D_eff separate on hidden states
+  HYBRID_PILOT:
+    condition: mean_lift_beta_1 > 0.05 OR mean_lift_d_eff > 0.1
+    note: Partial separation on activations
+  "NULL":
+    condition: else
+    note: No D_eff resolution even at 1.5B real HS

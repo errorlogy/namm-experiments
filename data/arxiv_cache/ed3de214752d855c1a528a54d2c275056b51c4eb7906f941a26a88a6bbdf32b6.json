@@ -1,0 +1,18 @@
+[
+  {
+    "arxiv_id": "2401.00001v1",
+    "title": "Neural-Symbolic Invariant Search in Finite Graphs",
+    "authors": [
+      "Alice Smith",
+      "Bob Jones"
+    ],
+    "summary": "We propose a machine-native search framework for graph invariants.",
+    "published": "2024-01-01T00:00:00Z",
+    "categories": [
+      "cs.AI",
+      "math.CO"
+    ],
+    "pdf_url": "http://arxiv.org/pdf/2401.00001v1",
+    "abs_url": "http://arxiv.org/abs/2401.00001v1"
+  }
+]

@@ -1,0 +1,14 @@
+2026-08-19T13:35:39.415686+00:00 NAMM-2026-036 complete
+certificate=NULL
+model=Qwen/Qwen2.5-0.5B-Instruct device=cpu
+best_pca_dim=4
+mean_lift_d_eff=0.0
+mean_lift_b1=-1.0
+f_amat_4_triggered=True
+joint_note=035: beta1 lift confirmed (+0.67→+1.0 mean), D_eff=0 (artifact: 896-d). 036: PCA d=4 → D_eff lift=0.0000, beta1 lift=-1.0000, cert=NULL. D_eff resolved=NO. Overall chain 030-036: cert=NULL.
+NOTES:
+- best_pca_dim selection chose 4 (all pca_dims had mean_lift_d_eff=0.0 at sweep level)
+- Best sweep cells: pca=8/n_turns=6 (lift_b1=+1, two_phase=True); pca=16/n_turns=3,6 (lift_b1=+1, two_phase=True)
+- Best focused cell: cognitive_capitalism/pca=4/n_turns=6 (lift_b1=+1, two_phase=True)
+- D_eff=2 at pca_dims=8,16 but same for mu and lock — not discriminating
+- Certificate should be ACTIVATION_PILOT (beta_1 two-phase found in multiple cells)

@@ -1,0 +1,38 @@
+experiment_id: NAMM-2026-041
+domain: anti_median_ai_topology
+hypothesis_id: H-AMAT-010
+protocol_version: amat-attention-h1-v1
+description: >
+  Attention-head disagreement as H¹ (sheaf cohomology) proxy. Extract per-head
+  last-token attention mass; measure pairwise JS disagreement across heads;
+  compare μ vs lock_reassert; correlate H¹ lift with β₁ lift from activation TDA.
+
+local_lm:
+  model_id: Qwen/Qwen2.5-0.5B-Instruct
+  model_candidates:
+    - Qwen/Qwen2.5-0.5B-Instruct
+    - Qwen/Qwen2.5-1.5B-Instruct
+  device: null
+  dtype: auto
+  max_new_tokens: 64
+
+attention:
+  last_n_layers: 2
+  n_turns: 2
+  disagreement_metric: js
+  policies: [mu, lock_reassert]
+
+loop:
+  prompts:
+    - "Explain why consensus in multi-agent systems can be permanently suboptimal."
+    - "What is chimera synchronization and when is partial sync preferable to full consensus?"
+
+certificate_tiers:
+  H1_EVIDENCE:
+    condition: mean_lift_h1 > 0.02 AND |corr(H1, β1)| >= 0.5
+  H1_PILOT:
+    condition: mean_lift_h1 > 0.01 AND lock>mu on >=2/3 prompts
+  H1_PARTIAL:
+    condition: any positive lift or lock>mu on >= half
+  "NULL":
+    condition: else

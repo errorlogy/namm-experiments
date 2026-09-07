@@ -1,0 +1,37 @@
+experiment_id: NAMM-2026-039
+hypothesis_id: H-AMAT-008
+domain: anti_median_ai_topology
+protocol_version: fractal-tda-v1
+reuse_full_fractal_tda: true
+description: >
+  Layer-wise box-counting fractal dimension sweep on hidden-state trajectories.
+  Tests whether nd-phase (lock_reassert) has higher non-integer d_f than mu-phase.
+
+local_lm:
+  model_id: "Qwen/Qwen2.5-0.5B-Instruct"
+  device: null       # auto-detect
+  dtype: "auto"
+  max_new_tokens: 128
+
+fractal:
+  pca_dim: 3          # reduce to 3-D before box counting (tractable on CPU)
+  n_epsilons: 14      # grid density for log-log regression
+  epsilon_min: 0.02
+  epsilon_max: 0.5
+  layer_variance_threshold: 0.01  # H-AMAT-008-c: lock variance > this
+
+session:
+  n_turns: 3
+
+prompts:
+  chimera: "What is chimera synchronization and when is partial sync preferable to full consensus?"
+  focused: "Explain why consensus in multi-agent systems can be permanently suboptimal."
+
+certificate_tiers:
+  FRACTAL_PILOT:    "Any separation on at least one prompt (mean_d_f lift and/or non-integer gap lift)"
+  FRACTAL_PARTIAL:  "lock mean_d_f > mu mean_d_f on both prompts"
+  FRACTAL_EVIDENCE: "non-integer gap (008b) and non-flat layer profile (008c) on both prompts"
+
+prior_experiments:
+  - NAMM-2026-035   # local LM activation TDA
+  - NAMM-2026-036   # PCA-reduced activation TDA

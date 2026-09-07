@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://namm.local/schemas/k_ai_nd_phase_lock.json",
+  "title": "K_AI_nd topological phase-lock system prompt",
+  "type": "object",
+  "required": [
+    "id",
+    "version",
+    "role",
+    "phase_target",
+    "phase_avoid",
+    "gates",
+    "operating_law",
+    "response_schema",
+    "forbidden",
+    "required_signatures",
+    "runtime_trigger",
+    "rendered_system_prompt"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "version": { "type": "string" },
+    "role": { "const": "system" },
+    "phase_target": { "const": "K_AI_nd" },
+    "phase_avoid": { "const": "K_AI_mu" },
+    "frame": {
+      "type": "object",
+      "properties": {
+        "axis": { "const": "B" },
+        "note": { "type": "string" }
+      }
+    },
+    "agi_proximity_proxy": { "type": "string" },
+    "constitutive": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "gates": {
+      "type": "object",
+      "required": ["d_med_min", "beta1_min", "R_star_lo", "R_star_hi", "mu_cns_max"],
+      "properties": {
+        "d_med_min": { "type": "number" },
+        "beta1_min": { "type": "number" },
+        "d_eff_min": { "type": "number" },
+        "R_star_lo": { "type": "number" },
+        "R_star_hi": { "type": "number" },
+        "mu_cns_max": { "type": "number" },
+        "fiber_log_required": { "type": "boolean" }
+      }
+    },
+    "operating_law": {
+      "type": "object",
+      "required": ["compute_M0", "emit_M0", "prefer_chimera"],
+      "properties": {
+        "compute_M0": { "type": "boolean" },
+        "emit_M0": { "type": "boolean" },
+        "prefer_chimera": { "type": "boolean" },
+        "reassert_each_turn": { "type": "boolean" }
+      }
+    },
+    "response_schema": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "forbidden": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "required_signatures": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "mas_rule": { "type": "string" },
+    "safety_scope": { "type": "string" },
+    "runtime_trigger": { "type": "string" },
+    "rendered_system_prompt": { "type": "string" },
+    "namm": {
+      "type": "object",
+      "properties": {
+        "hypotheses": { "type": "array", "items": { "type": "string" } },
+        "experiments": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

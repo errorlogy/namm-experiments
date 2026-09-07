@@ -1,0 +1,36 @@
+experiment_id: NAMM-2026-028
+domain: multi_agent_consensus
+hypothesis_id: H-MCG-005
+hypothesis_doc: docs/MYTHOGENESIS_CCT_CNS_GAME_THEORY.md
+branch: hypothesis/political-mythogenesis
+status: run
+seed: 2026028
+research_question: >
+  Do myth shifts show catastrophe hysteresis and class mobility under
+  salience / media coupling sweeps?
+protocol_version: mcg-myth-shift-v1
+
+cns_simulation:
+  consensus_operator: defuzzify_mean
+  num_agents: 36
+  opinion_dim: 3
+  max_non_optimality: 0.35
+
+coupling_values: [0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5]
+salience_values: [0.2, 0.4, 0.6, 0.8, 1.0]
+
+num_seeds: 10
+seeds: [42, 99, 202, 314, 512, 777, 888, 999, 1024, 2048]
+
+hypotheses:
+  - H-MCG-005
+  - H-MCG-006
+  - H-CNS-002
+
+sci_modules:
+  - catastrophe
+  - cognitive_class
+  - consensus
+
+falsifiers:
+  - F-MCG-7

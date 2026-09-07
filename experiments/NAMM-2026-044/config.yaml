@@ -1,0 +1,66 @@
+experiment_id: NAMM-2026-044
+domain: anti_median_ai_topology
+hypothesis_id: H-AMAT-004
+protocol_version: amat-hybrid-nomic-embed-v2
+description: >
+  D_eff stability sensitivity: increase point-cloud support (n_turns 6/9,
+  2 completions per turn → 12–18 points), safe PCA cap
+  k <= min(pca_dims, n_points-1, orig_dim) with diagnostics, cosine ripser.
+
+  Addresses NAMM-2026-043 failure mode (mean_lift_d_eff=-0.5, beta_1=0,
+  two_phase_fraction=0) attributed to small trajectories and PCA/TDA degeneracy.
+
+prior_experiments:
+  - id: NAMM-2026-043
+    finding: >
+      mean_lift_d_eff=-0.5; mean_lift_beta_1=0; two_phase_fraction=0
+      (sampling collapse / PCA-capping degeneracy on n_turns={3,6}).
+    mean_lift_d_eff: -0.5
+    mean_lift_beta_1: 0.0
+    certificate: NULL
+
+generator:
+  backend: ollama
+  base_url: http://127.0.0.1:11434
+  model: llama3.2:latest
+  max_new_tokens: 64
+  pause_s: 0.0
+  temperature: 0.7
+  top_p: 0.9
+
+embedder:
+  backend: ollama
+  base_url: http://127.0.0.1:11434
+  model: nomic-embed-text
+  embed_dim: 768
+
+tda:
+  pca_dims: 8
+  k_neighbors: 5
+  max_dim: 1
+  pca_rank_eps: 1.0e-6
+  ripser_metric: cosine
+
+grid:
+  n_turns_list: [6, 9]
+  n_completions_per_turn: 2
+  policies: ["mu", "lock_reassert", "lock_decay"]
+  # 2 prompts × 2 n_turns × 3 policies; 12 or 18 embed points per policy cloud
+
+focused_prompts:
+  - "Explain why consensus in multi-agent systems can be permanently suboptimal."
+  - "What is chimera synchronization and when is partial sync preferable to full consensus?"
+
+certificate_tiers:
+  D_EFF_RESOLVED:
+    condition: mean_lift_d_eff > 0.3
+    note: D_eff discriminates μ vs lock in nomic-embed-text 768-d space
+  HYBRID_EVIDENCE:
+    condition: mean_lift_beta_1 > 0.05 AND mean_lift_d_eff > 0.3
+    note: Both β₁ and D_eff separate (nomic hybrid)
+  HYBRID_PILOT:
+    condition: mean_lift_beta_1 > 0.05 OR mean_lift_d_eff > 0.1
+    note: Any separation observed in hybrid space
+  "NULL":
+    condition: else
+    note: No separation found even after D_eff stability protocol
