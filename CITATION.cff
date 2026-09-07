@@ -1,21 +1,24 @@
 cff-version: 1.2.0
 message: "If you use this research, please cite it as below."
 title: "Non-Anthropic Mathematics Mode (NAMM)"
-version: 0.1
-date-released: 2026-08-17
+version: 0.2.0
+date-released: 2026-09-07
 type: software
 license: CC-BY-4.0
 repository-code: "https://github.com/errorlogy/namm-experiments"
 url: "https://github.com/errorlogy/namm-experiments"
 abstract: >-
   Verification-first research program testing whether machine-native artifacts can
-  certify mathematical structure before compact human projection exists — certificates,
-  frame escalation, compression asymmetry (K_A/K_H), and open-problem shadows.
+  certify mathematical and representation-geometry structure before compact human
+  projection exists — Protocol v2 gates, certificate.json witnesses, Sci Flow
+  domain routing, AMAT pilots 037–041, compression asymmetry (K_A/K_H), and
+  open-problem shadows. Negative and null results are first-class (rejections.jsonl).
 keywords:
   - non-anthropic mathematics
   - machine-native discovery
   - verification-first
   - mathematical certificates
+  - AMAT
   - Anthemium
 authors:
   - family-names: Kuznetsov
@@ -26,6 +29,12 @@ authors:
     social:
       - type: x
         value: AGIminister
+identifiers:
+  - type: url
+    value: "https://github.com/errorlogy/namm-experiments"
+  - type: url
+    value: "https://zenodo.org/records/22646895"
+    description: "Sibling EIA deposit (Proto-AGI Horizon); NAMM deposit pending — see docs/ZENODO_RELEASE.md"
 preferred-citation:
   type: software
   title: "Non-Anthropic Mathematics Mode (NAMM)"
@@ -33,8 +42,9 @@ preferred-citation:
     - family-names: Kuznetsov
       given-names: Roman
   year: 2026
+  version: 0.2.0
   url: "https://github.com/errorlogy/namm-experiments"
-  notes: "Verification-first machine-native math discovery research program"
+  notes: "Verification-first machine-native math and AI-science discovery; AMAT case study 037–041"
 references:
   - type: software
     title: "Endogenous Initiative Architecture (EIA)"
@@ -42,5 +52,14 @@ references:
       - family-names: Kuznetsov
         given-names: Roman
     year: 2026
+    doi: "10.5281/zenodo.22646895"
+    url: "https://zenodo.org/records/22646895"
+    notes: "Sibling Anthemium research program — proactive AI with endogenous initiative; Zenodo v1.0.0"
+  - type: software
+    title: "Endogenous Initiative Architecture (EIA)"
+    authors:
+      - family-names: Kuznetsov
+        given-names: Roman
+    year: 2026
     url: "https://github.com/errorlogy/eia"
-    notes: "Sibling Anthemium research program on proactive AI with endogenous initiative"
+    notes: "Source repository for EIA sci-flow program"

@@ -63,7 +63,8 @@ Mathematical structures may exist that are natural for **machine cognition befor
 | **008** | Open-problem shadow — Graceful Tree conjecture | **P2** | [`NAMM-2026-008`](experiments/NAMM-2026-008/) |
 | **009+** | 11D shadows, M-theory moduli, trans-level Θ | Planned | Anthemium-led queue — see [`docs/ANTHEMIUM_NAMM_SYNERGY.md`](docs/ANTHEMIUM_NAMM_SYNERGY.md) |
 | **Protocol v2** | Hard acceptance gates, rejection logging, attack checklist | — | [`docs/PROTOCOL_V2.md`](docs/PROTOCOL_V2.md) |
-| **CI** | pytest + smoke search on every push to `main` | — | [`.github/workflows/ci.yml`](.github/workflows/ci.yml) |
+| **CI** | pytest + AMAT unit tests + smoke search on every push to `main` | — | [`.github/workflows/ci.yml`](.github/workflows/ci.yml) |
+| **Release** | Tag `v*` → pytest + Zenodo tarball artifact | — | [`.github/workflows/release.yml`](.github/workflows/release.yml) · [`docs/ZENODO_RELEASE.md`](docs/ZENODO_RELEASE.md) |
 
 Domain libraries (optional `[nd]` extra): **gudhi** (TDA), **qutip** (quantum frame stubs), pure-Python category hom-set counts. Install: `pip install -e ".[dev,nd]"`.
 
@@ -92,6 +93,8 @@ Domain libraries (optional `[nd]` extra): **gudhi** (TDA), **qutip** (quantum fr
 | **PROACTIVE AI — endogenous initiative architecture** | [`proactive-ai/README.md`](proactive-ai/README.md) · [`docs/proactive-ai/INTEGRATION.md`](docs/proactive-ai/INTEGRATION.md) |
 | Math object candidates (novelty registry) | [`docs/MATH_OBJECT_CANDIDATES.md`](docs/MATH_OBJECT_CANDIDATES.md) |
 | Math object hypotheses (falsifiable CONJECTURE registry) | [`docs/MATH_OBJECT_HYPOTHESES.md`](docs/MATH_OBJECT_HYPOTHESES.md) |
+| Article outline (methods + AMAT case study) | [`docs/NAMM_ARTICLE_OUTLINE.md`](docs/NAMM_ARTICLE_OUTLINE.md) |
+| Zenodo release checklist | [`docs/ZENODO_RELEASE.md`](docs/ZENODO_RELEASE.md) |
 | Mathematical fabric hypotheses (topological fuzzy dynamics, H-F registry) | [`docs/MATHEMATICAL_FABRIC_HYPOTHESES.md`](docs/MATHEMATICAL_FABRIC_HYPOTHESES.md) |
 | Philosophical inference registry (agent load) | [`docs/PHILOSOPHICAL_INFERENCE.md`](docs/PHILOSOPHICAL_INFERENCE.md) |
 | Domain universe catalog (math/physics **fields index** + TOC, agent load) | [`docs/NAMM_DOMAIN_UNIVERSE.md`](docs/NAMM_DOMAIN_UNIVERSE.md) |
@@ -232,16 +235,21 @@ See `NAMM_PROTOCOL.md`, [`docs/PROTOCOL_V2.md`](docs/PROTOCOL_V2.md), and `promp
 Every push and pull request to `main` runs CI:
 
 - `pip install -e ".[dev]"`
-- `pytest tests/ -v`
+- `pytest tests/ -v` (full suite)
+- Explicit AMAT unit tests (`test_amat_041_037_040.py`, catastrophe, fractal TDA, information geometry)
 - Lightweight smoke search (10 candidates)
 
 A weekly scheduled workflow re-runs pytest on `main`. There is no production deployment — CI is the quality gate before merge.
+
+**Tag releases (`v*`):** pushes a [release workflow](.github/workflows/release.yml) that re-runs pytest, builds a [Zenodo-ready tarball](docs/ZENODO_RELEASE.md) (excludes `.git`, logs, `artifacts/`), and attaches it to a GitHub Release. Zenodo upload is manual — see [`docs/ZENODO_RELEASE.md`](docs/ZENODO_RELEASE.md). Deposit: [Zenodo 22646895](https://zenodo.org/records/22646895).
 
 **Run the same checks locally:**
 
 ```bash
 python -m pip install -e ".[dev]"
 python -m pytest tests/ -v
+powershell -ExecutionPolicy Bypass -File scripts/build_zenodo_bundle.ps1   # Windows
+bash scripts/build_zenodo_bundle.sh 0.2.0                                 # Linux/macOS
 ```
 
 Details: [`.github/workflows/README.md`](.github/workflows/README.md)

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "namm-experiments"
-version = "0.1.0"
+version = "0.2.0"
 description = "NAMM Phase 1 experiments — finite graph invariant search"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -60,3 +60,7 @@ where = ["src"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "llm: marks tests that require live LLM API keys or local GPU models",
+]

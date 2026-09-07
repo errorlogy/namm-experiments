@@ -1,0 +1,59 @@
+# Release pipeline for NAMM — quality gate + Zenodo source bundle.
+#
+# Trigger: annotated version tag (v*). Runs pytest, builds a tarball via
+# scripts/build_zenodo_bundle.ps1, uploads a CI artifact, and attaches the
+# bundle to a GitHub Release.
+
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  release:
+    name: Test and publish release bundle
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - name: Install project with dev dependencies
+        run: pip install -e ".[dev]"
+
+      - name: Run pytest suite
+        run: pytest tests/ -v
+
+      - name: Build Zenodo source bundle
+        shell: pwsh
+        run: ./scripts/build_zenodo_bundle.ps1 -Version "${{ github.ref_name }}"
+
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: zenodo-bundle-${{ github.ref_name }}
+          path: dist/*.tar.gz
+          retention-days: 90
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.tar.gz
+          generate_release_notes: true
