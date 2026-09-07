@@ -4,7 +4,7 @@
 **Author:** Roman Kuznetsov · NAMM research program  
 **Date:** 2026-09-07  
 **Scope:** Non-Anthropic Mathematics Mode (NAMM) as a verification-first research program; AMAT experiments 037–041 as primary empirical case study  
-**Zenodo alignment:** [record 22646895](https://zenodo.org/records/22646895) — API fetch timed out during outline prep; align title/abstract/keywords with [`CITATION.cff`](../CITATION.cff) and repository README before deposit update.
+**Zenodo alignment:** sibling EIA deposit [record 22646895](https://zenodo.org/records/22646895) (Proto-AGI Horizon, v1.0.0); NAMM v0.2.0 bundle via [`docs/ZENODO_RELEASE.md`](ZENODO_RELEASE.md) and [`scripts/build_zenodo_bundle.ps1`](../scripts/build_zenodo_bundle.ps1).
 
 **Epistemic rule for the paper:** distinguish **brand / philosophical framing** (Anthemium, AMAT, “anti-median”, MUH motivation) from **operational claims** (Protocol v2 gates, `certificate.json`, logged falsifiers, reproducible experiment IDs). Report null and partial certificates as first-class outcomes.
 
